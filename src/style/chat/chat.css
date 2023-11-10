@@ -1,7 +1,7 @@
 .chatList {
   width: 1000px;
   height: 700px;
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
   margin: 0 auto;
   text-align: none;
   display: flex;
@@ -10,73 +10,135 @@
   flex: 1;
 }
 .chatList .chatList_left {
-  border-right: 1px solid #CCC;
   padding: 10px;
   height: 100%;
 }
-
-.chatList_header {
+.chatList .chatList_left .chatList_header {
   position: relative;
 }
-.chatList_header span {
+.chatList .chatList_left .chatList_header span {
   cursor: pointer;
   padding: 5px;
   position: absolute;
   right: 10px;
 }
-
-.chatList_inner {
+.chatList .chatList_left .chatList_inner {
   margin-top: 40px;
   overflow-y: scroll;
   height: 640px;
 }
-.chatList_inner .chatList_inner_listType {
+.chatList .chatList_left .chatList_inner .chatList_inner_listType {
   text-align: left;
 }
-.chatList_inner .chatList_inner_listType .chatList_inner_listType_type {
+.chatList .chatList_left .chatList_inner .chatList_inner_listType .chatList_inner_listType_type {
   cursor: pointer;
   display: inline-block;
   padding: 8px 15px;
   font-size: 1.5em;
   font-weight: 600;
 }
-.chatList_inner .chatList_inner_roomList {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList {
   margin: 0;
   padding: 0;
   width: 100%;
 }
-.chatList_inner .chatList_inner_roomList li {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li {
   clear: both;
   list-style: none;
   padding: 10px;
   display: flex;
   cursor: pointer;
 }
-.chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_img {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_img {
   width: 60px;
   height: 60px;
 }
-.chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_img img {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_img img {
   border-radius: 50%;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents {
   margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
 }
-.chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents div:first-child {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents div:first-child {
   font-size: 1.3em;
   font-weight: 600;
 }
-.chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents div:last-child {
-  color: #AAA;
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents div:last-child {
+  color: #aaa;
 }
-.chatList_inner .chatList_inner_roomList li:hover {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li:hover {
+  background-color: #eee;
+}
+.chatList .chatList_right {
+  border-left: 1px solid #CCC;
+  height: 700px;
+}
+.chatList .chatList_right .chatRoom_header {
+  border-bottom: 1px solid #CCC;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 50px;
+  padding-left: 20px;
+}
+.chatList .chatList_right .chatLog {
+  height: 570px;
+  overflow-y: scroll;
+}
+.chatList .chatList_right .chatLog .chat_message {
+  margin: 5px;
+  border: none;
+  padding: 5px;
+}
+.chatList .chatList_right .chatLog .oppo {
+  text-align: left;
+}
+.chatList .chatList_right .chatLog .me {
+  text-align: right;
+}
+.chatList .chatList_right .chatLog span {
+  display: inline-block;
+  text-align: left;
+  padding: 5px;
+  width: 200px;
+  overflow-wrap: break-word;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+.chatList .chatList_right .chatSend {
+  height: 80px;
+  border-top: 1px solid #CCC;
+  display: flex;
+  align-items: center;
+}
+.chatList .chatList_right .chatSend svg {
+  margin-left: 10px;
+}
+.chatList .chatList_right .chatSend textarea {
+  border: none;
   background-color: #EEE;
+  margin: 0 10px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  flex: 1;
+  height: 30px;
+  font-size: 1.4em;
+  line-height: 30px;
+  padding: 6px;
+  overflow-y: scroll;
+  resize: none;
+}
+.chatList .chatList_right .chatSend textarea::-webkit-scrollbar {
+  display: none;
+}
+.chatList .chatList_right .chatSend button {
+  display: none;
 }/*# sourceMappingURL=chat.css.map */

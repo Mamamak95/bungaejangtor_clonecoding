@@ -11,7 +11,7 @@ export default function ChatList() {
   return (
     <article className="chatList">
       <Inner getId={getId}></Inner>
-      <ChatRoom></ChatRoom>
+      <ChatRoom roomId={chatRoomId}></ChatRoom>
     </article>
   );
 }
