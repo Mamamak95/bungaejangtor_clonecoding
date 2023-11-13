@@ -1,0 +1,22 @@
+[
+  {
+    "last": "패딩",
+    "lastValue":"wPadding"
+  },
+  {
+    "last": "점퍼",
+    "lastValue":"wJumper"
+  },
+  {
+    "last": "코트",
+    "lastValue":"wCoat"
+  },
+  {
+    "last": "자켓",
+    "lastValue":"wJacket"
+  },
+  {
+    "last": "조끼/베스트",
+    "lastValue":"wVest"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "middle": "아우터",
+    "middleValue":"wOuter"
+  },
+  {
+    "middle": "상의",
+    "middleValue":"wTop"
+  },
+  {
+    "middle": "바지",
+    "middleValue":"wPants"
+  },
+  {
+    "middle": "치마",
+    "middleValue":"wSkirt"
+  },
+  {
+    "middle": "원피스",
+    "middleValue":"wOnepiece"
+  },
+  {
+    "middle": "점프수트",
+    "middleValue":"wJunpsuit"
+  },
+  {
+    "middle": "셋업/세트",
+    "middleValue":"wSetup"
+  },
+  {
+    "middle": "언터웨어/홈웨어",
+    "middleValue":"wUnderwear"
+  },
+  {
+    "middle": "테마/이멘트",
+    "middleValue":"wThema"
+  }
+]
