@@ -1,0 +1,30 @@
+[
+  {
+    "middle": "모자",
+    "middleValue":"hat"
+  },
+  {
+    "middle": "안경/선글라스",
+    "middleValue":"glasses"
+  },
+  {
+    "middle": "목도리/장갑",
+    "middleValue":"muffler"
+  },
+  {
+    "middle": "벨트",
+    "middleValue":"belt"
+  },
+  {
+    "middle": "양말/스타킹",
+    "middleValue":"socks"
+  },
+  {
+    "middle": "키링/키케이스",
+    "middleValue":"keyring"
+  },
+  {
+    "middle": "기타 액세서리",
+    "middleValue":"anotherFashion"
+  }
+]

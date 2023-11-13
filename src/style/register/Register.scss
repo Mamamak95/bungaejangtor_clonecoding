@@ -1,0 +1,320 @@
+.inner {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.submit {
+  color: #000;
+}
+
+.ProductRegisterTitle {
+  height: 100px;
+  color: rgb(25, 25, 25);
+  font-size: 26px;
+  font-weight: 400;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  border-bottom: 2px solid rgb(25, 25, 25);
+
+  span {
+    color: rgb(216, 12, 24);
+    font-size: 1rem;
+    margin-left: 2rem;
+  }
+}
+
+fieldset .inputContainer:nth-child(2) label::after {
+  content: '';
+}
+
+fieldset {
+
+  .inputContainer {
+    display: flex;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgb(218, 218, 218);
+
+    & div:nth-child(2) {
+      width: calc(100% - 200px);
+
+      .categoryNotice {
+        display: block;
+        color: rgb(245, 126, 0);
+        font-size: 14px;
+        margin-top: 0.5rem;
+
+        i {
+          font-size: 16px;
+          margin-right: 5px;
+        }
+      }
+
+      .choiceCategory {
+        margin-top: 1.5rem;
+        display: block;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgb(216, 12, 24);
+
+        b {
+          font-weight: 600;
+        }
+      }
+
+      .productRadio {
+        display: flex;
+        line-height: 125%;
+        color: rgb(25, 25, 25);
+        -webkit-box-align: center;
+        align-items: center;
+        position: relative;
+        margin-right: 2rem;
+        margin-bottom: 15px;
+        cursor: pointer;
+        &:last-child{
+          margin-bottom: 0;
+        }
+        span {
+          margin-left: 8px;
+          font-size: 14px;
+          margin-top: 3px;
+          color: rgb(102, 102, 102);
+        }
+
+        input[type='radio'] {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          opacity: 30%;
+          margin: 10px;
+          border: none;
+          padding: 0;
+          border: 1px solid #cfcfcf;
+          &:checked {
+            opacity: 1;
+            accent-color:red;
+
+          }
+        }
+
+      }
+
+    }
+
+    div {
+      &.nameInput {
+        display: flex;
+        flex-wrap: wrap;
+
+        #productName {
+          width: 90%;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 125%;
+          color: rgb(25, 25, 25);
+          border-radius: 2px;
+          border: 1px solid rgb(204, 204, 204);
+
+          &.on {
+            outline: 1px solid rgb(245, 126, 0) !important;
+          }
+        }
+
+        span {
+          width: 10%;
+          line-height: 45px;
+          text-align: right;
+        }
+
+        .notice {
+          display: block;
+          width: 100%;
+          color: rgb(245, 126, 0);
+          font-size: 14px;
+          margin-top: 0.5rem;
+          align-items: center;
+          text-align: left;
+
+          i {
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .register {
+        display: flex;
+        height: 19rem;
+        overflow: hidden;
+        border-radius: 2px;
+        border: 1px solid rgb(204, 204, 204);
+        background: rgb(255, 255, 255);
+
+        &.active {
+          border: 1px solid rgb(245, 126, 0) !important;
+          ;
+        }
+
+        &>div {
+          position: relative;
+          width: 33.3333%;
+          height: 100%;
+          overflow-y: auto;
+          font-size: 14px;
+          font-weight: 600;
+          color: rgb(99, 99, 99);
+          padding: 0.5rem 0;
+
+          .categoryNon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            font-weight: 400;
+            color: rgb(153, 153, 153);
+          }
+
+          &:nth-child(2) {
+            border: 1px solid rgb(204, 204, 204);
+            border-top: none;
+            border-bottom: none;
+          }
+
+          button {
+            width: 100%;
+            height: 40px;
+            text-align: left;
+            line-height: 40px;
+            padding-left: 15px;
+            cursor: pointer;
+            font-weight: 500;
+
+            &:hover {
+              background-color: #cfcfcf;
+            }
+
+            &.on {
+              color: rgb(216, 12, 24);
+            }
+
+          }
+        }
+
+      }
+
+      &.sellerLocation {
+        ul {
+          display: flex;
+          margin-bottom: 15px;
+
+          li {
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 400;
+            color: rgb(25, 25, 25);
+            border: 1px solid rgb(204, 204, 204);
+            margin-right: 1rem;
+            border-radius: 2px;
+          }
+        }
+
+        input {
+          width: 100%;
+
+        }
+      }
+
+    }
+
+    input {
+      height: 45px;
+      padding: 0 1rem;
+    }
+
+    .inputTitle {
+      width: 200px;
+      font-size: 18px;
+      font-weight: 400;
+      color: rgb(25, 25, 25);
+      line-height: 45px;
+
+      small {
+        color: rgb(178, 178, 178);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 42px;
+        margin-left: 0.25rem;
+        vertical-align: top;
+      }
+
+      span {
+        color: red;
+      }
+
+      &:after {
+        content: '*';
+        color: red;
+      }
+
+
+    }
+
+    #imageInput {
+      display: block;
+      width: 202px;
+      height: 202px;
+      position: relative;
+      border-radius: 2px;
+      border: 1px solid rgb(204, 204, 204);
+      background: rgb(250, 250, 250);
+
+      input[type="file"] {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+
+      }
+
+      input::file-selector-button {
+        display: none;
+      }
+
+      i {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: #cfcfcf;
+        text-align: center;
+        line-height: 30px;
+        font-size: 2.5rem;
+        pointer-events: none;
+
+        span {
+          display: block;
+          color: rgb(102, 102, 102);
+          font-size: 16px;
+          margin-top: 13px;
+        }
+      }
+    }
+
+    .imgExplain {
+      display: block;
+      margin-top: 20px;
+      color: rgb(102, 102, 102);
+      line-height: 180%;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+
+
+
+  }
+}

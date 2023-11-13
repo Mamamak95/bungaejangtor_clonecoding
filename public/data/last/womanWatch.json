@@ -1,0 +1,18 @@
+[
+  {
+    "last": "프리미엄 시계(쿼츠)",
+    "lastValue":"wPremiumQuots"
+  },
+  {
+    "last": "프리미엄 시계(오토매틱)",
+    "lastValue":"wPremiumAuto"
+  },
+  {
+    "last": "일반시계(디지털)",
+    "lastValue":"wWatchDigital"
+  },
+  {
+    "last": "일반시계(메탈밴드)",
+    "lastValue":"wWatchMtal"
+  }
+]
