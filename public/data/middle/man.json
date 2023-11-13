@@ -1,0 +1,30 @@
+[
+  {
+    "middle": "아우터",
+    "middleValue":"mOuter"
+  },
+  {
+    "middle": "상의",
+    "middleValue":"mTop"
+  },
+  {
+    "middle": "바지",
+    "middleValue":"mPants"
+  },
+  {
+    "middle": "점프수트",
+    "middleValue":"mJunpsuit"
+  },
+  {
+    "middle": "셋업/세트",
+    "middleValue":"mSetup"
+  },
+  {
+    "middle": "언터웨어/홈웨어",
+    "middleValue":"mUnderwear"
+  },
+  {
+    "middle": "테마/이멘트",
+    "middleValue":"mThema"
+  }
+]

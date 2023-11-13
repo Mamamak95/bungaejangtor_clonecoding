@@ -1,0 +1,35 @@
+[
+  {
+    "main": "여성의류",
+    "value":"waman"
+  },
+  {
+    "main": "남성의류",
+    "value":"man"
+  },
+  {
+    "main": "신발",
+    "value":"shoes"
+  },
+  {
+    "main": "가방/지갑",
+    "value":"bag"
+  },
+  {
+    "main": "시계",
+    "value":"watch"
+  },
+  {
+    "main": "쥬얼리",
+    "value":"jewellery"
+  },
+  {
+    "main": "패션 액세서리",
+    "value":"fashion"
+  }
+  ,
+  {
+    "main": "차량/오토바이",
+    "value":"car"
+  }
+]

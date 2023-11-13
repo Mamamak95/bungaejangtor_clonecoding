@@ -1,0 +1,22 @@
+[
+  {
+    "middle": "국산차",
+    "middleValue":"koreaCar"
+  },
+  {
+    "middle": "수입차",
+    "middleValue":"bmw"
+  },
+  {
+    "middle": "차량 용품/부품",
+    "middleValue":"carProduct"
+  },
+  {
+    "middle": " 오토바이/스쿠터",
+    "middleValue":"motorcycle"
+  },
+  {
+    "middle": "오토바이 용품/부품",
+    "middleValue":"motorcyclePoduct"
+  }
+]
