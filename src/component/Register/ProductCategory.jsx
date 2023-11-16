@@ -1,18 +1,17 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function ProductCategory(props) {
 
-
-  const [firstCategory, setFirstCategory] = useState([]) //첫번쨰 카테고리 fetch
-  const [secondCategory, setSecondCategory] = useState([]) //두번쨰 카테고리 fetch
-  const [lastCategory, setLastCategory] = useState([]) //세번쨰 카테고리 fetch
+  const [firstCategory, setFirstCategory] = useState([]) //첫번쨰 카테고리 axios.get
+  const [secondCategory, setSecondCategory] = useState([]) //두번쨰 카테고리 axios.get
+  const [lastCategory, setLastCategory] = useState([]) //세번쨰 카테고리 axios.get
   const [color, setColor] = useState(['', '', '']); // 글자색 넣기위해 value값 할당 후 클릭한 value랑 비교용
   const [active, setActive] = useState(''); // 테두리 색 변경 active
 
   useEffect(() => {
-    fetch(`data/mainCategory.json `)
-      .then((res) => res.json())
-      .then(data => setFirstCategory(data))
+    axios.get(`data/mainCategory.json `)
+      .then(res => setFirstCategory(res.data))
       .catch(() => { console.log('error') });
   }, []); // 처음 페이지 로드시 첫번째 카테고리 데이터 불러옴
 
@@ -22,18 +21,16 @@ export default function ProductCategory(props) {
     setActive('active') //active가 된다면 테두리색 변경
     props.onClick(true,e.target.value , e.target.textContent,0); // catagoryClick 함수에 파라미터 전송
 
-    fetch(`data/middle/${e.target.value}.json `)
-      .then((res) => res.json())
-      .then(data => setSecondCategory(data))
+    axios.get(`data/middle/${e.target.value}.json `)
+      .then(res => setSecondCategory(res.data))
       .catch(() => { console.log('error') });
   }
 
   let onLastCategory = (e) => {
-    fetch(`data/last/${e.target.value}.json `)
-      .then((res) => res.json())
-      .then(data => {
-        setLastCategory(data)
-        if (data.length === 0) {
+    axios.get(`data/last/${e.target.value}.json `)
+      .then(res => {
+        setLastCategory(res.data)
+        if (res.data.length === 0) {
           setActive('') //last 카테고리가 없다면 테두리색 없앰
           props.onClick(false,e.target.value,e.target.textContent,1); //last 카테고리가 없다면 상세 카테고리를 선택해주세요. 멘트 없애기 위해 false
         } else {
