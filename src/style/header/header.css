@@ -1,0 +1,191 @@
+@charset "UTF-8";
+/* 헤더 -------------------------------------------------------------- */
+header {
+  position: sticky;
+  top: -38px;
+  /* 헤더탑 -------------------------------------------------------------- */
+  /* 헤더메인부분 -------------------------------------------------------------- */
+}
+header .HeaderTop {
+  border-bottom: 1px solid #ddd;
+  font-size: 0.8rem;
+  background-color: #fff;
+  /* 헤더탑의 앱다운로드, 내상점의 글자색상 -------------------------------------------------------------- */
+  /* 헤더탑의 즐겨찾기, 로그인/회원가입 -------------------------------------------------------------- */
+  /* 헤더탑의 너비를 설정하기 위해서 감싸는 wrap 태그 -------------------------------------------------------------- */
+}
+header .HeaderTop a {
+  color: #666;
+}
+header .HeaderTop button {
+  color: #666;
+  padding: 10px 16px;
+  border: none;
+  background-color: #fff;
+}
+header .HeaderTop button:hover {
+  cursor: pointer;
+}
+header .HeaderTop .headerTopWrap {
+  width: 68%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  /* 헤더탑 왼쪽 메뉴 앱다운로드, 즐겨찾기 -------------------------------------------------------------- */
+  /* 헤더탑 오른쪽 메뉴 로그인/회원가입, 내상점 -------------------------------------------------------------- */
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuLeft {
+  display: flex;
+  align-items: center;
+  /* 헤더탑 왼쪽 메뉴 앱다운로드 -------------------------------------------------------------- */
+  /* 헤더탑 왼쪽 메뉴 즐겨찾기 -------------------------------------------------------------- */
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuLeft a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 16px;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuLeft a img {
+  padding-right: 6px;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuLeft button {
+  display: flex;
+  align-items: center;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuLeft button img {
+  padding-right: 6px;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight {
+  display: flex;
+  align-items: center;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign {
+  display: flex;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderMyStore a {
+  padding: 10px 16px;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderMyStore a img {
+  display: none;
+}
+header .HeaderMain {
+  padding-top: 36px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  /* 헤더메인의 너비를 설정하기 위해 감싸는 wrap -------------------------------------------------------------- */
+}
+header .HeaderMain .headerMainWrap {
+  width: 68%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+header .HeaderMain .headerMainWrap .HeaderContents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* 헤더메인부분의 오른쪽에 위치한 메뉴들 판매하기, 내상점, 번개톡 -------------------------------------------------------------- */
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu {
+  display: flex;
+  /* 헤더메인부분 오른쪽 위치한 메뉴 판매하기, 내상점 -------------------------------------------------------------- */
+  /* 헤더메인부분 오른쪽 위치한 메뉴 번개톡 -------------------------------------------------------------- */
+  /* 헤더메인부분 오른쪽 메뉴들의 선 처리 -------------------------------------------------------------- */
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu img {
+  width: 23px;
+  padding-right: 4px;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu a {
+  display: flex;
+  align-items: center;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu button {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: none;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu button:hover {
+  cursor: pointer;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu .HeaderMyStore {
+  margin: 0 30px;
+  position: relative;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu .HeaderMyStore::before {
+  display: inline-block;
+  content: "";
+  width: 1px;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: -22%;
+  background-color: #aaa;
+  transform: translate(-50%, -50%);
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu .HeaderMyStore::after {
+  display: inline-block;
+  content: "";
+  width: 1px;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  right: -22%;
+  background-color: #aaa;
+  transform: translate(-50%, -50%);
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch {
+  width: 40%;
+  height: 36px;
+  border: 2px solid rgb(247, 47, 51);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  /* 헤더 검색창의 숨겨진 닫기 (x) 버튼 -------------------------------------------------------------- */
+  /* 헤더 검색창의 돋보기 이미지 -------------------------------------------------------------- */
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch .search {
+  width: 100%;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch .search input {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch .searchCloseBtn {
+  visibility: hidden;
+  border: none;
+  background-color: #fff;
+  padding: 0 10px;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch .searchCloseBtn img {
+  width: 10px;
+}
+header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch img {
+  width: 16px;
+  height: 16px;
+}
+header .HeaderMain .headerMainWrap .HeaderCategory {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  font-weight: 600;
+}
+header .HeaderMain .headerMainWrap .HeaderCategory .categoryMenu {
+  width: 20px;
+  height: 16px;
+  margin-right: 20px;
+}
+header .HeaderMain .headerMainWrap .HeaderCategory .categoryMenu:hover {
+  cursor: pointer;
+}
+header .HeaderMain .headerMainWrap .HeaderCategory a {
+  padding: 0 10px;
+}
+header .HeaderMain .headerMainWrap .HeaderCategory .categoryRight {
+  width: 72px;
+}/*# sourceMappingURL=header.css.map */

@@ -1,0 +1,61 @@
+.logoutpopup {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 100;
+  background-color: rgba(0,0,0,0.6);
+
+  .logoutwrap {
+    position: relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: 25%;
+    background-color: #fff;
+    border-radius: 5px;
+
+    .logoutContent {
+      width: 80%;
+      margin:auto;
+
+      .logouttitle {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding-top: 30px;
+      }
+
+      .logoutquestion {
+        text-align: center;
+        padding: 30px 0;
+        font-size: 1.1rem;
+      }
+
+      .logoutBtn {
+        width: 100%;
+        display:flex;
+        justify-content: space-between;
+
+        button {
+          width: 48%;
+          font-size: 1.3rem;
+          font-weight: bold;
+          padding: 10px 0;
+          margin-bottom: 30px;
+        }
+
+        .logoutno {
+          background-color: #ddd;
+          color:#666;
+        }
+
+        .logoutyes {
+          background-color: red;
+          color:#fff;
+        }
+      }
+    }
+  }
+}
