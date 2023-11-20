@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import '../style/register/Register.css';
 import ProductCategory from '../component/Register/ProductCategory';
+import axios from "axios";
 
 export default function ProductRegister() {
 
@@ -16,7 +17,7 @@ export default function ProductRegister() {
   let checkNum = /^[0-9]/; // 가격 숫자만 정규식
   let [deliverPrice, setDeliverPrice] = useState(false) // 배달비칸 온 오프
   let [notice, setNotice] = useState([false, false, false, false]) // input 주의사항 메세지
-  let [outline,setOutline] = useState(['','','',''])
+  let [outline, setOutline] = useState(['', '', '', ''])
   let [info, setInfo] = useState(0);
 
   const inputProductName = useRef(null);
@@ -30,47 +31,22 @@ export default function ProductRegister() {
     copy[n] = boolean
     setNotice(copy) // boolean값으로 notice 메세지 띄우기 위해
   }
-  const onOutline = (txt,n)=>{
+  const onOutline = (txt, n) => {
     let copy = [...outline]
     copy[n] = txt
     setOutline(copy) // boolean값으로 notice 메세지 띄우기 위해
   }
-  let textNumCheck = (e, n) => {
-    let txtNum = e.target.value.length;
-    setTextNum(txtNum); //txtNum의 수에따라 input 테두리색을 위해 클래스 add , remove
-    if (txtNum === 1) {
 
-      onOutline('on',0)
-      noticeTxt(true, n)
-    } else {
-      noticeTxt(false, n)
-      onOutline('',0)
-    }
-  }
-  let priceNumCheck = (e, n) => {
-    let priceNum = e.target.value
-    if (parseInt(priceNum) < 100) {
-      onOutline('on',1)
-      noticeTxt(true, n)
-    } else {
-      onOutline('',1)
-      noticeTxt(false, n)
-    }
-    if (!checkNum.test(priceNum)) {
-      setForm({ ...form, 'price': '' });
-    }
 
-    setForm({ ...form, 'price': priceNum !== '' ? parseInt(priceNum) : '' });
-  }
 
   let deliverPriceCheck = (e, n) => {
     let deliverPrice = e.target.value
     if (parseInt(deliverPrice) < 100) {
       noticeTxt(true, n)
-      onOutline('on',2)
+      onOutline('on', 2)
     } else if (parseInt(deliverPrice) > 100000) {
       noticeTxt(true, n)
-      onOutline('on',2)
+      onOutline('on', 2)
       e.target.value = 100000
       alert('배송비는 100원부터 100,000원까지 입력할 수 있어요.')
     } else {
@@ -81,18 +57,6 @@ export default function ProductRegister() {
   }
 
 
-  let textAreaCheck = (e, n) => {
-    let txtNum = e.target.value.length;
-    setInfo(txtNum)
-    if (txtNum < 10) {
-
-      onOutline('on',3)
-      noticeTxt(true, n) //boolean값으로 notice 메세지 띄우기 위해
-    } else {
-      noticeTxt(false, n)
-      onOutline('on',3)
-    }
-  }
   let catagoryClick = (boolean, value, txt, n) => {
     setActive(boolean) // active boolean 값에 따라  '상세 카테고리를 선택해주세요.' 텍스트 노출 미노출
     setForm({ ...form, category: value }); // 카테고리 value값 재 할당
@@ -109,28 +73,75 @@ export default function ProductRegister() {
     }
 
   }
-  const handleChange = (e) => {
+  const handleChange = (e, n) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  } //input 값 onChange시 value값 재 할당
+    setForm({ ...form, [name]: value }); //input 값 onChange시 value값 재 할당
+    if (name === 'productName') { // 상품이름 유효성 검사
+      let txtNum = value.length;
+      setTextNum(txtNum); //txtNum의 수에따라 input 테두리색을 위해 클래스 add , remove
+      if (txtNum === 1) {
+
+        onOutline('on', 0)
+        noticeTxt(true, n)
+      } else {
+        noticeTxt(false, n)
+        onOutline('', 0)
+      }
+    }
+    if (name === 'price') {
+      let priceNum = e.target.value
+      if (parseInt(priceNum) < 100) {
+        onOutline('on', 1)
+        noticeTxt(true, n)
+      } else {
+        onOutline('', 1)
+        noticeTxt(false, n)
+      }
+      if (!checkNum.test(priceNum)) {
+        setForm({ ...form, 'price': '' });
+      }
+
+      setForm({ ...form, 'price': priceNum !== '' ? parseInt(priceNum) : '' });
+    }
+    
+    if (name === 'content') {
+      let txtNum = e.target.value.length;
+      setInfo(txtNum)
+      if (txtNum < 10) {
+        onOutline('on', 3)
+        noticeTxt(true, n) //boolean값으로 notice 메세지 띄우기 위해
+      } else {
+        noticeTxt(false, n)
+        onOutline('', 3)
+      }
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
     if (form.productName === '') {
       noticeTxt(true, 0)
-      onOutline('on',0)
+      onOutline('on', 0)
       return inputProductName.current.focus()
     }
     if (form.price === '') {
       noticeTxt(true, 1)
-      onOutline('on',1)
+      onOutline('on', 1)
       return inputPrice.current.focus()
     }
     if (form.content === '') {
       noticeTxt(true, 3)
-      onOutline('on',3)
+      onOutline('on', 3)
       return inputContent.current.focus()
     }
-    console.log(form);
+
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/productNew',
+      data: form
+    })
+      .then(result => alert('등록 완료'))
+      .catch(err => console.log('에러==>' + err))
+
   }
 
 
@@ -154,8 +165,7 @@ export default function ProductRegister() {
             <p className="inputTitle">상품명</p>
             <div className="nameInput">
               <input type="text" id="productName" className={outline[0]} name="productName" ref={inputProductName} value={form.productName} onChange={(e) => {
-                textNumCheck(e, 0);
-                handleChange(e);
+                handleChange(e, 0);
               }} maxLength='40' placeholder="상품명을 입력해 주세요." />
               <span>{textNum}/40</span>
               <span className="notice">
@@ -226,7 +236,7 @@ export default function ProductRegister() {
             <div >
               <p className="priceInput">
                 <input type="text" id="price" className={outline[1]} name="price" ref={inputPrice} value={form.price} onChange={(e) => {
-                  priceNumCheck(e, 1);
+                  handleChange(e, 1);
                 }} maxLength='11' placeholder="가격을 입력해 주세요." />
                 <span className="notice">
                   {notice[1] && <><i className="xi-ban"></i>100원 이상 입력해주세요.</>}
@@ -268,8 +278,7 @@ export default function ProductRegister() {
             <p className="inputTitle">설명</p>
             <div >
               <textarea rows="6" maxLength='2000' className={outline[3]} name="content" ref={inputContent} value={form.content} onChange={(e) => {
-                textAreaCheck(e, 3)
-                handleChange(e);
+                handleChange(e, 3);
               }}></textarea>
               <p className="infoNotice">
                 <span className="notice">
@@ -328,26 +337,6 @@ export default function ProductRegister() {
           </ul>
         </div>
       </form>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </>
   );
 }
