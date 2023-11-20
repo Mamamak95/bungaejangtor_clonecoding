@@ -2,13 +2,14 @@ import { useRef, useState } from "react";
 import '../style/register/Register.css';
 import ProductCategory from '../component/Register/ProductCategory';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductRegister() {
 
   // 초기 위치 정보 (나중에 API 데이터로 변경될 수 있음)
-  let location = '경기도 성남시 중원구 성남동'
+  let place = '경기도 성남시 중원구 성남동'
   // 상태 관리를 위한 useState 훅 사용
-  let [form, setForm] = useState({ 'seller ': 'userId', 'productName': '', 'category': 'ALL', location, 'price': '', 'content': '' })
+  let [form, setForm] = useState({ 'seller': 'user1', 'productName': '', 'category': 'ALL', place, 'price': '', 'content': '' })
   let [textNum, setTextNum] = useState(0);  // 상품이름 input 글자수 체크
   const [active, setActive] = useState(false) // '상세 카테고리를 선택해주세요.' 멘트 온오프
   let [first, setFirst] = useState(''); // 카테고리 천째칸
@@ -136,10 +137,12 @@ export default function ProductRegister() {
 
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/productNew',
+      url: 'http://127.0.0.1:8000/product/new',
       data: form
     })
-      .then(result => alert('등록 완료'))
+      .then(result =>{ 
+        alert(result.data)
+      })
       .catch(err => console.log('에러==>' + err))
 
   }
@@ -190,7 +193,7 @@ export default function ProductRegister() {
                 <li>주소 검색</li>
                 <li>지역설정안함</li>
               </ul>
-              <input type="text" value={location} disabled />
+              <input type="text" value={place} disabled />
             </div>
           </div>
           <div className="inputContainer">
@@ -277,7 +280,7 @@ export default function ProductRegister() {
           <div className="inputContainer">
             <p className="inputTitle">설명</p>
             <div >
-              <textarea rows="6" maxLength='2000' className={outline[3]} name="content" ref={inputContent} value={form.content} onChange={(e) => {
+              <textarea rows="6" maxLength='500' className={outline[3]} name="content" ref={inputContent} value={form.content} onChange={(e) => {
                 handleChange(e, 3);
               }}></textarea>
               <p className="infoNotice">
@@ -285,7 +288,7 @@ export default function ProductRegister() {
                   {notice[3] && <><i className="xi-ban"></i>상품 설명을 10글자 이상 입력해주세요.</>}
                 </span>
                 <span className="infoCheck">
-                  {info}/2000
+                  {info}/500
                 </span>
               </p>
               {
