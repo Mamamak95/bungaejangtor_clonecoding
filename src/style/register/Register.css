@@ -8,6 +8,21 @@
   color: #000;
 }
 
+.imageInputBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+.imageInputBox img {
+  width: 202px;
+  height: 202px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-left: 10px;
+}
+.imageInputBox .imgExplain {
+  width: 100%;
+}
+
 .ProductRegisterTitle {
   height: 100px;
   color: rgb(25, 25, 25);

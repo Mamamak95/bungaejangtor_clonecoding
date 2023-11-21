@@ -9,7 +9,7 @@ export default function ProductRegister() {
   // 초기 위치 정보 (나중에 API 데이터로 변경될 수 있음)
   let place = '경기도 성남시 중원구 성남동'
   // 상태 관리를 위한 useState 훅 사용
-  let [form, setForm] = useState({ 'seller': 'user1', 'productName': '', 'category': 'ALL', place, 'price': '', 'content': '' })
+  let [form, setForm] = useState({'img':null, 'seller': 'user1', 'productName': '', 'category': 'ALL', place, 'price': '', 'content': '' })
   let [textNum, setTextNum] = useState(0);  // 상품이름 input 글자수 체크
   const [active, setActive] = useState(false) // '상세 카테고리를 선택해주세요.' 멘트 온오프
   let [first, setFirst] = useState(''); // 카테고리 천째칸
@@ -77,6 +77,18 @@ export default function ProductRegister() {
   const handleChange = (e, n) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value }); //input 값 onChange시 value값 재 할당
+
+    if (name === 'img') {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setForm({ ...form, [name]: reader.result });
+        };
+        reader.readAsDataURL(file);
+      }
+
+    }
     if (name === 'productName') { // 상품이름 유효성 검사
       let txtNum = value.length;
       setTextNum(txtNum); //txtNum의 수에따라 input 테두리색을 위해 클래스 add , remove
@@ -104,7 +116,7 @@ export default function ProductRegister() {
 
       setForm({ ...form, 'price': priceNum !== '' ? parseInt(priceNum) : '' });
     }
-    
+
     if (name === 'content') {
       let txtNum = e.target.value.length;
       setInfo(txtNum)
@@ -116,6 +128,7 @@ export default function ProductRegister() {
         onOutline('', 3)
       }
     }
+
   }
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -140,7 +153,7 @@ export default function ProductRegister() {
       url: 'http://127.0.0.1:8000/product/new',
       data: form
     })
-      .then(result =>{ 
+      .then(result => {
         alert(result.data)
       })
       .catch(err => console.log('에러==>' + err))
@@ -156,11 +169,15 @@ export default function ProductRegister() {
           <h2 className="ProductRegisterTitle">기본정보<span>*필수항목</span></h2>
           <div className="inputContainer">
             <p className="inputTitle">상품이미지<span className="red">*</span><small>(0/5)</small></p>
-            <div>
+            <div className="imageInputBox">
               <span id="imageInput">
-                <input type="file" accept="image/jpg, image/jpeg, image/png" multiple />
+                <input type="file" name='img' accept="image/jpg, image/jpeg, image/png" multiple onChange={(e) => {
+                  handleChange(e, null)
+                }} />
                 <i className="xi-camera"><span>이미지 등록</span></i>
               </span>
+              {form.img && <img src={form.img}  />}
+
               <span className="imgExplain">상품 이미지는 PC에서는 1:1, 모바일에서는 1:1.23 비율로 보여져요.</span>
             </div>
           </div>
