@@ -1,35 +1,42 @@
-import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 
 export default function ChatRoom({ roomInfo }) {
   const [chatLog, setChatLog] = useState([]);
-  console.log('info',roomInfo)
+  const chatBox = useRef(null);
   useEffect(() => {
-    // fetch("/data/chat/chatLog.json")
-    //   .then((res) => res.json())
-    //   .then((data) => setChatLog(data));
+    handleLog();
+    
+  }, [roomInfo]);
 
-    // axios.post(`http://127.0.0.1:8000/chat/log`,{crid:roomInfo.crid,uid:roomInfo.uid})
-  }, []);
+  const handleLog = () => {
+    if (roomInfo.crid != null) {
+      axios
+        .post(`http://127.0.0.1:8000/chat/log`, { crid: roomInfo.crid })
+        .then((res) => {
+          setChatLog(res.data);
+        });
+        chatBox.current.scrollTop = chatBox.current.scrollHeight;
+    }
+  };
 
-  const isBuyer = roomInfo[1] === "";
   return (
     <div className="chatList_right">
-      <div className="chatRoom_header">{roomInfo[1]}상대 이름</div>
-      <div className="chatLog">
+      <div className="chatRoom_header"><span>{roomInfo.oppoName}</span><button onClick={handleLog}>새로고침</button></div>
+      <div className="chatLog" ref={chatBox}>
         {chatLog.map((s) => {
-          
           return (
             <div
               className={`${
-                (roomInfo[2] ^ s.isBuyer) ? "oppo" : "me" //!(사용자가 구매자? XOR 구매자가 보냄?)
+                roomInfo.isBuyer ^ s.isBuyerSend ? "oppo" : "me" //!(사용자가 구매자? XOR 구매자가 보냄?)
               } chat_message`}
             >
-              <span>aaaaa</span>
-              <div>date</div>
+              <span>{s.content}</span>
+              <div>{s.date}</div>
             </div>
           );
         })}
+        
       </div>
       <form className="chatSend">
         <svg

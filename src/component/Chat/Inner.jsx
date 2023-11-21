@@ -2,6 +2,8 @@ import React,{useEffect,useState} from 'react'
 import axios from 'axios';
 export default function Inner({getInfo}){
   const [chatInfo, setChatInfo] = useState([]);
+  
+
   useEffect(() => {
     axios.post('http://127.0.0.1:8000/chat/list',{id:'user1'}).then(res=>{
      setChatInfo(res.data)
@@ -18,7 +20,7 @@ export default function Inner({getInfo}){
             {chatInfo.map((v) => {
               return (
                 <li
-                  onClick={()=>{getInfo(v.buyer === "user1" ? {crid:v.crid,uid:v.seller,isBuyer:true} : {crid:v.crid,uid:v.buyer,isBuyer:false})}}
+                  onClick={()=>{getInfo(v.buyer === "user1" ? {crid:v.crid,oppoName:v.sellerName,isBuyer:true} : {crid:v.crid,uid:v.buyer,oppoName:v.buyerName,isBuyer:false})}}
                   key={v.crid}
                 >
                   <div className="chatList_inner_chatRoomLink_img">
