@@ -3,7 +3,7 @@ import React,{useEffect,useState} from 'react'
 export default function Inner({getId}){
   const [chatInfo, setChatInfo] = useState([]);
   useEffect(() => {
-    fetch("./testData/chatRoomList.json")
+    fetch("./data/chat/chatRoomList.json")
       .then((res) => res.json())
       .then((data) => setChatInfo(data));
   }, []);

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 export default function ChatRoom({ roomId }) {
   const [chatLog, setChatLog] = useState([]);
   useEffect(() => {
-    fetch("./testData/chatLog.json")
+    fetch("/data/chat/chatLog.json")
       .then((res) => res.json())
       .then((data) => setChatLog(data));
   }, []);
