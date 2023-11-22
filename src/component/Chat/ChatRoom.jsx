@@ -6,7 +6,6 @@ export default function ChatRoom({ roomInfo }) {
   const chatBox = useRef(null);
   useEffect(() => {
     handleLog();
-    
   }, [roomInfo]);
 
   const handleLog = () => {
@@ -16,13 +15,29 @@ export default function ChatRoom({ roomInfo }) {
         .then((res) => {
           setChatLog(res.data);
         });
-        chatBox.current.scrollTop = chatBox.current.scrollHeight;
+      chatBox.current.scrollTop = chatBox.current.scrollHeight;
     }
   };
 
+  const handleKey=(e)=>{
+    if(e.key==='Enter') {
+      const value=e.target.value
+      e.target.value=''
+      axios.post('http://127.0.0.1:8000/chat/send',{crid:roomInfo.crid,isBuyerSend:roomInfo.isBuyer,content:value})
+      .then((res) => {
+        setChatLog(res.data);
+      })
+      chatBox.current.scrollTop = chatBox.current.scrollHeight;
+    }
+  }
+
+
   return (
     <div className="chatList_right">
-      <div className="chatRoom_header"><span>{roomInfo.oppoName}</span><button onClick={handleLog}>새로고침</button></div>
+      <div className="chatRoom_header">
+        <span>{roomInfo.oppoName}</span>
+        <button onClick={handleLog}>새로고침</button>
+      </div>
       <div className="chatLog" ref={chatBox}>
         {chatLog.map((s) => {
           return (
@@ -36,7 +51,6 @@ export default function ChatRoom({ roomInfo }) {
             </div>
           );
         })}
-        
       </div>
       <form className="chatSend">
         <svg
@@ -52,8 +66,8 @@ export default function ChatRoom({ roomInfo }) {
             fillRule="evenodd"
           ></path>
         </svg>
-        <textarea cols="30" rows="2" maxLength={100}></textarea>
-        <button type="submit"></button>
+        <textarea cols="30" rows="2" maxLength={100} onKeyDown={handleKey}></textarea>
+        <button></button>
       </form>
     </div>
   );
