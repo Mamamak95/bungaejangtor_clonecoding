@@ -30,7 +30,7 @@ export default function ChatRoom({ roomInfo }) {
       chatBox.current.scrollTop = chatBox.current.scrollHeight;
     }
   }
-
+ 
 
   return (
     <div className="chatList_right">
