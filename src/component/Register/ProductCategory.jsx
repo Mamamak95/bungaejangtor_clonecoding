@@ -10,11 +10,7 @@ export default function ProductCategory(props) {
   const [active, setActive] = useState(''); // 테두리 색 변경 active
 
   useEffect(() => {
-<<<<<<< HEAD
     axios.get(`/data/mainCategory.json`)
-=======
-    axios.get(`/data/mainCategory.json `)
->>>>>>> origin/Eum
       .then(res => setFirstCategory(res.data))
       .catch(() => { console.log('main error') });
   }, []); // 처음 페이지 로드시 첫번째 카테고리 데이터 불러옴
