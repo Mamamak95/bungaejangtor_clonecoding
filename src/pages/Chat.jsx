@@ -1,4 +1,4 @@
-import ChatList from '../component/chat/ChatList'
+import ChatList from '../component/Chat/ChatList'
 
 export default function Chat(){
 

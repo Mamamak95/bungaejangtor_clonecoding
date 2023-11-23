@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProductRegister from './pages/ProductRegister';
 import Chat from './pages/Chat'
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
@@ -13,9 +14,9 @@ const router = createBrowserRouter([
     element: <App/>,
     // errorElement: <NotFound />,
     children: [
-      // { index : true ,path: '/', element: <App /> },
+      { index : true ,path: '/', element: <Home /> },
       { path: '/products/new/:id', element: <ProductRegister /> },
-      {path: '/chat', element: <Chat />}
+      { path: '/chat', element: <Chat/>}
 
     ]
   }
