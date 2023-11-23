@@ -1,0 +1,231 @@
+
+/* 헤더 -------------------------------------------------------------- */
+header{
+  position: sticky;
+  top:-38px;
+
+  /* 헤더탑 -------------------------------------------------------------- */
+  .HeaderTop {
+    border-bottom: 1px solid #ddd;
+    font-size: 0.8rem;
+    background-color: #fff;
+
+    /* 헤더탑의 앱다운로드, 내상점의 글자색상 -------------------------------------------------------------- */
+    a {
+      color:#666;
+    }
+
+    /* 헤더탑의 즐겨찾기, 로그인/회원가입 -------------------------------------------------------------- */
+    button {
+      color:#666;
+      padding: 10px 16px;
+      border:none;
+      background-color: #fff;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    /* 헤더탑의 너비를 설정하기 위해서 감싸는 wrap 태그 -------------------------------------------------------------- */
+    .headerTopWrap {
+      width: 68%;
+      margin:0 auto;
+      display:flex;
+      justify-content: space-between;
+
+      /* 헤더탑 왼쪽 메뉴 앱다운로드, 즐겨찾기 -------------------------------------------------------------- */
+      .HeaderTopMenuLeft {
+        display:flex;
+        align-items: center;
+
+        /* 헤더탑 왼쪽 메뉴 앱다운로드 -------------------------------------------------------------- */
+        a {
+          display:flex;
+          flex-wrap: wrap;
+          align-items: center;
+          padding: 0 16px;
+
+          img {
+            padding-right: 6px;
+          }
+        }
+
+        /* 헤더탑 왼쪽 메뉴 즐겨찾기 -------------------------------------------------------------- */
+        button {
+          display:flex;
+          align-items: center;
+
+          img {
+            padding-right: 6px;
+          }
+        }
+      }
+
+      /* 헤더탑 오른쪽 메뉴 로그인/회원가입, 내상점 -------------------------------------------------------------- */
+      .HeaderTopMenuRight {
+        display:flex;
+        align-items: center;
+
+        .HeaderLoginSign {
+          display:flex;
+        }
+
+        .HeaderMyStore {
+          
+          a {
+            padding: 10px 16px;
+
+            img {
+              display:none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* 헤더메인부분 -------------------------------------------------------------- */
+  .HeaderMain {
+    padding-top: 36px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+
+    /* 헤더메인의 너비를 설정하기 위해 감싸는 wrap -------------------------------------------------------------- */
+    .headerMainWrap {
+      width: 68%;
+      margin:0 auto;
+      display:flex;
+      flex-wrap: wrap;
+
+      .HeaderContents {
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        /* 헤더메인부분의 오른쪽에 위치한 메뉴들 판매하기, 내상점, 번개톡 -------------------------------------------------------------- */
+        .HeaderMainMenu {
+          display:flex;
+
+          img {
+            width: 23px;
+            padding-right: 4px;
+          }
+
+          /* 헤더메인부분 오른쪽 위치한 메뉴 판매하기, 내상점 -------------------------------------------------------------- */
+          a {
+            display:flex;
+            align-items: center;
+          }
+
+          /* 헤더메인부분 오른쪽 위치한 메뉴 번개톡 -------------------------------------------------------------- */
+          button {
+            display:flex;
+            align-items: center;
+            background-color: #fff;
+            border:none;
+            
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          /* 헤더메인부분 오른쪽 메뉴들의 선 처리 -------------------------------------------------------------- */
+          .HeaderMyStore {
+            margin: 0 30px;
+            position: relative;
+
+            &::before {
+              display: inline-block;
+              content: "";
+              width: 1px;
+              height: 50%;
+              position: absolute;
+              top: 50%;
+              left: -22%;
+              background-color: #aaa;
+              transform: translate(-50%,-50%);
+            }
+
+            &::after {
+              display: inline-block;
+              content: "";
+              width: 1px;
+              height: 50%;
+              position: absolute;
+              top: 50%;
+              right: -22%;
+              background-color: #aaa;
+              transform: translate(-50%,-50%);
+            }
+          }
+        }
+
+        .HeaderSearch {
+          width: 40%;
+          height: 36px;
+          border:2px solid rgb(247, 47, 51);
+          display:flex;
+          align-items: center;
+          padding: 0 16px;
+
+          .search {
+            width: 100%;
+
+            input {
+              width: 100%;
+              border:none;
+              outline: none;
+            }
+          }
+
+          /* 헤더 검색창의 숨겨진 닫기 (x) 버튼 -------------------------------------------------------------- */
+          .searchCloseBtn {
+            visibility: hidden;
+            border:none;
+            background-color: #fff;
+            padding: 0 10px;
+
+            img {
+              width: 10px;
+            }
+          }
+
+          /* 헤더 검색창의 돋보기 이미지 -------------------------------------------------------------- */
+          img {
+            width:16px;
+            height: 16px;
+          }
+        }
+      }
+
+      .HeaderCategory {
+        display:flex;
+        align-items: center;
+        height: 70px;
+        font-weight: 600;
+
+        .categoryMenu {
+          width: 20px;
+          height: 16px;
+          margin-right: 20px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        a {
+          padding: 0 10px;
+        }
+
+        .categoryRight {
+          width: 72px;
+
+        }
+      }
+    }
+  }
+}

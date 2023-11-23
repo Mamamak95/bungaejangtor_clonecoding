@@ -1,0 +1,191 @@
+/* footerTop */
+.footerTop {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+
+  .footerMenu {
+    width: 68%;
+    height: 60px;
+    margin:0 auto;
+    display:flex;
+    align-items: center;
+
+    a {
+      font-size: 0.9rem;
+      padding: 0 22px;
+      position: relative;
+      color:#333;
+
+      &:first-of-type {
+        padding: 0 22px 0 0;
+      }
+
+      &::after {
+        display: inline-block;
+        content: "";
+        width: 1px;
+        height: 50%;
+        position: absolute;
+        top: 50%;
+        right: -1%;
+        background-color: #aaa;
+        transform: translate(-50%,-50%);
+      }
+
+      &:nth-of-type(4){
+        font-weight: bold;
+      }
+
+      &:last-of-type::after {
+        display:none;
+      }
+    }
+  }
+}
+
+
+/* footerMainContents */
+.footerMainContents {
+  width: 68%;
+  margin:0 auto;
+  display:flex;
+  justify-content: space-between;
+  padding: 40px 0;
+  border-bottom: 1px solid #ddd;
+
+  a {
+    text-decoration: underline;
+    font-size: 0.8rem;
+    color:#333;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
+
+  /* address, bungaeInfo 와 pointInfo 둘을 감싸고 위아래로 배치 */
+  .address {
+    width: 48%;
+
+    /* bungaeInfo */
+    .bungaeInfo {
+      padding-bottom: 30px;
+
+      .addrContents {
+        color:#7f7f7f;
+        font-size: 0.75rem;
+
+        &> p {
+          padding-bottom: 10px;
+        }
+      }
+    }
+
+    /* pointInfo */
+    .pointInfo {
+      color:#7f7f7f;
+      font-size: 0.75rem;
+
+      p {
+        padding-bottom: 10px;
+
+        b {
+          font-size: 0.8rem;
+          font-weight: bold;
+          color:#333;
+        }
+      }
+    }
+  }
+
+  /* customer, customerInfo 와 guide 둘을 감싸고 위아래로 배치  */
+  .customer {
+    width: 48%;
+
+    /* customerInfo */
+    .customerInfo {
+      padding-bottom: 30px;
+
+      strong {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color:#666;
+      }
+
+      .centerTime {
+        color:#7f7f7f;
+        font-size: 0.75rem;
+        padding: 6px 0;
+      }
+
+      a {
+        margin-right: 16px;
+      }
+    }
+
+    /* guide */
+    .guide {
+
+      .guideContent {
+        color:#7f7f7f;
+        font-size: 0.75rem;
+        line-height: 1.5rem;
+      }
+      
+      .copyright {
+        color:#7f7f7f;
+        font-size: 0.8rem;
+        padding: 10px 0;
+      }
+    }
+  }
+}
+
+
+.term {
+  width: 68%;
+  margin:0 auto;
+  padding: 30px 0;
+  display:flex;
+  justify-content: space-between;
+
+  .termContent {
+    width: 48%;
+
+    .termLink {
+      display:flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 30px;
+        height: 30px;
+        padding-bottom: 6px;
+      }
+
+      .termWrite {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color:#7f7f7f;
+        font-size: 0.7rem;
+        padding-left: 10px;
+
+        p {
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+
+  .termExplain {
+    width: 48%;
+
+    .explainContent {
+      color:#7f7f7f;
+      font-size: 0.7rem;
+    }
+  }
+}
