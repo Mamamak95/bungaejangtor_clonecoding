@@ -8,7 +8,7 @@ export default function Home(){
     <div className="home">
       <Banner />
       <Product />
-      <SubBar />
+      
     </div>
   )
 }
