@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 import ProductRegister from './pages/ProductRegister';
 import Chat from './pages/Chat'
 import Home from './pages/Home';
@@ -12,7 +13,7 @@ import DetailItem from './pages/DetailItem';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App/>,
+    element: <App />,
     // errorElement: <NotFound />,
     children: [
       { index : true ,path: '/', element: <Home /> },
@@ -23,10 +24,13 @@ const router = createBrowserRouter([
     ]
   }
 ])
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <CookiesProvider>
+      <RouterProvider router = {router}/>
+    </CookiesProvider>
   </React.StrictMode>
 );
 

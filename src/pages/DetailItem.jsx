@@ -2,6 +2,7 @@
 // import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import '../style/detailItem/detailItem.css'
+import Image from './../component/common/Image';
 
 export default function DetailItem() {
 
@@ -13,9 +14,8 @@ export default function DetailItem() {
     <div className="inner">
       <div className="detailItem">
 
-        <span className="detailItemImg">
-          <img src="https://shopping-phinf.pstatic.net/main_4261637/42616374622.20230913113829.jpg?type=f640" alt="" />
-        </span>
+
+        <Image className='detailItemImg' url='productImg\\image-1700723928096.png' />
 
         <div>
 
@@ -50,7 +50,45 @@ export default function DetailItem() {
             </div>
           </div>
 
-          <div></div>
+          <div className="productCondition">
+
+            <div>
+              <p>상품상태</p>
+              <span>새 상품</span>
+            </div>
+            <div>
+              <p>교환여부</p>
+              <span>교환불가능</span>
+            </div>
+            <div>
+              <p>배송비</p>
+              <span>배송비 별도</span>
+            </div>
+            <div>
+              <p>거래지역</p>
+              <span><img src="https://m.bunjang.co.kr/pc-static/resource/c5e781f4a76a029355bc.png" alt="지역 아이콘" />전국</span>
+            </div>
+
+          </div>
+
+          <div className="btnIcon">
+
+            <div>
+              <button>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K" alt="" />
+                <span>찜</span>
+                <span>1</span>
+              </button>
+            </div>
+
+            <button>
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K" alt="" />
+              번개톡
+            </button>
+
+            <button>바로구매</button>
+
+          </div>
 
         </div>
 

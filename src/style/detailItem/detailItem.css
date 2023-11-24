@@ -16,58 +16,58 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.detailItem div {
+.detailItem > div {
   width: 100%;
 }
-.detailItem div .mainInfo {
+.detailItem > div .mainInfo {
   padding-bottom: 30px;
   border-bottom: 1px solid rgb(238, 238, 238);
   width: 100%;
 }
-.detailItem div .mainInfo .productName {
+.detailItem > div .mainInfo .productName {
   font-size: 24px;
   margin-bottom: 25px;
   font-weight: 600;
   line-height: 1.4;
 }
-.detailItem div .mainInfo .price {
+.detailItem > div .mainInfo .price {
   display: flex;
   align-items: flex-end;
   gap: 10px;
 }
-.detailItem div .mainInfo .price p {
+.detailItem > div .mainInfo .price p {
   font-size: 40px;
   font-weight: 500;
 }
-.detailItem div .mainInfo .price span {
+.detailItem > div .mainInfo .price span {
   font-size: 28px;
   font-weight: 400;
   margin-left: 3px;
 }
-.detailItem div .mainInfo .price .thunderImg {
+.detailItem > div .mainInfo .price .thunderImg {
   display: inline-block;
   height: 28px;
 }
-.detailItem div .subInfo .infoIcon {
+.detailItem > div .subInfo .infoIcon {
   height: 30px;
   margin-top: 15px;
   margin-bottom: 25px;
   display: flex;
   justify-content: space-between;
 }
-.detailItem div .subInfo .infoIcon div {
+.detailItem > div .subInfo .infoIcon div {
   height: 100%;
   display: flex;
   align-items: center;
 }
-.detailItem div .subInfo .infoIcon div p {
+.detailItem > div .subInfo .infoIcon div p {
   display: flex;
   align-items: center;
   color: rgb(204, 204, 204);
   font-size: 16px;
   height: 100%;
 }
-.detailItem div .subInfo .infoIcon div p::after {
+.detailItem > div .subInfo .infoIcon div p::after {
   content: "";
   width: 1px;
   height: 12px;
@@ -75,17 +75,59 @@
   margin-left: 10px;
   margin-right: 10px;
 }
-.detailItem div .subInfo .infoIcon div p:last-child::after {
+.detailItem > div .subInfo .infoIcon div p:last-child::after {
   display: none;
 }
-.detailItem div .subInfo button {
+.detailItem > div .subInfo button {
   color: rgb(204, 204, 204);
   font-size: 16px;
   display: flex;
   align-items: center;
 }
-.detailItem div .subInfo img {
+.detailItem > div .subInfo img {
   width: 21px;
   margin-right: 5px;
   vertical-align: bottom;
+}
+.detailItem > div .productCondition div {
+  display: flex;
+  margin-bottom: 17px;
+  font-size: 14px;
+}
+.detailItem > div .productCondition div p {
+  position: relative;
+  width: 90px;
+  padding-left: 15px;
+  color: rgb(153, 153, 153);
+}
+.detailItem > div .productCondition div p::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 6px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgb(204, 204, 204);
+}
+.detailItem > div .productCondition div span {
+  position: relative;
+  display: flex;
+}
+.detailItem > div .productCondition div img {
+  margin-right: 4px;
+  width: 15px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.detailItem > div .btnIcon {
+  display: flex;
+  justify-content: space-between;
+}
+.detailItem > div .btnIcon > * {
+  width: 31%;
+  text-align: center;
+}
+.detailItem > div .btnIcon div {
+  position: relative;
 }/*# sourceMappingURL=detailItem.css.map */
