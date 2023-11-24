@@ -3,11 +3,29 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { CookiesProvider } from 'react-cookie';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import SignUp from './pages/SignUp';
+// import NotFound from './pages/NotFound';
+
+const router = createBrowserRouter([
+  {
+    path : '/',
+    element : <App />,
+    // errorElement : <NotFound />,
+    children : [
+      // { index : true, path : '/', element : <Home /> },
+      { path : '/sign', element : <SignUp /> }
+    ]
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <CookiesProvider>
+      <RouterProvider router = {router}/>
+    </CookiesProvider>
   </React.StrictMode>
 );
 
