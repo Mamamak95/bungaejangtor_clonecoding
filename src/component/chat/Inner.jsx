@@ -1,11 +1,13 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
+import Image from '../common/Image'
+
 export default function Inner({getInfo}){
   const [chatInfo, setChatInfo] = useState([]);
-  
+  const [userInfo,setUserInfo]=useState({id:'user1'})
 
   useEffect(() => {
-    axios.post('http://127.0.0.1:8000/chat/list',{id:'user1'}).then(res=>{
+    axios.post('http://127.0.0.1:8000/chat/list',{id:userInfo.id}).then(res=>{
      setChatInfo(res.data)
     }).catch(err=>console.log(err))
 
@@ -20,17 +22,14 @@ export default function Inner({getInfo}){
             {chatInfo.map((v) => {
               return (
                 <li
-                  onClick={()=>{getInfo(v.buyer === "user1" ? {crid:v.crid,oppoName:v.sellerName,isBuyer:true} : {crid:v.crid,uid:v.buyer,oppoName:v.buyerName,isBuyer:false})}}
+                  onClick={()=>{getInfo(v.buyer === userInfo.id ? {crid:v.crid,oppoName:v.sellerName,isBuyer:true} : {crid:v.crid,uid:v.buyer,oppoName:v.buyerName,isBuyer:false})}}
                   key={v.crid}
                 >
                   <div className="chatList_inner_chatRoomLink_img">
-                    <img
-                      src="http://gangnamstar.co.kr/files/attach/images/119/496/028/5ab093602c1cd1d6c8cae3bd29a391d5.jpg"
-                      alt=""
-                    />
+                    <Image></Image>
                   </div>
                   <div className="chatList_inner_chatRoomLink_contents">
-                    <div>{v.buyer === "user1" ? v.sellerName : v.buyerName}</div>
+                    <div>{v.buyer === userInfo.id ? v.sellerName : v.buyerName}</div>
                     <div>{v.lastestMessage}</div>
                   </div>
                 </li>
