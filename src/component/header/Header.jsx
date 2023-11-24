@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import DownloadQR from '../popup/DownloadQR';
 import LoginPopUp from '../login/LoginPopUp';
 import LogoutPopUp from './../login/LogoutPopUp';
+import SubBar from './../SubBar';
 
 export default function Header(){
   const bookmark = (e) => {
@@ -74,7 +75,7 @@ export default function Header(){
 
           <div className="HeaderCategory">{/* 헤더메인부분의 맨 아래쪽 카테고리를 감싸는 태그 */}
             <img src="https://m.bunjang.co.kr/pc-static/resource/9ddac97c001dd6e0c2eb.png" className="categoryMenu" alt="categoryMenubar" />
-            <Link to = "https://seller.bunjang.co.kr/intro" target="_blank">번개장터 판매자센터</Link>
+            <Link to = "/" target="_blank">번개장터 판매자센터</Link>
             <img src="https://m.bunjang.co.kr/pc-static/resource/34a01cb11e0b14957f81.png" className="categoryRight" alt="categoryRightImg" />
           </div>
         </div>
@@ -83,6 +84,7 @@ export default function Header(){
       {qr && <DownloadQR qrToggleBtn={qrToggleBtn} />}
       <LoginPopUp styleLoginBlock={styleLoginBlock} handleLoginToggle={handleLoginToggle}/>
       <LogoutPopUp />
+      <SubBar />
     </header>
   );
 }

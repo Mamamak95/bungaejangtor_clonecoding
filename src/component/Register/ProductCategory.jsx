@@ -10,9 +10,9 @@ export default function ProductCategory(props) {
   const [active, setActive] = useState(''); // 테두리 색 변경 active
 
   useEffect(() => {
-    axios.get(`data/mainCategory.json `)
+    axios.get(`/data/mainCategory.json`)
       .then(res => setFirstCategory(res.data))
-      .catch(() => { console.log('error') });
+      .catch(() => { console.log('main error') });
   }, []); // 처음 페이지 로드시 첫번째 카테고리 데이터 불러옴
 
 
@@ -21,13 +21,13 @@ export default function ProductCategory(props) {
     setActive('active') //active가 된다면 테두리색 변경
     props.onClick(true,e.target.value , e.target.textContent,0); // catagoryClick 함수에 파라미터 전송
 
-    axios.get(`data/middle/${e.target.value}.json `)
+    axios.get(`/data/middle/${e.target.value}.json `)
       .then(res => setSecondCategory(res.data))
-      .catch(() => { console.log('error') });
+      .catch(() => { console.log('middle error') });
   }
 
   let onLastCategory = (e) => {
-    axios.get(`data/last/${e.target.value}.json `)
+    axios.get(`/data/last/${e.target.value}.json `)
       .then(res => {
         setLastCategory(res.data)
         if (res.data.length === 0) {
@@ -40,7 +40,7 @@ export default function ProductCategory(props) {
         }
 
       })
-      .catch(() => { console.log('error') });
+      .catch(() => { console.log('last error') });
   }
 
   let handleClick = (e, i) => {

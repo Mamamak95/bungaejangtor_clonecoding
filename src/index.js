@@ -3,19 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { CookiesProvider } from 'react-cookie';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
+import ProductRegister from './pages/ProductRegister';
+import Chat from './pages/Chat'
+import Home from './pages/Home';
 import SignUp from './pages/SignUp';
-// import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
 const router = createBrowserRouter([
   {
-    path : '/',
-    element : <App />,
-    // errorElement : <NotFound />,
-    children : [
-      // { index : true, path : '/', element : <Home /> },
-      { path : '/sign', element : <SignUp /> }
+    path: '/',
+    element: <App />,
+    // errorElement: <NotFound />,
+    children: [
+      { index : true ,path: '/', element: <Home /> },
+      { path: '/products/new/:id', element: <ProductRegister /> },
+      { path: '/chat', element: <Chat />},
+      { path : '/sign', element : <SignUp /> },
+      { path : '/profile', element : <Profile /> }
     ]
   }
 ])
