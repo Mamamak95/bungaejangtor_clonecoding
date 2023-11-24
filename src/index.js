@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProductRegister from './pages/ProductRegister';
 import Chat from './pages/Chat'
 import Home from './pages/Home';
+import DetailItem from './pages/DetailItem';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     children: [
       { index : true ,path: '/', element: <Home /> },
       { path: '/products/new/:id', element: <ProductRegister /> },
+      { path: '/productDetail/:pid', element: <DetailItem /> },
       { path: '/chat', element: <Chat/>}
 
     ]
