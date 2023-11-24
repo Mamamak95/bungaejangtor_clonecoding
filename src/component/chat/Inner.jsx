@@ -26,7 +26,7 @@ export default function Inner({getInfo}){
                   key={v.crid}
                 >
                   <div className="chatList_inner_chatRoomLink_img">
-                    <Image></Image>
+                    <Image url='productImg/image-1700725251398.jpg'></Image>
                   </div>
                   <div className="chatList_inner_chatRoomLink_contents">
                     <div>{v.buyer === userInfo.id ? v.sellerName : v.buyerName}</div>
