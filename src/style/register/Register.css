@@ -4,6 +4,11 @@
   margin: 0 auto;
 }
 
+.photoPreview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .submit {
   color: #000;
 }
@@ -17,7 +22,7 @@
   height: 202px;
   -o-object-fit: cover;
      object-fit: cover;
-  margin-left: 10px;
+  margin: 5px;
 }
 .imageInputBox .imgExplain {
   width: 100%;
@@ -261,8 +266,6 @@ fieldset .inputContainer div .register > div:nth-child(2) {
 fieldset .inputContainer div .register > div button {
   width: 100%;
   height: 40px;
-  text-align: left;
-  line-height: 40px;
   padding-left: 15px;
   cursor: pointer;
   font-weight: 500;
@@ -336,6 +339,7 @@ fieldset .inputContainer #imageInput {
   border-radius: 2px;
   border: 1px solid rgb(204, 204, 204);
   background: rgb(250, 250, 250);
+  margin: 5px;
 }
 fieldset .inputContainer #imageInput input[type=file] {
   width: 100%;

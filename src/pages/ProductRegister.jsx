@@ -9,6 +9,7 @@ export default function ProductRegister() {
   // 초기 위치 정보 (나중에 API 데이터로 변경될 수 있음)
   let place = '경기도 성남시 중원구 성남동'
   // 상태 관리를 위한 useState 훅 사용
+  let [formImg, setFormImg] = useState([]);
   let [form, setForm] = useState({ 'img': '', 'seller': 'user1', 'productName': '', 'category': 'ALL', place, 'price': '', 'content': '' })
   let [textNum, setTextNum] = useState(0);  // 상품이름 input 글자수 체크
   const [active, setActive] = useState(false) // '상세 카테고리를 선택해주세요.' 멘트 온오프
@@ -20,12 +21,11 @@ export default function ProductRegister() {
   let [notice, setNotice] = useState([false, false, false, false]) // input 주의사항 메세지
   let [outline, setOutline] = useState(['', '', '', ''])
   let [info, setInfo] = useState(0);
-  let [thumnail, setThumnail] = useState(null);
+  let [thumnail, setThumnail] = useState([]);
   const inputProductName = useRef(null);
   const inputPrice = useRef(null);
   const inputContent = useRef(null);
   const navigate = useNavigate();
-
 
   const noticeTxt = (boolean, n) => {
     let copy = [...notice]
@@ -80,14 +80,20 @@ export default function ProductRegister() {
 
     if (name === 'img') {
       const file = e.target.files[0];
-      setForm({ ...form, 'img': file });
-      if (file) {
+      setFormImg([...formImg, file])
+      if (file && thumnail.length <= 4) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          setThumnail(reader.result);
+          setThumnail([...thumnail, reader.result]);
         };
         reader.readAsDataURL(file);
+      } else {
+        alert('이미지는 5장까지 업로드 가능합니다.')
       }
+
+      let photoArr = []
+      photoArr.push(file)
+      setForm({ ...form, 'img': photoArr[0] });
 
     }
     if (name === 'productName') { // 상품이름 유효성 검사
@@ -149,8 +155,13 @@ export default function ProductRegister() {
       return inputContent.current.focus()
     }
     const formData = new FormData();
-    formData.append('image', form.img);
-    formData.append('form',JSON.stringify(form)) //
+
+    for (let i = 0; i < formImg.length; i++) {
+      formData.append('images', formImg[i]);
+      console.log(formImg[i]);
+    }
+
+    formData.append('form', JSON.stringify(form))
     axios({
       method: 'post',
       url: `http://127.0.0.1:8000/product/new/${form.seller}`,
@@ -182,7 +193,8 @@ export default function ProductRegister() {
                 }} />
                 <i className="xi-camera"><span>이미지 등록</span></i>
               </span>
-              {thumnail && <img src={thumnail} />}
+              {thumnail.length ? thumnail.map(photo => <img src={photo} className='photoPreview' />) : null}
+
 
               <span className="imgExplain">상품 이미지는 PC에서는 1:1, 모바일에서는 1:1.23 비율로 보여져요.</span>
             </div>
