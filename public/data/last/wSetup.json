@@ -1,0 +1,14 @@
+[
+  {
+    "last": "정장/셋업",
+    "lastValue":"wSuite"
+  },
+  {
+    "last": "트레이닝/스웨트 셋업",
+    "lastValue":"wTranningSetup"
+  },
+  {
+    "last": "기타 셋업/세트",
+    "lastValue":"wOtherSetup"
+  }
+]

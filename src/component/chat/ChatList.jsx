@@ -4,14 +4,14 @@ import ChatRoom from "./ChatRoom";
 import Inner from "./Inner";
 
 export default function ChatList() {
-  const [chatRoomId, setChatRoomId] = useState([]);
-  function getId(id){
-    setChatRoomId(id)
+  const [chatRoomInfo, setChatRoomInfo] = useState({});
+  function getInfo(info){
+    setChatRoomInfo(info)
   }
   return (
     <article className="chatList">
-      <Inner getId={getId}></Inner>
-      <ChatRoom roomId={chatRoomId}></ChatRoom>
+      <Inner getInfo={getInfo}></Inner>
+      <ChatRoom roomInfo={chatRoomInfo}></ChatRoom>
     </article>
   );
 }
