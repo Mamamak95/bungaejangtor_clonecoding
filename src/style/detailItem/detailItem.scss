@@ -17,7 +17,7 @@
     }
   }
 
-  &>div {
+  & > div {
     width: 100%;
 
     .mainInfo {
@@ -56,7 +56,6 @@
     }
 
     .subInfo {
-
       .infoIcon {
         height: 30px;
         margin-top: 15px;
@@ -78,10 +77,6 @@
             color: rgb(204, 204, 204);
             font-size: 16px;
             height: 100%;
-
-
-
-            span {}
 
             &::after {
               content: "";
@@ -105,7 +100,6 @@
         display: flex;
         -webkit-box-align: center;
         align-items: center;
-
       }
 
       img {
@@ -113,7 +107,6 @@
         margin-right: 5px;
         vertical-align: bottom;
       }
-
     }
 
     .productCondition {
@@ -158,19 +151,19 @@
       -webkit-box-pack: justify;
       justify-content: space-between;
 
-      &>* {
+      & > * {
         width: 31%;
         text-align: center;
       }
 
-      &>div {
+      & > div {
         position: relative;
 
         button {
           width: 100%;
           height: 100%;
-          font-weight: 600;
-          background: rgb(204, 204, 204);
+          padding: 20px;
+
           color: rgb(255, 255, 255);
           display: flex;
           -webkit-box-align: center;
@@ -178,17 +171,57 @@
           -webkit-box-pack: center;
           justify-content: center;
           line-height: 1;
+          span {
+            margin: 0 3px;
+            font-weight: 800;
+          }
         }
+      }
+      .btnWish {
+        background-color: #aaa;
+      }
+      .btnWishActive {
+        background-color: #222;
+      }
+      .btnChat {
+        background-color: orange;
+      }
+      .btnOrder {
+        background-color: red;
       }
     }
 
-    button {
-
-      &:last-child {}
-    }
   }
 }
-
-
-
+.contentInfo {
+  border-bottom: 1.5px solid black;
+  .contentInfoHeader {
+    display: flex;
+    justify-content: flex-end;
+    div {
+      width: 25px;
+      height: 25px;
+      margin: 10px 5px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-position: center center;
+      }
+      svg{
+        width: 70%;
+        height: 70%;
+        margin: 3.75px auto;
+        color: white;
+      }
+      &:nth-child(2){
+        background-color: #3B5998;
+      }
+      &:nth-child(3){
+        background-color: #55ACEE;
+      }
+      &:last-child{
+        background-color: transparent;
+      }
+    }
+  }
 }

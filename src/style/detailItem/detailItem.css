@@ -128,6 +128,66 @@
   width: 31%;
   text-align: center;
 }
-.detailItem > div .btnIcon div {
+.detailItem > div .btnIcon > div {
   position: relative;
+}
+.detailItem > div .btnIcon > div button {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.detailItem > div .btnIcon > div button span {
+  margin: 0 3px;
+  font-weight: 800;
+}
+.detailItem > div .btnIcon .btnWish {
+  background-color: #aaa;
+}
+.detailItem > div .btnIcon .btnWishActive {
+  background-color: #222;
+}
+.detailItem > div .btnIcon .btnChat {
+  background-color: orange;
+}
+.detailItem > div .btnIcon .btnOrder {
+  background-color: red;
+}
+
+.contentInfo {
+  border-bottom: 1.5px solid black;
+}
+.contentInfo .contentInfoHeader {
+  display: flex;
+  justify-content: flex-end;
+}
+.contentInfo .contentInfoHeader div {
+  width: 25px;
+  height: 25px;
+  margin: 10px 5px;
+}
+.contentInfo .contentInfoHeader div img {
+  width: 100%;
+  height: 100%;
+  -o-object-position: center center;
+     object-position: center center;
+}
+.contentInfo .contentInfoHeader div svg {
+  width: 70%;
+  height: 70%;
+  margin: 3.75px auto;
+  color: white;
+}
+.contentInfo .contentInfoHeader div:nth-child(2) {
+  background-color: #3B5998;
+}
+.contentInfo .contentInfoHeader div:nth-child(3) {
+  background-color: #55ACEE;
+}
+.contentInfo .contentInfoHeader div:last-child {
+  background-color: transparent;
 }/*# sourceMappingURL=detailItem.css.map */
