@@ -3,23 +3,56 @@
   margin: 0 auto;
 }
 
+.photoPreview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .submit {
   color: #000;
 }
-.imageInputBox{
+
+.imageInputBox {
   display: flex;
   flex-wrap: wrap;
-  img{
+
+  .previewContainer {
+    position: relative;
     width: 202px;
     height: 202px;
-    object-fit: cover;
-    margin-left: 10px;
-    
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin: 5px;
+
+    }
+
+    .imgClose {
+      position: absolute;
+      display: block;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: rgba(25, 25, 25, .3);
+      padding: 0;
+      top: 15px;
+      right: 5px;
+
+      svg {
+        color: #fff;
+        margin: 0 auto;
+        pointer-events: none;
+      }
+    }
   }
-  .imgExplain{
+
+  .imgExplain {
     width: 100%;
   }
 }
+
 .ProductRegisterTitle {
   height: 100px;
   color: rgb(25, 25, 25);
@@ -329,8 +362,8 @@ fieldset {
           button {
             width: 100%;
             height: 40px;
-            text-align: left;
-            line-height: 40px;
+            // text-align: left;
+            // line-height: 40px;
             padding-left: 15px;
             cursor: pointer;
             font-weight: 500;
@@ -429,6 +462,11 @@ fieldset {
       border-radius: 2px;
       border: 1px solid rgb(204, 204, 204);
       background: rgb(250, 250, 250);
+      margin: 5px;
+
+      &.on {
+        outline: 1px solid rgb(245, 126, 0) !important;
+      }
 
       input[type="file"] {
         width: 100%;

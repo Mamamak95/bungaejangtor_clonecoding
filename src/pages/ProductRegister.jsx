@@ -3,12 +3,14 @@ import '../style/register/Register.css';
 import ProductCategory from '../component/Register/ProductCategory';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { CgClose } from "react-icons/cg";
 
 export default function ProductRegister() {
 
   // 초기 위치 정보 (나중에 API 데이터로 변경될 수 있음)
   let place = '경기도 성남시 중원구 성남동'
   // 상태 관리를 위한 useState 훅 사용
+  let [formImg, setFormImg] = useState([]); // 이미지 넘길 변수
   let [form, setForm] = useState({ 'img': '', 'seller': 'user1', 'productName': '', 'category': 'ALL', place, 'price': '', 'content': '' })
   let [textNum, setTextNum] = useState(0);  // 상품이름 input 글자수 체크
   const [active, setActive] = useState(false) // '상세 카테고리를 선택해주세요.' 멘트 온오프
@@ -17,15 +19,15 @@ export default function ProductRegister() {
   let [last, setLast] = useState(''); // 카테고리 셋째칸
   let checkNum = /^[0-9]/; // 가격 숫자만 정규식
   let [deliverPrice, setDeliverPrice] = useState(false) // 배달비칸 온 오프
-  let [notice, setNotice] = useState([false, false, false, false]) // input 주의사항 메세지
-  let [outline, setOutline] = useState(['', '', '', ''])
+  let [notice, setNotice] = useState([false, false, false, false, false]) // input 주의사항 메세지
+  let [outline, setOutline] = useState(['', '', '', '', '']) //input 주의사항 테두리
   let [info, setInfo] = useState(0);
-  let [thumnail, setThumnail] = useState(null);
+  let [thumnail, setThumnail] = useState([]); // 이미지 미리보기 썸네일
+  const inputImg = useRef(null);
   const inputProductName = useRef(null);
   const inputPrice = useRef(null);
   const inputContent = useRef(null);
   const navigate = useNavigate();
-
 
   const noticeTxt = (boolean, n) => {
     let copy = [...notice]
@@ -57,6 +59,11 @@ export default function ProductRegister() {
 
   }
 
+  let closeImg = (e) => {
+    setThumnail(thumnail = thumnail.filter(v => v !== thumnail[e.target.value]))
+    setFormImg(formImg = formImg.filter(v => v !== formImg[e.target.value]))
+  }
+
 
   let catagoryClick = (boolean, value, txt, n) => {
     setActive(boolean) // active boolean 값에 따라  '상세 카테고리를 선택해주세요.' 텍스트 노출 미노출
@@ -80,14 +87,22 @@ export default function ProductRegister() {
 
     if (name === 'img') {
       const file = e.target.files[0];
-      setForm({ ...form, 'img': file });
-      if (file) {
+      setFormImg([...formImg, file])
+      if (file && thumnail.length <= 4) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          setThumnail(reader.result);
+          setThumnail([...thumnail, reader.result]);
         };
         reader.readAsDataURL(file);
+        onOutline('', 4)
+        noticeTxt(false, 4)
+      } else {
+        alert('이미지는 5장까지 업로드 가능합니다.')
       }
+
+      let photoArr = []
+      photoArr.push(file)
+      setForm({ ...form, 'img': photoArr[0] });
 
     }
     if (name === 'productName') { // 상품이름 유효성 검사
@@ -133,6 +148,11 @@ export default function ProductRegister() {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (formImg.length === 0) {
+      onOutline('on', 4)
+      noticeTxt(true, 4)
+      return inputImg.current.focus()
+    }
     if (form.productName === '') {
       noticeTxt(true, 0)
       onOutline('on', 0)
@@ -148,9 +168,14 @@ export default function ProductRegister() {
       onOutline('on', 3)
       return inputContent.current.focus()
     }
+
     const formData = new FormData();
-    formData.append('image', form.img);
-    formData.append('form',JSON.stringify(form)) //
+
+    for (let i = 0; i < formImg.length; i++) {
+      formData.append('images', formImg[i]);
+    }
+
+    formData.append('form', JSON.stringify(form))
     axios({
       method: 'post',
       url: `http://127.0.0.1:8000/product/new/${form.seller}`,
@@ -160,7 +185,7 @@ export default function ProductRegister() {
       },
     })
       .then(result => {
-        console.log('상품 등록이 완료되었습니다.')
+        alert('상품 등록이 완료되었습니다.')
         navigate(`/`)
       })
       .catch(err => console.log('에러==>' + err))
@@ -174,16 +199,25 @@ export default function ProductRegister() {
         <fieldset className="inner">
           <h2 className="ProductRegisterTitle">기본정보<span>*필수항목</span></h2>
           <div className="inputContainer">
-            <p className="inputTitle">상품이미지<span className="red">*</span><small>(0/5)</small></p>
+            <p className="inputTitle">상품이미지<span className="red">*</span><small>({formImg.length}/5)</small></p>
             <div className="imageInputBox">
-              <span id="imageInput">
-                <input type="file" name='img' accept="image/jpg, image/jpeg, image/png" multiple onChange={(e) => {
+              <span id="imageInput" className={outline[4]}>
+                <input type="file" name='img' ref={inputImg} accept="image/jpg, image/jpeg, image/png" multiple onChange={(e) => {
                   handleChange(e, null)
                 }} />
                 <i className="xi-camera"><span>이미지 등록</span></i>
               </span>
-              {thumnail && <img src={thumnail} />}
+              {thumnail.length ? thumnail.map((photo, i) =>
+                <span className="previewContainer">
+                  <img src={photo} className='photoPreview' />
+                  <button className="imgClose" type="button" value={i} onClick={closeImg}><CgClose /></button>
+                </span>)
+                :
+                null}
 
+              <span className="notice">
+                {notice[4] && <><i className="xi-ban"></i>상품 사진을 등록해주세요..</>}
+              </span>
               <span className="imgExplain">상품 이미지는 PC에서는 1:1, 모바일에서는 1:1.23 비율로 보여져요.</span>
             </div>
           </div>
