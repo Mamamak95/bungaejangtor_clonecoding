@@ -70,6 +70,89 @@ header{
 
         .HeaderLoginSign {
           display:flex;
+
+          .loginuserid {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+          }
+
+          .alert {
+            color:#666;
+            display:flex;
+            align-items: center;
+            padding: 6px;
+            cursor: pointer;
+            position: relative;
+
+            > *:not(.alertnot) {
+              padding-left: 4px;
+            }
+
+            .alertnot {
+              z-index: 110;
+              position: absolute;
+              top:38px;
+              left:-230%;
+              padding: 30px 100px;
+              background-color: #eee;
+              text-align: center;
+              text-wrap: nowrap;
+              border:1px solid #ccc;
+              cursor:default;
+              display:none;
+
+              i {
+                font-size: 1.5rem;
+              }
+
+              p {
+                padding-top: 10px;
+                cursor:text;
+              }
+            }
+
+            .alertnot.hover {
+              display:block;
+            }
+          }
+
+          .mystore {
+            color:#666;
+            display:flex;
+            align-items: center;
+            padding: 6px;
+            cursor: pointer;
+            position: relative;
+
+            > *:not(.mystorelist) {
+              padding-left: 4px;
+            }
+
+            .mystorelist {
+              z-index: 110;
+              position: absolute;
+              top:38px;
+              right:0;
+              background-color: #eee;
+              border:1px solid #ddd;
+              cursor:default;
+              display:none;
+
+              ul {
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+
+                li {
+                  padding: 0px 10px;
+                  margin: 6px 0;
+                }
+              }
+            }
+          }
         }
 
         .HeaderMyStore {

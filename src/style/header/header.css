@@ -64,6 +64,77 @@ header .HeaderTop .headerTopWrap .HeaderTopMenuRight {
 header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign {
   display: flex;
 }
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .loginuserid {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert {
+  color: #666;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  cursor: pointer;
+  position: relative;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert > *:not(.alertnot) {
+  padding-left: 4px;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .alertnot {
+  z-index: 110;
+  position: absolute;
+  top: 38px;
+  left: -230%;
+  padding: 30px 100px;
+  background-color: #eee;
+  text-align: center;
+  text-wrap: nowrap;
+  border: 1px solid #ccc;
+  cursor: default;
+  display: none;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .alertnot i {
+  font-size: 1.5rem;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .alertnot p {
+  padding-top: 10px;
+  cursor: text;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .alertnot.hover {
+  display: block;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .mystore {
+  color: #666;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  cursor: pointer;
+  position: relative;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .mystore > *:not(.mystorelist) {
+  padding-left: 4px;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .mystore .mystorelist {
+  z-index: 110;
+  position: absolute;
+  top: 38px;
+  right: 0;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  cursor: default;
+  display: none;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .mystore .mystorelist ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .mystore .mystorelist ul li {
+  padding: 0px 10px;
+  margin: 6px 0;
+}
 header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderMyStore a {
   padding: 10px 16px;
 }
