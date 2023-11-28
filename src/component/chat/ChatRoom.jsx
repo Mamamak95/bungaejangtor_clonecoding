@@ -1,18 +1,17 @@
-import React, { useEffect, useState, useRef} from "react";
+
+import React, { useEffect, useState, useRef } from "react";
+
 import axios from "axios";
 
 export default function ChatRoom({ roomInfo }) {
   const [chatLog, setChatLog] = useState([]);
   const chatBox = useRef(null);
-  
 
-  useEffect(() => {
-    handleLog();
-  }, [roomInfo]);
 
   useEffect(()=>{
       chatBox.current.scrollTop = chatBox.current.scrollHeight;
   },[chatLog])
+
 
   const handleLog = () => {
     if (roomInfo.crid != null) {
@@ -41,28 +40,33 @@ export default function ChatRoom({ roomInfo }) {
     }
   };
 
+
   return (
     <div className="chatList_right">
       <div className="chatRoom_header">
         <span>{roomInfo.oppoName}</span>
         <button onClick={handleLog}>새로고침</button>
       </div>
+
       <ul className="chatLog" ref={chatBox}>
         {chatLog.map((s,i) => {
           
           return (
             <li
+
               className={`${
                 roomInfo.isBuyer ^ s.isBuyerSend ? "oppo" : "me" //!(사용자가 구매자? XOR 구매자가 보냄?)
               } chat_message`}
             >
               <span>{s.content}</span>
               <div>{s.date}</div>
+
             </li>
           );
         })}
         
       </ul>
+
       <form className="chatSend">
         <svg
           width="22"
@@ -77,12 +81,14 @@ export default function ChatRoom({ roomInfo }) {
             fillRule="evenodd"
           ></path>
         </svg>
+
         <textarea
           cols="30"
           rows="2"
           maxLength={100}
           onKeyDown={handleKey}
         ></textarea>
+
         <button></button>
       </form>
     </div>
