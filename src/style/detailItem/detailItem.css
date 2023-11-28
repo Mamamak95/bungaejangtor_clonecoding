@@ -7,8 +7,7 @@
 .detailItem .detailItemImg {
   margin-right: 40px;
   flex-shrink: 0;
-  width: 430px;
-  height: 430px;
+  width: 40%;
 }
 .detailItem .detailItemImg img {
   width: 100%;
@@ -17,7 +16,7 @@
      object-fit: cover;
 }
 .detailItem > div {
-  width: 100%;
+  flex: 1;
 }
 .detailItem > div .mainInfo {
   padding-bottom: 30px;
@@ -190,4 +189,94 @@
 }
 .contentInfo .contentInfoHeader div:last-child {
   background-color: transparent;
+}
+
+.otherProduct {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+.otherProduct div {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.otherProduct div span {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 6px;
+  margin-left: 4px;
+  border-radius: 12px;
+  border: 1px solid rgb(195, 194, 204);
+  font-weight: 400;
+  font-size: 16px;
+}
+.otherProduct div span img {
+  display: inline-block;
+  margin-left: 1px;
+}
+
+.swiperContainer {
+  width: 100%;
+  margin-bottom: 50px;
+}
+.swiperContainer > div {
+  height: 100%;
+}
+.swiperContainer > div .swiper-slide .detailItemImg img {
+  width: 100%;
+}
+.swiperContainer > div .swiper-slide .slideProduct {
+  display: block;
+  margin-top: 10px;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.4;
+  font-size: 13px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  cursor: pointer;
+  z-index: 11;
+  width: 40px;
+  height: 40px;
+  background: rgb(255, 255, 255);
+  opacity: 0.6;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-next {
+  right: 0px;
+}
+.swiper-button-next::after {
+  content: "";
+  background: url(https://m.bunjang.co.kr/pc-static/resource/593d36bc17825240e687.png) 50% 50% no-repeat;
+  background-size: contain;
+  width: 12px;
+  height: 12px;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+.swiper-button-prev::after {
+  content: "";
+  background: url(https://m.bunjang.co.kr/pc-static/resource/74821b5e835955696b91.png) 50% 50% no-repeat;
+  background-size: contain;
+  width: 12px;
+  height: 12px;
 }/*# sourceMappingURL=detailItem.css.map */

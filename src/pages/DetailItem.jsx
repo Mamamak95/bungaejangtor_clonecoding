@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 // import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../style/detailItem/detailItem.css";
@@ -9,18 +10,23 @@ import { BsChatHeartFill } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
+import SwiperComponent from "../component/swiper/SwiperComponent";
 
 export default function DetailItem() {
   const navigate = useNavigate();
   //찜버튼 찜여부
   const [btnWish, setBtnWish] = useState(false);
+  const [page,setPage] =useState(1);
 
+  const changePage = (e) => {
+    e ? setPage(1) : setPage(2)
+  }
   return (
     <div className="inner">
       <div className="detailItem">
         <Image
           className="detailItemImg"
-          url="productImg\\image-1700723928096.png"
+          url="productImg\\images-1701140289870.PNG"
         />
 
         <div>
@@ -124,17 +130,28 @@ export default function DetailItem() {
         </div>
 
       </div>
-        {/* 랜덤 상품 5개 */}
-
-        {/* 상품 정보(상품 설명/content) */}
-        <div className="contentInfo">
-          <div className="contentInfoHeader">
-            <div><img src="http://127.0.0.1:8000/webImg/blog.png" alt="네이버블로그공유" /></div>
-            <div><FaFacebookF/></div>
-            <div><FaTwitter/></div>
-            <div><img src="http://127.0.0.1:8000/webImg/url.png" alt="URL공유" /></div>
-          </div>
+      <div className="otherProduct">
+        <div>
+          <p>연관상품</p>
+          <span>AD <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9IiM5Qjk5QTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE0IDdjMCAzLjg2LTMuMTQgNy03IDdzLTctMy4xNC03LTcgMy4xNC03IDctNyA3IDMuMTQgNyA3em0tMS40IDBjMC0zLjA4OC0yLjUxMi01LjYtNS42LTUuNi0zLjA4OCAwLTUuNiAyLjUxMi01LjYgNS42IDAgMy4wODggMi41MTIgNS42IDUuNiA1LjYgMy4wODggMCA1LjYtMi41MTIgNS42LTUuNnpNOC40IDkuOGMwIC4zODctLjMxMy43LS43LjdIN2MtLjM4NyAwLS43LS4zMTMtLjctLjdWN2MtLjM4NyAwLS43LS4zMTMtLjctLjcgMC0uMzg3LjMxMy0uNy43LS43SDdjLjM4NyAwIC43LjMxMy43Ljd2Mi44Yy4zODcgMCAuNy4zMTMuNy43ek02LjIzIDQuMmMwLS40MjUuMzQ1LS43Ny43Ny0uNzcuNDI1IDAgLjc3LjM0NS43Ny43NyAwIC40MjUtLjM0NS43Ny0uNzcuNzctLjQyNSAwLS43Ny0uMzQ1LS43Ny0uNzd6Ii8+Cjwvc3ZnPgo=" alt="" /></span>
         </div>
+        <p>{page}/2</p>
+
+      </div>
+      {/* 랜덤 상품 5개 */}
+      <div className="swiperContainer">
+        <SwiperComponent changePage={changePage} />
+      </div>
+
+      {/* 상품 정보(상품 설명/content) */}
+      <div className="contentInfo">
+        <div className="contentInfoHeader">
+          <div><img src="http://127.0.0.1:8000/webImg/blog.png" alt="네이버블로그공유" /></div>
+          <div><FaFacebookF /></div>
+          <div><FaTwitter /></div>
+          <div><img src="http://127.0.0.1:8000/webImg/url.png" alt="URL공유" /></div>
+        </div>
+      </div>
     </div>
   );
 }
