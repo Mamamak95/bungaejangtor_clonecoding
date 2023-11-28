@@ -7,6 +7,9 @@ export default function ChatRoom({ roomInfo }) {
   const [chatLog, setChatLog] = useState([]);
   const chatBox = useRef(null);
 
+  useEffect(()=>{
+    handleLog()
+  },[roomInfo])
 
   useEffect(()=>{
       chatBox.current.scrollTop = chatBox.current.scrollHeight;
