@@ -1,0 +1,356 @@
+.detailItem {
+  margin-top: 30px;
+  display: flex;
+  padding: 30px 0px;
+  border-top: 1px solid rgb(63, 63, 63);
+
+  .detailItemImg {
+    margin-right: 40px;
+    flex-shrink: 0;
+    width: 40%;
+
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &>div {
+    flex: 1;
+
+    .mainInfo {
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgb(238, 238, 238);
+      width: 100%;
+
+      .productName {
+        font-size: 24px;
+        margin-bottom: 25px;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      .price {
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+
+        p {
+          font-size: 40px;
+          font-weight: 500;
+        }
+
+        span {
+          font-size: 28px;
+          font-weight: 400;
+          margin-left: 3px;
+        }
+
+        .thunderImg {
+          display: inline-block;
+          height: 28px;
+        }
+      }
+    }
+
+    .subInfo {
+      .infoIcon {
+        height: 30px;
+        margin-top: 15px;
+        margin-bottom: 25px;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+
+        div {
+          height: 100%;
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+
+          p {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            color: rgb(204, 204, 204);
+            font-size: 16px;
+            height: 100%;
+
+            &::after {
+              content: "";
+              width: 1px;
+              height: 12px;
+              border-right: 1px solid rgb(238, 238, 238);
+              margin-left: 10px;
+              margin-right: 10px;
+            }
+
+            &:last-child::after {
+              display: none;
+            }
+          }
+        }
+      }
+
+      button {
+        color: rgb(204, 204, 204);
+        font-size: 16px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+      }
+
+      img {
+        width: 21px;
+        margin-right: 5px;
+        vertical-align: bottom;
+      }
+    }
+
+    .productCondition {
+      div {
+        display: flex;
+        margin-bottom: 17px;
+        font-size: 14px;
+
+        p {
+          position: relative;
+          width: 90px;
+          padding-left: 15px;
+          color: rgb(153, 153, 153);
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 7px;
+            left: 6px;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgb(204, 204, 204);
+          }
+        }
+
+        span {
+          position: relative;
+          display: flex;
+        }
+
+        img {
+          margin-right: 4px;
+          width: 15px;
+          object-fit: contain;
+        }
+      }
+    }
+
+    .btnIcon {
+      display: flex;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+
+      &>* {
+        width: 31%;
+        text-align: center;
+      }
+
+      &>div {
+        position: relative;
+
+        button {
+          width: 100%;
+          height: 100%;
+          padding: 20px;
+          color: rgb(255, 255, 255);
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          -webkit-box-pack: center;
+          justify-content: center;
+          line-height: 1;
+
+          span {
+            margin: 0 3px;
+            font-weight: 800;
+          }
+        }
+      }
+
+      .btnWish {
+        background-color: #aaa;
+      }
+
+      .btnWishActive {
+        background-color: #222;
+      }
+
+      .btnChat {
+        background-color: orange;
+      }
+
+      .btnOrder {
+        background-color: red;
+      }
+    }
+
+  }
+}
+
+.contentInfo {
+  border-bottom: 1.5px solid black;
+
+  .contentInfoHeader {
+    display: flex;
+    justify-content: flex-end;
+
+    div {
+      width: 25px;
+      height: 25px;
+      margin: 10px 5px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-position: center center;
+      }
+
+      svg {
+        width: 70%;
+        height: 70%;
+        margin: 3.75px auto;
+        color: white;
+      }
+
+      &:nth-child(2) {
+        background-color: #3B5998;
+      }
+
+      &:nth-child(3) {
+        background-color: #55ACEE;
+      }
+
+      &:last-child {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+.otherProduct {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  p{
+
+  }
+  div{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    
+  
+    span{
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: row;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      padding: 0px 6px;
+      margin-left: 4px;
+      border-radius: 12px;
+      border: 1px solid rgb(195, 194, 204);
+      font-weight: 400;
+      font-size: 16px;
+      img{
+        display: inline-block;
+        margin-left: 1px;
+      }
+    }
+  }
+
+}
+
+.swiperContainer {
+  width: 100%;
+  margin-bottom: 50px;
+
+  &>div {
+    height: 100%;
+
+    .swiper-slide {
+
+      .detailItemImg {
+        img {
+          width: 100%;
+        }
+      }
+
+      .slideProduct {
+        display: block;
+        margin-top: 10px;
+        width: 100%;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        line-height: 1.4;
+        font-size: 13px;
+      }
+
+
+    }
+  }
+
+}
+
+
+
+.swiper-button-next,
+.swiper-button-prev {
+  cursor: pointer;
+  z-index: 11;
+  width: 40px;
+  height: 40px;
+  background: rgb(255, 255, 255);
+  opacity: 0.6;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.swiper-button-next {
+  right: 0px;
+
+  &::after {
+    content: '';
+    background: url(https://m.bunjang.co.kr/pc-static/resource/593d36bc17825240e687.png) 50% 50% no-repeat;
+    background-size: contain;
+    width: 12px;
+    height: 12px;
+  }
+
+}
+
+.swiper-button-prev {
+  left: 0;
+
+  &::after {
+    content: '';
+    background: url(https://m.bunjang.co.kr/pc-static/resource/74821b5e835955696b91.png) 50% 50% no-repeat;
+    background-size: contain;
+    width: 12px;
+    height: 12px;
+  }
+}
