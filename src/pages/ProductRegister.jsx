@@ -3,6 +3,7 @@ import '../style/register/Register.css';
 import ProductCategory from '../component/Register/ProductCategory';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { CgClose } from "react-icons/cg";
 
 export default function ProductRegister() {
 
@@ -55,6 +56,11 @@ export default function ProductRegister() {
       noticeTxt(false, n)
     }
 
+  }
+
+  let closeImg = (e) => {
+    setThumnail(thumnail = thumnail.filter(v => v !== thumnail[e.target.value]))
+    setFormImg(formImg = formImg.filter(v => v !== formImg[e.target.value]))
   }
 
 
@@ -193,7 +199,13 @@ export default function ProductRegister() {
                 }} />
                 <i className="xi-camera"><span>이미지 등록</span></i>
               </span>
-              {thumnail.length ? thumnail.map(photo => <img src={photo} className='photoPreview' />) : null}
+              {thumnail.length ? thumnail.map((photo, i) =>
+                <span className="previewContainer">
+                  <img src={photo} className='photoPreview' />
+                  <button className="imgClose" type="button" value={i} onClick={closeImg}><CgClose /></button>
+                </span>)
+                :
+                null}
 
 
               <span className="imgExplain">상품 이미지는 PC에서는 1:1, 모바일에서는 1:1.23 비율로 보여져요.</span>
