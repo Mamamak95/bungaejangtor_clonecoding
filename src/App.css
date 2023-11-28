@@ -46,3 +46,8 @@ iframe{
 fieldset{
   border: none;
 }
+/* home */
+.home{
+  width: 75%;
+  margin: 10px auto;
+}

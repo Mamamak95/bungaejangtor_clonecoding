@@ -1,0 +1,21 @@
+.profile_navs{
+  width: 1200px;
+  height: 50px;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.profile_nav:hover{
+  color: red;
+}
+
+.profile_nav {
+  border: 1px solid red;
+  text-decoration: none;
+  width:230px;
+  padding:15px 0px;
+  text-align: center;
+  font-weight: bold;
+  float:left;
+}
