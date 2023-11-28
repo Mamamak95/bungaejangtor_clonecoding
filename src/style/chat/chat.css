@@ -104,6 +104,23 @@
   height: 570px;
   overflow-y: scroll;
 }
+.chatList .chatList_right .chatLog li .empty-chat {
+  width: 100%;
+  height: 570px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.chatList .chatList_right .chatLog li .empty-chat img {
+  width: 150px;
+  height: 150px;
+}
+.chatList .chatList_right .chatLog li .empty-chat span {
+  background-color: transparent;
+  font-weight: 900;
+  text-align: center;
+}
 .chatList .chatList_right .chatLog .chat_message {
   margin: 5px;
   border: none;

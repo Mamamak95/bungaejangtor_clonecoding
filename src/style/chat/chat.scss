@@ -102,6 +102,26 @@
     .chatLog {
       height: 570px;
       overflow-y: scroll;
+
+      li {
+        .empty-chat {
+          width: 100%;
+          height: 570px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 150px;
+            height: 150px;
+          }
+          span{
+            background-color: transparent;
+            font-weight: 900;
+            text-align: center;
+          }
+        }
+      }
       .chat_message {
         margin: 5px;
 
