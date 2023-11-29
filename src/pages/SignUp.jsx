@@ -6,8 +6,10 @@ import axios from 'axios';
 export default function SignUp(){
   const navigate = useNavigate();
   const [signInfo, setSignInfo] = useState({uid : "", pw : "", pwcheck : "", name : "", email : "", tel : ""})
-  const [signId, setSignId] = useState('');
   const [checkError, setCheckError] = useState('');
+  // setCheckError('특수문자 사용은 불가능하며 영문자(대소문자), 숫자를 혼합하여 6 ~ 16 자로 입력해주세요.')
+
+  const [idBlurCheck, setIdBlurCheck] = useState('');
 
   /* 폼 체크박스 */
   const [isSnsChecked, setIsSnsChecked] = useState(false);
@@ -29,37 +31,9 @@ export default function SignUp(){
   const inputNicName = useRef(null)
   const inputEmail = useRef(null)
   const inputPhone = useRef(null)
+  const idCheckP = useRef(null)
 
-  /* 취소 버튼 클릭 시 입력한 정보 초기화, 각 정보입력 input 들에게 value 값을 줘야함 */
-  const handleReset = (e) => {
-    alert("회원정보를 다시 입력해주세요.")
-    setSignInfo({uid : "", pw : "", pwcheck : "", name : "", email : "", tel : ""})
-    window.location.reload();
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSignInfo({...signInfo, [name] : value})
-    // if(signInfo.id === '' && !inputId.onblur)
-
-    // 아이디 중복 체크
-    if(name === 'uid' && value !== ''){
-      axios
-      .get(`http://127.0.0.1:8000/sign/${value}`)
-      .then(data => {
-        if(data.data.cnt === 1){
-          setCheckError('이미 사용중인 아이디 입니다.');
-        } else if (data.data.cnt === 0){
-          setCheckError('사용 가능한 아이디 입니다.')
-        }
-      })
-      .catch((err) => console.log(err))
-    } else if(name === 'uid' && value === ''){
-      setCheckError('');
-    }
-  }
-
-
+  /* 회원가입 확인 or 엔터 */
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -96,7 +70,6 @@ export default function SignUp(){
       return inputPhone.current.focus();
     }
 
-
     axios
     .post('http://localhost:8000/sign', signInfo)
     .then(data => {
@@ -108,6 +81,74 @@ export default function SignUp(){
     .catch(err => console.log(err))
   }
 
+  /* 취소 버튼 클릭 시 입력한 정보 초기화, 각 정보입력 input 들에게 value 값을 줘야함 */
+  const handleReset = (e) => {
+    alert("회원정보를 다시 입력해주세요.")
+    setSignInfo({uid : "", pw : "", pwcheck : "", name : "", email : "", tel : ""})
+    window.location.reload();
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSignInfo({...signInfo, [name] : value})
+
+    // 아이디 중복 체크
+    // if(name === 'uid' && value !== ''){
+
+      let length = e.target.value.length;
+
+      // axios
+      // .get(`http://127.0.0.1:8000/sign/${value}`)
+      // .then(data => {
+        // if((length < 4) && ((data.data.cnt === 1) || (data.data.cnt === 0))) {
+        //   setCheckError('');
+        // } else if((data.data.cnt === 0) && ((length > 4 || length < 16) && (!/^[a-zA-Z0-9]*$/.test(e.target.value) )) || (length > 16)){
+        //   setCheckError('사용 불가능한 아이디 입니다.')
+        // } else if ((data.data.cnt === 0) ){
+        //   setCheckError('사용 가능한 아이디 입니다.')
+        // } else if(data.data.cnt === 1){
+        //   setCheckError('이미 사용중인 아이디 입니다.');
+        // }
+    //   })
+    //   .catch((err) => console.log(err))
+    // } else if(name === 'uid' && value === ''){
+    //   setCheckError('');
+    // }
+    
+  }
+
+  /* 아이디 중복 체크 버튼 */
+  const handleDuplication = (e) => {
+    let signUid = signInfo.uid;
+
+    axios
+    .get(`http://127.0.0.1:8000/sign/${signUid}`)
+    .then(data => {
+      if(data.data.cnt === 1){
+        alert('이미 존재하는 아이디 입니다.')
+        return inputId.current.focus();
+      } else if(data.data.cnt === 0){
+        alert('사용 가능한 아이디 입니다.')
+        return inputPass.current.focus();
+      } 
+    })
+    .catch(err => console.log(err))
+  }
+
+  /* 아이디 입력란에서 벗어났을때 유효성 체크 */
+  const handleBlurUid = (e) => {
+    
+    if (e.target.value.length === 0) {
+      setIdBlurCheck('사용하실 아이디를 입력해주세요.')
+    } else if(e.target.value.length < 4 || e.target.value.length > 16 ){
+      setIdBlurCheck('4 ~ 16 자 까지 사용 가능합니다.')
+    } else if(!/^[a-zA-Z0-9]*$/.test(e.target.value)){
+      setIdBlurCheck('아이디는 한글 및 특수문자 사용이 불가능합니다.');
+    } else {
+      setIdBlurCheck('')
+    }
+  }
+
 
   return(
     <div className="signup">
@@ -115,13 +156,9 @@ export default function SignUp(){
       <form className="signForm" onSubmit={handleSubmit}>
         <div className="signId">
           <label htmlFor="uid">아이디</label>
-          <input type="text" name="uid" value={signInfo.uid} ref={inputId} onChange={handleChange} placeholder="아이디를 입력해주세요."/>
-          <button type="button" className="idoverlapcheck">아이디 중복 확인</button>
-          <p>{signId}</p>
-          <p>{checkError}</p>
-          <p>6 ~ 16 자까지 영문자(대소문자), 숫자 사용 가능합니다.</p>
-          <p>사용 가능한 아이디 입니다.</p>
-          <p>사용 불가능한 아이디 입니다.</p>
+          <input type="text" name="uid" value={signInfo.uid} ref={inputId} onChange={handleChange} onBlur={handleBlurUid} placeholder="아이디를 입력해주세요."/>
+          <button type="button" className="idoverlapcheck" onClick={handleDuplication}>아이디 중복 확인</button>
+          { idBlurCheck && <p style={{ color: 'red' }}>({idBlurCheck})</p> }
         </div>
 
         <div className="signpass">

@@ -72,13 +72,12 @@ export default function LoginPopUp(prop){
 
   /* 비밀번호 보안 ON/OFF */
   const [isShowPwChecked, setShowPwChecked] = useState(false)
-  const passwordRef = useRef(null)
 
   const handleIpToggle = async(e) => {
     setIpToggle(!ipToggle);
 
     /* 비밀번호 보안 ON/OFF */
-    const password = passwordRef.current
+    const password = inputPw.current
     if (password === null) return
 
     setShowPwChecked(!isShowPwChecked)
