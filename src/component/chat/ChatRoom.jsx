@@ -52,7 +52,7 @@ export default function ChatRoom({ roomInfo }) {
       </div>
 
       <ul className="chatLog" ref={chatBox}>
-        {chatLog.map((s,i) => {
+        {chatLog.length!=0?chatLog.map((s,i) => {
           
           return (
             <li
@@ -66,7 +66,15 @@ export default function ChatRoom({ roomInfo }) {
 
             </li>
           );
-        })}
+        }):<>
+        <li>
+          <div className="empty-chat">
+            <img src="http://127.0.0.1:8000/webImg/empty_chat.svg" alt="" />
+        <span>대화방을 선택해주세요.</span>
+        </div>
+        </li>
+        
+        </>}
         
       </ul>
 

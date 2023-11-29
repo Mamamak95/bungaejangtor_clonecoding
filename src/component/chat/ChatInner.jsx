@@ -8,7 +8,7 @@ export default function Inner(){
   const [chatRoomInfo, setChatRoomInfo] = useState({});
   
   useEffect(() => {
-    axios.post('http://127.0.0.1:8000/chat/list',{id:'user1'}).then(res=>{
+    axios.post('http://127.0.0.1:8000/chat/list',{id:'user3'}).then(res=>{
      setChatInfo(res.data)
     }).catch(err=>console.log(err))
 
@@ -24,7 +24,7 @@ export default function Inner(){
               {chatInfo.map((v) => {
                 return (
                   <li
-                    onClick={()=>{setChatRoomInfo(v.buyer === "user1" ? {crid:v.crid,oppoName:v.sellerName,isBuyer:true} : {crid:v.crid,uid:v.buyer,oppoName:v.buyerName,isBuyer:false})}}
+                    onClick={()=>{setChatRoomInfo(v.buyer === "user3" ? {crid:v.crid,oppoName:v.sellerName,isBuyer:true} : {crid:v.crid,uid:v.buyer,oppoName:v.buyerName,isBuyer:false})}}
                     key={v.crid}
                   >
                     <div className="chatList_inner_chatRoomLink_img">
@@ -34,7 +34,7 @@ export default function Inner(){
                       />
                     </div>
                     <div className="chatList_inner_chatRoomLink_contents">
-                      <div>{v.buyer === "user1" ? v.sellerName : v.buyerName}</div>
+                      <div>{v.buyer === "user3" ? v.sellerName : v.buyerName}</div>
                       <div>{v.lastestMessage}</div>
                     </div>
                   </li>
