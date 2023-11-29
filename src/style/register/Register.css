@@ -1,9 +1,4 @@
 @charset "UTF-8";
-.inner {
-  width: 60%;
-  margin: 0 auto;
-}
-
 .photoPreview {
   display: flex;
   flex-wrap: wrap;
