@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +10,7 @@
   text-decoration: inherit;
   font-weight: inherit;
   word-break:keep-all ;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 li {
@@ -46,8 +49,26 @@ iframe{
 fieldset{
   border: none;
 }
-/* home */
-.home{
-  width: 75%;
-  margin: 10px auto;
+
+.inner{
+  width: 60%;
+  margin: 0 auto;
+}
+@media screen and (max-width: 1600px) {
+  .inner{
+    width: 70%;
+  }
+  
+}
+@media screen and (max-width: 1500px) {
+  .inner{
+    width: 80%;
+  }
+  
+}
+@media screen and (max-width: 1000px) {
+  .inner{
+    width: 85%;
+  }
+  
 }
