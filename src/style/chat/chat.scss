@@ -5,37 +5,43 @@
   margin: 0 auto;
   text-align: none;
   display: flex;
+  margin-top: -1px;
   & > div {
     flex: 1;
   }
+  
   .chatList_left {
-    padding: 10px;
+    
     height: 100%;
 
     .chatList_header {
+      padding: 20px 0;
       position: relative;
-      span {
+      border-bottom: 1px solid rgb(212, 212, 212);
+      >span {
         cursor: pointer;
         padding: 5px;
         position: absolute;
         right: 10px;
-      }
-    }
+        text-decoration: underline;
 
-    .chatList_inner {
-      margin-top: 40px;
-      overflow-y: scroll;
-      height: 640px;
+      }
       .chatList_inner_listType {
         text-align: left;
         .chatList_inner_listType_type {
           cursor: pointer;
           display: inline-block;
           padding: 8px 15px;
-          font-size: 1.5em;
+          font-size: 2em;
           font-weight: 600;
         }
       }
+    }
+
+    .chatList_inner {
+      overflow-y: scroll;
+      height: 640px;
+     
       .chatList_inner_roomList {
         margin: 0;
         padding: 0;
@@ -47,13 +53,29 @@
           display: flex;
           cursor: pointer;
           .chatList_inner_chatRoomLink_img {
+            position: relative; 
             width: 60px;
             height: 60px;
+            background-color: #CCC;
+            border-radius: 50%;
+            
             img {
+              position: relative;
               border-radius: 50%;
               width: 100%;
               height: 100%;
               object-fit: cover;
+              z-index: 2;
+            }
+            svg{
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%,-50%);
+              width: 70%;
+              height: 70%;
+              color: white;
+              z-index: 1;
             }
           }
           .chatList_inner_chatRoomLink_contents {
