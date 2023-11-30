@@ -4,15 +4,17 @@ import { useNavigate, Link } from "react-router-dom";
 import "../style/detailItem/detailItem.css";
 
 /* icons */
-import { BsChatHeartFill } from "react-icons/bs";
-import { BsHeartFill } from "react-icons/bs";
 import { FaFacebookF, FaBook } from "react-icons/fa";
 import { HiMiniMapPin } from "react-icons/hi2";
 import { FaTwitter } from "react-icons/fa";
 import { RiPriceTagFill } from "react-icons/ri";
+import { IoIosArrowForward } from "react-icons/io";
 
 import SwiperComponent from "../component/swiper/SwiperComponent";
 import Image from './../component/common/Image';
+import ChatBtn from './../component/button/ChatBtn';
+import WishBtn from './../component/button/WishBtn';
+import Follow from './../component/button/Follow';
 
 export default function DetailItem() {
   const navigate = useNavigate();
@@ -122,24 +124,17 @@ export default function DetailItem() {
 
             <div className="btnIcon">
               <div>
-                <button
-                  className={btnWish === false ? "btnWish" : "btnWishActive"}
-                >
-                  <BsHeartFill color={btnWish === false ? "white" : "red"} />
-                  <span>찜</span>
-                  <span>1</span>
-                </button>
+
+                <WishBtn btnWish={btnWish} size={20} />
+
               </div>
 
               <div>
-                <button className="btnChat">
-                  <BsChatHeartFill color="white" size={20} />
-                  <span>번개톡</span>
-                </button>
+                <ChatBtn className="btnChat" color="white" size={20} />
               </div>
 
               <div>
-                <button className="btnOrder">
+                <button className="btnOrder btnStyle">
                   <span>바로구매</span>
                 </button>
               </div>
@@ -214,9 +209,9 @@ export default function DetailItem() {
           <h3>비슷한 새 상품 보기</h3>
           <ul className="similarProduct">
             <li>
-              <Image className="detailItemImg" url="productImg\\image-1700723555581.png" />
+              <Image className="detailItemImg" url="productImg\image-1700723555581.png" />
               <div>
-                <p className="similarProductPrice">235,900d원</p>
+                <p className="similarProductPrice">235,900원</p>
                 <p>
                   나이키 로말레오 4 3XD SE 올검 올흰 역도화 스쿼트화 헬스화 크로스핏화 헬스신발
                 </p>
@@ -228,7 +223,7 @@ export default function DetailItem() {
             <li>
               <Image className="detailItemImg" url="productImg\\image-1700725251398.jpg" />
               <div>
-                <p className="similarProductPrice">235,900d원</p>
+                <p className="similarProductPrice">235,900원</p>
                 <p>
                   나이키 로말레오 4 3XD SE 올검 올흰 역도화 스쿼트화 헬스화 크로스핏화 헬스신발
                 </p>
@@ -241,6 +236,83 @@ export default function DetailItem() {
         <div>
           <h3>상점정보</h3>
           <div>
+
+            <div className="userInfo">
+              <Image className="profileImg" url="productImg\image-1700723555581.png" />
+              <div className="storeName">
+                <Link to="#">
+                  <p>윤현규스토어</p>
+                  <ul>
+                    <li>상품30</li>
+                    <li>팔로워20</li>
+                  </ul>
+                </Link>
+
+              </div>
+            </div>
+            <div className="followBtn">
+              <Follow className="detailPageFollow" color='rgb(136,136,136)' size={18} />
+            </div>
+            <ul className="photoList">
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>90,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>600,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>70,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>50,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>100,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>102,000</span>원</p>
+                </Link>
+              </li>
+            </ul>
+
+            <div className="showMoreSeller">
+              <Link to='#'>
+                <span>163개</span>
+                상품더보기
+                <IoIosArrowForward color="rgb(136, 136, 136" />
+              </Link>
+            </div>
+
+            <div className="btnIcon">
+              <div>
+                <WishBtn btnWish={btnWish} size={14} />
+              </div>
+              <div>
+                <ChatBtn className="btnChat" color="white" size={14} />
+              </div>
+            </div>
+
+
+
+
+
 
           </div>
         </div>
