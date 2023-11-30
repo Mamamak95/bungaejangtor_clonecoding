@@ -4,98 +4,106 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 // import required modules
-import { Navigation } from 'swiper/modules';
+import { Pagination ,EffectFade ,Navigation} from 'swiper/modules';
 import Image from '../common/Image';
 
 export default function SwiperComponent(props) {
 
   const [pageBoolean,setPageBoolean] = useState(false)
 
+
+
+
   return (
     <>
       <Swiper
         navigation={true}
-        modules={[Navigation]}
-        spaceBetween={15}
-        slidesPerView={5}
+        modules={[Navigation,Pagination,EffectFade]}
+        spaceBetween={props.between}
+        slidesPerView={props.view}
+        effect={props.effect}
         onSlideChange={() => {
           setPageBoolean(!pageBoolean)
           props.changePage(pageBoolean);
         }}
-        slidesPerGroup={5}
-        className="mySwiper">
-        <SwiperSlide>
+        
+        pagination={props.pagination}
+        slidesPerGroup={props.group}
+        className={`mySwiper ${props.hover}`}>
+
+        <SwiperSlide >
           <Image
             className="detailItemImg"
-            url="productImg\\image-1700725251398.jpg"
+            url="productImg\\image-1700723555581.png"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
           <Image
             className="detailItemImg"
-            url="productImg\\image-1700725251398.jpg"
+            url="productImg\\images-1701140289870.PNG"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
           <Image
             className="detailItemImg"
-            url="productImg\\image-1700725251398.jpg"
+            url="productImg\\images-1701141335587.jpg"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide > 
           <Image
             className="detailItemImg"
             url="productImg\\image-1700725251398.jpg"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
           <Image
             className="detailItemImg"
-            url="productImg\\image-1700725251398.jpg"
+            url="productImg\\images-1701141335589.jpg"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
           <Image
             className="detailItemImg"
-            url="productImg\\image-1700725251398.jpg"
+            url="productImg\\images-1701141335588.jpg"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
           <Image
             className="detailItemImg"
-            url="productImg\\image-1700725251398.jpg"
+            url="productImg\\images-1701141335589.jpg"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
           <Image
             className="detailItemImg"
             url="productImg\\image-1700725251398.jpg"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
           <Image
             className="detailItemImg"
-            url="productImg\\image-1700725251398.jpg"
+            url="productImg\\images-1701141335588.jpg"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide >
           <Image
             className="detailItemImg"
             url="productImg\\image-1700725251398.jpg"
           />
-          <span className='slideProduct'>이자벨마랑 니트</span>
+          {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
         </SwiperSlide>
       </Swiper>
     </>

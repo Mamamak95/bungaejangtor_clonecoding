@@ -1,48 +1,12 @@
-
 import React, { useEffect, useState, useRef } from "react";
 
-import axios from "axios";
 
-export default function ChatRoom({ roomInfo }) {
-  const [chatLog, setChatLog] = useState([]);
+export default function ChatRoom({ roomInfo, chatLog, handleLog, handleKey }) {
   const chatBox = useRef(null);
 
-  useEffect(()=>{
-    handleLog()
-  },[roomInfo])
-
-  useEffect(()=>{
-      chatBox.current.scrollTop = chatBox.current.scrollHeight;
-  },[chatLog])
-
-
-  const handleLog = () => {
-    if (roomInfo.crid != null) {
-      axios
-        .post(`http://127.0.0.1:8000/chat/log`, { crid: roomInfo.crid })
-        .then((res) => {
-          setChatLog(res.data);
-        });
-    }
-  };
-
-  const handleKey = (e) => {
-    if (e.key === "Enter") {
-      const value = e.target.value;
-      e.target.value = "";
-      axios
-        .post("http://127.0.0.1:8000/chat/send", {
-          crid: roomInfo.crid,
-          isBuyerSend: roomInfo.isBuyer,
-          content: value,
-        })
-        .then((res) => {
-          setChatLog(res.data);
-        });
-      // 
-    }
-  };
-
+  useEffect(() => {
+    chatBox.current.scrollTop = chatBox.current.scrollHeight;
+  }, [chatLog]);
 
   return (
     <div className="chatList_right">
@@ -52,25 +16,33 @@ export default function ChatRoom({ roomInfo }) {
       </div>
 
       <ul className="chatLog" ref={chatBox}>
-        {chatLog.map((s,i) => {
-          
-          return (
-            <li
-
-              className={`${
-                roomInfo.isBuyer ^ s.isBuyerSend ? "oppo" : "me" //!(사용자가 구매자? XOR 구매자가 보냄?)
-              } chat_message`}
-            >
-              <span>{s.content}</span>
-              <div>{s.date}</div>
-
+        {chatLog.length != 0 ? (
+          chatLog.map((s, i) => {
+            return (
+              <li
+                className={`${
+                  roomInfo.isBuyer ^ s.isBuyerSend ? "oppo" : "me" //!(사용자가 구매자? XOR 구매자가 보냄?)
+                } chat_message`}
+                key={i}
+              >
+                <span>{s.content}</span>
+                <div>{s.date}</div>
+              </li>
+            );
+          })
+        ) : (
+          <>
+            <li>
+              <div className="empty-chat">
+                <img src="http://127.0.0.1:8000/webImg/empty_chat.svg" alt="" />
+                <span>대화방을 선택해주세요.</span>
+              </div>
             </li>
-          );
-        })}
-        
+          </>
+        )}
       </ul>
 
-      <form className="chatSend">
+      {chatLog.length != 0?<form className="chatSend">
         <svg
           width="22"
           height="22"
@@ -94,6 +66,8 @@ export default function ChatRoom({ roomInfo }) {
 
         <button></button>
       </form>
+      :<></>
+      }
     </div>
   );
 }
