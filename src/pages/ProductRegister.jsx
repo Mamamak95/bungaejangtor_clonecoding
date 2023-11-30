@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
 import * as localStorage from '../util/localStorage';
-import Home from './Home';
+import NotFound from './NotFound';
 
 export default function ProductRegister() {
   const userInfo = localStorage.getUser();
@@ -200,7 +200,8 @@ export default function ProductRegister() {
   return (
 
     <>
-    {userInfo.uid ?   <form onSubmit={handleSubmit}>
+    {userInfo.uid ?   
+    <form onSubmit={handleSubmit}>
         <fieldset className="inner">
           <h2 className="ProductRegisterTitle">기본정보<span>*필수항목</span></h2>
           <div className="inputContainer">
@@ -403,7 +404,7 @@ export default function ProductRegister() {
         </div>
       </form>
       :
-      <Home/>}
+      <NotFound/>}
     
     </>
   );
