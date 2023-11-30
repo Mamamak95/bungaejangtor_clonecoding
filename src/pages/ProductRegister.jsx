@@ -4,14 +4,17 @@ import ProductCategory from '../component/Register/ProductCategory';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
+import * as localStorage from '../util/localStorage';
+import Home from './Home';
 
 export default function ProductRegister() {
+  const userInfo = localStorage.getUser();
 
   // 초기 위치 정보 (나중에 API 데이터로 변경될 수 있음)
   let place = '경기도 성남시 중원구 성남동'
   // 상태 관리를 위한 useState 훅 사용
   let [formImg, setFormImg] = useState([]); // 이미지 넘길 변수
-  let [form, setForm] = useState({ 'img': '', 'seller': 'user1', 'productName': '', 'category': 'ALL', place, 'price': '', 'content': '' })
+  let [form, setForm] = useState({ 'img': '', 'seller': userInfo.uid, 'productName': '', 'category': 'ALL', place, 'price': '', 'content': '' })
   let [textNum, setTextNum] = useState(0);  // 상품이름 input 글자수 체크
   const [active, setActive] = useState(false) // '상세 카테고리를 선택해주세요.' 멘트 온오프
   let [first, setFirst] = useState(''); // 카테고리 천째칸
@@ -28,6 +31,7 @@ export default function ProductRegister() {
   const inputPrice = useRef(null);
   const inputContent = useRef(null);
   const navigate = useNavigate();
+
 
   const noticeTxt = (boolean, n) => {
     let copy = [...notice]
@@ -178,7 +182,7 @@ export default function ProductRegister() {
     formData.append('form', JSON.stringify(form))
     axios({
       method: 'post',
-      url: `http://127.0.0.1:8000/product/new/${form.seller}`,
+      url: `http://127.0.0.1:8000/product/new/${userInfo.uid}`,
       data: formData,
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -194,8 +198,9 @@ export default function ProductRegister() {
 
 
   return (
+
     <>
-      <form onSubmit={handleSubmit}>
+    {userInfo.uid ?   <form onSubmit={handleSubmit}>
         <fieldset className="inner">
           <h2 className="ProductRegisterTitle">기본정보<span>*필수항목</span></h2>
           <div className="inputContainer">
@@ -397,6 +402,9 @@ export default function ProductRegister() {
           </ul>
         </div>
       </form>
+      :
+      <Home/>}
+    
     </>
   );
 }
