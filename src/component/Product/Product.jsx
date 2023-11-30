@@ -1,37 +1,61 @@
 import React, { useState, useEffect } from "react";
 import '../../style/Product/product.css';
+import ProductList from "./ProductList";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 export default function Product(){
-  const [list, setList] = useState([])
+  const [products, setProducts] = useState([]); 
+  const [newLimit, setNewLimit] = useState(5);
+  const [offset, setOffset] = useState(5);
+  
   useEffect(()=>{
-    fetch(`testData/product.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        //console.log(data);
-        setList(data);
-      });
+
+    axios
+    .get(`http://127.0.0.1:8000/`)
+    .then((result)=>
+      setProducts(result.data)
+      )
+    .catch((err)=>console.log(err))
     }, []);
 
+  const loadMore = () => {
+  
+    axios({
+      method:'post',
+      url:`http://127.0.0.1:8000/loadMore/${offset}/${newLimit}`,
+      data: products
+    })
+    .then((result) => {
+      console.log(JSON.stringify(result.data))
+      setProducts((prevProducts) => [...prevProducts, ...result.data]);
+      setNewLimit((prevLimit) => prevLimit )
+      setOffset((prevOffset) => prevOffset + 5)
+    })
+    .catch((err)=>console.log(err))
+    
+  };
+
   return(
-    <div className="product">
-      {list.map((list)=>
-          <div className="pro">
-            <img className="pro_img" src={list.image}/>
-            <div className="pro_comtent">
-              <h3 className="pro_name">
-                {list.name}
-              </h3>
-              <div className="pro_pr_da">
-                <div className="pro_price">
-                  {list.price} 원
-                </div>
-                <div className="pro_date">
-                  {list.date}
-                </div>
-              </div>
-          </div>
-        </div>
-      )}
-    </div>
+    <>
+      <div className="product">
+        {products.map((item)=>
+            <div key={item.pid}>
+              <Link to={`/productDetail/${item.pid}`}>
+                <ProductList
+                  image={item.img}
+                  name={item.productName}
+                  price={item.price}
+                  date={item.regdate}
+                ></ProductList>
+              </Link>
+            </div>
+        )}
+      </div>
+      <button className="more_button" onClick={loadMore} >
+        더보기
+      </button>
+    </>
   )
 }
