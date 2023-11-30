@@ -19,6 +19,7 @@ const router = createBrowserRouter([
     // errorElement: <NotFound />,
     children: [
       { index : true ,path: '/', element: <Home /> },
+      { path: '/loadMore/:offset/:newLimit', element: <Home /> },
       { path: '/products/new/:id', element: <ProductRegister /> },
       { path: '/productDetail/:pid', element: <DetailItem /> },
       { path: '/chat', element: <Chat/>},
