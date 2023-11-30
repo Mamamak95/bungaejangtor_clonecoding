@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "../../style/banner/banner.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import axios from "axios";
 
 export default function Banner(){
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const [list, setList] = useState([])
   useEffect(()=>{
-    fetch(`testData/banner.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        //console.log(data);
-        setList(data);
-      });
+    // fetch(`productlist/banner.json`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     //console.log(data);
+    //     setList(data);
+    //   });
+    axios
+    .get(`productlist/banner.json`)
+    .then((result)=>
+      setList(result.data))
+    .catch()
     }, []);
 
   useEffect(() => {
