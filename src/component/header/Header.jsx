@@ -38,7 +38,7 @@ export default function Header(){
   
   /* 각 주소로 이동 */
   const naviProductNew = (e) => {
-    navigate('/product/new')
+    navigate(`/product/new/${userInfo.uid}`)
   }
   const naviProduct = (e) => {
     navigate('/product')
