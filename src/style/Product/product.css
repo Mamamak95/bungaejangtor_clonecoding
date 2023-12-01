@@ -16,12 +16,17 @@
 }
 
 .pro_img {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  object-fit: fill;
+}
+.pro_img img{
+  width: 100%;
+  height: 230px;
 }
 
+
 .pro_name {
-  font-size: 18px;
+  font-size: 15px;
   padding: 5px;
 }
 .pro_pr_da{

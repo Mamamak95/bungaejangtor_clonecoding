@@ -15,7 +15,7 @@
 
 .banner_img {
   width: 100%; 
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .banner_controls {

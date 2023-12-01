@@ -3,13 +3,12 @@ import '../../style/Product/product.css';
 import Image from "../common/Image";
 
 export default function ProductList({image, name, price, date}){
-
   return(
     <div className="product">
           <div className="pro">
             <Image
               className="pro_img"
-              url="productImg\\image-1700725251398.jpg" />
+              url={image} />
             <div className="pro_comtent">
               <p className="pro_name">
                 {name}
