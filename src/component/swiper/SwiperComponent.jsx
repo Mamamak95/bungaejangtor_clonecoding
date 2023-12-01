@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -14,7 +14,6 @@ import Image from '../common/Image';
 export default function SwiperComponent(props) {
 
   const [pageBoolean, setPageBoolean] = useState(false)
-  // console.log(props.img);
 
 
 
@@ -30,21 +29,11 @@ export default function SwiperComponent(props) {
           setPageBoolean(!pageBoolean)
           props.changePage(pageBoolean);
         }}
-
         pagination={props.pagination}
         slidesPerGroup={props.group}
         className={`mySwiper ${props.hover}`}>
-          
-        {
-          props.img.map((v, i) =>
-            <SwiperSlide key={i}>
-              <Image
-                className="detailItemImg"
-                url={v}
-              />
-              {props.pName && <span className='slideProduct'>이자벨마랑 니트</span>}
-            </SwiperSlide>)
-        }
+          {props.children}
+        
         {/* <SwiperSlide >
           <Image
             className="detailItemImg"
