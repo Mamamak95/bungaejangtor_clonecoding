@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useNavigate, Link } from "react-router-dom";
 import "../style/detailItem/detailItem.css";
+import { SwiperSlide } from 'swiper/react';
 
 /* icons */
 import { FaFacebookF, FaBook } from "react-icons/fa";
@@ -22,12 +23,13 @@ import formatRelativeDate from "../util/date";
 
 export default function DetailItem() {
   const userInfo = localStorage.getUser();
-  let {pid} = useParams();
+  let { pid } = useParams();
   const navigate = useNavigate();
-  const [info,setInfo] = useState({});
+  const [info, setInfo] = useState({});
   const [productImg, setProductImg] = useState([]);
-
-
+  const [similar, setSimilar] = useState([]);
+  const [depth, setDepth] = useState(true);
+  const [shop, setShop] = useState([]);
   //찜버튼 찜여부
   const [btnWish, setBtnWish] = useState(false);
   const [page, setPage] = useState(1);
@@ -43,44 +45,23 @@ export default function DetailItem() {
       url: `http://localhost:8000/product/${pid}`
     })
       .then(res => {
-        res.data.regdate = formatRelativeDate(res.data.regdate)
-        
-        setInfo(res.data)
-        setProductImg((res.data.images).split(','));
+        res.data.product.regdate = formatRelativeDate(res.data.product.regdate)
+        setInfo(res.data.product)
+        setProductImg((res.data.product.images).split(','));
+        setSimilar(res.data.slide)
+        setShop(res.data.shopData)
       })
       .catch((err) => { console.log(err) });
-  }, []);
+  }, [depth])
 
-  // function formatRelativeDate(inputDate) {
-  //   const currentDate = new Date();
-  //   const targetDate = new Date(inputDate);
-  
-  //   const diffInSeconds = Math.floor((currentDate - targetDate) / 1000);
-  
-  //   const rtf = new Intl.RelativeTimeFormat('ko', { numeric: 'auto' });
-  
-  //   if (diffInSeconds < 60) {
-  //     return rtf.format(-diffInSeconds, 'second');
-  //   } else if (diffInSeconds < 3600) {
-  //     const diffInMinutes = Math.floor(diffInSeconds / 60);
-  //     return rtf.format(-diffInMinutes, 'minute');
-  //   } else if (diffInSeconds < 86400) {
-  //     const diffInHours = Math.floor(diffInSeconds / 3600);
-  //     return rtf.format(-diffInHours, 'hour');
-  //   } else if (diffInSeconds < 604800) {
-  //     const diffInDays = Math.floor(diffInSeconds / 86400);
-  //     return rtf.format(-diffInDays, 'day');
-  //   } else if (diffInSeconds < 2629746) {
-  //     const diffInWeeks = Math.floor(diffInSeconds / 604800);
-  //     return rtf.format(-diffInWeeks, 'week');
-  //   } else if (diffInSeconds < 31556952) {
-  //     const diffInMonths = Math.floor(diffInSeconds / 2629746);
-  //     return rtf.format(-diffInMonths, 'month');
-  //   } else {
-  //     const diffInYears = Math.floor(diffInSeconds / 31556952);
-  //     return rtf.format(-diffInYears, 'year');
-  //   }
-  // }
+  const handleClick = (e) => {
+    setDepth(!depth);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // 부드럽게 스크롤링되도록 하려면 'smooth'를 사용
+    });
+
+  }
 
   return (
     <main className="inner">
@@ -97,8 +78,17 @@ export default function DetailItem() {
               pagination={{ clickable: true }}
               effect={'fade'}
               hover={hover}
-              img ={productImg}
-            />
+            >
+              {
+                productImg.map((v, i) =>
+                  <SwiperSlide key={i}>
+                    <Image
+                      className="detailItemImg"
+                      url={v}
+                    />
+                  </SwiperSlide>)
+              }
+            </SwiperComponent>
           </div>
 
 
@@ -209,7 +199,30 @@ export default function DetailItem() {
         </div>
         {/* 랜덤 상품 5개 */}
         <div className="swiperContainer">
-          {/* <SwiperComponent changePage={changePage} view={5} group={5} between={15} pName={true} pagination={false} effect={''} /> */}
+          <SwiperComponent
+            changePage={changePage}
+            view={5}
+            group={5}
+            between={15}
+            pName={true}
+            pagination={false}
+            effect={''}
+          >{
+              similar.map((v, i) =>
+                <SwiperSlide >
+                  <Link to={`/productDetail/${v.pid}`} onClick={handleClick}>
+                    <Image
+                      className="detailItemImg"
+                      url={v.img}
+                    />
+                    <span className='slideProduct'>{v.productName}</span>
+                  </Link>
+
+                </SwiperSlide>
+              )
+            }
+
+          </SwiperComponent>
         </div>
 
         {/* 상품 정보(상품 설명/content) */}
@@ -273,7 +286,7 @@ export default function DetailItem() {
 
             </li>
             <li>
-              <Image className="detailItemImg" url="productImg\\image-1700725251398.jpg" />
+              <Image className="detailItemImg" url="productImg\image-1700725251398.jpg" />
               <div>
                 <p className="similarProductPrice">235,900원</p>
                 <p>
@@ -290,7 +303,7 @@ export default function DetailItem() {
           <div>
 
             <div className="userInfo">
-              <Image className="profileImg" url="productImg\image-1700723555581.png" />
+              <Image className="profileImg" url={info.userImage} />
               <div className="storeName">
                 <Link to="#">
                   <p>{info.seller}</p>
@@ -306,7 +319,16 @@ export default function DetailItem() {
               <Follow className="detailPageFollow" color='rgb(136,136,136)' size={18} />
             </div>
             <ul className="photoList">
-              <li>
+              {
+                shop.map((v, i) =>
+                  <li>
+                    <Link to={`/productDetail/${v.pid}`} onClick={handleClick}>
+                      <Image className="productPhoto" url={v.img} />
+                      <p><span>{v.price}</span>원</p>
+                    </Link>
+                  </li>)
+              }
+              {/* <li>
                 <Link to='#'>
                   <Image className="productPhoto" url="productImg\image-1700723555581.png" />
                   <p><span>90,000</span>원</p>
@@ -341,7 +363,7 @@ export default function DetailItem() {
                   <Image className="productPhoto" url="productImg\image-1700723555581.png" />
                   <p><span>102,000</span>원</p>
                 </Link>
-              </li>
+              </li> */}
             </ul>
 
             <div className="showMoreSeller">

@@ -442,6 +442,7 @@
 
 .detailSecond {
   display: flex;
+  margin-bottom: 50px;
 
   &>div {
     color: #212121;
@@ -586,7 +587,21 @@
       margin-bottom: 16px;
 
       .profileImg {
+        position: relative;
         margin-right: 16px;
+        width: 48px;
+        height: 48px;
+        text-align: center;
+        line-height: 48px;
+        border: 1px solid #0a0a0a;
+        border-radius: 50%;
+          svg{
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%,-50%);
+            width: 24px;
+            height: 24px;
+          }
 
         img {
           border-radius: 50%;
