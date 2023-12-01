@@ -9,8 +9,8 @@
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  margin-top: 12px;
-  width: 215px;
+  margin-top: 10px;
+  width: 210px;
   text-align: left;
   overflow: hidden;
 }
@@ -21,9 +21,8 @@
 }
 .pro_img img{
   width: 100%;
-  height: 230px;
+  height: 220px;
 }
-
 
 .pro_name {
   font-size: 15px;

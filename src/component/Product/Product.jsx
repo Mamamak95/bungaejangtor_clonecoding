@@ -21,7 +21,8 @@ export default function Product(){
     }, []);
 
   const loadMore = () => {
-  
+    let now = new Date();
+    console.log(now);
     axios({
       method:'post',
       url:`http://127.0.0.1:8000/loadMore/${offset}/${newLimit}`,
