@@ -27,7 +27,11 @@
 .pro_name {
   font-size: 15px;
   padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .pro_pr_da{
   display: flex;
   flex-wrap: wrap;
@@ -62,5 +66,4 @@
   width: 80px;
   height: 30px;
 }
-
 
