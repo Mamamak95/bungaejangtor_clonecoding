@@ -15,7 +15,7 @@
 
 .banner_img {
   width: 100%; 
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .banner_controls {
@@ -50,4 +50,9 @@
   font-size: 16px;
   max-width: 400px;
   margin: 0 auto;
+}
+
+.banner_bottom{
+  width: 100%;
+  margin-top: 20px;
 }
