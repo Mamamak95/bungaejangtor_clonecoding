@@ -11,12 +11,13 @@ import Home from './pages/Home';
 import DetailItem from './pages/DetailItem';
 import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    // errorElement: <NotFound />,
+    errorElement: <NotFound />,
     children: [
       { index : true ,path: '/', element: <Home /> },
       { path: '/loadMore/:offset/:newLimit', element: <Home /> },

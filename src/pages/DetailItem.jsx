@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useNavigate, Link } from "react-router-dom";
 import "../style/detailItem/detailItem.css";
+import { SwiperSlide } from 'swiper/react';
 
 /* icons */
-import { BsChatHeartFill } from "react-icons/bs";
-import { BsHeartFill } from "react-icons/bs";
 import { FaFacebookF, FaBook } from "react-icons/fa";
 import { HiMiniMapPin } from "react-icons/hi2";
 import { FaTwitter } from "react-icons/fa";
 import { RiPriceTagFill } from "react-icons/ri";
+import { IoIosArrowForward } from "react-icons/io";
 
 import SwiperComponent from "../component/swiper/SwiperComponent";
 import Image from './../component/common/Image';
+import ChatBtn from './../component/button/ChatBtn';
+import WishBtn from './../component/button/WishBtn';
+import Follow from './../component/button/Follow';
+import * as localStorage from '../util/localStorage';
+import { useParams } from "react-router";
+import axios from "axios";
+import formatRelativeDate from "../util/date";
 
 export default function DetailItem() {
+  const userInfo = localStorage.getUser();
+  let { pid } = useParams();
   const navigate = useNavigate();
+  const [info, setInfo] = useState({});
+  const [productImg, setProductImg] = useState([]);
+  const [similar, setSimilar] = useState([]);
+  const [depth, setDepth] = useState(true);
+  const [shop, setShop] = useState([]);
   //찜버튼 찜여부
   const [btnWish, setBtnWish] = useState(false);
   const [page, setPage] = useState(1);
@@ -24,6 +38,31 @@ export default function DetailItem() {
   const changePage = (e) => {
     e ? setPage(1) : setPage(2)
   }
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `http://localhost:8000/product/${pid}`
+    })
+      .then(res => {
+        res.data.product.regdate = formatRelativeDate(res.data.product.regdate)
+        setInfo(res.data.product)
+        setProductImg((res.data.product.images).split(','));
+        setSimilar(res.data.slide)
+        setShop(res.data.shopData)
+      })
+      .catch((err) => { console.log(err) });
+  }, [depth])
+
+  const handleClick = (e) => {
+    setDepth(!depth);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // 부드럽게 스크롤링되도록 하려면 'smooth'를 사용
+    });
+
+  }
+
   return (
     <main className="inner">
       <section className="detailFirst">
@@ -39,7 +78,17 @@ export default function DetailItem() {
               pagination={{ clickable: true }}
               effect={'fade'}
               hover={hover}
-            />
+            >
+              {
+                productImg.map((v, i) =>
+                  <SwiperSlide key={i}>
+                    <Image
+                      className="detailItemImg"
+                      url={v}
+                    />
+                  </SwiperSlide>)
+              }
+            </SwiperComponent>
           </div>
 
 
@@ -48,9 +97,9 @@ export default function DetailItem() {
 
           <div>
             <div className="mainInfo">
-              <p className="productName">타임 구스패딩</p>
+              <p className="productName">{info.productName}</p>
               <div className="price">
-                <p>500,000</p>
+                <p>{info.price}</p>
                 <span>원</span>
                 <img
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMzIiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMzIgNjAiIGZpbGw9Im5vbmUiPgogICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzE5MjhfMzQzNTUpIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTMyIiBoZWlnaHQ9IjYwIiBmaWxsPSJ3aGl0ZSIgLz4KICAgICAgICA8cGF0aAogICAgICAgICAgICBkPSJNMTMyIDU0LjQ4MTZWNS41MjY1MkMxMzIgMi40NzQzMSAxMjkuNDY0IDAgMTI2LjMzNSAwSDUuNjY0ODdDMi41MzYyNSAwIDAgMi40NzQzMSAwIDUuNTI2NTJWNTQuNDgxNkMtMS42Nzc1OGUtMDYgNTUuOTQ2NSAwLjU5NzEwMSA1Ny4zNTE0IDEuNjU5NzEgNTguMzg2NUMyLjcyMjMzIDU5LjQyMTYgNC4xNjMyMyA2MC4wMDIgNS42NjQ4NyA1OS45OTk4SDEyNi4zMDFDMTI3LjgwOSA2MC4wMTA4IDEyOS4yNTggNTkuNDM0MyAxMzAuMzI4IDU4LjM5ODJDMTMxLjM5OCA1Ny4zNjIyIDEzMiA1NS45NTIzIDEzMiA1NC40ODE2WiIKICAgICAgICAgICAgZmlsbD0iI0Q4MEMxOCIgLz4KICAgICAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIKICAgICAgICAgICAgZD0iTTMyLjkzMyAyNy44ODU0SDQzLjYzODdWMjcuODg4N0M0My44NCAyNy44ODg3IDQzLjk0MDcgMjguMTQ2IDQzLjc5NDQgMjguMjkxOUwyNC4xNTA3IDQ4LjA4NDdDMjMuOTk5NyA0OC4yMzU1IDIzLjc0OTYgNDguMTEwOSAyMy43NzAxIDQ3Ljg5M0wyNS4yNjU4IDMxLjc1MTNMMTQuODI3NCAzMS44Njc2QzE0LjYyNDUgMzEuODY5MiAxNC41MjIzIDMxLjYxMDMgMTQuNjcwMSAzMS40NjI4TDM0LjI5MDIgMTEuOTE1OEMzNC40NDI4IDExLjc2NSAzNC42OTI5IDExLjg5NDUgMzQuNjY5MyAxMi4xMTI0TDMyLjkzMyAyNy44ODU0Wk03Ni4xOTM5IDEzLjkwOTFIODEuMTExM1Y0Ni4xMTk2SDc2LjE5MzlWMTMuOTA5MVpNNzQuMjY1NiAxNC4wODgyVjQ1LjUxNTFINjkuNDIyN1YzMC41MTkzSDY2LjUwMDRWMjUuNzg0Nkg2OS40MjI3VjE0LjA4ODJINzQuMjY1NlpNNTEuMzUwMiAzOC43MzZWNDMuMTkwMkw2OC4xODAyIDQyLjQ3MjZWMzguMDkyNkw2NS44NjIzIDM4LjE4MzRMNjUuOTI4NSAxOS4xNTRINjcuOTIzNlYxNC42OTk4SDUxLjYzOTlWMTkuMTU0SDUzLjY0MzNMNTMuNzAxMiAzOC42NDUzTDUxLjM1MDIgMzguNzM2Wk01OC40NTMgMTkuMTU0NUg2MS4xMTg3TDYxLjA1MjUgMzguMzY1NEw1OC41MTEgMzguNDY0M0w1OC40NTMgMTkuMTU0NVpNMTEyLjkwMSAxMy45MDkxSDEwNy44NDNWNDYuMTE5NkgxMTIuOTAxVjEzLjkwOTFaTTg4LjA2NTQgNDEuNDk5M0M4Ni4zOTg3IDM5Ljk5MjYgODUuNDgyNiAzNy42OTY3IDg1LjMxNyAzNC42MTE4Qzg1LjMwNTggMzQuMzM0IDg1LjI5NTEgMzQuMDU4NiA4NS4yODQ2IDMzLjc4NjJDODUuMjU2NCAzMy4wNTU2IDg1LjIyOSAzMi4zNDYgODUuMTkyOCAzMS42NjdDODUuMTQzMSAzMC43MzUgODUuMTQzMSAyOS44MDI5IDg1LjE0MzEgMjguODg3M0M4NS4xNDMxIDI3Ljk3MTcgODUuMTUxNCAyNy4wMzk2IDg1LjE5MjggMjYuMTA3NUM4NS4yMzQyIDI1LjE3NTQgODUuMjc1NiAyNC4xOTM5IDg1LjMxNyAyMy4xNzExQzg1LjQ4MjYgMjAuMDg2MSA4Ni40MDk4IDE3Ljc4NDggODguMDY1NCAxNi4yODM1Qzg5Ljg2NzEgMTQuNzIxMiA5Mi4yMDI4IDEzLjkwOTEgOTQuNTg4OSAxNC4wMTUyQzk1LjgyODMgMTQuMDAyNyA5Ny4wNjE1IDE0LjE5MjIgOTguMjM5NiAxNC41NzYxQzk5LjMxMTEgMTQuOTI4OCAxMDAuMjkyIDE1LjUxMTcgMTAxLjExMiAxNi4yODM1QzEwMS45NTIgMTcuMDkyMiAxMDIuNjA2IDE4LjA3MTEgMTAzLjAzMyAxOS4xNTRDMTAzLjUzNiAyMC40MzYzIDEwMy44MTYgMjEuNzk0OCAxMDMuODYxIDIzLjE3MTFDMTAzLjg2OCAyMy4zMjE4IDEwMy44NzYgMjMuNDcxOSAxMDMuODgzIDIzLjYyMTRDMTAzLjkyNiAyNC40ODY3IDEwMy45NjggMjUuMzMwNSAxMDMuOTY4IDI2LjEzMjNWMjguOTI4NUMxMDMuOTY4IDI5LjIzMTggMTAzLjk3MSAyOS41MzY4IDEwMy45NzQgMjkuODQzMVYyOS44NDQyVjI5Ljg0NTNDMTAzLjk3OSAzMC40NjMgMTAzLjk4NSAzMS4wODU3IDEwMy45NjggMzEuNzA4M0MxMDMuOTQzIDMyLjY0MDQgMTAzLjkxIDMzLjYwNTQgMTAzLjg2MSAzNC42MTE4QzEwMy44MiAzNS45OTM3IDEwMy41NCAzNy4zNTgyIDEwMy4wMzMgMzguNjQ1M0MxMDIuNjAxIDM5LjcyMDQgMTAxLjk0NiA0MC42OTI5IDEwMS4xMTIgNDEuNDk5M0MxMDAuMjkyIDQyLjI3MTEgOTkuMzExMSA0Mi44NTQgOTguMjM5NiA0My4yMDY3Qzk3LjA2MSA0My41ODc5IDk1LjgyNzkgNDMuNzc0NSA5NC41ODg5IDQzLjc1OTRDOTIuMjAzOSA0My44Njc4IDg5Ljg2ODQgNDMuMDU4NiA4OC4wNjU0IDQxLjQ5OTNaTTkwLjgwNTggMjEuNjIwMkM5MC41Njg1IDIyLjU2MzIgOTAuNDI3IDIzLjUyNzYgOTAuMzgzNiAyNC40OTg5QzkwLjI4NDMgMjUuOTA5NCA5MC4yMzQ2IDI3LjM2OTQgOTAuMjM0NiAyOC44ODcxQzkwLjIzNDYgMzAuNDA0OCA5MC4yODQzIDMxLjg3MzEgOTAuMzgzNiAzMy4yODM2QzkwLjQyNyAzNC4yNTIxIDkwLjU2ODQgMzUuMjEzOSA5MC44MDU4IDM2LjE1NDFDOTAuOTY0NyAzNi44MTU3IDkxLjI0NTQgMzcuNDQyMSA5MS42MzM3IDM4LjAwMTdDOTEuOTU3OSAzOC40NDQxIDkyLjM5NTMgMzguNzkxNiA5Mi45MDAzIDM5LjAwODFDOTMuNDI1MyAzOS4yMjE4IDkzLjk4ODkgMzkuMzI1NiA5NC41NTYgMzkuMzEzM0M5NS4xMjI4IDM5LjMyMzYgOTUuNjg2IDM5LjIxOTcgOTYuMjExNiAzOS4wMDgxQzk2LjcxNjYgMzguNzkxNiA5Ny4xNTQgMzguNDQ0MSA5Ny40NzgyIDM4LjAwMTdDOTcuODY2NiAzNy40NDIyIDk4LjE0NzMgMzYuODE1NyA5OC4zMDYxIDM2LjE1NDFDOTguNTQ2NyAzNS4yMTQyIDk4LjY5MDkgMzQuMjUyNSA5OC43MzY2IDMzLjI4MzZDOTguODI3NiAzMS44NzMxIDk4Ljg3NzMgMzAuNDIxMyA5OC44NzczIDI4LjkxMTlDOTguODc3MyAyNy40MDI0IDk4LjgyNzYgMjUuOTI1OSA5OC43MzY2IDI0LjQ5ODlDOTguNjkwOCAyMy41MjczIDk4LjU0NjYgMjIuNTYyOCA5OC4zMDYxIDIxLjYyMDJDOTguMTQ3MyAyMC45NjExIDk3Ljg2NjUgMjAuMzM3MyA5Ny40NzgyIDE5Ljc4MDdDOTcuMTU2NSAxOS4zMzYxIDk2LjcxODMgMTguOTg4IDk2LjIxMTYgMTguNzc0NEM5NS42ODYgMTguNTYyNyA5NS4xMjI4IDE4LjQ1ODkgOTQuNTU2IDE4LjQ2OTJDOTMuOTg4OSAxOC40NTY4IDkzLjQyNTMgMTguNTYwNyA5Mi45MDAzIDE4Ljc3NDRDOTIuMzkzNiAxOC45ODggOTEuOTU1NCAxOS4zMzYxIDkxLjYzMzcgMTkuNzgwN0M5MS4yNDU0IDIwLjMzNzMgOTAuOTY0NiAyMC45NjExIDkwLjgwNTggMjEuNjIwMloiCiAgICAgICAgICAgIGZpbGw9IndoaXRlIiAvPgogICAgPC9nPgogICAgPGRlZnM+CiAgICAgICAgPGNsaXBQYXRoIGlkPSJjbGlwMF8xOTI4XzM0MzU1Ij4KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjEzMiIgaGVpZ2h0PSI2MCIgZmlsbD0id2hpdGUiIC8+CiAgICAgICAgPC9jbGlwUGF0aD4KICAgIDwvZGVmcz4KPC9zdmc+"
@@ -82,7 +131,7 @@ export default function DetailItem() {
                       src="https://m.bunjang.co.kr/pc-static/resource/f5ac734eb33eb0faa3b4.png"
                       alt=""
                     />
-                    <span>4일 전</span>
+                    <span>{info.regdate}</span>
                   </p>
                 </div>
                 <button>
@@ -122,24 +171,17 @@ export default function DetailItem() {
 
             <div className="btnIcon">
               <div>
-                <button
-                  className={btnWish === false ? "btnWish" : "btnWishActive"}
-                >
-                  <BsHeartFill color={btnWish === false ? "white" : "red"} />
-                  <span>찜</span>
-                  <span>1</span>
-                </button>
+
+                <WishBtn btnWish={btnWish} size={20} />
+
               </div>
 
               <div>
-                <button className="btnChat">
-                  <BsChatHeartFill color="white" size={20} />
-                  <span>번개톡</span>
-                </button>
+                <ChatBtn className="btnChat" color="white" size={20} />
               </div>
 
               <div>
-                <button className="btnOrder">
+                <button className="btnOrder btnStyle">
                   <span>바로구매</span>
                 </button>
               </div>
@@ -157,7 +199,30 @@ export default function DetailItem() {
         </div>
         {/* 랜덤 상품 5개 */}
         <div className="swiperContainer">
-          <SwiperComponent changePage={changePage} view={5} group={5} between={15} pName={true} pagination={false} effect={''} />
+          <SwiperComponent
+            changePage={changePage}
+            view={5}
+            group={5}
+            between={15}
+            pName={true}
+            pagination={false}
+            effect={''}
+          >{
+              similar.map((v, i) =>
+                <SwiperSlide >
+                  <Link to={`/productDetail/${v.pid}`} onClick={handleClick}>
+                    <Image
+                      className="detailItemImg"
+                      url={v.img}
+                    />
+                    <span className='slideProduct'>{v.productName}</span>
+                  </Link>
+
+                </SwiperSlide>
+              )
+            }
+
+          </SwiperComponent>
         </div>
 
         {/* 상품 정보(상품 설명/content) */}
@@ -175,12 +240,7 @@ export default function DetailItem() {
       <section className="detailSecond">
         <div>
           <h3>상품정보</h3>
-          <p>
-            보테가베네타 인트레치아토 더비 블랙 색상 42.5사이즈 새제품 판매합니다. <br />
-            그래파이트 색상 염색한 제품 아니고 블랙 제품입니다.<br />
-            직거래시 의정부에서 가능합니다.<br />
-            관심 있으시면 연락주세요!<br />
-          </p>
+          <p>{info.content}</p>
           <ul className="infoList">
             <li>
               <p>
@@ -214,9 +274,9 @@ export default function DetailItem() {
           <h3>비슷한 새 상품 보기</h3>
           <ul className="similarProduct">
             <li>
-              <Image className="detailItemImg" url="productImg\\image-1700723555581.png" />
+              <Image className="detailItemImg" url="productImg\image-1700723555581.png" />
               <div>
-                <p className="similarProductPrice">235,900d원</p>
+                <p className="similarProductPrice">235,900원</p>
                 <p>
                   나이키 로말레오 4 3XD SE 올검 올흰 역도화 스쿼트화 헬스화 크로스핏화 헬스신발
                 </p>
@@ -226,9 +286,9 @@ export default function DetailItem() {
 
             </li>
             <li>
-              <Image className="detailItemImg" url="productImg\\image-1700725251398.jpg" />
+              <Image className="detailItemImg" url="productImg\image-1700725251398.jpg" />
               <div>
-                <p className="similarProductPrice">235,900d원</p>
+                <p className="similarProductPrice">235,900원</p>
                 <p>
                   나이키 로말레오 4 3XD SE 올검 올흰 역도화 스쿼트화 헬스화 크로스핏화 헬스신발
                 </p>
@@ -241,6 +301,92 @@ export default function DetailItem() {
         <div>
           <h3>상점정보</h3>
           <div>
+
+            <div className="userInfo">
+              <Image className="profileImg" url={info.userImage} />
+              <div className="storeName">
+                <Link to="#">
+                  <p>{info.seller}</p>
+                  <ul>
+                    <li>상품{info.total_pid_count}</li>
+                    <li>팔로워20</li>
+                  </ul>
+                </Link>
+
+              </div>
+            </div>
+            <div className="followBtn">
+              <Follow className="detailPageFollow" color='rgb(136,136,136)' size={18} />
+            </div>
+            <ul className="photoList">
+              {
+                shop.map((v, i) =>
+                  <li>
+                    <Link to={`/productDetail/${v.pid}`} onClick={handleClick}>
+                      <Image className="productPhoto" url={v.img} />
+                      <p><span>{v.price}</span>원</p>
+                    </Link>
+                  </li>)
+              }
+              {/* <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>90,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>600,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>70,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>50,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>100,000</span>원</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='#'>
+                  <Image className="productPhoto" url="productImg\image-1700723555581.png" />
+                  <p><span>102,000</span>원</p>
+                </Link>
+              </li> */}
+            </ul>
+
+            <div className="showMoreSeller">
+              <Link to='#'>
+                <span>{info.total_pid_count}개</span>
+                상품더보기
+                <IoIosArrowForward color="rgb(136, 136, 136" />
+              </Link>
+            </div>
+
+            <div className="btnIcon">
+              <div>
+                <WishBtn btnWish={btnWish} size={14} />
+              </div>
+              <div>
+                <ChatBtn className="btnChat" color="white" size={14} />
+              </div>
+            </div>
+
+
+
+
+
 
           </div>
         </div>

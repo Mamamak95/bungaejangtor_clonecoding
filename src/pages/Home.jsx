@@ -8,11 +8,13 @@ export default function Home(){
 
   
   return(
-    <div className="home">
-      <Banner />
-      <h3 className="product_title">오늘의 추천 상품</h3>
-      <Product />
-      <SubBar />
+    <div className="inner">
+      <div className="home">
+        <Banner />
+        <h3 className="product_title">오늘의 추천 상품</h3>
+        <Product />
+        <SubBar />
+      </div>
     </div>
   )
 }

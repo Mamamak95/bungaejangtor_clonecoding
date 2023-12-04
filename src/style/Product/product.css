@@ -9,21 +9,29 @@
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  margin-top: 12px;
-  width: 215px;
+  margin-top: 10px;
+  width: 210px;
   text-align: left;
   overflow: hidden;
 }
 
 .pro_img {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  object-fit: fill;
+}
+.pro_img img{
+  width: 100%;
+  height: 220px;
 }
 
 .pro_name {
-  font-size: 18px;
+  font-size: 15px;
   padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .pro_pr_da{
   display: flex;
   flex-wrap: wrap;
@@ -58,5 +66,4 @@
   width: 80px;
   height: 30px;
 }
-
 

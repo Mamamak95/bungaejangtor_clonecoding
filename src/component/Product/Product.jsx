@@ -3,12 +3,13 @@ import '../../style/Product/product.css';
 import ProductList from "./ProductList";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import formatRelativeDate from "../../util/date";
 
 
 export default function Product(){
   const [products, setProducts] = useState([]); 
-  const [newLimit, setNewLimit] = useState(5);
-  const [offset, setOffset] = useState(5);
+  const [newLimit, setNewLimit] = useState(10);
+  const [offset, setOffset] = useState(10);
   
   useEffect(()=>{
 
@@ -21,17 +22,16 @@ export default function Product(){
     }, []);
 
   const loadMore = () => {
-  
+
     axios({
       method:'post',
       url:`http://127.0.0.1:8000/loadMore/${offset}/${newLimit}`,
-      data: products
     })
     .then((result) => {
       console.log(JSON.stringify(result.data))
       setProducts((prevProducts) => [...prevProducts, ...result.data]);
       setNewLimit((prevLimit) => prevLimit )
-      setOffset((prevOffset) => prevOffset + 5)
+      setOffset((prevOffset) => prevOffset + 10)
     })
     .catch((err)=>console.log(err))
     
@@ -47,7 +47,7 @@ export default function Product(){
                   image={item.img}
                   name={item.productName}
                   price={item.price}
-                  date={item.regdate}
+                  date={formatRelativeDate(item.regdate)} 
                 ></ProductList>
               </Link>
             </div>

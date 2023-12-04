@@ -5,6 +5,7 @@ import * as localStorage from "../../util/localStorage.js";
 import Image from "../common/Image.jsx";
 import io from "socket.io-client";
 
+//소켓 서버연결 주소
 const socket = io("http://127.0.0.1:8000/");
 
 export default function Inner() {
@@ -14,9 +15,7 @@ export default function Inner() {
   const [roomInfo, setRoomInfo] = useState({});
   const [chatLog, setChatLog] = useState([]);
 
-  /////////////
-
-  /////////////
+  //소켓 연결 시작
   useEffect(() => {
     axios
       .post("http://127.0.0.1:8000/chat/list", { id: user })
@@ -32,7 +31,7 @@ export default function Inner() {
     handleLog();
   }, [roomInfo]);
 
-  ///////
+  //
   useEffect(() => {
     socket.on("received-message", (received) => {
       if(received) handleLog();
@@ -63,9 +62,15 @@ export default function Inner() {
       socket.emit("send-message", message);
     }
   };
+  //test create
+  const test=(e)=>{
+    axios.post('http://127.0.0.1:8000/chat/create',{uid:'user3',pid:3})
+  }
+
 
   return (
     <section className="chatList">
+      <button onClick={test} style={{'backgroud':'black','height':'100px','width':'100px','display':'block'}}></button>
       <div className="chatList_left">
         <div className="chatList_header">
           <span>설정</span>
@@ -74,6 +79,7 @@ export default function Inner() {
           </div>
         </div>
         <div className="chatList_inner">
+          
           <ul className="chatList_inner_roomList">
             {userChats.map((v) => {
               return (

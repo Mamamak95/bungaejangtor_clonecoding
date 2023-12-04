@@ -38,20 +38,23 @@ export default function Banner(){
   const translateValue = -currentImageIndex * 100;
 
 return(
-  <div className="banner">
-    <div className="banner_slider" style={{ transform: `translateX(${translateValue}%)` }}>
-      {list.map((item, index) => (
-          <img key={index + list.length} className="banner_img" src={item.banner} alt={`Banner  ${index + 1}`} />
-        ))}
+  <>
+    <div className="banner">
+      <div className="banner_slider" style={{ transform: `translateX(${translateValue}%)` }}>
+        {list.map((item, index) => (
+            <img key={index + list.length} className="banner_img" src={item.banner} alt={`Banner  ${index + 1}`} />
+          ))}
+      </div>
+      <div className="banner_controls">
+        <button className="banner_control" onClick={prevImage}>
+          <IoIosArrowBack />
+        </button>
+        <button className="banner_control" onClick={nextImage}>
+          <IoIosArrowForward />
+        </button>
+      </div>
     </div>
-    <div className="banner_controls">
-      <button className="banner_control" onClick={prevImage}>
-        <IoIosArrowBack />
-      </button>
-      <button className="banner_control" onClick={nextImage}>
-        <IoIosArrowForward />
-      </button>
-    </div>
-  </div>
+    <img className="banner_bottom" src="https://m.bunjang.co.kr/pc-static/resource/237e17f5cbe07edc8fff.png" alt="" />
+  </>
   )
 }
