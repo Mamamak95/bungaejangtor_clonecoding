@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 
-export default function ChatRoom({ roomInfo, chatLog, handleLog, handleKey }) {
+export default function ChatRoom({user, roomInfo, chatLog, handleLog, handleKey }) {
   const chatBox = useRef(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function ChatRoom({ roomInfo, chatLog, handleLog, handleKey }) {
             return (
               <li
                 className={`${
-                  roomInfo.isBuyer ^ s.isBuyerSend ? "oppo" : "me" //!(사용자가 구매자? XOR 구매자가 보냄?)
+                    user != s.sender ? "oppo" : "me" //!(사용자가 구매자? XOR 구매자가 보냄?)
                 } chat_message`}
                 key={i}
               >
