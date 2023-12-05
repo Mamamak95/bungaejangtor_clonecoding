@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .btnStyle {
   width: 100%;
   text-align: center;
@@ -40,25 +41,36 @@
   width: 32.3333%;
 }
 
-.detailItem {
+.myPageBtn a {
+  display: block;
+  padding: 20px;
+  font-weight: 800;
+  text-align: center;
+  background: rgb(255, 164, 37);
+  border: 1px solid rgb(243, 150, 20);
+  color: rgb(255, 255, 255);
+}
+
+.detailPage .detailItem {
   margin-top: 30px;
   display: flex;
   padding: 30px 0px;
   border-top: 1px solid rgb(63, 63, 63);
+  height: 440px;
 }
-.detailItem .productSwiper {
+.detailPage .detailItem .productSwiper {
   width: 40%;
   margin-right: 40px;
 }
-.detailItem .productSwiper > div {
+.detailPage .detailItem .productSwiper > div {
   width: 100%;
 }
-.detailItem .productSwiper .swiper {
+.detailPage .detailItem .productSwiper .swiper {
   height: 100%;
   overflow: visible;
 }
-.detailItem .productSwiper .swiper-button-next,
-.detailItem .productSwiper .swiper-button-prev {
+.detailPage .detailItem .productSwiper .swiper-button-next,
+.detailPage .detailItem .productSwiper .swiper-button-prev {
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -66,27 +78,27 @@
   opacity: 1;
   display: none;
 }
-.detailItem .productSwiper .on .swiper-button-next,
-.detailItem .productSwiper .on .swiper-button-prev {
+.detailPage .detailItem .productSwiper .on .swiper-button-next,
+.detailPage .detailItem .productSwiper .on .swiper-button-prev {
   display: flex;
 }
-.detailItem .productSwiper .swiper-button-next {
+.detailPage .detailItem .productSwiper .swiper-button-next {
   right: 10px;
 }
-.detailItem .productSwiper .swiper-button-next::after {
+.detailPage .detailItem .productSwiper .swiper-button-next::after {
   background-image: url(https://m.bunjang.co.kr/pc-static/resource/086e98d9e0b1bc50a763.png);
 }
-.detailItem .productSwiper .swiper-button-prev {
+.detailPage .detailItem .productSwiper .swiper-button-prev {
   left: 10px;
 }
-.detailItem .productSwiper .swiper-button-prev::after {
+.detailPage .detailItem .productSwiper .swiper-button-prev::after {
   background-image: url(https://m.bunjang.co.kr/pc-static/resource/8c3af341bcc305c7e562.png);
 }
-.detailItem .productSwiper .swiper-pagination {
+.detailPage .detailItem .productSwiper .swiper-pagination {
   top: unset;
   bottom: -25px;
 }
-.detailItem .productSwiper .swiper-pagination .swiper-pagination-bullet {
+.detailPage .detailItem .productSwiper .swiper-pagination .swiper-pagination-bullet {
   background: none;
   width: 10px;
   height: 10px;
@@ -95,77 +107,80 @@
   border-radius: 50%;
   box-sizing: border-box;
 }
-.detailItem .productSwiper .swiper-pagination .swiper-pagination-bullet-active {
+.detailPage .detailItem .productSwiper .swiper-pagination .swiper-pagination-bullet-active {
   margin-right: 10px;
   background: rgb(33, 33, 33);
   border: 0px;
 }
-.detailItem .productSwiper .detailItemImg {
+.detailPage .detailItem .productSwiper .detailItemImg {
   display: block;
   width: 100%;
   height: 100%;
 }
-.detailItem .productSwiper .detailItemImg img {
+.detailPage .detailItem .productSwiper .detailItemImg img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.detailItem > div:last-child {
+.detailPage .detailItem > div:last-child {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.detailItem > div:last-child .mainInfo {
+.detailPage .detailItem > div:last-child .mainInfo {
   padding-bottom: 30px;
   border-bottom: 1px solid rgb(238, 238, 238);
   width: 100%;
 }
-.detailItem > div:last-child .mainInfo .productName {
+.detailPage .detailItem > div:last-child .mainInfo .productName {
   font-size: 24px;
   margin-bottom: 25px;
   font-weight: 600;
   line-height: 1.4;
 }
-.detailItem > div:last-child .mainInfo .price {
+.detailPage .detailItem > div:last-child .mainInfo .price {
   display: flex;
   align-items: flex-end;
   gap: 10px;
 }
-.detailItem > div:last-child .mainInfo .price p {
+.detailPage .detailItem > div:last-child .mainInfo .price p {
   font-size: 40px;
   font-weight: 500;
 }
-.detailItem > div:last-child .mainInfo .price span {
+.detailPage .detailItem > div:last-child .mainInfo .price span {
   font-size: 28px;
   font-weight: 400;
   margin-left: 3px;
 }
-.detailItem > div:last-child .mainInfo .price .thunderImg {
+.detailPage .detailItem > div:last-child .mainInfo .price .thunderImg {
   display: inline-block;
   height: 28px;
 }
-.detailItem > div:last-child .subInfo .infoIcon {
+.detailPage .detailItem > div:last-child .subInfo .infoIcon {
   height: 30px;
   margin-top: 15px;
   margin-bottom: 25px;
   display: flex;
   justify-content: space-between;
 }
-.detailItem > div:last-child .subInfo .infoIcon div {
+.detailPage .detailItem > div:last-child .subInfo .infoIcon div {
   height: 100%;
   display: flex;
   align-items: center;
 }
-.detailItem > div:last-child .subInfo .infoIcon div p {
+.detailPage .detailItem > div:last-child .subInfo .infoIcon div p {
   display: flex;
   align-items: center;
   color: rgb(204, 204, 204);
   font-size: 16px;
   height: 100%;
 }
-.detailItem > div:last-child .subInfo .infoIcon div p::after {
+.detailPage .detailItem > div:last-child .subInfo .infoIcon div p svg {
+  margin-right: 5px;
+}
+.detailPage .detailItem > div:last-child .subInfo .infoIcon div p::after {
   content: "";
   width: 1px;
   height: 12px;
@@ -173,32 +188,32 @@
   margin-left: 10px;
   margin-right: 10px;
 }
-.detailItem > div:last-child .subInfo .infoIcon div p:last-child::after {
+.detailPage .detailItem > div:last-child .subInfo .infoIcon div p:last-child::after {
   display: none;
 }
-.detailItem > div:last-child .subInfo button {
+.detailPage .detailItem > div:last-child .subInfo button {
   color: rgb(204, 204, 204);
   font-size: 16px;
   display: flex;
   align-items: center;
 }
-.detailItem > div:last-child .subInfo img {
+.detailPage .detailItem > div:last-child .subInfo img {
   width: 21px;
   margin-right: 5px;
   vertical-align: bottom;
 }
-.detailItem > div:last-child .productCondition div {
+.detailPage .detailItem > div:last-child .productCondition div {
   display: flex;
   margin-bottom: 17px;
   font-size: 14px;
 }
-.detailItem > div:last-child .productCondition div p {
+.detailPage .detailItem > div:last-child .productCondition div p {
   position: relative;
   width: 90px;
   padding-left: 15px;
   color: rgb(153, 153, 153);
 }
-.detailItem > div:last-child .productCondition div p::before {
+.detailPage .detailItem > div:last-child .productCondition div p::before {
   content: "";
   position: absolute;
   top: 7px;
@@ -208,63 +223,110 @@
   border-radius: 50%;
   background: rgb(204, 204, 204);
 }
-.detailItem > div:last-child .productCondition div span {
+.detailPage .detailItem > div:last-child .productCondition div span {
   position: relative;
   display: flex;
+  align-items: center;
 }
-.detailItem > div:last-child .productCondition div img {
+.detailPage .detailItem > div:last-child .productCondition div img {
   margin-right: 4px;
   width: 15px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-
-.contentInfo {
+.detailPage .alreadySell p {
+  padding: 28px 0px 20px;
+  font-size: 18px;
+}
+.detailPage .alreadySell .productlist .pro {
+  display: flex;
+  width: 100%;
+  filter: none;
+}
+.detailPage .alreadySell .productlist .pro .pro_img {
+  width: 200px;
+}
+.detailPage .alreadySell .productlist .pro .pro_img img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.detailPage .alreadySell .productlist .pro .pro_comtent {
+  padding: 20px;
+}
+.detailPage .alreadySell .productlist .pro .pro_comtent .pro_name {
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+.detailPage .alreadySell .productlist .pro .pro_comtent .pro_price {
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 3px;
+  line-height: 1;
+}
+.detailPage .alreadySell .productlist .pro .pro_comtent .pro_date {
+  display: none;
+}
+.detailPage .alreadySell .productlist .pro .pro_comtent::after {
+  content: "키워드 알림 등록하기";
+  height: 40px;
+  width: 250px;
+  margin-bottom: 0px;
+  margin: 20px 0px 40px;
+  background: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  font-weight: 500;
+  font-size: 14px;
+}
+.detailPage .contentInfo {
   border-bottom: 1.5px solid black;
 }
-.contentInfo .contentInfoHeader {
+.detailPage .contentInfo .contentInfoHeader {
   display: flex;
   justify-content: flex-end;
 }
-.contentInfo .contentInfoHeader div {
+.detailPage .contentInfo .contentInfoHeader div {
   width: 25px;
   height: 25px;
   margin: 10px 5px;
 }
-.contentInfo .contentInfoHeader div img {
+.detailPage .contentInfo .contentInfoHeader div img {
   width: 100%;
   height: 100%;
   -o-object-position: center center;
      object-position: center center;
 }
-.contentInfo .contentInfoHeader div svg {
+.detailPage .contentInfo .contentInfoHeader div svg {
   width: 70%;
   height: 70%;
   margin: 3.75px auto;
   color: white;
 }
-.contentInfo .contentInfoHeader div:nth-child(2) {
+.detailPage .contentInfo .contentInfoHeader div:nth-child(2) {
   background-color: #3B5998;
 }
-.contentInfo .contentInfoHeader div:nth-child(3) {
+.detailPage .contentInfo .contentInfoHeader div:nth-child(3) {
   background-color: #55ACEE;
 }
-.contentInfo .contentInfoHeader div:last-child {
+.detailPage .contentInfo .contentInfoHeader div:last-child {
   background-color: transparent;
 }
-
-.otherProduct {
+.detailPage .otherProduct {
   display: flex;
   justify-content: space-between;
   margin: 30px 0;
 }
-.otherProduct div {
+.detailPage .otherProduct div {
   display: flex;
   align-items: center;
   font-size: 18px;
   font-weight: 600;
 }
-.otherProduct div span {
+.detailPage .otherProduct div span {
   position: relative;
   z-index: 2;
   display: flex;
@@ -278,25 +340,24 @@
   font-weight: 400;
   font-size: 16px;
 }
-.otherProduct div span img {
+.detailPage .otherProduct div span img {
   display: inline-block;
   margin-left: 1px;
 }
-
-.swiperContainer {
+.detailPage .swiperContainer {
   width: 100%;
   margin-bottom: 50px;
 }
-.swiperContainer > div {
+.detailPage .swiperContainer > div {
   height: 100%;
 }
-.swiperContainer > div .swiper-slide .detailItemImg img {
+.detailPage .swiperContainer > div .swiper-slide .detailItemImg img {
   width: 100%;
   height: 140px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.swiperContainer > div .swiper-slide .slideProduct {
+.detailPage .swiperContainer > div .swiper-slide .slideProduct {
   display: block;
   margin-top: 10px;
   width: 100%;
@@ -307,9 +368,8 @@
   line-height: 1.4;
   font-size: 13px;
 }
-
-.swiper-button-next,
-.swiper-button-prev {
+.detailPage .swiper-button-next,
+.detailPage .swiper-button-prev {
   cursor: pointer;
   z-index: 11;
   width: 40px;
@@ -323,65 +383,62 @@
   justify-content: center;
   align-items: center;
 }
-
-.swiper-button-next {
+.detailPage .swiper-button-next {
   right: 0px;
 }
-.swiper-button-next::after {
+.detailPage .swiper-button-next::after {
   content: "";
   background: url(https://m.bunjang.co.kr/pc-static/resource/593d36bc17825240e687.png) 50% 50% no-repeat;
   background-size: contain;
   width: 12px;
   height: 12px;
 }
-
-.swiper-button-prev {
+.detailPage .swiper-button-prev {
   left: 0;
 }
-.swiper-button-prev::after {
+.detailPage .swiper-button-prev::after {
   content: "";
   background: url(https://m.bunjang.co.kr/pc-static/resource/74821b5e835955696b91.png) 50% 50% no-repeat;
   background-size: contain;
   width: 12px;
   height: 12px;
 }
-
-.detailSecond {
+.detailPage .detailSecond {
   display: flex;
   margin-bottom: 50px;
 }
-.detailSecond > div {
+.detailPage .detailSecond > div {
   color: #212121;
 }
-.detailSecond > div h3 {
+.detailPage .detailSecond > div h3 {
   font-size: 16px;
   padding: 48px 0px 16px;
   border-bottom: 1px solid rgb(238, 238, 238);
 }
-.detailSecond > div:first-child {
+.detailPage .detailSecond > div:first-child {
   width: 70%;
   padding-right: 30px;
   box-sizing: border-box;
   border-right: 1px solid rgb(238, 238, 238);
 }
-.detailSecond > div:first-child p {
+.detailPage .detailSecond > div:first-child p {
   white-space: pre-wrap;
   overflow-wrap: break-word;
   margin: 15px 0px;
   line-height: 1.5;
   font-size: 13px;
 }
-.detailSecond > div:first-child .infoList {
+.detailPage .detailSecond > div:first-child .infoList {
   padding: 20px 0px;
   border-top: 1px solid rgb(238, 238, 238);
   border-bottom: 1px solid rgb(238, 238, 238);
   display: flex;
 }
-.detailSecond > div:first-child .infoList li {
+.detailPage .detailSecond > div:first-child .infoList li {
   border-right: 1px solid rgb(238, 238, 238);
   flex: 1;
 }
-.detailSecond > div:first-child .infoList li p {
+.detailPage .detailSecond > div:first-child .infoList li p {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -389,7 +446,7 @@
   font-size: 13px;
   color: rgb(178, 178, 178);
 }
-.detailSecond > div:first-child .infoList li span {
+.detailPage .detailSecond > div:first-child .infoList li span {
   font-size: 13px;
   color: rgb(102, 102, 102);
   padding: 0px 15px;
@@ -401,10 +458,10 @@
   text-align: center;
   word-break: keep-all;
 }
-.detailSecond > div:first-child .infoList li:last-child {
+.detailPage .detailSecond > div:first-child .infoList li:last-child {
   border: none;
 }
-.detailSecond > div:first-child .similarProduct {
+.detailPage .detailSecond > div:first-child .similarProduct {
   display: flex;
   -moz-column-gap: 16px;
        column-gap: 16px;
@@ -414,24 +471,24 @@
   margin-bottom: 16px;
   box-sizing: border-box;
 }
-.detailSecond > div:first-child .similarProduct li {
+.detailPage .detailSecond > div:first-child .similarProduct li {
   width: 50%;
   display: flex;
   justify-content: space-between;
   height: 128px;
 }
-.detailSecond > div:first-child .similarProduct li .detailItemImg {
+.detailPage .detailSecond > div:first-child .similarProduct li .detailItemImg {
   display: block;
   width: 35%;
   height: 100%;
 }
-.detailSecond > div:first-child .similarProduct li .detailItemImg img {
+.detailPage .detailSecond > div:first-child .similarProduct li .detailItemImg img {
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.detailSecond > div:first-child .similarProduct li > div {
+.detailPage .detailSecond > div:first-child .similarProduct li > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -439,13 +496,13 @@
   padding-left: 12px;
   box-sizing: border-box;
 }
-.detailSecond > div:first-child .similarProduct li > div .similarProductPrice {
+.detailPage .detailSecond > div:first-child .similarProduct li > div .similarProductPrice {
   color: rgb(33, 33, 33);
   font-size: 15px;
   font-weight: 700;
   margin-bottom: 6px;
 }
-.detailSecond > div:first-child .similarProduct li > div p:nth-child(2) {
+.detailPage .detailSecond > div:first-child .similarProduct li > div p:nth-child(2) {
   font-size: 14px;
   line-height: 18px;
   max-height: 36px;
@@ -458,21 +515,21 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.detailSecond > div:first-child .similarProduct li > div span {
+.detailPage .detailSecond > div:first-child .similarProduct li > div span {
   font-size: 12px;
   color: rgb(178, 178, 178);
   display: block;
 }
-.detailSecond > div:last-child {
+.detailPage .detailSecond > div:last-child {
   flex: 1;
   padding: 0 30px;
 }
-.detailSecond > div:last-child .userInfo {
+.detailPage .detailSecond > div:last-child .userInfo {
   display: flex;
   margin-top: 20px;
   margin-bottom: 16px;
 }
-.detailSecond > div:last-child .userInfo .profileImg {
+.detailPage .detailSecond > div:last-child .userInfo .profileImg {
   position: relative;
   margin-right: 16px;
   width: 48px;
@@ -482,7 +539,7 @@
   border: 1px solid #0a0a0a;
   border-radius: 50%;
 }
-.detailSecond > div:last-child .userInfo .profileImg svg {
+.detailPage .detailSecond > div:last-child .userInfo .profileImg svg {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -490,34 +547,34 @@
   width: 24px;
   height: 24px;
 }
-.detailSecond > div:last-child .userInfo .profileImg img {
+.detailPage .detailSecond > div:last-child .userInfo .profileImg img {
   border-radius: 50%;
   width: 48px;
   height: 48px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.detailSecond > div:last-child .userInfo .storeName a {
+.detailPage .detailSecond > div:last-child .userInfo .storeName a {
   display: block;
 }
-.detailSecond > div:last-child .userInfo .storeName a p {
+.detailPage .detailSecond > div:last-child .userInfo .storeName a p {
   display: block;
   margin: 4px 0px 4px;
   color: rgb(33, 33, 33);
   font-size: 15px;
 }
-.detailSecond > div:last-child .userInfo .storeName a ul {
+.detailPage .detailSecond > div:last-child .userInfo .storeName a ul {
   display: flex;
 }
-.detailSecond > div:last-child .userInfo .storeName a ul li {
+.detailPage .detailSecond > div:last-child .userInfo .storeName a ul li {
   font-size: 12px;
   color: rgb(153, 153, 153);
 }
-.detailSecond > div:last-child .userInfo .storeName a ul li:first-child {
+.detailPage .detailSecond > div:last-child .userInfo .storeName a ul li:first-child {
   margin-right: 17px;
   position: relative;
 }
-.detailSecond > div:last-child .userInfo .storeName a ul li:first-child::after {
+.detailPage .detailSecond > div:last-child .userInfo .storeName a ul li:first-child::after {
   content: "";
   position: absolute;
   top: 4px;
@@ -526,7 +583,7 @@
   height: 12px;
   border-right: 1px solid rgb(204, 204, 204);
 }
-.detailSecond > div:last-child .detailPageFollow {
+.detailPage .detailSecond > div:last-child .detailPageFollow {
   width: 100%;
   height: 32px;
   border: 1px solid rgb(238, 238, 238);
@@ -537,32 +594,32 @@
   font-size: 13px;
   border-radius: 2px;
 }
-.detailSecond > div:last-child .detailPageFollow svg {
+.detailPage .detailSecond > div:last-child .detailPageFollow svg {
   margin-right: 3px;
 }
-.detailSecond > div:last-child .photoList {
+.detailPage .detailSecond > div:last-child .photoList {
   margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 3px;
 }
-.detailSecond > div:last-child .photoList li {
+.detailPage .detailSecond > div:last-child .photoList li {
   width: calc(49% - 3px);
   margin: 0 0.5%;
   box-sizing: border-box;
 }
-.detailSecond > div:last-child .photoList li a {
+.detailPage .detailSecond > div:last-child .photoList li a {
   width: 100%;
   display: block;
   position: relative;
 }
-.detailSecond > div:last-child .photoList li a img {
+.detailPage .detailSecond > div:last-child .photoList li a img {
   width: 100%;
   height: 100px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.detailSecond > div:last-child .photoList li a p {
+.detailPage .detailSecond > div:last-child .photoList li a p {
   position: absolute;
   bottom: 0px;
   left: 0px;
@@ -575,36 +632,51 @@
   font-size: 12px;
   background: rgba(0, 0, 0, 0.25);
 }
-.detailSecond > div:last-child .photoList li a p span {
+.detailPage .detailSecond > div:last-child .photoList li a p span {
   font-weight: 600;
   margin-right: 3px;
 }
-.detailSecond > div:last-child .showMoreSeller {
+.detailPage .detailSecond > div:last-child .showMoreSeller {
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid rgb(238, 238, 238);
 }
-.detailSecond > div:last-child .showMoreSeller a {
+.detailPage .detailSecond > div:last-child .showMoreSeller a {
   font-size: 13px;
   display: flex;
   align-items: center;
   color: rgb(102, 102, 102);
 }
-.detailSecond > div:last-child .showMoreSeller a span {
+.detailPage .detailSecond > div:last-child .showMoreSeller a span {
   color: rgb(247, 47, 51);
   margin-right: 3px;
 }
-.detailSecond > div:last-child .showMoreSeller a svg {
+.detailPage .detailSecond > div:last-child .showMoreSeller a svg {
   margin: 3px 0 0 3px;
 }
-.detailSecond > div:last-child .btnIcon {
+.detailPage .detailSecond > div:last-child .btnIcon {
   padding: 16px 0;
 }
-.detailSecond > div:last-child .btnIcon > div {
+.detailPage .detailSecond > div:last-child .btnIcon > div {
   width: 49%;
 }
-.detailSecond > div:last-child .btnIcon > div span {
+.detailPage .detailSecond > div:last-child .btnIcon > div span {
   font-size: 14px;
+}
+.detailPage .callBox {
+  margin: 40px 0px 40px;
+  background: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  font-weight: 500;
+}
+.detailPage .callBox svg {
+  margin-right: 5px;
 }/*# sourceMappingURL=detailItem.css.map */
