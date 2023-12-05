@@ -115,11 +115,11 @@ export default function ProductRegister() {
 
     // }
     if (name === 'img') {
-      const files = e.target.files;
-    
-      if (files && thumnail.length <= 4) {
+      if (e.target.files.length <= 5 && thumnail.length <= 5) {
+        const files = e.target.files;
+
         setFormImg([...formImg, ...files]);
-    
+
         for (const file of Object.values(files)) {
           const reader = new FileReader();
           reader.onloadend = () => {
@@ -127,12 +127,14 @@ export default function ProductRegister() {
           };
           reader.readAsDataURL(file);
         }
-    
+
         onOutline('', 4);
         noticeTxt(false, 4);
       } else {
         alert('이미지는 5장까지 업로드 가능합니다.');
       }
+
+
     }
     if (name === 'productName') { // 상품이름 유효성 검사
       let txtNum = value.length;
@@ -203,8 +205,8 @@ export default function ProductRegister() {
     for (let i = 0; i < formImg.length; i++) {
       formData.append('images', formImg[i]);
     }
-
     formData.append('form', JSON.stringify(form))
+
     axios({
       method: 'post',
       url: `http://127.0.0.1:8000/product/new/${userInfo.uid}`,
