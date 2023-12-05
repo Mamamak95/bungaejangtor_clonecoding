@@ -189,6 +189,10 @@ header{
         justify-content: space-between;
         width: 100%;
 
+        button {
+          padding: 0;
+        }
+
         /* 헤더메인부분의 오른쪽에 위치한 메뉴들 판매하기, 내상점, 번개톡 -------------------------------------------------------------- */
         .HeaderMainMenu {
           display:flex;

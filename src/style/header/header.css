@@ -161,6 +161,9 @@ header .HeaderMain .headerMainWrap .HeaderContents {
   width: 100%;
   /* 헤더메인부분의 오른쪽에 위치한 메뉴들 판매하기, 내상점, 번개톡 -------------------------------------------------------------- */
 }
+header .HeaderMain .headerMainWrap .HeaderContents button {
+  padding: 0;
+}
 header .HeaderMain .headerMainWrap .HeaderContents .HeaderMainMenu {
   display: flex;
   /* 헤더메인부분 오른쪽 위치한 메뉴 판매하기, 내상점 -------------------------------------------------------------- */

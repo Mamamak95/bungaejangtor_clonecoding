@@ -6,16 +6,41 @@ import axios from 'axios';
 export default function SignUp(){
   const navigate = useNavigate();
   const [signInfo, setSignInfo] = useState({uid : "", pw : "", pwcheck : "", name : "", email : "", tel : ""})
-  const [checkError, setCheckError] = useState('');
-  // setCheckError('특수문자 사용은 불가능하며 영문자(대소문자), 숫자를 혼합하여 6 ~ 16 자로 입력해주세요.')
 
+  /* 아이디 중복 확인 */
+  const [idCheckBtn, setIdCheckBtn] = useState(0);
   const [idBlurCheck, setIdBlurCheck] = useState('');
+  const [idChangeCheck, setIdChangeCheck] = useState(false);
+
+  const [idChecked, setIdChecked] = useState(false)
+
+  /* 비밀번호 중복 확인, 비밀번호 가리기 토글 */
+  const [pwLengthCheck, setPwLengthCheck] = useState('');
+  const [pwMixCheck, setPwMixCheck] = useState('');
+  const [pwSameCheck, setPwSameCheck] = useState('');
+  const [pwLookToggle, setPwLookToggle] = useState(false);
+  const [pwLookCheckToggle, setPwLookCheckToggle] = useState(false);
+
+  /* 닉네임 체크 */
+  const [nameCheck, setNameCheck] = useState('');
+
+  /* 폰번호 체크, 폰번호 중복 시 회원가입 막기 */
+  const [phoneCheck, setPhoneCheck] = useState('');
+  const [phoneSame, setPhoneSame] = useState(false);
 
   /* 폼 체크박스 */
   const [isSnsChecked, setIsSnsChecked] = useState(false);
   const [isEmailChecked, setIsEmailChecked] = useState(false);
 
-  /* 폼 체크박스 */
+  /* 비밀번호 가리기 토글 아이콘 */
+  const handlePwLookToggle = (e) => {
+    setPwLookToggle(!pwLookToggle)
+  }
+  const handlePwLookCheckToggle = (e) => {
+    setPwLookCheckToggle(!pwLookCheckToggle)
+  }
+
+  /* 폼 체크박스 체크 */
   const handleSnsCheckChange = () => {
     setIsSnsChecked(!isSnsChecked);
   };
@@ -31,7 +56,6 @@ export default function SignUp(){
   const inputNicName = useRef(null)
   const inputEmail = useRef(null)
   const inputPhone = useRef(null)
-  const idCheckP = useRef(null)
 
   /* 회원가입 확인 or 엔터 */
   const handleSubmit = (e) => {
@@ -57,7 +81,7 @@ export default function SignUp(){
       alert('이메일을 입력해주세요.')
       return inputEmail.current.focus();
     }
-    if(signInfo.tel === ''){
+    if(inputPhone === ''){
       alert('폰번호를 입력해주세요.')
       return inputPhone.current.focus();
     }
@@ -70,15 +94,44 @@ export default function SignUp(){
       return inputPhone.current.focus();
     }
 
+    // 아이디 중복 확인 후 아이디를 
+    if(!idChangeCheck){
+      alert('아이디 중복 체크를 다시 해주세요')
+      inputId.current.focus();
+      return;
+    }
+
+
+    let signTel = signInfo.tel
+
     axios
-    .post('http://localhost:8000/sign', signInfo)
+    .get(`http://127.0.0.1:8000/sign/user/${signTel}`)
     .then(data => {
-      if(data.data === 'good'){
-        alert('회원가입 되셨습니다.')
-        navigate('/')
+      console.log(data.data);
+      if(data.data.cnt === 1){
+        alert('이미 등록된 폰번호 입니다.')
+        setPhoneSame(false)
+        return inputPhone.current.focus();
+      } else {
+        setPhoneSame(true);
       }
     })
     .catch(err => console.log(err))
+
+
+    if(phoneSame && idChecked){ 
+      axios
+      .post('http://localhost:8000/sign', signInfo)
+      .then(data => {
+        if(data.data === 'good'){
+          alert('회원가입 되셨습니다.')
+          navigate('/')
+        }
+      })
+      .catch(err => console.log(err))
+    } else if(!idChecked){
+      inputId.current.focus();
+    }
   }
 
   /* 취소 버튼 클릭 시 입력한 정보 초기화, 각 정보입력 input 들에게 value 값을 줘야함 */
@@ -88,55 +141,62 @@ export default function SignUp(){
     window.location.reload();
   }
 
+  /* 각 input 의 name, value 구조분해, 아이디 체킹 */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSignInfo({...signInfo, [name] : value})
 
-    // 아이디 중복 체크
-    // if(name === 'uid' && value !== ''){
-
-      let length = e.target.value.length;
-
-      // axios
-      // .get(`http://127.0.0.1:8000/sign/${value}`)
-      // .then(data => {
-        // if((length < 4) && ((data.data.cnt === 1) || (data.data.cnt === 0))) {
-        //   setCheckError('');
-        // } else if((data.data.cnt === 0) && ((length > 4 || length < 16) && (!/^[a-zA-Z0-9]*$/.test(e.target.value) )) || (length > 16)){
-        //   setCheckError('사용 불가능한 아이디 입니다.')
-        // } else if ((data.data.cnt === 0) ){
-        //   setCheckError('사용 가능한 아이디 입니다.')
-        // } else if(data.data.cnt === 1){
-        //   setCheckError('이미 사용중인 아이디 입니다.');
-        // }
-    //   })
-    //   .catch((err) => console.log(err))
-    // } else if(name === 'uid' && value === ''){
-    //   setCheckError('');
-    // }
+    if(name === 'uid'){
+      setIdChangeCheck(false)
+    }
     
   }
 
   /* 아이디 중복 체크 버튼 */
   const handleDuplication = (e) => {
     let signUid = signInfo.uid;
+    let idValue = inputId.current.value;
 
+    if((idValue.length < 4 || idValue.length > 16) && (!/^[a-zA-Z0-9]*$/.test(idValue))){
+      alert('사용할 수 없는 아이디 입니다.')
+      setIdBlurCheck('이미 중복된 아이디가 있습니다.')
+      return inputId.current.focus();
+    } 
+
+    // setIdCheckBtn 값이 2 이면 중복된아이디, 1 이면 사용가능아이디
     axios
     .get(`http://127.0.0.1:8000/sign/${signUid}`)
     .then(data => {
       if(data.data.cnt === 1){
         alert('이미 존재하는 아이디 입니다.')
+        setIdCheckBtn(2)
+        setIdChangeCheck(false)
+        setIdChecked(false);
+        setIdBlurCheck('이미 중복된 아이디가 있습니다.')
         return inputId.current.focus();
       } else if(data.data.cnt === 0){
-        alert('사용 가능한 아이디 입니다.')
+        alert('사용할 수 있는 아이디 입니다.')
+        setIdCheckBtn(1)
+        setIdChangeCheck(true)
+        setIdBlurCheck('사용 가능한 아이디 입니다.')
+        setIdChecked(true);
+        inputId.current.style.borderBottom = '1px solid #888';
         return inputPass.current.focus();
-      } 
+      }
     })
     .catch(err => console.log(err))
   }
 
+  /* input 포커싱 */
+  const handleFocusInput = (e) => {
+    e.target.style.outline = 'none';
+    e.target.style.borderBottom = '1px solid red';
+  }
+
   /* 아이디 입력란에서 벗어났을때 유효성 체크 */
   const handleBlurUid = (e) => {
+    e.target.style.outline = 'none';
+    e.target.style.borderBottom = '1px solid red';
     
     if (e.target.value.length === 0) {
       setIdBlurCheck('사용하실 아이디를 입력해주세요.')
@@ -144,46 +204,143 @@ export default function SignUp(){
       setIdBlurCheck('4 ~ 16 자 까지 사용 가능합니다.')
     } else if(!/^[a-zA-Z0-9]*$/.test(e.target.value)){
       setIdBlurCheck('아이디는 한글 및 특수문자 사용이 불가능합니다.');
+    }/*  else if(idCheckBtn === 0){
+      setIdBlurCheck('아이디 중복 확인을 해주세요.')
+    } */
+  }
+
+  /* 비밀번호 입력란 길이 및 영문,특수문자,숫자 사용 체크 */
+  const handleBlurPw = (e) => {
+    e.target.style.outline = 'none';
+    e.target.style.borderBottom = '1px solid red';
+
+    if (e.target.value.length === 0) {
+      setPwLengthCheck('사용하실 비밀번호를 입력해주세요.')
+    } else if(e.target.value.length < 4 || e.target.value.length > 16 ){
+      setPwLengthCheck('4 ~ 16 자 까지 사용 가능합니다.')
+    } else if(e.target.value.length > 4 || e.target.value.length < 16){
+      setPwLengthCheck('')
+      e.target.style.borderBottom = '1px solid #888';
+    }
+    
+    if(!/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/.test(e.target.value)){
+      setPwMixCheck('영문, 특수문자, 숫자를 각 1개 이상씩 혼합해야 합니다.');
     } else {
-      setIdBlurCheck('')
+      setPwMixCheck('사용 가능한 비밀번호 입니다.')
+      e.target.style.borderBottom = '1px solid #888';
     }
   }
 
+  /* 비밀번호 확인 체크 */
+  const handleBlurPwSame = (e) => {
+    e.target.style.outline = 'none';
+    e.target.style.borderBottom = '1px solid red';
+
+    if(e.target.value === '') {
+      e.target.style.borderBottom = '1px solid red';
+    } else if(inputPass.current.value === e.target.value){
+      e.target.style.borderBottom = '1px solid #888';
+      setPwSameCheck('위 입력한 비밀번호를 올바르게 입력하셨습니다.')
+    } else if(inputPass.current.value !== e.target.value){
+      e.target.style.borderBottom = '1px solid red';
+      setPwSameCheck('위 입력하신 비밀번호와 일치하지 않습니다.')
+    } 
+  }
+
+  /* 닉네임 체크 */
+  const handleBlurName = (e) => {
+    e.target.style.outline = 'none';
+    e.target.style.borderBottom = '1px solid red';
+
+    if(inputNicName.current.value === ''){
+      setNameCheck('닉네임을 입력해주세요.')
+    } else {
+      setNameCheck('올바르게 입력하셨습니다.')
+      e.target.style.borderBottom = '1px solid #888';
+    }
+    
+  }
+
+  /* 폰번호 체크 */
+  const handleBlurPhone = (e) => {
+    e.target.style.outline = 'none';
+    e.target.style.borderBottom = '1px solid red';
+
+    if(inputPhone.current.value === ''){
+      setPhoneCheck('폰번호를 입력해주세요.')
+    } else if(!/^[0-9]+$/.test(inputPhone.current.value)){
+      setPhoneCheck('숫자만 입력해주세요.')
+    } else if(inputPhone.current.value.length < 10 || inputPhone.current.value.length > 11){
+      setPhoneCheck('번호를 재확인 해주세요.')
+    } else {
+      setPhoneCheck('올바른 양식 입니다.')
+      e.target.style.borderBottom = '1px solid #888';
+    }
+  }
 
   return(
     <div className="signup">
       <h2 className="signtitle">회원가입</h2>
+      <p className="signsubtitle">번개장터 계정으로 사용하실 회원정보를 입력해 주세요</p>
       <form className="signForm" onSubmit={handleSubmit}>
         <div className="signId">
-          <label htmlFor="uid">아이디</label>
-          <input type="text" name="uid" value={signInfo.uid} ref={inputId} onChange={handleChange} onBlur={handleBlurUid} placeholder="아이디를 입력해주세요."/>
+          <input type="text" name="uid" placeholder="아이디를 입력해주세요."
+            value={signInfo.uid} 
+            ref={inputId}
+            onFocus={handleFocusInput}
+            onBlur={handleBlurUid}
+            onChange={handleChange}
+          />
           <button type="button" className="idoverlapcheck" onClick={handleDuplication}>아이디 중복 확인</button>
-          { idBlurCheck && <p style={{ color: 'red' }}>({idBlurCheck})</p> }
+          { idBlurCheck && <p className="inputid">* {idBlurCheck}</p> }
         </div>
 
         <div className="signpass">
-          <label htmlFor="pw">비밀번호</label>
-          <input type="password" name="pw" value={signInfo.pw} ref={inputPass} onChange={handleChange} placeholder="비밀번호를 입력해주세요."/>
-          <p>6 ~ 16 자까지 영문자(대소문자), 숫자 및 특수문자 사용 가능합니다</p>
-          <p>사용 가능한 비밀번호 입니다.</p>
-          <p>사용 불가능한 비밀번호 입니다.</p>
+          <input name="pw" placeholder="비밀번호를 입력해주세요."
+            type={pwLookToggle ? 'text' : 'password'}
+            value={signInfo.pw} 
+            ref={inputPass}
+            onFocus={handleFocusInput}
+            onBlur={handleBlurPw}
+            onChange={handleChange}
+          />
+          { !pwLookToggle ? <i class="fa-regular fa-eye" onClick={handlePwLookToggle}></i> : <i class="fa-regular fa-eye-slash" onClick={handlePwLookToggle}></i> }
+          { pwLengthCheck && <p style={{ color: 'red' }}>* {pwLengthCheck}</p> }
+          { pwMixCheck && <p style={{ color: 'red' }}>* {pwMixCheck}</p> }
         </div>
 
         <div className="signpasscheck">
-          <label htmlFor="pwcheck">비밀번호 확인</label>
-          <input type="password" name="pwcheck" value={signInfo.pwcheck} ref={inputPassCheck} onChange={handleChange}/>
-          <p>위 입력한 비밀번호를 올바르게 입력하셨습니다.</p>
-          <p>위 입력한 비밀번호와 일치하지 않습니다.</p>
+          <input name="pwcheck" placeholder="비밀번호를 확인해주세요."
+            type={pwLookCheckToggle ? 'text' : 'password'}
+            value={signInfo.pwcheck}
+            onFocus={handleFocusInput}
+            onBlur={handleBlurPwSame}
+            onChange={handleChange} 
+            ref={inputPassCheck} 
+          />
+          { !pwLookCheckToggle ? <i class="fa-regular fa-eye" onClick={handlePwLookCheckToggle}></i> : <i class="fa-regular fa-eye-slash" onClick={handlePwLookCheckToggle}></i> }
+          {/* <i class="fa-regular fa-eye-slash"></i> */}
+          { pwSameCheck && <p style={{ color: 'red' }}>* {pwSameCheck}</p> }
         </div>
 
         <div className="signnicname">
-          <label htmlFor="name">닉네임</label>
-          <input type="text" name="name" value={signInfo.name} ref={inputNicName} onChange={handleChange} placeholder="닉네임을 입력해주세요."/>
+          <input type="text" name="name" placeholder="닉네임을 입력해주세요."
+            value={signInfo.name} 
+            ref={inputNicName}
+            onFocus={handleFocusInput}
+            onBlur={handleBlurName}
+            onChange={handleChange} 
+          />
+          { nameCheck && <p style={{ color: 'red' }}>* {nameCheck}</p> }
         </div>
 
         <div className="signemail">
-          <label htmlFor="email">이메일</label>
-          <input type="text" name="email" value={signInfo.email} ref={inputEmail} onChange={handleChange} placeholder="이메일을 입력해주세요."/>
+          <input type="text" name="email" placeholder="이메일을 입력해주세요."
+            value={signInfo.email} 
+            ref={inputEmail}
+            onFocus={handleFocusInput}
+            onChange={handleChange} 
+          />
           <select className="signemailselect">
             <option>naver.com</option>
             <option>daum.net</option>
@@ -192,8 +349,15 @@ export default function SignUp(){
         </div>
         
         <div className="signphone">
-          <label htmlFor="tel">휴대폰</label>
-          <input type="number" name="tel" value={signInfo.tel} ref={inputPhone} onChange={handleChange} placeholder="폰번호를 입력해주세요."/> 
+          <input type="tel" name="tel" placeholder="폰번호를 입력해주세요."
+            value={signInfo.tel} 
+            ref={inputPhone}
+            onFocus={handleFocusInput}
+            onBlur={handleBlurPhone}
+            onChange={handleChange}
+          /> 
+          {/* { !isPhoneVal ? <p style={{ color: 'red' }}>숫자만 입력해주세요.</p> : '' } */}
+          { phoneCheck && <p style={{ color: 'red' }}>* {phoneCheck}</p> }
           <div className="signphonecheckbox">
             <p>
               <input type="checkbox" name="snscheck" checked={isSnsChecked} onChange={handleSnsCheckChange}/><label>SNS 수신 허용</label>
@@ -207,7 +371,6 @@ export default function SignUp(){
         <div className="signcheckbar">
           <div className="signcheckBtn">
             <button type="button" className="signcancel" onClick={handleReset}>취소</button>
-            <div></div>
             <button className="signcheck">확인</button>
           </div>
         </div>
