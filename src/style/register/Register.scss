@@ -1,7 +1,6 @@
-// .inner {
-//   width: 60%;
-//   margin: 0 auto;
-// }
+@use '../mixin' as m;
+
+
 
 .photoPreview {
   display: flex;
@@ -21,6 +20,10 @@
     width: 202px;
     height: 202px;
     margin: 5px;
+    @media #{m.$max-lg} {
+      width: 160px;
+      height: 160px;
+    }
 
     img {
       width: 100%;
@@ -63,10 +66,22 @@
   align-items: center;
   border-bottom: 2px solid rgb(25, 25, 25);
 
+
+
   span {
     color: rgb(216, 12, 24);
     font-size: 1rem;
     margin-left: 2rem;
+  }
+
+  @media #{m.$max-lg} {
+    height: 80px;
+    font-size: 20px;
+
+    span {
+      font-size: 0.8rem;
+      margin-left: 1rem;
+    }
   }
 }
 
@@ -75,14 +90,20 @@ fieldset .inputContainer:nth-child(2) label::after {
 }
 
 fieldset {
+  width: 100%;
 
   .inputContainer {
     display: flex;
+    width: 100%;
     padding: 2rem 0;
     border-bottom: 1px solid rgb(218, 218, 218);
 
     &:last-child {
       margin-bottom: 50px;
+      @media #{m.$max-sm} {
+        margin-bottom: 15px;
+      }
+
     }
 
     .formRadio {
@@ -149,6 +170,12 @@ fieldset {
       position: relative;
       width: calc(100% - 200px);
 
+      @media #{m.$max-lg} {
+        width: 82%;
+        padding-left: 8px;
+        box-sizing: border-box;
+      }
+
       .notice {
         display: block;
         width: 100%;
@@ -183,6 +210,11 @@ fieldset {
         font-weight: 400;
         color: rgb(216, 12, 24);
 
+        @media #{m.$max-sm} {
+          font-size: 14px;
+          margin-top: 1rem;
+        }
+
         span {
           font-weight: 600;
         }
@@ -201,6 +233,24 @@ fieldset {
         align-items: center;
         cursor: pointer;
 
+     
+
+        @media #{m.$max-lg} {
+          font-size: 12px;
+          flex-wrap: wrap;
+          margin-right: 10px;
+          &.radioPrice {
+            flex-wrap: nowrap;
+          }
+          &.productRadio {
+            font-size: 14px;
+          }
+
+          span {
+            width: 100%;
+            font-size: 12px;
+          }
+        }
 
 
         &.productRadio {
@@ -218,7 +268,13 @@ fieldset {
             font-size: 14px;
             margin-top: 3px;
             color: rgb(102, 102, 102);
+
+            @media #{m.$max-sm} {
+              font-size: 12px;
+            }
+
           }
+
 
 
 
@@ -249,12 +305,20 @@ fieldset {
         font-weight: 400;
         line-height: 150%;
         color: rgb(153, 153, 153);
-
         span {
           display: inline-block;
           margin-top: 8px;
           font-size: 12px;
         }
+        @media #{m.$max-lg} {
+          font-size: 12px;
+          span{
+            margin-top: 6px;
+            font-size: 10px;
+          }
+        }
+
+
       }
 
     }
@@ -281,15 +345,24 @@ fieldset {
       width: 400px;
       margin-bottom: 10px;
 
+      @media #{m.$max-lg} {
+        width: 100%;
+
+      }
+
       &::after {
         content: '원';
         position: absolute;
         right: 14px;
         top: 14px;
-
         font-size: 16px;
         font-weight: 400;
         color: rgb(153, 153, 153);
+
+        @media #{m.$max-sm} {
+          font-size: 12px;
+        }
+
       }
 
       &.quantity::after {
@@ -307,6 +380,11 @@ fieldset {
 
         #productName {
           width: 90%;
+          @media #{m.$max-lg} {
+            width: 87%;
+            font-size: 12px;
+          }
+
         }
 
 
@@ -315,6 +393,13 @@ fieldset {
           width: 10%;
           line-height: 45px;
           text-align: right;
+
+          @media #{m.$max-lg} {
+            width: 13%;
+            font-size: 12px;
+          
+          }
+
         }
 
 
@@ -343,6 +428,10 @@ fieldset {
           color: rgb(99, 99, 99);
           padding: 0.5rem 0;
 
+          @media #{m.$max-sm} {
+            font-size: 12px;
+          }
+
           .categoryNon {
             position: absolute;
             left: 50%;
@@ -351,6 +440,12 @@ fieldset {
             font-size: 16px;
             font-weight: 400;
             color: rgb(153, 153, 153);
+            text-align: center;
+
+            @media #{m.$max-sm} {
+              font-size: 14px;
+            }
+
           }
 
           &:nth-child(2) {
@@ -367,6 +462,10 @@ fieldset {
             padding-left: 15px;
             cursor: pointer;
             font-weight: 500;
+
+            @media #{m.$max-lg} {
+              height: auto;
+            }
 
             &:hover {
               background-color: #cfcfcf;
@@ -386,6 +485,16 @@ fieldset {
           display: flex;
           margin-bottom: 15px;
 
+          @media #{m.$max-lg} {
+            flex-wrap: wrap;
+            justify-content: center;
+
+            li {
+              margin: 8px 0;
+              width: 49%;
+            }
+          }
+
           li {
             width: 100px;
             height: 50px;
@@ -397,6 +506,8 @@ fieldset {
             border: 1px solid rgb(204, 204, 204);
             margin-right: 1rem;
             border-radius: 2px;
+
+
           }
         }
 
@@ -433,6 +544,37 @@ fieldset {
       color: rgb(25, 25, 25);
       line-height: 45px;
 
+      @media #{m.$max-lg} {
+        display: flex;
+      }
+
+      &.imgTitle {
+        @media #{m.$max-lg} {
+          display: block;
+          margin-top: 10px;
+          line-height: 20px;
+
+          .red {
+            display: none;
+          }
+
+          small {
+            line-height: 20px;
+
+          }
+        }
+
+      }
+
+      @media #{m.$max-lg} {
+        font-size: 16px;
+      }
+
+      @media #{m.$max-lg} {
+        font-size: 14px;
+        width: 18%;
+      }
+
       small {
         color: rgb(178, 178, 178);
         font-size: 16px;
@@ -440,6 +582,14 @@ fieldset {
         line-height: 42px;
         margin-left: 0.25rem;
         vertical-align: top;
+
+        @media #{m.$max-lg} {
+          font-size: 14px;
+        }
+
+        @media #{m.$max-sm} {
+          font-size: 12px;
+        }
       }
 
       span {
@@ -463,6 +613,10 @@ fieldset {
       border: 1px solid rgb(204, 204, 204);
       background: rgb(250, 250, 250);
       margin: 5px;
+      @media #{m.$max-lg} {
+        width: 160px;
+        height: 160px;
+      }
 
       &.on {
         outline: 1px solid rgb(245, 126, 0) !important;
@@ -496,6 +650,10 @@ fieldset {
           color: rgb(102, 102, 102);
           font-size: 16px;
           margin-top: 13px;
+          @media #{m.$max-sm} {
+            font-size: 14px;
+          }
+    
         }
       }
     }
@@ -507,6 +665,12 @@ fieldset {
       line-height: 180%;
       font-size: 14px;
       font-weight: 400;
+
+      @media #{m.$max-lg} {
+        font-size: 12px;
+        line-height: 150%;
+      }
+
     }
 
 
@@ -530,7 +694,13 @@ form {
     box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px;
     z-index: 10;
 
+    @media #{m.$max-lg} {
+      width: 100%;
+    }
+
     ul {
+
+
       display: flex;
       height: 100%;
       -webkit-box-pack: end;
@@ -569,6 +739,20 @@ form {
           }
         }
       }
+
+      @media #{m.$max-lg} {
+          gap: 0;
+          justify-content: center;
+          li{
+            margin: 0 5%;
+          }
+          button{
+            padding: 10px 20px;
+            font-size: 14px;
+    
+          }
+      }
+
     }
   }
 }

@@ -8,7 +8,7 @@ import * as localStorage from '../util/localStorage';
 import NotFound from './NotFound';
 
 export default function ProductRegister() {
-  const userInfo = localStorage.getUser();
+  const userInfo = localStorage.getUser() ? localStorage.getUser() : '';
 
   // 초기 위치 정보 (나중에 API 데이터로 변경될 수 있음)
   let place = '경기도 성남시 중원구 성남동'
@@ -228,11 +228,11 @@ export default function ProductRegister() {
 
     <>
       {userInfo.uid ?
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}  >
           <fieldset className="inner">
             <h2 className="ProductRegisterTitle">기본정보<span>*필수항목</span></h2>
             <div className="inputContainer">
-              <p className="inputTitle">상품이미지<span className="red">*</span><small>({formImg.length}/5)</small></p>
+              <p className="inputTitle imgTitle">상품이미지<span className="red">*</span><small>({formImg.length}/5)</small></p>
               <div className="imageInputBox">
                 <span id="imageInput" className={outline[4]}>
                   <input type="file" name='img' ref={inputImg} accept="image/jpg, image/jpeg, image/png" multiple onChange={(e) => {
@@ -335,11 +335,11 @@ export default function ProductRegister() {
                     {notice[1] && <><i className="xi-ban"></i>100원 이상 입력해주세요.</>}
                   </span>
                 </p>
-                <div className="formRadio">
-                  <label for="include" >
+                <div className="formRadio ">
+                  <label for="include" className="radioPrice">
                     <input id="include" type="radio" name="deliver" checked={!deliverPrice} onChange={() => setDeliverPrice(false)} />배송비포함
                   </label>
-                  <label for="notInclude" >
+                  <label for="notInclude" className="radioPrice">
                     <input id="notInclude" type="radio" name="deliver" onChange={() => setDeliverPrice(true)} />배송비별도
                   </label>
                 </div>
