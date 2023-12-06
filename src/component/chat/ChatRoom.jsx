@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 
-export default function ChatRoom({user, roomInfo, chatLog, handleLog, handleKey }) {
+export default function ChatRoom({user, roomInfo, chatLog, handleKey}) {
   const chatBox = useRef(null);
 
   useEffect(() => {
@@ -12,11 +12,10 @@ export default function ChatRoom({user, roomInfo, chatLog, handleLog, handleKey 
     <div className="chatList_right">
       <div className="chatRoom_header">
         <span>{roomInfo.oppoName}</span>
-        <button onClick={handleLog}>새로고침</button>
       </div>
 
       <ul className="chatLog" ref={chatBox}>
-        {chatLog.length != 0 ? (
+        {roomInfo.crid ? (
           chatLog.map((s, i) => {
             return (
               <li
@@ -25,6 +24,7 @@ export default function ChatRoom({user, roomInfo, chatLog, handleLog, handleKey 
                 } chat_message`}
                 key={i}
               >
+                {!s.isRead?<div className="readMark">안읽음</div>:<></>}
                 <span>{s.content}</span>
                 <div>{s.date}</div>
               </li>
@@ -42,7 +42,7 @@ export default function ChatRoom({user, roomInfo, chatLog, handleLog, handleKey 
         )}
       </ul>
 
-      {chatLog.length != 0?<form className="chatSend">
+      {roomInfo.crid?<form className="chatSend">
         <svg
           width="22"
           height="22"
@@ -62,6 +62,7 @@ export default function ChatRoom({user, roomInfo, chatLog, handleLog, handleKey 
           rows="2"
           maxLength={100}
           onKeyDown={handleKey}
+          ref={(input)=>input&&input.focus()}
         ></textarea>
 
         <button></button>
