@@ -153,15 +153,17 @@ export default function ProductRegister() {
       if (parseInt(priceNum) < 100) {
         onOutline('on', 1)
         noticeTxt(true, n)
+
       } else {
         onOutline('', 1)
         noticeTxt(false, n)
-      }
-      if (!checkNum.test(priceNum)) {
         setForm({ ...form, 'price': '' });
+
+      }
+      if (checkNum.test(priceNum)) {
+        setForm({ ...form, 'price': parseInt(priceNum) });
       }
 
-      setForm({ ...form, 'price': priceNum !== '' ? parseInt(priceNum) : '' });
     }
 
     if (name === 'content') {
