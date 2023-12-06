@@ -5,7 +5,6 @@
   border-bottom: 1px solid #ddd;
 }
 .footerTop .footerMenu {
-  width: 68%;
   height: 60px;
   margin: 0 auto;
   display: flex;
@@ -40,7 +39,6 @@
 
 /* footerMainContents */
 .footerMainContents {
-  width: 68%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -119,7 +117,6 @@
 }
 
 .term {
-  width: 68%;
   margin: 0 auto;
   padding: 30px 0;
   display: flex;

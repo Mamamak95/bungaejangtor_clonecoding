@@ -2,7 +2,7 @@
 /* 헤더 -------------------------------------------------------------- */
 header{
   position: sticky;
-  top:-38px;
+  top:-40px;
   z-index: 110;
 
   /* 헤더탑 -------------------------------------------------------------- */
@@ -30,7 +30,6 @@ header{
 
     /* 헤더탑의 너비를 설정하기 위해서 감싸는 wrap 태그 -------------------------------------------------------------- */
     .headerTopWrap {
-      width: 68%;
       margin:0 auto;
       display:flex;
       justify-content: space-between;
@@ -178,7 +177,6 @@ header{
 
     /* 헤더메인의 너비를 설정하기 위해 감싸는 wrap -------------------------------------------------------------- */
     .headerMainWrap {
-      width: 68%;
       margin:0 auto;
       display:flex;
       flex-wrap: wrap;
@@ -258,6 +256,7 @@ header{
           display:flex;
           align-items: center;
           padding: 0 16px;
+          position: relative;
 
           .search {
             width: 100%;
@@ -296,12 +295,14 @@ header{
         font-weight: 600;
 
         .categoryMenu {
-          width: 20px;
-          height: 16px;
+          font-size: 1.5rem;
           margin-right: 20px;
+          position: relative;
+          padding: 24px 10px 24px 0;
 
           &:hover {
             cursor: pointer;
+            color:red;
           }
         }
 
