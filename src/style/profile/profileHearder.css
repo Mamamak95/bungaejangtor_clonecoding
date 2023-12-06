@@ -1,66 +1,88 @@
-.ph_haerder{
+.pro_header{
+  border: .5px solid #eee;
   width: 100%;
-  border: 1px solid red;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.gray-box {
-  border: 1px solid red;
-  width: 250px;
-  height: 250px;
-  background-color: #ccc;
-  padding: 10px;
+  height: 300px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  line-height: 35px;
+  margin: 20px auto;
+  color: #555;
 }
 
-.stars{
-  display: flex;
-  margin-left: 20px;
+.left_box{
+  width: 30%;
+  height: 100%;
+  /* min-width: 180px; */
+  background: #ccc;
+  float: left;
+  position: relative;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
-.store{
-  margin-left: 50px;
+.inline{
+  display: inline;
+  box-sizing: border-box;
+}
+
+.stor{
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+
+.stor_but{
+  border: 1px solid #eee;
+  border-radius: 5px;
+  width: 120px;
+  height: 40px;
 }
 
 
-.white_box {
+/* right_box */
+.right_box{
+  width: 70%;
+  height: 100%;
+  /* min-width: 430px; */
+  float: left;
+  padding: 20px;
+  box-sizing: border-box;
   border: 1px solid red;
-  padding: 10px;
-  width: 750px;
-  height: 250px;
-  background-color: white;
 }
 
-.first_box {
+.float_left{
+  float: left;
+}
+
+.sbox{
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 80px;
+  font-size: 0.8rem;
+}
+
+
+.float_right{
+  float: right;
+}
+
+.first{
+  height: 20%;
+}
+
+.second{
+  height: 50%;
   display: flex;
   justify-content: space-between;
-  margin: auto;
+  margin-top: 10px;
+  
 }
 
-
-
-
-button {
-  cursor: pointer;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+.smallfont{
+  font-size: 0.8rem;
+  line-height: 12px;
 }
 
-.second_box {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.second_box div {
-  text-align: center;
-}
-.third_box button {
-  cursor: pointer;
+.third{
+  margin-top: 45px;
+  height: 20%;
 }
