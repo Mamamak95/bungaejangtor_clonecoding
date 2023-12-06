@@ -5,7 +5,7 @@ import "../style/detailItem/detailItem.css";
 import { SwiperSlide } from 'swiper/react';
 
 /* icons */
-import { FaFacebookF, FaBook ,FaClock  } from "react-icons/fa";
+import { FaFacebookF, FaBook, FaClock } from "react-icons/fa";
 import { HiMiniMapPin } from "react-icons/hi2";
 import { FaTwitter } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa6";
@@ -33,6 +33,9 @@ export default function DetailItem() {
   const [similar, setSimilar] = useState([]);
   const [depth, setDepth] = useState(true);
   const [shop, setShop] = useState([]);
+  const [view, setView] = useState(5);
+  const [group, setGroup] = useState(5);
+  const [between, setBetween] = useState(15);
   //찜버튼 찜여부
   const [btnWish, setBtnWish] = useState(false);
   const [page, setPage] = useState(1);
@@ -45,6 +48,21 @@ export default function DetailItem() {
   const changePage = (e) => {
     e ? setPage(1) : setPage(2)
   }
+
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get',
+  //     url: `http://localhost:8000/product/${pid}`
+  //   })
+  //     .then(res => {
+  //       res.data.product.regdate = formatRelativeDate(res.data.product.regdate)
+  //       setInfo(res.data.product)
+  //       setProductImg((res.data.product.images).split(','));
+  //       setSimilar(res.data.slide)
+  //       setShop(res.data.shopData)
+  //     })
+  //     .catch((err) => { console.log(err) });
+  // }, [depth])
 
   useEffect(() => {
     axios({
@@ -59,18 +77,47 @@ export default function DetailItem() {
         setShop(res.data.shopData)
       })
       .catch((err) => { console.log(err) });
-  }, [depth])
+
+    // 모바일 화면 크기 변화를 감지하는 이벤트 리스너 등록
+    const mediaQuery = window.matchMedia('(max-width: 500px)');
+
+    const handleResize = () => {
+      if (mediaQuery.matches) {
+        // 여기에 모바일 화면 크기 변화 시 실행되어야 하는 코드 추가
+        
+        setView(3)
+        setGroup(3)
+        setBetween(5)
+      }
+      else{
+        setView(5)
+        setGroup(5)
+        setBetween(15)
+      }
+    };
+
+    // 초기 실행
+    handleResize();
+
+    // 이벤트 리스너 등록
+    mediaQuery.addListener(handleResize);
+
+    // 언마운트 시 이벤트 리스너 제거
+    return () => {
+      mediaQuery.removeListener(handleResize);
+    };
+  }, [depth]);
 
   const handleClick = (e) => setDepth(!depth)
 
   const mouseEnter = (e) => productImg.length > 1 ? setHover('on') : setHover('')
 
   const chatClick = (e) => {
-    let chatData = {uid :userInfo.uid , pid : info.pid}
+    let chatData = { uid: userInfo.uid, pid: info.pid }
     axios({
       method: 'post',
       url: `http://127.0.0.1:8000/chat/create`,
-      data : chatData
+      data: chatData
     })
       .then(res => {
         navigate('/chat')
@@ -141,12 +188,12 @@ export default function DetailItem() {
                           <span>370</span>
                         </p>
                         <p>
-                        <FaClock color='#ccc' size={20}/>
+                          <FaClock color='#ccc' size={20} />
                           <span>{info.regdate}</span>
                         </p>
                       </div>
                       <button>
-                      <PiSirenBold  color='#ccc' size={20}/>
+                        <PiSirenBold color='#ccc' size={20} />
                         신고하기
                       </button>
                     </div>
@@ -187,7 +234,7 @@ export default function DetailItem() {
                           <WishBtn btnWish={btnWish} size={20} />
                         </div>
                         <div>
-                          <ChatBtn className="btnChat" color="white" size={20} chatClick={chatClick}/>
+                          <ChatBtn className="btnChat" color="white" size={20} chatClick={chatClick} />
                         </div>
                         <div>
                           <button className="btnOrder btnStyle">
@@ -233,9 +280,9 @@ export default function DetailItem() {
         <div className="swiperContainer">
           <SwiperComponent
             changePage={changePage}
-            view={5}
-            group={5}
-            between={15}
+            view={view}
+            group={group}
+            between={between}
             pName={true}
             pagination={false}
             effect={''}
@@ -386,7 +433,7 @@ export default function DetailItem() {
                         <WishBtn btnWish={btnWish} size={14} />
                       </div>
                       <div>
-                        <ChatBtn className="btnChat" color="white" size={14} chatClick={chatClick}/>
+                        <ChatBtn className="btnChat" color="white" size={14} chatClick={chatClick} />
                       </div>
                     </div>
                 }
