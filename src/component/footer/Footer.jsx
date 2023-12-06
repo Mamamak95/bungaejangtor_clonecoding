@@ -6,7 +6,7 @@ export default function Footer(){
   return(
     <div className="footer">
       <div className="footerTop">
-        <nav className="footerMenu">
+        <nav className="footerMenu inner">
           <Link to = "https://bgzt.co.kr/" target="_blank">회사소개</Link>
           <Link to = "https://terms.bunjang.co.kr/terms/service.html" target="_blank">이용약관</Link>
           <Link to = "https://terms.bunjang.co.kr/terms/service-policy.html" target="_blank">운영정책</Link>
@@ -16,7 +16,7 @@ export default function Footer(){
         </nav>
       </div>
 
-      <div className="footerMainContents">
+      <div className="footerMainContents inner">
         <div className="address">
           <div className="bungaeInfo">
             <p className="title">번개장터(주) 사업자정보</p>
@@ -65,7 +65,7 @@ export default function Footer(){
         </div>
       </div>
 
-      <div className="term">
+      <div className="term inner">
         <div className="termContent">
           <Link to = "https://isms.kisa.or.kr/main/ispims/issue/?certificationMode=list&crtfYear=&searchCondition=2&searchKeyword=%EB%B2%88%EA%B0%9C%EC%9E%A5%ED%84%B0+%EC%A3%BC%EC%8B%9D%ED%9A%8C%EC%82%AC&__encrypted=U8oaEwTLg12yqNDZuCwRPMiDRLgcrZjlbxomU5uctoZc1kXWONBhXaf0KhG%2BaV6wpp2zSeTry6yKT1QpQPP4n6Wl4JbzPyTKSn7s1FoRr90UnnwTp%2BW928V1TpyMuwFVMU8D270RkIg564CRAF0bUnkvpnfyAxjhbyn0pSpjvw%2BMlXuoQnR3oJUfvVi%2B1dac8Gnd7jHhSmiDLOX09CuWhVRPx40RuMcaT%2FHbItyyZvQECWvcAvRb36C1zB%2FnwnWRJNfv74iaCKBgpNE%2BERnypNyBfcqQSKf%2BfDsW9aHcpTOO1K747YgBrg%3D%3D" target="_blank" className="termLink">
             <img src="https://m.bunjang.co.kr/pc-static/resource/ee757469a142ab4f2f48.png" alt="termImg" />

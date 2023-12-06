@@ -2,7 +2,7 @@
 /* 헤더 -------------------------------------------------------------- */
 header {
   position: sticky;
-  top: -38px;
+  top: -40px;
   z-index: 110;
   /* 헤더탑 -------------------------------------------------------------- */
   /* 헤더메인부분 -------------------------------------------------------------- */
@@ -28,7 +28,6 @@ header .HeaderTop button:hover {
   cursor: pointer;
 }
 header .HeaderTop .headerTopWrap {
-  width: 68%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -149,7 +148,6 @@ header .HeaderMain {
   /* 헤더메인의 너비를 설정하기 위해 감싸는 wrap -------------------------------------------------------------- */
 }
 header .HeaderMain .headerMainWrap {
-  width: 68%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -220,6 +218,7 @@ header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch {
   display: flex;
   align-items: center;
   padding: 0 16px;
+  position: relative;
   /* 헤더 검색창의 숨겨진 닫기 (x) 버튼 -------------------------------------------------------------- */
   /* 헤더 검색창의 돋보기 이미지 -------------------------------------------------------------- */
 }
@@ -251,12 +250,14 @@ header .HeaderMain .headerMainWrap .HeaderCategory {
   font-weight: 600;
 }
 header .HeaderMain .headerMainWrap .HeaderCategory .categoryMenu {
-  width: 20px;
-  height: 16px;
+  font-size: 1.5rem;
   margin-right: 20px;
+  position: relative;
+  padding: 24px 10px 24px 0;
 }
 header .HeaderMain .headerMainWrap .HeaderCategory .categoryMenu:hover {
   cursor: pointer;
+  color: red;
 }
 header .HeaderMain .headerMainWrap .HeaderCategory a {
   padding: 0 10px;
