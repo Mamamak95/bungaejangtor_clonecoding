@@ -67,14 +67,20 @@ export default function DetailItem() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:8000/product/${pid}`
+      url: `http://localhost:8000/product/${pid}/${userInfo.uid}`
     })
       .then(res => {
+
         res.data.product.regdate = formatRelativeDate(res.data.product.regdate)
         setInfo(res.data.product)
         setProductImg((res.data.product.images).split(','));
         setSimilar(res.data.slide)
         setShop(res.data.shopData)
+        // setWishList(res.data.wishList);
+        let wishList = res.data.wishList.map(v=> v.pid)
+        wishList = wishList.filter(v=>v===res.data.product.pid)
+        wishList = wishList.length ? true : false;
+        setBtnWish(wishList)
       })
       .catch((err) => { console.log(err) });
 
@@ -84,21 +90,22 @@ export default function DetailItem() {
     const handleResize = () => {
       if (mediaQuery.matches) {
         // 여기에 모바일 화면 크기 변화 시 실행되어야 하는 코드 추가
-        
+
         setView(3)
         setGroup(3)
         setBetween(5)
       }
-      else{
+      else {
         setView(5)
         setGroup(5)
         setBetween(15)
       }
     };
 
+
+
     // 초기 실행
     handleResize();
-
     // 이벤트 리스너 등록
     mediaQuery.addListener(handleResize);
 
@@ -111,7 +118,7 @@ export default function DetailItem() {
   const handleClick = (e) => setDepth(!depth)
 
   const mouseEnter = (e) => productImg.length > 1 ? setHover('on') : setHover('')
-
+  
   const chatClick = (e) => {
     let chatData = { uid: userInfo.uid, pid: info.pid }
     axios({
@@ -124,6 +131,22 @@ export default function DetailItem() {
       })
       .catch((err) => { console.log(err) });
   }
+
+  const addWishList = (e) => {
+    let data = { pid: info.pid, uid: userInfo.uid,btnWish }
+    axios({
+      method: 'post',
+      url: `http://localhost:8000/product/wish`,
+      data: data
+    })
+      .then(res => {
+        alert(res)
+        setDepth(!depth)
+      })
+      .catch((err) => { console.log(err) });
+  }
+
+
 
 
 
@@ -231,10 +254,10 @@ export default function DetailItem() {
                       :
                       <div className="btnIcon">
                         <div>
-                          <WishBtn btnWish={btnWish} size={20} />
+                          <WishBtn btnWish={btnWish} size={17} addWishList={addWishList} />
                         </div>
                         <div>
-                          <ChatBtn className="btnChat" color="white" size={20} chatClick={chatClick} />
+                          <ChatBtn className="btnChat" color="white" size={18} chatClick={chatClick} />
                         </div>
                         <div>
                           <button className="btnOrder btnStyle">
@@ -430,7 +453,7 @@ export default function DetailItem() {
 
                     <div className="btnIcon">
                       <div>
-                        <WishBtn btnWish={btnWish} size={14} />
+                        <WishBtn btnWish={btnWish} size={14} addWishList={addWishList} />
                       </div>
                       <div>
                         <ChatBtn className="btnChat" color="white" size={14} chatClick={chatClick} />
