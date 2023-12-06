@@ -10,10 +10,11 @@ const socket = io("http://127.0.0.1:8000/");
 
 export default function Inner() {
   const user = localStorage.getUser().uid;
-
   const [userChats, setUserChats] = useState([]);
   const [roomInfo, setRoomInfo] = useState({});
   const [chatLog, setChatLog] = useState([]);
+  const [socketRead, setSocketRead] = useState({});
+  const [socketReceive, setSocketReceive] = useState({});
 
   //소켓 연결 시작, 채팅방 목록 요청
   useEffect(() => {
@@ -26,18 +27,20 @@ export default function Inner() {
       .catch((err) => console.log(err));
   }, []);
 
-  /**
-   * @param {object} info buyer,buyerImg,buyerName,crid,lastestMessage,seller,sellerImg,sellerName
+  /** 채팅로그 요청
+   * @param {object} info buyer,buyerImg,buyerName,crid,lastestMessage,seller,sellerImg,sellerName,cnt
    *
    */
   const handleChatRoom = (info) => {
-    console.log(info)
-    setRoomInfo({...info});
+    setRoomInfo({ ...info });
     axios
       .post("http://127.0.0.1:8000/chat/refresh", { crid: info.crid })
       .then((res) => {
         setChatLog(
           res.data.map((c) => (c.receiver == user ? { ...c, isRead: true } : c))
+        );
+        setUserChats(
+          userChats.map((v) => (v.crid == info.crid ? { ...v, cnt: 0 } : v))
         );
         socket.emit("read-message", {
           receiver: user,
@@ -55,7 +58,6 @@ export default function Inner() {
       봤는데 안봤다고 체크된게 나은 상황이라 판단하기 때문
  */
   useEffect(() => {
-    console.log("roominfo");
     if (roomInfo.crid) {
       axios.post("http://127.0.0.1:8000/chat/read", {
         crid: roomInfo.crid,
@@ -63,45 +65,49 @@ export default function Inner() {
       });
     }
   }, [roomInfo]);
-  const handleReceive=(crid)=>{
-    console.log('check',roomInfo)
+  const handleReceive = (crid) => {
     axios
-          .post("http://127.0.0.1:8000/chat/list", { id: user })
-          .then((res) => {
-            setUserChats(res.data);
-          })
-          .catch((err) => console.log(err));
-        if (roomInfo.crid == crid) {
-          axios
-            .post("http://127.0.0.1:8000/chat/refresh", { crid: roomInfo.crid })
-            .then((res) => {
-              setChatLog(res.data);
-            });
-          axios.post("http://127.0.0.1:8000/chat/read", {
-            crid: roomInfo.crid,
-            uid: user,
-          });
-        }
-  }
+      .post("http://127.0.0.1:8000/chat/list", { id: user })
+      .then((res) => {
+        setUserChats(res.data);
+        console.log("new", res.data);
+      })
+      .catch((err) => console.log(err));
+    if (roomInfo.crid == crid) {
+      handleChatRoom(roomInfo);
+    }
+  };
   useEffect(() => {
-    //채팅방 실시간 읽음 확인
-    socket.on("read-message", (receiver,crid) => {
-      if (roomInfo.crid === crid)
-        setChatLog(
-          chatLog.map((c) =>
-            c.receiver == receiver ? { ...c, isRead: true } : c
-          )
-        );
+    //채팅방 실시간 읽음 신호 수신
+    socket.on("read-message", (receiver, crid) => {
+      setSocketRead({ receiver: receiver, crid: crid });
     });
-
-    //채팅방 실시간 새로고침
+    //채팅방 실시간 새로고침 신호 수신
     socket.on("received-message", (received, crid) => {
-      console.log(crid,'crid')
-      if (received) {
-        handleReceive(crid)
-      }
+      setSocketReceive({ received, crid });
     });
-  },[]);
+  }, []);
+  //채팅방 실시간 읽음 확인
+  useEffect(() => {
+    if (roomInfo.crid === socketRead.crid) {
+      setChatLog(
+        chatLog.map((c) =>
+          c.receiver == socketRead.receiver ? { ...c, isRead: true } : c
+        )
+      );
+      setUserChats(
+        userChats.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v))
+      );
+    }
+  }, [socketRead]);
+
+  //채팅방 실시간 새로고침
+  useEffect(() => {
+    if (socketReceive.received) {
+      handleReceive(socketReceive.crid);
+    }
+  }, [socketReceive]);
+
   //채팅보내기
   const handleKey = (e) => {
     if (e.key === "Enter" && e.target.value != "") {
@@ -140,6 +146,7 @@ export default function Inner() {
                     <div>{v.buyer === user ? v.sellerName : v.buyerName}</div>
                     <div>{v.lastestMessage}</div>
                   </div>
+                  <div className="notReadCnt">{v.cnt}</div>
                 </li>
               );
             })}

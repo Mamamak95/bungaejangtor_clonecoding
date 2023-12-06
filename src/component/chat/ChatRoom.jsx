@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 
-export default function ChatRoom({user, roomInfo, chatLog, handleKey }) {
+export default function ChatRoom({user, roomInfo, chatLog, handleKey}) {
   const chatBox = useRef(null);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function ChatRoom({user, roomInfo, chatLog, handleKey }) {
                 } chat_message`}
                 key={i}
               >
-                {!s.isRead?<div className="readMark">d</div>:<></>}
+                {!s.isRead?<div className="readMark">안읽음</div>:<></>}
                 <span>{s.content}</span>
                 <div>{s.date}</div>
               </li>
@@ -62,6 +62,7 @@ export default function ChatRoom({user, roomInfo, chatLog, handleKey }) {
           rows="2"
           maxLength={100}
           onKeyDown={handleKey}
+          ref={(input)=>input&&input.focus()}
         ></textarea>
 
         <button></button>
