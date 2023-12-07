@@ -15,7 +15,7 @@
     .chatList_header {
       padding: 20px 0;
       position: relative;
-      border-bottom: 1px solid rgb(212, 212, 212);
+      // border-bottom: 1px solid rgb(212, 212, 212);
       >span {
         cursor: pointer;
         padding: 5px;
@@ -51,6 +51,8 @@
           padding: 10px;
           display: flex;
           cursor: pointer;
+          position: relative;
+          font-size: 1.3em;
           .chatList_inner_chatRoomLink_img {
             position: relative; 
             width: 60px;
@@ -76,6 +78,7 @@
               color: white;
               z-index: 1;
             }
+            
           }
           .chatList_inner_chatRoomLink_contents {
             margin-left: 10px;
@@ -84,7 +87,7 @@
             justify-content: center;
             text-align: left;
             div:first-child {
-              font-size: 1.3em;
+              
               font-weight: 600;
             }
             div:last-child {
@@ -94,13 +97,31 @@
           &:hover {
             background-color: #eee;
           }
+          .notReadCnt{
+            position: absolute;
+            right: 20px;
+            width: 35px;
+            height: 35px;
+            
+            font-weight: 600;
+            text-align: center;
+            line-height: 35px;
+            transform: translate(10px,15px);
+            background-color: #F70000;
+            border-radius: 50%;
+            color: white;
+          }
+          .cntOverTen{
+            font-size: 0.8em;
+          }
         }
       }
     }
   }
   .chatList_right {
+    
     border-left: 1px solid #ccc;
-    height: 700px;
+    height: 100%;
     .chatRoom_header {
       border-bottom: 1px solid #ccc;
       height: 50px;
@@ -121,7 +142,7 @@
       }
     }
     .chatLog {
-      height: 570px;
+      height: 620px;
       overflow-y: scroll;
 
       li {
