@@ -15,13 +15,13 @@ export default function Inner() {
   const [chatLog, setChatLog] = useState([]);
   const [socketRead, setSocketRead] = useState({});
   const [socketReceive, setSocketReceive] = useState({});
-
   //소켓 연결 시작, 채팅방 목록 요청
   useEffect(() => {
     axios
       .post("http://127.0.0.1:8000/chat/list", { id: user })
       .then((res) => {
         setUserChats(res.data);
+        console.log(res.data)
         socket.emit("connect-room", { uid: user });
       })
       .catch((err) => console.log(err));
@@ -32,23 +32,44 @@ export default function Inner() {
    *
    */
   const handleChatRoom = (info) => {
-    setRoomInfo({ ...info });
-    axios
-      .post("http://127.0.0.1:8000/chat/refresh", { crid: info.crid })
-      .then((res) => {
-        setChatLog(
-          res.data.map((c) => (c.receiver == user ? { ...c, isRead: true } : c))
-        );
-        setUserChats(
-          userChats.map((v) => (v.crid == info.crid ? { ...v, cnt: 0 } : v))
-        );
-        socket.emit("read-message", {
-          receiver: user,
-          crid: info.crid,
-          sender: info.buyer == user ? info.seller : info.buyer,
-        });
-      });
+    
+    setRoomInfo({
+      ...info,
+      oppoName: user == info.buyer ? info.sellerName : info.buyerName,
+    });
   };
+  useEffect(() => {
+    if (roomInfo.crid) {
+      axios
+        .post("http://127.0.0.1:8000/chat/refresh", { crid: roomInfo.crid })
+        .then((res) => {
+          setChatLog(
+            res.data.map((c) =>
+              c.receiver == user ? { ...c, isRead: true } : c
+            )
+          );
+          setUserChats(
+            userChats.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v))
+          );
+          socket.emit("read-message", {
+            receiver: user,
+            crid: roomInfo.crid,
+            sender: roomInfo.buyer == user ? roomInfo.seller : roomInfo.buyer,
+          });
+        });
+
+      axios.post("http://127.0.0.1:8000/chat/read", {
+        crid: roomInfo.crid,
+        uid: user,
+      });
+    }
+  }, [roomInfo]);
+  
+  useEffect(() => {
+    console.log(userChats)
+    if (roomInfo.crid)
+      userChats.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v));
+  }, [userChats]);
 
   /* 읽었는지 체크
      
@@ -57,26 +78,20 @@ export default function Inner() {
       채팅을 요청하고 못봤는데 본거로 체크된 상황보다는 
       봤는데 안봤다고 체크된게 나은 상황이라 판단하기 때문
  */
-  useEffect(() => {
-    if (roomInfo.crid) {
-      axios.post("http://127.0.0.1:8000/chat/read", {
-        crid: roomInfo.crid,
-        uid: user,
-      });
-    }
-  }, [roomInfo]);
   const handleReceive = (crid) => {
+    console.log(userChats)
     axios
       .post("http://127.0.0.1:8000/chat/list", { id: user })
       .then((res) => {
+        console.log(res.data)
         setUserChats(res.data);
-        console.log("new", res.data);
       })
       .catch((err) => console.log(err));
     if (roomInfo.crid == crid) {
       handleChatRoom(roomInfo);
     }
   };
+
   useEffect(() => {
     //채팅방 실시간 읽음 신호 수신
     socket.on("read-message", (receiver, crid) => {
@@ -95,6 +110,7 @@ export default function Inner() {
           c.receiver == socketRead.receiver ? { ...c, isRead: true } : c
         )
       );
+      console.log(userChats);
       setUserChats(
         userChats.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v))
       );
@@ -146,7 +162,17 @@ export default function Inner() {
                     <div>{v.buyer === user ? v.sellerName : v.buyerName}</div>
                     <div>{v.lastestMessage}</div>
                   </div>
-                  <div className="notReadCnt">{v.cnt}</div>
+                  {v.cnt ? (
+                    <div
+                      className={
+                        v.cnt < 10 ? "notReadCnt" : "notReadCnt cntOverTen"
+                      }
+                    >
+                      {v.cnt < 10 ? v.cnt : "10+"}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </li>
               );
             })}
