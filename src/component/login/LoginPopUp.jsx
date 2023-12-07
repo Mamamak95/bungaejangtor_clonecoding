@@ -127,7 +127,7 @@ export default function LoginPopUp(prop){
               <p className="loginContent">
                 <div className="loginstate">
                   <i className="fa-regular fa-circle-check"></i>
-                  <div className="loginstay">로그인 상태 유지</div>
+                  <div className="loginstay">입력 정보 기억하기</div>
                 </div>
                 <div className="ipsecurity">
                   <span className="ipsecu">PW보안</span>

@@ -34,6 +34,7 @@ export default function ChatRoom({user, roomInfo, chatLog, handleKey}) {
           <>
             <li>
               <div className="empty-chat">
+                
                 <img src="http://127.0.0.1:8000/webImg/empty_chat.svg" alt="" />
                 <span>대화방을 선택해주세요.</span>
               </div>

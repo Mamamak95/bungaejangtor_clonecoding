@@ -238,6 +238,7 @@ export default function SignUp(){
 
     if(e.target.value === '') {
       e.target.style.borderBottom = '1px solid red';
+      setPwSameCheck('비밀번호를 확인해 주세요.')
     } else if(inputPass.current.value === e.target.value){
       e.target.style.borderBottom = '1px solid #888';
       setPwSameCheck('위 입력한 비밀번호를 올바르게 입력하셨습니다.')

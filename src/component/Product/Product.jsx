@@ -10,9 +10,8 @@ export default function Product(){
   const [products, setProducts] = useState([]); 
   const [newLimit, setNewLimit] = useState(10);
   const [offset, setOffset] = useState(10);
-  
+  console.log(products);
   useEffect(()=>{
-
     axios
     .get(`http://127.0.0.1:8000/`)
     .then((result)=>
@@ -38,8 +37,7 @@ export default function Product(){
   };
 
   return(
-    <>
-      <div className="product">
+    <div className="product">
         {products.map((item)=>
             <div key={item.pid}>
               <Link to={`/productDetail/${item.pid}`}>
@@ -48,14 +46,16 @@ export default function Product(){
                   name={item.productName}
                   price={item.price}
                   date={formatRelativeDate(item.regdate)} 
+                  sellStatus={item.sellStatus}
+                  place={item.place}
                 ></ProductList>
               </Link>
             </div>
         )}
-      </div>
+      <div style={{clear:'both'}}></div>
       <button className="more_button" onClick={loadMore} >
         더보기
       </button>
-    </>
+    </div>
   )
 }
