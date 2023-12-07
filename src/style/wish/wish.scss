@@ -1,0 +1,238 @@
+@use '../mixin' as m;
+
+.wishList {
+
+  .check {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgb(238, 238, 238);
+    cursor: pointer;
+    transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 5px;
+      left: 0px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: transparent rgb(204, 204, 204) rgb(204, 204, 204) transparent;
+      width: 6px;
+      height: 12px;
+      transform: rotate(40deg);
+      transform-origin: 100% 100%;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 5px;
+      left: 2px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: transparent;
+      width: 0px;
+      height: 0px;
+      transform: rotate(40deg);
+      transform-origin: 100% 100%;
+      transition: width 0.1s ease-out 0s, height 0.1s ease-out 0.1s;
+    }
+
+    &.on {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      position: relative;
+      background: rgb(247, 47, 51);
+      border: 1px solid rgb(247, 47, 51);
+      transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        left: 0px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent rgb(204, 204, 204) rgb(204, 204, 204) transparent;
+        width: 6px;
+        height: 12px;
+        transform: rotate(40deg);
+        transform-origin: 100% 100%;
+      }
+
+      &::after {
+        content: "";
+        width: 6px;
+        height: 12px;
+        border-right: 2px solid rgb(255, 255, 255);
+        border-bottom: 2px solid rgb(255, 255, 255);
+      }
+
+    }
+  }
+
+  h2 {
+    font-size: 18px;
+    padding: 50px 0px 20px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    -webkit-box-pack: justify;
+
+    @media #{m.$max-sm} {
+      font-size: 16px;
+      padding: 30px 0 10px;
+
+    }
+
+    span {
+      color: rgb(247, 47, 51);
+    }
+
+
+  }
+
+  .sortBtn {
+    margin: 25px 0px 20px;
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+
+
+  }
+
+  .checkControll {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgb(238, 238, 238);
+    cursor: pointer;
+    transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
+    position: relative;
+
+
+  }
+
+  ul {
+
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      position: relative;
+      width: 48%;
+      margin: 0 1% 1%;
+      .check {
+        position: absolute;
+        z-index: 10;
+        top: 20px;
+        right: 15px;
+
+        &.on {
+          position: absolute;
+
+        }
+      }
+ 
+
+      .pro {
+        width: 100%;
+
+        .pro_img {
+
+          img {
+            object-fit: cover;
+          }
+        }
+      }
+
+    }
+
+    @media #{m.$min-sm} {
+      .productlist {
+        .pro {
+          display: flex;
+          filter: none;
+
+          .pro_img {
+            width: 160px;
+            height: 160px;
+
+            img {
+              object-fit: cover;
+              height: 100%;
+            }
+          }
+
+          .pro_comtent {
+            padding: 20px;
+
+            .pro_name {
+              font-size: 14px;
+              margin-bottom: 10px;
+              padding: 0;
+            }
+
+            .pro_price {
+              font-size: 16px;
+              font-weight: 600;
+              margin-right: 3px;
+              line-height: 1;
+            }
+
+            .pro_pr_da {
+              display: block;
+
+              .pro_date {
+                margin-top: 10px;
+              }
+            }
+
+
+
+
+          }
+
+        }
+      }
+    }
+
+    @media #{m.$max-sm} {
+      li {
+        width: 30.33333%;
+        margin: 0 1.5% 1.5%;
+
+        .pro {
+          margin-top: 0;
+
+          .pro_name {
+            font-size: 12px;
+          }
+
+          .pro_pr_da {
+            display: block;
+          }
+
+          .pro_img {
+            img {
+              height: 35vw;
+            }
+
+          }
+
+          .pro_date {
+            font-size: 12px;
+            padding-bottom: 5px;
+          }
+
+        }
+
+      }
+    }
+
+
+
+  }
+}
