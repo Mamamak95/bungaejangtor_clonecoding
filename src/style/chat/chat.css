@@ -16,7 +16,6 @@
 .chatList .chatList_left .chatList_header {
   padding: 20px 0;
   position: relative;
-  border-bottom: 1px solid rgb(212, 212, 212);
 }
 .chatList .chatList_left .chatList_header > span {
   cursor: pointer;
@@ -51,6 +50,8 @@
   padding: 10px;
   display: flex;
   cursor: pointer;
+  position: relative;
+  font-size: 1.3em;
 }
 .chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_img {
   position: relative;
@@ -86,7 +87,6 @@
   text-align: left;
 }
 .chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents div:first-child {
-  font-size: 1.3em;
   font-weight: 600;
 }
 .chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents div:last-child {
@@ -95,9 +95,25 @@
 .chatList .chatList_left .chatList_inner .chatList_inner_roomList li:hover {
   background-color: #eee;
 }
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .notReadCnt {
+  position: absolute;
+  right: 20px;
+  width: 35px;
+  height: 35px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 35px;
+  transform: translate(10px, 15px);
+  background-color: #F70000;
+  border-radius: 50%;
+  color: white;
+}
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .cntOverTen {
+  font-size: 0.8em;
+}
 .chatList .chatList_right {
   border-left: 1px solid #ccc;
-  height: 700px;
+  height: 100%;
 }
 .chatList .chatList_right .chatRoom_header {
   border-bottom: 1px solid #ccc;
@@ -119,7 +135,7 @@
   padding: 5px;
 }
 .chatList .chatList_right .chatLog {
-  height: 570px;
+  height: 620px;
   overflow-y: scroll;
 }
 .chatList .chatList_right .chatLog li .empty-chat {
