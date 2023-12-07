@@ -47,6 +47,7 @@ export default function Product(){
                   price={item.price}
                   date={formatRelativeDate(item.regdate)} 
                   sellStatus={item.sellStatus}
+                  place={item.place}
                 ></ProductList>
               </Link>
             </div>

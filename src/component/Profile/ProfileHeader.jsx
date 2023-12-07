@@ -25,7 +25,7 @@ export default function ProfileHeader(){
               <button className="inline sbox">상점명 수정</button>
             </div>
             <div className="float_right">
-              <p className="inline">ok</p>
+              <p className="inline ok"> ok</p>
               <p className="inline">본인인증 완료</p>  
             </div>
           </div>

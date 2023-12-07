@@ -46,7 +46,6 @@
   float: left;
   padding: 20px;
   box-sizing: border-box;
-  border: 1px solid red;
 }
 
 .float_left{
@@ -85,4 +84,15 @@
 .third{
   margin-top: 45px;
   height: 20%;
+}
+
+.ok{
+  margin: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 1px solid orange;
+  border-radius: 10px;
+  background: orange;
+  color: white;
+  font-size: 0.8rem;
 }

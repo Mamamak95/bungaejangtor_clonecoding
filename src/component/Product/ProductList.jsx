@@ -3,7 +3,7 @@ import '../../style/Product/product.css';
 import Image from "../common/Image";
 
 
-export default function ProductList({image, name, price, date, sellStatus}){
+export default function ProductList({image, name, price, date, sellStatus, place}){
   const productClass = sellStatus === "sell" ? "sellClass" : "";
 
   return(
@@ -37,6 +37,9 @@ export default function ProductList({image, name, price, date, sellStatus}){
                 <div className="pro_date">
                   {date}
                 </div>
+                {
+                  place ? (<div>{place}</div>) : null
+                }
               </div>
         
           </div>
