@@ -9,7 +9,9 @@
     cursor: pointer;
     transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
     position: relative;
-
+    @media #{m.$max-sm} {
+      display: none;
+    }
     &::before {
       content: "";
       position: absolute;
@@ -72,6 +74,20 @@
 
     }
   }
+  .deleteWish{
+    padding: 0px 10px;
+    margin-left: 10px;
+    height: 28px;
+    border: 1px solid rgb(238, 238, 238);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-size: 13px;
+    background: rgb(255, 255, 255);
+    color: rgb(136, 136, 136);
+  }
 
   h2 {
     font-size: 18px;
@@ -105,12 +121,8 @@
   }
 
   .checkControll {
-    width: 24px;
-    height: 24px;
-    border: 1px solid rgb(238, 238, 238);
-    cursor: pointer;
-    transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
-    position: relative;
+    display: flex;
+
 
 
   }
@@ -124,18 +136,28 @@
       position: relative;
       width: 48%;
       margin: 0 1% 1%;
+
+      .productlist {
+        width: 100%;
+        float: none;
+        margin: 0;
+      }
+
       .check {
         position: absolute;
         z-index: 10;
         top: 20px;
         right: 15px;
+        @media #{m.$max-sm} {
+          display: none;
+        }
 
         &.on {
           position: absolute;
 
         }
       }
- 
+
 
       .pro {
         width: 100%;
@@ -150,13 +172,49 @@
 
     }
 
+    .productlist {
+
+
+    }
+
+
     @media #{m.$min-sm} {
       .productlist {
+        .pro_comtent {
+          position: relative;
+          width: 100%;
+  
+          .pro_pr_da {
+            &>div:last-child {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              box-sizing: border-box;
+              padding: 8px 0 8px 8px;
+              border-top: 1px solid rgb(238, 238, 238);
+              font-size: 12px;
+              &::before{
+                content: '';
+                position: relative;
+                bottom: 1px;
+                display: inline-block;
+                width: 16px;
+                height: 13px;
+                background: url(https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png) 50% 50% no-repeat;
+                background-size: contain;
+                vertical-align: middle;
+    
+              }
+            }
+          }
+        }
         .pro {
           display: flex;
           filter: none;
 
           .pro_img {
+            display: block;
             width: 160px;
             height: 160px;
 
@@ -167,12 +225,13 @@
           }
 
           .pro_comtent {
-            padding: 20px;
 
             .pro_name {
               font-size: 14px;
               margin-bottom: 10px;
-              padding: 0;
+              padding: 20px 0 0 20px;
+              box-sizing: border-box;
+
             }
 
             .pro_price {
@@ -184,10 +243,15 @@
 
             .pro_pr_da {
               display: block;
+              padding-left: 20px;
+              box-sizing: border-box;
+
 
               .pro_date {
                 margin-top: 10px;
               }
+          
+
             }
 
 
@@ -213,6 +277,9 @@
 
           .pro_pr_da {
             display: block;
+            &>div:last-child {
+              display: none;
+            }
           }
 
           .pro_img {
