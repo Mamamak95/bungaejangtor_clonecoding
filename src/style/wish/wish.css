@@ -6,6 +6,11 @@
   transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
   position: relative;
 }
+@media screen and (max-width:500px) {
+  .wishList .check {
+    display: none;
+  }
+}
 .wishList .check::before {
   content: "";
   position: absolute;
@@ -62,6 +67,18 @@
   border-right: 2px solid rgb(255, 255, 255);
   border-bottom: 2px solid rgb(255, 255, 255);
 }
+.wishList .deleteWish {
+  padding: 0px 10px;
+  margin-left: 10px;
+  height: 28px;
+  border: 1px solid rgb(238, 238, 238);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  background: rgb(255, 255, 255);
+  color: rgb(136, 136, 136);
+}
 .wishList h2 {
   font-size: 18px;
   padding: 50px 0px 20px;
@@ -85,12 +102,7 @@
   justify-content: space-between;
 }
 .wishList .checkControll {
-  width: 24px;
-  height: 24px;
-  border: 1px solid rgb(238, 238, 238);
-  cursor: pointer;
-  transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
-  position: relative;
+  display: flex;
 }
 .wishList ul {
   display: flex;
@@ -101,11 +113,21 @@
   width: 48%;
   margin: 0 1% 1%;
 }
+.wishList ul li .productlist {
+  width: 100%;
+  float: none;
+  margin: 0;
+}
 .wishList ul li .check {
   position: absolute;
   z-index: 10;
   top: 20px;
   right: 15px;
+}
+@media screen and (max-width:500px) {
+  .wishList ul li .check {
+    display: none;
+  }
 }
 .wishList ul li .check.on {
   position: absolute;
@@ -118,11 +140,37 @@
      object-fit: cover;
 }
 @media screen and (min-width:500px) {
+  .wishList ul .productlist .pro_comtent {
+    position: relative;
+    width: 100%;
+  }
+  .wishList ul .productlist .pro_comtent .pro_pr_da > div:last-child {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 0 8px 8px;
+    border-top: 1px solid rgb(238, 238, 238);
+    font-size: 12px;
+  }
+  .wishList ul .productlist .pro_comtent .pro_pr_da > div:last-child::before {
+    content: "";
+    position: relative;
+    bottom: 1px;
+    display: inline-block;
+    width: 16px;
+    height: 13px;
+    background: url(https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png) 50% 50% no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+  }
   .wishList ul .productlist .pro {
     display: flex;
     filter: none;
   }
   .wishList ul .productlist .pro .pro_img {
+    display: block;
     width: 160px;
     height: 160px;
   }
@@ -131,13 +179,11 @@
        object-fit: cover;
     height: 100%;
   }
-  .wishList ul .productlist .pro .pro_comtent {
-    padding: 20px;
-  }
   .wishList ul .productlist .pro .pro_comtent .pro_name {
     font-size: 14px;
     margin-bottom: 10px;
-    padding: 0;
+    padding: 20px 0 0 20px;
+    box-sizing: border-box;
   }
   .wishList ul .productlist .pro .pro_comtent .pro_price {
     font-size: 16px;
@@ -147,6 +193,8 @@
   }
   .wishList ul .productlist .pro .pro_comtent .pro_pr_da {
     display: block;
+    padding-left: 20px;
+    box-sizing: border-box;
   }
   .wishList ul .productlist .pro .pro_comtent .pro_pr_da .pro_date {
     margin-top: 10px;
@@ -165,6 +213,9 @@
   }
   .wishList ul li .pro .pro_pr_da {
     display: block;
+  }
+  .wishList ul li .pro .pro_pr_da > div:last-child {
+    display: none;
   }
   .wishList ul li .pro .pro_img img {
     height: 35vw;
