@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Text from "./Text";
-import TextCopy from "./Text2";
 import '../../style/profile/profilenav.css';
+import WishList from './../WishList/WishList';
+import Text2 from "./Text2";
+import Text3 from './Text3';
+import Text4 from './Text4';
 
 export default function ProfileNavbar() {
-  const [activeNav, setActiveNav] = useState(null);
+  const [activeNav, setActiveNav] = useState("상품");
 
   const handleNavClick = (nav) => {
     setActiveNav(nav);
@@ -46,7 +49,10 @@ export default function ProfileNavbar() {
       </nav>
 
       {activeNav === "상품" && <Text />}
-      {activeNav === "찜" && <TextCopy />}
+      {activeNav === "상점후기" && <Text2/>}
+      {activeNav === "찜" && <WishList />}
+      {activeNav === "팔로잉" && <Text3 />}
+      {activeNav === "팔로워" && <Text4 />}
     </div>
   );
 }
