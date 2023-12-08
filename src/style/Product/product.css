@@ -2,9 +2,8 @@
   text-align: center;
 }
 .productlist {
-  width: 200px;
-  margin-top: 10px;
-  margin-right: 12px;
+  width: 19%;
+  margin: 10px 0.5% 0;
   float: left;
 }
 
@@ -20,10 +19,10 @@
 
 .pro_img {
   width: 100%;
-  object-fit: cover;
 }
 
 .pro_img img{
+  object-fit: cover;
   width: 100%;
   height: 200px;
 }
@@ -93,4 +92,19 @@
   text-align: center;
   font-size: 1.3rem;
   line-height: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+  .product .productlist{
+    width: 24%;
+  }
+  .product .productlist img{
+    height: 30vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .product .productlist{
+    width: 32.33333%;
+  }
 }
