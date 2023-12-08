@@ -1,5 +1,58 @@
 .Searchpop {
   position: absolute;
-  top:50px;
+  top:46px;
   left:0;
+  width: 100%;
+  border:1px solid #ddd;
+  box-sizing: border-box;
+
+  .searchcontent {
+    padding: 20px;
+    background-color: #fff;
+
+    .titlename {
+      display:flex;
+      justify-content: space-between;
+      text-align: center;
+      font-weight: bold;
+
+      div {
+        padding: 6px;
+        width: 50%;
+      }
+
+      .recently {
+        border-bottom:2px solid red;
+        color:red;
+      }
+
+      .popular {
+        border-bottom:2px solid rgb(217,217,217);
+      }
+    }
+
+    .searchcenter {
+      height: 360px;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 52px !important;
+        height: 46px !important;
+      }
+
+      p {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .searchfooter {
+    display:flex;
+    justify-content: space-between;
+    padding: 8px 30px;
+    background-color: #efefef;
+  }
 }

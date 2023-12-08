@@ -41,11 +41,19 @@ export default function LoginPopUp(prop){
       if(data.data.login){
         alert('로그인 성공')
 
-        Cookie.setCookie('x-auth_token', data.data.token)
+        if(infoRemind === true){
+          Cookie.setCookie('x-auth_token', data.data.token)
 
-        const userInfo = jwtDecode(data.data.token)
+          const userInfo = jwtDecode(data.data.token)
 
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+          localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        } else if(infoRemind === false){
+          Cookie.setCookie('x-auth_sessionToken', data.data.token)
+
+          const userInfoSession = jwtDecode(data.data.token)
+
+          sessionStorage.setItem('userInfoSession', JSON.stringify(userInfoSession));
+        }
 
         // 상품구매쿠키 보유 시 해당페이지로 이동
         const sellProductCookie = Cookie.getCookie('sellproductcookie')
@@ -100,6 +108,17 @@ export default function LoginPopUp(prop){
     navigate('/sign')
   }
 
+  /* 입력정보 기억하기 */
+  const infoRemindRef = useRef(null)
+  const [infoRemind, setInfoRemind] = useState(false)
+  const handleInfoRemind = (e) => {
+    setInfoRemind(!infoRemind)
+    console.log(infoRemind);
+  }
+  let styleRemindRed = {
+    color : infoRemind ? "red" : "black"
+  }
+
   return(
     <>
       <div className="loginpopupwrap" style={prop.styleLoginBlock} onClick={prop.handleLoginToggle} ></div>
@@ -125,8 +144,8 @@ export default function LoginPopUp(prop){
               </p>
   
               <p className="loginContent">
-                <div className="loginstate">
-                  <i className="fa-regular fa-circle-check"></i>
+                <div className="loginstate" onClick={handleInfoRemind} ref={infoRemindRef}>
+                  <i className="fa-regular fa-circle-check" style={styleRemindRed}></i>
                   <div className="loginstay">입력 정보 기억하기</div>
                 </div>
                 <div className="ipsecurity">

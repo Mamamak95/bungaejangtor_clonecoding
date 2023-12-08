@@ -1,6 +1,7 @@
 import React from "react";
 import '../../style/popup/logoutpopup.css';
-import * as localStorage from '../../util/localStorage.js'; 
+import * as localStorage from '../../util/localStorage.js';
+import * as sessionStorage from '../../util/sessionStorage.js'; 
 import { useNavigate } from "react-router-dom";
 
 export default function LogoutPopUp(prop){
@@ -9,9 +10,9 @@ export default function LogoutPopUp(prop){
   const handleLogout = () => {
     alert('로그아웃 되었습니다.');
     localStorage.removeUser();
+    sessionStorage.removeUserSession()
     prop.handleLogoutToggle();
     navigate('/');
-    window.location.reload();
   }
 
   return(

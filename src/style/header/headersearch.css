@@ -1,5 +1,49 @@
 .Searchpop {
   position: absolute;
-  top: 50px;
+  top: 46px;
   left: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.Searchpop .searchcontent {
+  padding: 20px;
+  background-color: #fff;
+}
+.Searchpop .searchcontent .titlename {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  font-weight: bold;
+}
+.Searchpop .searchcontent .titlename div {
+  padding: 6px;
+  width: 50%;
+}
+.Searchpop .searchcontent .titlename .recently {
+  border-bottom: 2px solid red;
+  color: red;
+}
+.Searchpop .searchcontent .titlename .popular {
+  border-bottom: 2px solid rgb(217, 217, 217);
+}
+.Searchpop .searchcontent .searchcenter {
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Searchpop .searchcontent .searchcenter img {
+  width: 52px !important;
+  height: 46px !important;
+}
+.Searchpop .searchcontent .searchcenter p {
+  margin-top: 20px;
+}
+.Searchpop .searchfooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 30px;
+  background-color: #efefef;
 }/*# sourceMappingURL=headersearch.css.map */
