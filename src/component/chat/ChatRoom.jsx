@@ -24,7 +24,7 @@ export default function ChatRoom({user, roomInfo, chatLog, handleKey}) {
                 } chat_message`}
                 key={i}
               >
-                {!s.isRead?<div className="readMark">안읽음</div>:<></>}
+                {!s.isRead&&s.sender==user?<div className="readMark">안읽음</div>:<></>}
                 <span>{s.content}</span>
                 <div>{s.date}</div>
               </li>
