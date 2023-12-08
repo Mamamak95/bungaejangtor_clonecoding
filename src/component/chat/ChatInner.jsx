@@ -13,116 +13,124 @@ export default function Inner() {
   const [userChats, setUserChats] = useState([]);
   const [roomInfo, setRoomInfo] = useState({});
   const [chatLog, setChatLog] = useState([]);
+
+  const [detList, setDetList] = useState([]);
+  const [detLog, setDetLog] = useState([]);
+
   const [socketRead, setSocketRead] = useState({});
   const [socketReceive, setSocketReceive] = useState({});
-  //소켓 연결 시작, 채팅방 목록 요청
-  useEffect(() => {
-    axios
+
+  //채팅방목록 불러오기
+  const getUserChats = () => {
+    return axios
       .post("http://127.0.0.1:8000/chat/list", { id: user })
       .then((res) => {
-        setUserChats(res.data);
-        console.log(res.data)
-        socket.emit("connect-room", { uid: user });
+        return res.data;
       })
       .catch((err) => console.log(err));
+  };
+  //채팅로그 불러오기
+  const getLog = (crid) => {
+    return axios
+      .post("http://127.0.0.1:8000/chat/refresh", { crid: crid })
+      .then((res) => res.data);
+  };
+
+  //소켓 연결 시작, 채팅방 목록 요청
+  useEffect(() => {
+    async function getList() {
+      let list = await getUserChats();
+      setDetList(list);
+      socket.emit("connect-room", { uid: user });
+      //채팅방 실시간 읽음 신호 수신
+      socket.on("read-message", (receiver, crid) => {
+        setSocketRead({ receiver: receiver, crid: crid });
+      });
+      //채팅방 실시간 새로고침 신호 수신
+      socket.on("received-message", (crid) => {
+        setSocketReceive({ crid });
+      });
+    }
+    getList();
   }, []);
+
+  //불러온 목록 넣기
+  useEffect(() => {
+    setUserChats(detList);
+  }, [detList]);
+
+  //불러온 로그 넣기
+
+  useEffect(() => {
+    setChatLog(detLog);
+  }, [detLog]);
 
   /** 채팅로그 요청
    * @param {object} info buyer,buyerImg,buyerName,crid,lastestMessage,seller,sellerImg,sellerName,cnt
    *
    */
   const handleChatRoom = (info) => {
-    
     setRoomInfo({
       ...info,
       oppoName: user == info.buyer ? info.sellerName : info.buyerName,
     });
   };
+  //채팅방 선택시
   useEffect(() => {
+    async function getChatLog() {
+      let list = await getLog(roomInfo.crid);
+      setDetLog(list);
+    }
     if (roomInfo.crid) {
-      axios
-        .post("http://127.0.0.1:8000/chat/refresh", { crid: roomInfo.crid })
-        .then((res) => {
-          setChatLog(
-            res.data.map((c) =>
-              c.receiver == user ? { ...c, isRead: true } : c
-            )
-          );
-          setUserChats(
-            userChats.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v))
-          );
-          socket.emit("read-message", {
-            receiver: user,
-            crid: roomInfo.crid,
-            sender: roomInfo.buyer == user ? roomInfo.seller : roomInfo.buyer,
-          });
-        });
-
-      axios.post("http://127.0.0.1:8000/chat/read", {
+      console.log(roomInfo.crid);
+      getChatLog();
+      setDetList(
+        userChats.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v))
+      );
+      socket.emit("read-message", {
+        receiver: user,
         crid: roomInfo.crid,
-        uid: user,
+        sender: roomInfo.buyer == user ? roomInfo.seller : roomInfo.buyer,
       });
     }
   }, [roomInfo]);
-  
-  useEffect(() => {
-    console.log(userChats)
-    if (roomInfo.crid)
-      userChats.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v));
-  }, [userChats]);
 
-  /* 읽었는지 체크
-     
-      채팅로그 불러올때 하지않는 이유는 
-      네트워크 오류로
-      채팅을 요청하고 못봤는데 본거로 체크된 상황보다는 
-      봤는데 안봤다고 체크된게 나은 상황이라 판단하기 때문
- */
-  const handleReceive = (crid) => {
-    console.log(userChats)
-    axios
-      .post("http://127.0.0.1:8000/chat/list", { id: user })
-      .then((res) => {
-        console.log(res.data)
-        setUserChats(res.data);
-      })
-      .catch((err) => console.log(err));
-    if (roomInfo.crid == crid) {
-      handleChatRoom(roomInfo);
+  //메세지 받을때
+  useEffect(() => {
+    async function getList(isRead) {
+      let list = await getUserChats();
+      if(isRead)setDetList(
+        list.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v))
+      );
+      else setDetList(list);
     }
-  };
+    async function getChatLog() {
+      let list = await getLog(socketReceive.crid);
+      socket.emit("read-message", {
+        receiver: user,
+        crid: roomInfo.crid,
+        sender: roomInfo.buyer == user ? roomInfo.seller : roomInfo.buyer,
+      });
+      setDetLog(list);
+    }
+    if (roomInfo.crid && roomInfo.crid == socketReceive.crid) {
+      getChatLog();
+      getList(true);
 
+    }
+    else getList(false)
+  }, [socketReceive]);
+
+  //메세지 읽을때
   useEffect(() => {
-    //채팅방 실시간 읽음 신호 수신
-    socket.on("read-message", (receiver, crid) => {
-      setSocketRead({ receiver: receiver, crid: crid });
-    });
-    //채팅방 실시간 새로고침 신호 수신
-    socket.on("received-message", (received, crid) => {
-      setSocketReceive({ received, crid });
-    });
-  }, []);
-  //채팅방 실시간 읽음 확인
-  useEffect(() => {
-    if (roomInfo.crid === socketRead.crid) {
-      setChatLog(
-        chatLog.map((c) =>
-          c.receiver == socketRead.receiver ? { ...c, isRead: true } : c
-        )
-      );
-      console.log(userChats);
-      setUserChats(
-        userChats.map((v) => (v.crid == roomInfo.crid ? { ...v, cnt: 0 } : v))
-      );
+    async function getChatLog() {
+      let list = await getLog(socketRead.crid);
+      setDetLog(list);
+    }
+    if (roomInfo.crid && roomInfo.crid == socketRead.crid) {
+      getChatLog();
     }
   }, [socketRead]);
-
-  //채팅방 실시간 새로고침
-  useEffect(() => {
-    if (socketReceive.received) {
-      handleReceive(socketReceive.crid);
-    }
-  }, [socketReceive]);
 
   //채팅보내기
   const handleKey = (e) => {
