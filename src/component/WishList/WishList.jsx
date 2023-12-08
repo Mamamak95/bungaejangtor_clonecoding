@@ -65,7 +65,7 @@ export default function WishList() {
   }
 
   return (
-    <div className="inner wishList">
+    <div className="wishList">
       <h2>찜<span>{list.length}</span></h2>
       <div className="sortBtn">
         <div className="checkControll">
