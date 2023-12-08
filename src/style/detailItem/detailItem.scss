@@ -433,17 +433,25 @@
     }
 
     .productlist {
+      float: none;
+      width: auto;
       .pro {
         display: flex;
         width: 100%;
         filter: none;
 
-        .pro_img {
-          width: 200px;
+        .pro_status {
+          position: relative;
 
-          img {
-            object-fit: cover;
+          .pro_img {
+            width: 200px;
+            display: block;
+
+            img {
+              object-fit: cover;
+            }
           }
+
         }
 
         .pro_comtent {

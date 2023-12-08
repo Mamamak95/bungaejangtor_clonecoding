@@ -359,15 +359,23 @@
   padding: 28px 0px 20px;
   font-size: 18px;
 }
+.detailPage .alreadySell .productlist {
+  float: none;
+  width: auto;
+}
 .detailPage .alreadySell .productlist .pro {
   display: flex;
   width: 100%;
   filter: none;
 }
-.detailPage .alreadySell .productlist .pro .pro_img {
-  width: 200px;
+.detailPage .alreadySell .productlist .pro .pro_status {
+  position: relative;
 }
-.detailPage .alreadySell .productlist .pro .pro_img img {
+.detailPage .alreadySell .productlist .pro .pro_status .pro_img {
+  width: 200px;
+  display: block;
+}
+.detailPage .alreadySell .productlist .pro .pro_status .pro_img img {
   -o-object-fit: cover;
      object-fit: cover;
 }

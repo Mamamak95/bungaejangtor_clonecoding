@@ -1,7 +1,10 @@
-.product {
-  display: grid;
-  margin: 0 auto;
-  grid-template-columns: repeat(5,1fr);
+.product{
+  text-align: center;
+}
+.productlist {
+  width: 19%;
+  margin: 10px 0.5% 0;
+  float: left;
 }
 
 .pro {
@@ -9,19 +12,19 @@
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
-  width: 210px;
+  width: 100%;
   text-align: left;
   overflow: hidden;
 }
 
 .pro_img {
   width: 100%;
-  object-fit: fill;
 }
+
 .pro_img img{
+  object-fit: cover;
   width: 100%;
-  height: 220px;
+  height: 200px;
 }
 
 .pro_name {
@@ -67,3 +70,41 @@
   height: 30px;
 }
 
+.pro.sellClass {
+  filter: brightness(70%);
+}
+
+.pro_status {
+  font-size: 14px;
+  color: red;
+  font-weight: bold;
+}
+
+.sell{
+  position: absolute;
+  border: 3.5px solid  red;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.3rem;
+  line-height: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+  .product .productlist{
+    width: 24%;
+  }
+  .product .productlist img{
+    height: 30vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .product .productlist{
+    width: 32.33333%;
+  }
+}

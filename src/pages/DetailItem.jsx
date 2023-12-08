@@ -140,7 +140,6 @@ export default function DetailItem() {
       data: data
     })
       .then(res => {
-        alert(res)
         setDepth(!depth)
       })
       .catch((err) => { console.log(err) });
@@ -291,6 +290,7 @@ export default function DetailItem() {
                 name={info.productName}
                 price={info.price}
                 date={info.regdate}
+                sellStatus = {info.sellStatus}
               />
               <p>이런 상품은 어떠세요?</p>
             </div>
