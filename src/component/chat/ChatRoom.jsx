@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-
+import formatRelativeDate from'../../util/date.js'
 
 export default function ChatRoom({user, roomInfo, chatLog, handleKey}) {
   const chatBox = useRef(null);
@@ -26,7 +26,7 @@ export default function ChatRoom({user, roomInfo, chatLog, handleKey}) {
               >
                 {!s.isRead&&s.sender==user?<div className="readMark">안읽음</div>:<></>}
                 <span>{s.content}</span>
-                <div>{s.date}</div>
+                <div>{formatRelativeDate(s.date)}</div>
               </li>
             );
           })
