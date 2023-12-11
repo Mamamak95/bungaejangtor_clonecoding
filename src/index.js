@@ -12,6 +12,7 @@ import DetailItem from './pages/DetailItem';
 import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
+import ProductEdit from './pages/ProductEdit';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { index : true ,path: '/', element: <Home /> },
       { path: '/loadMore/:offset/:newLimit', element: <Home /> },
       { path: '/products/new/:id', element: <ProductRegister /> },
+      { path: '/edit/:pid', element: <ProductEdit /> },
       { path: '/productDetail/:pid', element: <DetailItem /> },
       { path: '/chat', element: <Chat/>},
       { path : '/sign', element : <SignUp /> },

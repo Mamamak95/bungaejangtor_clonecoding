@@ -19,11 +19,11 @@ import Image from './../component/common/Image';
 import ChatBtn from './../component/button/ChatBtn';
 import WishBtn from './../component/button/WishBtn';
 import Follow from './../component/button/Follow';
-import * as localStorage from '../util/localStorage';
 import { useParams } from "react-router";
 import axios from "axios";
 import formatRelativeDate from "../util/date";
 import ProductList from './../component/Product/ProductList';
+import { getUser } from './../util/localStorage';
 
 export default function DetailItem() {
   let { pid } = useParams();
@@ -42,8 +42,7 @@ export default function DetailItem() {
   const [hover, setHover] = useState('');
 
 
-  const userInfo = localStorage.getUser() ? localStorage.getUser() : '';
-
+  const userInfo = getUser() ? getUser() : '';
 
   const changePage = (e) => {
     e ? setPage(1) : setPage(2)
@@ -70,6 +69,8 @@ export default function DetailItem() {
       url: `http://localhost:8000/product/${pid}/${userInfo.uid}`
     })
       .then(res => {
+        let recent = { 'pid': res.data.product.pid, 'image': (res.data.product.images).split(',')[0] };
+        localStorage.setItem('recentProduct', JSON.stringify(recent));
 
         res.data.product.regdate = formatRelativeDate(res.data.product.regdate)
         setInfo(res.data.product)
@@ -77,8 +78,8 @@ export default function DetailItem() {
         setSimilar(res.data.slide)
         setShop(res.data.shopData)
         // setWishList(res.data.wishList);
-        let wishList = res.data.wishList.map(v=> v.pid)
-        wishList = wishList.filter(v=>v===res.data.product.pid)
+        let wishList = res.data.wishList.map(v => v.pid)
+        wishList = wishList.filter(v => v === res.data.product.pid)
         wishList = wishList.length ? true : false;
         setBtnWish(wishList)
       })
@@ -118,7 +119,7 @@ export default function DetailItem() {
   const handleClick = (e) => setDepth(!depth)
 
   const mouseEnter = (e) => productImg.length > 1 ? setHover('on') : setHover('')
-  
+
   const chatClick = (e) => {
     let chatData = { uid: userInfo.uid, pid: info.pid }
     axios({
@@ -133,16 +134,21 @@ export default function DetailItem() {
   }
 
   const addWishList = (e) => {
-    let data = { pid: info.pid, uid: userInfo.uid,btnWish }
-    axios({
-      method: 'post',
-      url: `http://localhost:8000/product/wish`,
-      data: data
-    })
-      .then(res => {
-        setDepth(!depth)
+    if (userInfo.uid) {
+      let data = { pid: info.pid, uid: userInfo.uid, btnWish }
+      axios({
+        method: 'post',
+        url: `http://localhost:8000/product/wish`,
+        data: data
       })
-      .catch((err) => { console.log(err) });
+        .then(res => {
+          setDepth(!depth)
+        })
+        .catch((err) => { console.log(err) });
+    }else{
+      alert('로그인후 진행해주세요!')
+    }
+
   }
 
 
@@ -290,7 +296,7 @@ export default function DetailItem() {
                 name={info.productName}
                 price={info.price}
                 date={info.regdate}
-                sellStatus = {info.sellStatus}
+                sellStatus={info.sellStatus}
               />
               <p>이런 상품은 어떠세요?</p>
             </div>
