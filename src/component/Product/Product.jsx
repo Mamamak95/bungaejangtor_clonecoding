@@ -10,7 +10,7 @@ export default function Product(){
   const [products, setProducts] = useState([]); 
   const [newLimit, setNewLimit] = useState(10);
   const [offset, setOffset] = useState(10);
-  console.log(products);
+  
   useEffect(()=>{
     axios
     .get(`http://127.0.0.1:8000/`)

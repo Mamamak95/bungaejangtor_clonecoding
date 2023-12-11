@@ -1,5 +1,6 @@
 import React from "react";
 import "../style/sub_bar/sub_bar.css"
+import { Link } from "react-router-dom";
 
 export default function SubBar(){
 
@@ -9,9 +10,9 @@ export default function SubBar(){
   
   return(
     <div className="sub_bar">
-      <div className="pick_prod">
-        찜한상품
-      </div>
+      <Link className="pick_prod" to={'/profile'}>
+        찜한상품 
+      </Link>
       <div className="last_prod">
         최근본상품
         <p className="last_prod2">
