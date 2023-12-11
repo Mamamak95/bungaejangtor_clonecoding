@@ -9,20 +9,19 @@
   & > div {
     flex: 1;
   }
-  
+
   .chatList_left {
     height: 100%;
     .chatList_header {
       padding: 20px 0;
       position: relative;
       // border-bottom: 1px solid rgb(212, 212, 212);
-      >span {
+      > span {
         cursor: pointer;
         padding: 5px;
         position: absolute;
         right: 10px;
         text-decoration: underline;
-
       }
       .chatList_inner_listType {
         text-align: left;
@@ -38,7 +37,7 @@
 
     .chatList_inner {
       height: 640px;
-      
+
       .chatList_inner_roomList {
         overflow-y: scroll;
         margin: 0;
@@ -54,12 +53,12 @@
           position: relative;
           font-size: 1.3em;
           .chatList_inner_chatRoomLink_img {
-            position: relative; 
+            position: relative;
             width: 60px;
             height: 60px;
-            background-color: #CCC;
+            background-color: #ccc;
             border-radius: 50%;
-            
+
             img {
               position: relative;
               border-radius: 50%;
@@ -68,17 +67,16 @@
               object-fit: cover;
               z-index: 2;
             }
-            svg{
+            svg {
               position: absolute;
               top: 50%;
               left: 50%;
-              transform: translate(-50%,-50%);
+              transform: translate(-50%, -50%);
               width: 70%;
               height: 70%;
               color: white;
               z-index: 1;
             }
-            
           }
           .chatList_inner_chatRoomLink_contents {
             margin-left: 10px;
@@ -87,7 +85,6 @@
             justify-content: center;
             text-align: left;
             div:first-child {
-              
               font-weight: 600;
             }
             div:last-child {
@@ -97,21 +94,21 @@
           &:hover {
             background-color: #eee;
           }
-          .notReadCnt{
+          .notReadCnt {
             position: absolute;
             right: 20px;
             width: 35px;
             height: 35px;
-            
+
             font-weight: 600;
             text-align: center;
             line-height: 35px;
-            transform: translate(10px,15px);
-            background-color: #F70000;
+            transform: translate(10px, 15px);
+            background-color: #f70000;
             border-radius: 50%;
             color: white;
           }
-          .cntOverTen{
+          .cntOverTen {
             font-size: 0.8em;
           }
         }
@@ -119,9 +116,54 @@
     }
   }
   .chatList_right {
-    
     border-left: 1px solid #ccc;
     height: 100%;
+    position: relative;
+    overflow: hidden;
+    .purchaseModal{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150%;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: flex-end;
+      z-index: -1;
+      transition: all 0.5s ease-out;
+      opacity: 0;
+      &.active{
+        top:-50%;
+        opacity:1;
+        z-index: 100;
+        background-color: rgba($color: #000000, $alpha: 0.3);
+      }
+      &>div{
+        padding-top: 30px;
+        padding-bottom: 50px;
+        background-color: white;
+        border-radius: 30px 30px 0 0;
+        font-weight: 700;
+        font-size: 2em;
+        div:first-of-type{
+          padding-bottom: 30px;
+        }
+        div:last-of-type{
+          button{
+            display: block;
+            
+            width: 90%;
+            padding:10px 20px;
+            margin: 10px auto;
+            border-radius: 10px;
+            background-color: #f70000;
+            color: white;
+            font-size: 0.7em;
+          }
+        }
+      }
+    }
     .chatRoom_header {
       border-bottom: 1px solid #ccc;
       height: 50px;
@@ -141,8 +183,47 @@
         padding: 5px;
       }
     }
+    .purchase {
+      display: flex;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      align-items: center;
+      .productlist {
+        margin: -1px -1px 0 0;
+        width: 400px;
+        flex: 1;
+        float:none;
+        .pro {
+          display: flex;
+          border: none;
+          background-color: transparent;
+          box-shadow: none;
+          .pro_status {
+            width: 80px;
+            height: 80px;
+
+            .pro_img {
+              display: block;
+              width: 80px;
+              height: 80px;
+              img{
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+        
+        }
+      }
+      button{
+        color: white;
+        background-color: #f70000;
+        padding: 10px;
+        border-radius: 5px;
+      }
+    }
     .chatLog {
-      height: 620px;
+      height: 520px;
       overflow-y: scroll;
 
       li {
@@ -157,7 +238,7 @@
             width: 150px;
             height: 150px;
           }
-          span{
+          span {
             background-color: transparent;
             font-weight: 900;
             text-align: center;
