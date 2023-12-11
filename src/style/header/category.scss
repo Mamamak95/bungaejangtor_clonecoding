@@ -8,15 +8,19 @@
   font-weight: 400;
   background-color: #fff;
   cursor: auto;
+  // display:flex;
 
   .maincategoryname {
     font-weight: bold;
-    width: 250px;
+    position: relative;
+    height: 600px;
 
     .categoryname {
       border-bottom: 1px solid #ddd;
       padding: 14px 26px;
       position: relative;
+      width: 250px;
+      box-sizing: border-box;
 
       .categoryarrow {
         position: absolute;
@@ -28,6 +32,7 @@
     .maincategorylist {
       padding: 10px 0;
       font-weight: 500;
+      width: 250px;
       
       .categorylist {
         padding: 16px 0;
@@ -36,13 +41,43 @@
         p {
           padding-left: 26px;
         }
+      }
+    }
+  }
 
-        .middlecategoryname {
-          margin-left: 251px;
+  .middlecategoryname {
+    font-weight: bold;
+    width: 250px;
+    height: 600px;
+    position: absolute;
+    top:0;
+    left:251px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 
-          p {
-            padding: 10px 0;
-          }
+    .middlename {
+      border-bottom: 1px solid #ddd;
+      padding: 14px 26px;
+      position: relative;
+
+      .categoryarrow {
+        position: absolute;
+        right:30px;
+        color:red;
+      }
+    }
+
+    .middlecategorylist {
+      padding: 10px 0;
+      font-weight: 500;
+
+      .middlelist {
+        padding: 16px 0;
+        cursor: pointer;
+
+        p {
+          padding-left: 26px;
         }
       }
     }

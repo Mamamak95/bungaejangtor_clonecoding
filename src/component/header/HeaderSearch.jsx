@@ -1,23 +1,30 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import '../../style/header/headersearch.css';
 
 export default function HeaderSearch(){
-  /* 검색창 포커싱 */
-  const [SearchToggle, setSearchToggle] = useState(false);
-  const handleSearch = (e) => {
-    setSearchToggle(e);
+
+let searchRef = useRef(null);
+// 검색 리스트 렌더링용 (true이면 보여준다)
+const [inputFocus, setInputFocus] = useState(false);
+
+useEffect(() => {
+  function handleOutside(e) {
+    // current.contains(e.target) : 컴포넌트 특정 영역 외 클릭 감지를 위해 사용
+    if (searchRef.current && !searchRef.current.contains(e.target)) {
+      setInputFocus(false);
+    }
   }
-  
-  const handleTrueClick = (e) => {
-    setSearchToggle(true)
-  }
+  document.addEventListener("mousedown", handleOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleOutside);
+  };
+}, [searchRef]);
 
   return(
     <>
-      <form className="HeaderSearch" onFocus={() => {handleSearch(true)}} onBlur={() => {handleSearch(false)}}>{/* 헤더메인부분의 검색창을 다루는 컴포넌트 */}
-
-        { SearchToggle &&
-          <div className="Searchpop" onClick={handleTrueClick}>
+      <form className="HeaderSearch" ref={searchRef} onFocus={() => {setInputFocus(true)}}>{/* 헤더메인부분의 검색창을 다루는 컴포넌트 */}
+          { inputFocus &&
+            <div className="Searchpop" id="searchpop">
             <div className="searchcontent">
               <div className="titlename">
                 <div className="recently">최근 검색어</div>
@@ -33,7 +40,7 @@ export default function HeaderSearch(){
               <div className="searchclose">닫기</div>
             </div>
           </div>
-        }
+          }
 
         <div className="search">
           <input placeholder="상품명,지역명,@상점명 입력" type="text" />
