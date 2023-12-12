@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import '../../style/profile/profileHearder.css'
 import { RiStoreLine } from "react-icons/ri";
 import { CiStar } from "react-icons/ci";
+import axios from "axios";
+import { getUser } from "../../util/localStorage";
 
 export default function ProfileHeader({uid, name,regDate,comment}){
   const [isTextareaVisible, setIsTextareaVisible] = useState(false);
@@ -10,30 +12,45 @@ export default function ProfileHeader({uid, name,regDate,comment}){
   const [updatedName, setUpdatedName] = useState(name);
   const commentTextareaRef = useRef(null); 
   const storenameTextareaRef = useRef(null); 
+  const userInfo = getUser() ? getUser() : '';
 
-    /* storename */
-    const handleTogglee = () => {
-      setSTextareaVisible(true);
-    };
-  
-    const handleSavee = () => {
-      setSTextareaVisible(false);
-    };
+  /* storename */
+  const handleTogglee = () => {
+    setSTextareaVisible(true);
+  };
 
-    useEffect(() => {
-      if (isSTextareaVisible) {
-        storenameTextareaRef.current.focus();
-        storenameTextareaRef.current.selectionStart = storenameTextareaRef.current.value.length;
-      }
-    }, [isSTextareaVisible]);
+  const handleSavee = () => {
+    setSTextareaVisible(false);
+
+      axios
+      .get(`http://127.0.0.1:8000/profile/${userInfo.uid}/updatedName/${updatedName}`)
+      .then((result)=>
+        window.location.reload()
+      )
+      .catch((err)=>console.log(err))
+  };
+
+  useEffect(() => {
+    if (isSTextareaVisible) {
+      storenameTextareaRef.current.focus();
+      storenameTextareaRef.current.selectionStart = storenameTextareaRef.current.value.length;
+    }
+  }, [isSTextareaVisible]);
 
   /* comment */
   const handleToggle = () => {
-    setIsTextareaVisible(!isTextareaVisible);
+    setIsTextareaVisible(true);
   };
 
-  const handleSave = () => {
+  const handleComment = () => {
     setIsTextareaVisible(false);
+
+    axios
+    .get(`http://127.0.0.1:8000/profile/${userInfo.uid}/updatedComment/${updatedComment}`)
+    .then((result)=>
+      window.location.reload()
+    )
+    .catch((err)=>console.log(err))
   };
 
   useEffect(() => {
@@ -125,7 +142,7 @@ export default function ProfileHeader({uid, name,regDate,comment}){
               </button>
             )}
             {isTextareaVisible && (
-              <button className="sbox float_left" onClick={handleSave}>
+              <button className="sbox float_left" onClick={handleComment}>
                 저장
               </button>
             )}
