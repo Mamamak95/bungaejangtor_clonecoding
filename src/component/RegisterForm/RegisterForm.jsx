@@ -2,19 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import '../../style/register/Register.css';
 import ProductCategory from '../Register/ProductCategory';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
 import * as localStorage from '../../util/localStorage';
 
 export default function RegisterForm(props) {
   const userInfo = localStorage.getUser() ? localStorage.getUser() : '';
+  let { pid } = useParams();
 
   // 초기 위치 정보 (나중에 API 데이터로 변경될 수 있음)
   let place = '경기도 성남시 중원구 성남동'
   // 상태 관리를 위한 useState 훅 사용
+  let [saveImg, setSaveImg] = useState([]);
+  let [deleteImg, setDeleteImg] = useState([]);
   let [formImg, setFormImg] = useState([]); // 이미지 넘길 변수
   let [form, setForm] = useState({ 'img': '', 'seller': userInfo.uid, 'productName': '', 'category': 'ALL', place, 'price': '', 'content': '' });
-
 
 
   let [textNum, setTextNum] = useState(0);  // 상품이름 input 글자수 체크
@@ -39,8 +41,7 @@ export default function RegisterForm(props) {
 
     setForm(props.data ? props.data : form);
     props.data ? setInfo(props.data.content.length) : setInfo(0)
-    setFormImg(props.images)
-    console.log(props.images);
+    setSaveImg(props.images)
   }, [props.data]);
 
 
@@ -77,6 +78,11 @@ export default function RegisterForm(props) {
   let closeImg = (e) => {
     setThumnail(thumnail = thumnail.filter(v => v !== thumnail[e.target.value]))
     setFormImg(formImg = formImg.filter(v => v !== formImg[e.target.value]))
+    setSaveImg((saveImg) => saveImg.filter((v) => parseInt(v.imageid) !== parseInt(e.target.dataset.imagenum)));
+
+    let deleteImgSubmit = [];
+    deleteImgSubmit.push(e.target.dataset.imagenum)
+    setDeleteImg([...deleteImg, ...deleteImgSubmit])
   }
 
 
@@ -102,7 +108,7 @@ export default function RegisterForm(props) {
 
 
     if (name === 'img') {
-      if (e.target.files.length <= 5 && thumnail.length <= 5) {
+      if (e.target.files.length + saveImg.length <= 5 && thumnail.length + saveImg.length <= 4) {
         const files = e.target.files;
         setFormImg([]);
         setFormImg([...formImg, ...files]);
@@ -168,7 +174,7 @@ export default function RegisterForm(props) {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (formImg.length === 0) {
+    if (formImg.length === 0 && thumnail.length === 0 && saveImg.length === 0) {
       onOutline('on', 4)
       noticeTxt(true, 4)
       return inputImg.current.focus()
@@ -195,48 +201,37 @@ export default function RegisterForm(props) {
       formData.append('images', formImg[i]);
     }
     formData.append('form', JSON.stringify(form))
-
+    formData.append('deleteImg', JSON.stringify(deleteImg))
     axios({
       method: 'post',
-      url: `http://127.0.0.1:8000/product/new/${userInfo.uid}`,
+      url: props.edit ? `http://127.0.0.1:8000/edit/${pid}` : `http://127.0.0.1:8000/product/new/${userInfo.uid}`,
       data: formData,
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     })
       .then(result => {
-        alert('상품 등록이 완료되었습니다.')
-        navigate(`/`)
+        props.edit ? alert('상품 수정이 완료되었습니다.') : alert('상품 등록이 완료되었습니다.')
+        navigate('/')
       })
       .catch(err => console.log('에러==>' + err))
 
   }
 
   let imgPreview = () => {
-    if (formImg) {
-      return formImg.length ? (
-        formImg.map((photo, i) => (
+    if (saveImg) {
+      return saveImg.length ? (
+        saveImg.map((photo, i) => (
           <span className="previewContainer" key={i}>
             <img src={`http://127.0.0.1:8000/${photo.img}`} className='photoPreview' />
-            <button className="imgClose" type="button" value={i} onClick={closeImg}>
-              <CgClose />
-            </button>
-          </span>
-        ))
-      ) : null;
-    } else if (thumnail.length) {
-      return thumnail.length ? (
-        thumnail.map((photo, i) => (
-          <span className="previewContainer" key={i}>
-            <img src={photo} className='photoPreview' />
-            <button className="imgClose" type="button" value={i} onClick={closeImg}>
+            <button className="imgClose" type="button" data-imagenum={photo.imageid} onClick={closeImg}>
               <CgClose />
             </button>
           </span>
         ))
       ) : null;
     }
-  
+
     return null;
   };
 
@@ -249,7 +244,7 @@ export default function RegisterForm(props) {
         <fieldset className="inner">
           <h2 className="ProductRegisterTitle">기본정보<span>*필수항목</span></h2>
           <div className="inputContainer">
-            <p className="inputTitle imgTitle">상품이미지<span className="red">*</span><small>({formImg.length}/5)</small></p>
+            <p className="inputTitle imgTitle">상품이미지<span className="red">*</span><small>({formImg.length + saveImg.length}/5)</small></p>
             <div className="imageInputBox">
               <span id="imageInput" className={outline[4]}>
                 <input type="file" name='img' ref={inputImg} accept="image/jpg, image/jpeg, image/png" multiple onChange={(e) => {
@@ -258,13 +253,13 @@ export default function RegisterForm(props) {
                 <i className="xi-camera"><span>이미지 등록</span></i>
               </span>
               {imgPreview()}
-              {/* {thumnail.length ? thumnail.map((photo, i) =>
+              {thumnail.length ? thumnail.map((photo, i) =>
                 <span className="previewContainer">
                   <img src={photo} className='photoPreview' />
                   <button className="imgClose" type="button" value={i} onClick={closeImg}><CgClose /></button>
                 </span>)
                 :
-                null} */}
+                null}
 
               <span className="notice">
                 {notice[4] && <><i className="xi-ban"></i>상품 사진을 등록해주세요..</>}
@@ -443,8 +438,8 @@ export default function RegisterForm(props) {
         </fieldset>
         <div className="submitBar">
           <ul className="inner">
-            <li><button readOnly>임시저장</button></li>
-            <li><button className="submit">등록하기</button></li>
+            <li><button readOnly type="button">임시저장</button></li>
+            <li><button className="submit">{props.edit ? '수정하기' : '등록하기'}</button></li>
           </ul>
         </div>
       </form>
