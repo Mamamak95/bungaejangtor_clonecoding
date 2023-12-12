@@ -30,7 +30,7 @@ export default function ProductEdit() {
 
     <>
       {userInfo.uid ?
-        <RegisterForm data={data} images={images}/>
+        <RegisterForm data={data} images={images} edit={true}/>
         :
         <NotFound />}
 

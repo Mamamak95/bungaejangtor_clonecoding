@@ -11,7 +11,7 @@ export default function ProductRegister() {
 
     <>
       {userInfo.uid ?
-        <RegisterForm/>
+        <RegisterForm images={[]}/>
         :
         <NotFound />}
 
