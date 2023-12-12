@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import '../../style/profile/profileHearder.css'
 import { RiStoreLine } from "react-icons/ri";
 import { CiStar } from "react-icons/ci";
@@ -8,6 +8,8 @@ export default function ProfileHeader({uid, name,regDate,comment}){
   const [isSTextareaVisible, setSTextareaVisible] = useState(false);
   const [updatedComment, setUpdatedComment] = useState(comment);
   const [updatedName, setUpdatedName] = useState(name);
+  const commentTextareaRef = useRef(null); 
+  const storenameTextareaRef = useRef(null); 
 
     /* storename */
     const handleTogglee = () => {
@@ -18,15 +20,28 @@ export default function ProfileHeader({uid, name,regDate,comment}){
       setSTextareaVisible(false);
     };
 
+    useEffect(() => {
+      if (isSTextareaVisible) {
+        storenameTextareaRef.current.focus();
+        storenameTextareaRef.current.selectionStart = storenameTextareaRef.current.value.length;
+      }
+    }, [isSTextareaVisible]);
 
   /* comment */
   const handleToggle = () => {
-    setIsTextareaVisible(true);
+    setIsTextareaVisible(!isTextareaVisible);
   };
 
   const handleSave = () => {
     setIsTextareaVisible(false);
   };
+
+  useEffect(() => {
+    if (isTextareaVisible) {
+      commentTextareaRef.current.focus();
+      commentTextareaRef.current.selectionStart = commentTextareaRef.current.value.length;
+    }
+  }, [isTextareaVisible]);
 
   return(
     <div className="inner">
@@ -49,6 +64,7 @@ export default function ProfileHeader({uid, name,regDate,comment}){
               ) : (
                 <textarea
                   className="name_textarea"
+                  ref={storenameTextareaRef}
                   value={updatedName}
                   onChange={(e) => setUpdatedName(e.target.value)}
                 ></textarea>
@@ -97,6 +113,7 @@ export default function ProfileHeader({uid, name,regDate,comment}){
               ) : (
                 <textarea
                   className="commet_textarea"
+                  ref={commentTextareaRef}
                   value={updatedComment}
                   onChange={(e) => setUpdatedComment(e.target.value)}
                 ></textarea>
