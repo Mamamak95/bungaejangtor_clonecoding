@@ -3,14 +3,16 @@ import "../style/sub_bar/sub_bar.css";
 import { Link } from "react-router-dom";
 import Image from "./common/Image";
 
-export default function SubBar() {
+export default function SubBar({pathname}) {
   const [recentProduct, setRecentProduct] = useState(null);
 
   useEffect(() => {
     const recentProductData = localStorage.getItem("recentProduct");
     const parsedData = recentProductData ? JSON.parse(recentProductData) : null;
-    setRecentProduct(parsedData);
-  }, []);
+    if (parsedData !== recentProduct) {
+      setRecentProduct((s)=>parsedData);
+    }
+  },[pathname]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

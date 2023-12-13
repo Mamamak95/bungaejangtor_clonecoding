@@ -19,7 +19,6 @@ export default function Text() {
       url: `http://localhost:8000/wishList/${userInfo.uid}`
     })
       .then(res => {
-        console.log(res.data);
         res.data = res.data.map(v => ({ ...v, 'check': false }))
         setList(res.data)
       })
