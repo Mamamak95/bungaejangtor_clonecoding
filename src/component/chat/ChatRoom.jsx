@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import formatRelativeDate from "../../util/date.js";
 import ProductList from "../Product/ProductList.jsx";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function ChatRoom({ user, roomInfo, chatLog, handleKey }) {
   const chatBox = useRef(null);
   const [purchase, setPerchase] = useState(false);
   const navigate = useNavigate();
 
-  console.log(roomInfo);
   useEffect(() => {
     const scroll = window.scrollTop;
     async function scrollTo() {
@@ -21,13 +21,35 @@ export default function ChatRoom({ user, roomInfo, chatLog, handleKey }) {
     setPerchase(true);
   };
 
+  const confirmPurchase = () => {
+    axios
+      .post(`http://127.0.0.1:8000/purchase`, {
+        pid: roomInfo.pid,
+        buyer: user,
+        seller: roomInfo.seller,
+      })
+      .then((res) =>
+        res.data > 0
+          ? navigate(`/purchase/${roomInfo.pid}/${user}/${res.data}`)
+          : res.data == -1
+          ? alert("이미 구매가 완료된 상품입니다.")
+          : alert("다시 시도해주세요")
+      );
+  };
+
   return (
     <div className="chatList_right">
       <div className={purchase ? "purchaseModal active" : "purchaseModal"}>
         <div>
           <div>구매하시겠습니까?</div>
           <div>
-            <button onClick={()=>{navigate(`/purchase/${roomInfo.pid}`)}}>구매</button>
+            <button
+              onClick={() => {
+                confirmPurchase();
+              }}
+            >
+              구매
+            </button>
             <button
               onClick={() => {
                 setPerchase(false);
@@ -50,7 +72,9 @@ export default function ChatRoom({ user, roomInfo, chatLog, handleKey }) {
               price={roomInfo.price}
             ></ProductList>
           </Link>
-          {roomInfo.seller != user ? (
+          {roomInfo.sellStatus == "sell" ? (
+            <button style={{ cursor: "default" }}>판매완료</button>
+          ) : roomInfo.seller != user ? (
             <button
               onClick={() => {
                 handlePurchase(roomInfo.crid);
