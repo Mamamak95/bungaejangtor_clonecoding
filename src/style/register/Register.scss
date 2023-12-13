@@ -412,6 +412,9 @@ fieldset {
         border-radius: 2px;
         border: 1px solid rgb(204, 204, 204);
         background: rgb(255, 255, 255);
+        @media #{m.$max-sm} {
+          height: 55vw;
+        }
 
         &.active {
           border: 1px solid rgb(245, 126, 0) !important;
@@ -463,8 +466,8 @@ fieldset {
             cursor: pointer;
             font-weight: 500;
 
-            @media #{m.$max-lg} {
-              height: auto;
+            @media #{m.$max-sm} {
+              padding-left: 0px;
             }
 
             &:hover {

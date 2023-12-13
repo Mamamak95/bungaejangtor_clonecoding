@@ -343,6 +343,11 @@ fieldset .inputContainer div .register {
   border: 1px solid rgb(204, 204, 204);
   background: rgb(255, 255, 255);
 }
+@media screen and (max-width:500px) {
+  fieldset .inputContainer div .register {
+    height: 55vw;
+  }
+}
 fieldset .inputContainer div .register.active {
   border: 1px solid rgb(245, 126, 0) !important;
 }
@@ -388,9 +393,9 @@ fieldset .inputContainer div .register > div button {
   cursor: pointer;
   font-weight: 500;
 }
-@media screen and (max-width:1000px) {
+@media screen and (max-width:500px) {
   fieldset .inputContainer div .register > div button {
-    height: auto;
+    padding-left: 0px;
   }
 }
 fieldset .inputContainer div .register > div button:hover {
