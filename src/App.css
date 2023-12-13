@@ -68,7 +68,10 @@ fieldset{
 }
 @media screen and (max-width: 1000px) {
   .inner{
-    width: 98%;
+    width: 90%;
   }
   
+}
+:root {
+  --red: rgb(247, 47, 51); 
 }

@@ -1,6 +1,9 @@
 @use '../mixin' as m;
 
 .wishList {
+  margin-bottom: 8%;
+
+
 
   .check {
     width: 24px;
@@ -9,9 +12,11 @@
     cursor: pointer;
     transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
     position: relative;
+
     @media #{m.$max-sm} {
       display: none;
     }
+
     &::before {
       content: "";
       position: absolute;
@@ -46,8 +51,8 @@
       height: 24px;
       cursor: pointer;
       position: relative;
-      background: rgb(247, 47, 51);
-      border: 1px solid rgb(247, 47, 51);
+      background: var(--red);
+      border: 1px solid var(--red);
       transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
 
       &::before {
@@ -74,7 +79,8 @@
 
     }
   }
-  .deleteWish{
+
+  .deleteWish {
     padding: 0px 10px;
     margin-left: 10px;
     height: 28px;
@@ -87,6 +93,10 @@
     font-size: 13px;
     background: rgb(255, 255, 255);
     color: rgb(136, 136, 136);
+
+    @media #{m.$max-sm} {
+      display: none;
+    }
   }
 
   h2 {
@@ -96,13 +106,14 @@
     -webkit-box-pack: justify;
 
     @media #{m.$max-sm} {
-      font-size: 16px;
-      padding: 30px 0 10px;
 
+      display: none;
     }
 
     span {
-      color: rgb(247, 47, 51);
+      color: var(--red);
+
+      // color: var(--red);
     }
 
 
@@ -117,17 +128,76 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
 
+    @media #{m.$max-sm} {
+      padding: 4% 0 2%;
+      border-bottom: 1px solid rgb(238, 238, 238);
+
+    }
+
+
+    h2 {
+      display: none;
+
+      @media #{m.$max-sm} {
+        padding: 0;
+        font-size: 16;
+        display: block;
+      }
+    }
+
+    .sort {
+      display: flex;
+      font-size: 13px;
+
+      span {
+        margin-right: 20px;
+        position: relative;
+        display: block;
+        cursor: pointer;
+
+        &.on {
+          color: var(--red);
+
+        }
+
+        &:hover {
+          color: var(--red);
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 1px;
+          right: -10px;
+          width: 1px;
+          height: 12px;
+          border-right: 1px solid rgb(204, 204, 204);
+        }
+
+        &:last-child {
+          margin-right: 0;
+
+          &::after {
+            display: none;
+          }
+
+        }
+      }
+    }
 
   }
 
   .checkControll {
     display: flex;
 
+    @media #{m.$max-sm} {
+      display: none;
+    }
 
 
   }
 
-  ul {
+  .wishContainer {
 
     display: flex;
     flex-wrap: wrap;
@@ -148,9 +218,8 @@
         z-index: 10;
         top: 20px;
         right: 15px;
-        @media #{m.$max-sm} {
-          display: none;
-        }
+
+
 
         &.on {
           position: absolute;
@@ -172,127 +241,145 @@
 
     }
 
+    .productlist {}
+
+
     .productlist {
+      .pro_comtent {
+        position: relative;
+        width: 100%;
 
+        .pro_pr_da {
+          &>div:last-child {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 0 8px 8px;
+            border-top: 1px solid rgb(238, 238, 238);
+            font-size: 12px;
 
-    }
-
-
-    @media #{m.$min-sm} {
-      .productlist {
-        .pro_comtent {
-          position: relative;
-          width: 100%;
-  
-          .pro_pr_da {
-            &>div:last-child {
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              box-sizing: border-box;
-              padding: 8px 0 8px 8px;
-              border-top: 1px solid rgb(238, 238, 238);
-              font-size: 12px;
-              &::before{
-                content: '';
-                position: relative;
-                bottom: 1px;
-                display: inline-block;
-                width: 16px;
-                height: 13px;
-                background: url(https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png) 50% 50% no-repeat;
-                background-size: contain;
-                vertical-align: middle;
-    
-              }
-            }
-          }
-        }
-        .pro {
-          display: flex;
-          filter: none;
-
-          .pro_img {
-            display: block;
-            width: 160px;
-            height: 160px;
-
-            img {
-              object-fit: cover;
-              height: 100%;
-            }
-          }
-
-          .pro_comtent {
-
-            .pro_name {
-              font-size: 14px;
-              margin-bottom: 10px;
-              padding: 20px 0 0 20px;
-              box-sizing: border-box;
+            &::before {
+              content: '';
+              position: relative;
+              bottom: 1px;
+              display: inline-block;
+              width: 16px;
+              height: 13px;
+              background: url(https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png) 50% 50% no-repeat;
+              background-size: contain;
+              vertical-align: middle;
 
             }
+            @media #{m.$max-lg} {
+            padding: 6px 0 6px 6px;
+            font-size: 11px;
 
-            .pro_price {
-              font-size: 16px;
-              font-weight: 600;
-              margin-right: 3px;
-              line-height: 1;
+            &::before {
+              width: 13px;
+              height: 10px;
             }
 
-            .pro_pr_da {
-              display: block;
-              padding-left: 20px;
-              box-sizing: border-box;
-
-
-              .pro_date {
-                margin-top: 10px;
-              }
-          
-
             }
-
-
+            @media #{m.$max-sm} {
+              position: static;
+              padding: 5px 0;
+            }
 
 
           }
-
         }
       }
-    }
 
-    @media #{m.$max-sm} {
-      li {
-        width: 30.33333%;
-        margin: 0 1.5% 1.5%;
+      .pro {
+        display: flex;
+        filter: none;
+        @media #{m.$max-sm} {
+          flex-wrap: wrap;
+        }
 
-        .pro {
-          margin-top: 0;
+        .pro_status {
+          @media #{m.$max-lg} {
+            width: 40%;
+          }
+          @media #{m.$max-sm} {
+            width: 100%;
+          }
+
+
+        }
+
+        .pro_img {
+          display: block;
+          width: 160px;
+          height: 160px;
+
+          @media #{m.$max-lg} {
+            width: 100%;
+            height: 115px;
+          }
+          @media #{m.$max-sm} {
+            height: 40vw;
+          }
+
+
+          img {
+            object-fit: cover;
+            height: 100%;
+          }
+        }
+
+        .pro_comtent {
 
           .pro_name {
-            font-size: 12px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding: 20px 0 0 20px;
+            box-sizing: border-box;
+
+            @media #{m.$max-lg} {
+              font-size: 12px;
+              margin-bottom: 5px;
+              padding: 10px 0 0 10px;
+            }
+
+          }
+
+          .pro_price {
+            font-size: 16px;
+            font-weight: 600;
+            margin-right: 3px;
+            line-height: 1;
+            @media #{m.$max-lg} {
+              font-size: 14px;
+            }
+
           }
 
           .pro_pr_da {
             display: block;
-            &>div:last-child {
-              display: none;
-            }
-          }
-
-          .pro_img {
-            img {
-              height: 35vw;
+            padding-left: 20px;
+            box-sizing: border-box;
+            @media #{m.$max-lg} {
+              padding-left: 10px;
             }
 
+
+            .pro_date {
+              margin-top: 10px;
+              @media #{m.$max-lg} {
+                margin-top: 6px;
+                font-size: 12px;
+              }
+  
+            }
+
+
           }
 
-          .pro_date {
-            font-size: 12px;
-            padding-bottom: 5px;
-          }
+
+
 
         }
 
@@ -300,6 +387,103 @@
     }
 
 
+
+
+
+    // @media #{m.$max-sm} {
+    //   li {
+    //     width: 30.33333%;
+    //     margin: 0 1.5% 1.5%;
+
+    //     .pro {
+    //       margin-top: 0;
+
+    //       .pro_name {
+    //         font-size: 12px;
+    //       }
+
+    //       .pro_pr_da {
+    //         display: block;
+
+    //         &>div:last-child {
+    //           display: none;
+    //         }
+    //       }
+
+    //       .pro_img {
+    //         img {
+    //           height: 35vw;
+    //         }
+
+    //       }
+
+    //       .pro_date {
+    //         font-size: 12px;
+    //         padding-bottom: 5px;
+    //       }
+
+    //     }
+
+    //   }
+    // }
+
+
+
+  }
+
+  .noList {
+    color: rgb(136, 136, 136);
+    margin: 4% 0 0;
+    font-size: 14px;
+  }
+
+  .rc-pagination {
+    padding-top: 4%;
+    display: flex;
+    justify-content: center;
+    @media #{m.$max-sm} {
+      padding-top: 6%;
+    }
+
+    .rc-pagination-item-active:focus,
+    .rc-pagination-item-active:hover {
+      border-color: var(--red);
+    }
+
+    .rc-pagination-item-active {
+      border-color: var(--red);
+    }
+
+    .rc-pagination-item-active a {
+      color: var(--red);
+    }
+
+    .rc-pagination-item:focus,
+    .rc-pagination-item:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .rc-pagination-item:focus a,
+    .rc-pagination-item:hover a {
+      color: var(--red);
+    }
+
+    .rc-pagination-prev:focus .rc-pagination-item-link,
+    .rc-pagination-next:focus .rc-pagination-item-link,
+    .rc-pagination-prev:hover .rc-pagination-item-link,
+    .rc-pagination-next:hover .rc-pagination-item-link {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .rc-pagination-disabled .rc-pagination-item-link,
+    .rc-pagination-disabled:hover .rc-pagination-item-link,
+    .rc-pagination-disabled:focus .rc-pagination-item-link {
+      color: rgba(0, 0, 0, 1);
+      cursor: default;
+      border-color: #d9d9d9;
+    }
 
   }
 }

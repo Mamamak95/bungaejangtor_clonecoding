@@ -159,6 +159,7 @@
   height: 100%;
 }
 .detailPage .detailItem .productSwiper .detailItemImg img {
+  background-color: #fff;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -766,6 +767,7 @@
   display: flex;
   margin-top: 20px;
   margin-bottom: 16px;
+  cursor: pointer;
 }
 .detailPage .detailSecond > div:last-child .userInfo .profileImg {
   position: relative;
@@ -792,27 +794,24 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.detailPage .detailSecond > div:last-child .userInfo .storeName a {
-  display: block;
-}
-.detailPage .detailSecond > div:last-child .userInfo .storeName a p {
+.detailPage .detailSecond > div:last-child .userInfo .storeName p {
   display: block;
   margin: 4px 0px 4px;
   color: rgb(33, 33, 33);
   font-size: 15px;
 }
-.detailPage .detailSecond > div:last-child .userInfo .storeName a ul {
+.detailPage .detailSecond > div:last-child .userInfo .storeName ul {
   display: flex;
 }
-.detailPage .detailSecond > div:last-child .userInfo .storeName a ul li {
+.detailPage .detailSecond > div:last-child .userInfo .storeName ul li {
   font-size: 12px;
   color: rgb(153, 153, 153);
 }
-.detailPage .detailSecond > div:last-child .userInfo .storeName a ul li:first-child {
+.detailPage .detailSecond > div:last-child .userInfo .storeName ul li:first-child {
   margin-right: 17px;
   position: relative;
 }
-.detailPage .detailSecond > div:last-child .userInfo .storeName a ul li:first-child::after {
+.detailPage .detailSecond > div:last-child .userInfo .storeName ul li:first-child::after {
   content: "";
   position: absolute;
   top: 4px;

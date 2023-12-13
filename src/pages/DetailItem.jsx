@@ -412,16 +412,14 @@ export default function DetailItem() {
               <h3>상점정보</h3>
               <div>
 
-                <div className="userInfo">
+                <div className="userInfo" onClick={()=>navigate(`/profile/${info.seller}`)}>
                   <Image className="profileImg" url={info.userImage} />
                   <div className="storeName">
-                    <Link to="#">
                       <p>{info.seller}</p>
                       <ul>
                         <li>상품{info.total_pid_count}</li>
                         <li>팔로워20</li>
                       </ul>
-                    </Link>
 
                   </div>
                 </div>
@@ -442,29 +440,29 @@ export default function DetailItem() {
                 </ul>
 
                 <div className="showMoreSeller">
-                  <Link to='#'>
+                  <Link to={`/profile/${info.seller}`}>
                     <span>{info.total_pid_count}개</span>
                     상품더보기
                     <IoIosArrowForward color="rgb(136, 136, 136" />
                   </Link>
                 </div>
                 {
-                  userInfo.uid === info.seller ?
-                    <div className="myPageBtn">
-                      <Link to="/profile">
-                        내 상점 관리
-                      </Link>
-                    </div>
-                    :
+                  // userInfo.uid === info.seller ?
+                  //   <div className="myPageBtn">
+                  //     <Link to="/profile">
+                  //       내 상점 관리
+                  //     </Link>
+                  //   </div>
+                  //   :
 
-                    <div className="btnIcon">
-                      <div>
-                        <WishBtn btnWish={btnWish} size={14} addWishList={addWishList} />
-                      </div>
-                      <div>
-                        <ChatBtn className="btnChat" color="white" size={14} chatClick={chatClick} />
-                      </div>
-                    </div>
+                  //   <div className="btnIcon">
+                  //     <div>
+                  //       <WishBtn btnWish={btnWish} size={14} addWishList={addWishList} />
+                  //     </div>
+                  //     <div>
+                  //       <ChatBtn className="btnChat" color="white" size={14} chatClick={chatClick} />
+                  //     </div>
+                  //   </div>
                 }
 
 
