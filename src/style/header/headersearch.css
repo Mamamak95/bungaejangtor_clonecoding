@@ -1,4 +1,5 @@
-.Searchpop {
+@charset "UTF-8";
+.HeaderSearch .Searchpop {
   position: absolute;
   top: 46px;
   left: 0;
@@ -6,44 +7,73 @@
   border: 1px solid #ddd;
   box-sizing: border-box;
 }
-.Searchpop .searchcontent {
+.HeaderSearch .Searchpop .searchcontent {
   padding: 20px;
   background-color: #fff;
+  /* 검색어를 입력하는 중인 onChange 상태의 css */
 }
-.Searchpop .searchcontent .titlename {
+.HeaderSearch .Searchpop .searchcontent .titlename {
   display: flex;
   justify-content: space-between;
   text-align: center;
   font-weight: bold;
 }
-.Searchpop .searchcontent .titlename div {
+.HeaderSearch .Searchpop .searchcontent .titlename div {
   padding: 6px;
   width: 50%;
 }
-.Searchpop .searchcontent .titlename .recently {
+.HeaderSearch .Searchpop .searchcontent .titlename .recently {
   border-bottom: 2px solid red;
   color: red;
 }
-.Searchpop .searchcontent .titlename .popular {
+.HeaderSearch .Searchpop .searchcontent .titlename .popular {
   border-bottom: 2px solid rgb(217, 217, 217);
 }
-.Searchpop .searchcontent .searchcenter {
+.HeaderSearch .Searchpop .searchcontent .searchcenter {
   height: 360px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.Searchpop .searchcontent .searchcenter img {
+.HeaderSearch .Searchpop .searchcontent .searchcenter img {
   width: 52px !important;
   height: 46px !important;
 }
-.Searchpop .searchcontent .searchcenter p {
+.HeaderSearch .Searchpop .searchcontent .searchcenter p {
   margin-top: 20px;
 }
-.Searchpop .searchfooter {
+.HeaderSearch .Searchpop .searchcontent .titlename2 {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid rgb(217, 217, 217);
+  position: relative;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename2 div {
+  padding: 6px;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename2 .recently2 span {
+  color: red;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter2 {
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter2 p {
+  margin-top: 20px;
+}
+.HeaderSearch .Searchpop .searchfooter {
   display: flex;
   justify-content: space-between;
   padding: 8px 30px;
   background-color: #efefef;
+}
+.HeaderSearch .Searchpop .searchfooter .searchclose {
+  cursor: pointer;
+}
+.HeaderSearch .searchCloseBtn {
+  visibility: visible;
 }/*# sourceMappingURL=headersearch.css.map */
