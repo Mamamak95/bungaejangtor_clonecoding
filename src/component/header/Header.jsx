@@ -14,7 +14,6 @@ export default function Header(){
 
   const userInfo = localStorage.getUser();
   const userInfoSession = sessionStorage.getUserSession();
-  const userUid = userInfo.uid;
 
   const bookmark = (e) => {
     alert('Ctrl+D 키를 누르면 즐겨찾기에 추가하실 수 있습니다.');
