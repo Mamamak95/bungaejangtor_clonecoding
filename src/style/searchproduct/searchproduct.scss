@@ -1,0 +1,92 @@
+.selected {
+  color:red;
+}
+
+.searchProduct {
+  padding: 80px 0;
+
+  .searchproductnav {
+    display:flex;
+    justify-content: space-between;
+
+    .searchproducttitle {
+      display: flex;
+
+      .searchproductname {
+        color:red;
+      }
+
+      .searchproductcount {
+        padding-left: 10px;
+      }
+    }
+
+    .searchsequence {
+      display: flex;
+      font-size: 0.9rem;
+
+      li:not(:last-of-type) {
+        margin-right: 20px;
+        padding-right: 20px;
+        position: relative;
+      }
+
+      li:not(:last-of-type)::after {
+        content:"";
+        display:block;
+        width: 1px;
+        height: 50%;
+        position: absolute;
+        top:50%;
+        right:0;
+        transform: translateY(-50%);
+        background-color: #ccc;
+      }
+
+      li {
+        cursor: pointer;
+      }
+    }
+  }
+
+
+  .searchproductmain {
+    margin: 40px 0;
+    
+    .searchproductcontent {
+      display:flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      li {
+        border:1px solid #ddd;
+        padding: 10px;
+
+        .searchlistlink {
+
+          .searchlistinfo {
+            display:flex;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+  }
+
+
+  .searchpage {
+    
+
+    .searchpagenation {
+      display:flex;
+      justify-content: center;
+
+      li {
+        padding: 6px 12px;
+        margin: 0 10px;
+        border:1px solid #000;
+
+      }
+    }
+  }
+}

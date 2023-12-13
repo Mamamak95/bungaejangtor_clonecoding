@@ -231,7 +231,6 @@ header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch .search input {
   outline: none;
 }
 header .HeaderMain .headerMainWrap .HeaderContents .HeaderSearch .searchCloseBtn {
-  visibility: hidden;
   border: none;
   background-color: #fff;
   padding: 0 10px;

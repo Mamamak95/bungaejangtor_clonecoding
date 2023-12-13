@@ -12,14 +12,14 @@ export default function Category(prop){
   const [mainCategory, setMainCategory] = useState([])
   useEffect(() => {
     axios
-    .get('data/mainCategory.json')
+    .get('http://127.0.0.1:3000/data/mainCategory.json')
     .then(data => {
       setMainCategory(data.data)
     })
     .catch(error => {
       console.error('에러 상태 코드:', error.data);
     });
-  },[])
+  },[]) // indexjs 의 경로랑 충돌나서 상품등록페이지, 상세페이지에서 출력이 안돼서 경로를 생략하지않고 써야함
 
   const listRef = useRef(null)
   const mainNameRef = useRef(null)
@@ -40,7 +40,7 @@ export default function Category(prop){
     setMiddleName(mainNameKor)
 
     await axios
-    .get(`data/middle/${mainName}.json`)
+    .get(`http://127.0.0.1:3000/data/middle/${mainName}.json`)
     .then(data => 
       setMiddle(data.data)
     )

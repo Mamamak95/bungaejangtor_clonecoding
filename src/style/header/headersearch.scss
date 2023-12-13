@@ -1,58 +1,113 @@
-.Searchpop {
-  position: absolute;
-  top:46px;
-  left:0;
-  width: 100%;
-  border:1px solid #ddd;
-  box-sizing: border-box;
+.HeaderSearch {
 
-  .searchcontent {
-    padding: 20px;
-    background-color: #fff;
+  .Searchpop {
+    position: absolute;
+    top:46px;
+    left:0;
+    width: 100%;
+    border:1px solid #ddd;
+    box-sizing: border-box;
 
-    .titlename {
-      display:flex;
-      justify-content: space-between;
-      text-align: center;
-      font-weight: bold;
+    .searchcontent {
+      padding: 20px;
+      background-color: #fff;
 
-      div {
-        padding: 6px;
-        width: 50%;
+      .titlename {
+        display:flex;
+        justify-content: space-between;
+        text-align: center;
+        font-weight: bold;
+
+        div {
+          padding: 6px;
+          width: 50%;
+        }
+
+        .recently {
+          border-bottom:2px solid red;
+          color:red;
+        }
+
+        .popular {
+          border-bottom:2px solid rgb(217,217,217);
+        }
       }
 
-      .recently {
-        border-bottom:2px solid red;
-        color:red;
+      .searchcenter {
+        height: 360px;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 52px !important;
+          height: 46px !important;
+        }
+
+        p {
+          margin-top: 20px;
+        }
       }
 
-      .popular {
+      /* 검색어를 입력하는 중인 onChange 상태의 css */
+      .titlename2 {
+        display:flex;
+        align-items: center;
         border-bottom:2px solid rgb(217,217,217);
+        position: relative;
+
+        div {
+          padding: 6px;
+        }
+
+        .searchproducticon {
+          
+        }
+
+        .recently2 {
+          
+          span {
+            color:red;
+          }
+        }
+
+        .popular2 {
+          
+        }
+      }
+
+      .searchcenter2 {
+        height: 360px;
+        display:flex;
+        flex-direction: column;
+        justify-content:flex-start;
+        align-items:left;
+
+        p {
+          margin-top: 20px;
+        }
       }
     }
 
-    .searchcenter {
-      height: 360px;
+    .searchfooter {
       display:flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      justify-content: space-between;
+      padding: 8px 30px;
+      background-color: #efefef;
 
-      img {
-        width: 52px !important;
-        height: 46px !important;
-      }
-
-      p {
-        margin-top: 20px;
+      .searchclose {
+        cursor: pointer;
       }
     }
   }
 
-  .searchfooter {
-    display:flex;
-    justify-content: space-between;
-    padding: 8px 30px;
-    background-color: #efefef;
+
+  .search {
+
+  }
+  
+  .searchCloseBtn {
+    visibility:visible;
   }
 }

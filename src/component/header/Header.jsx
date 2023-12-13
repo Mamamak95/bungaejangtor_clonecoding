@@ -14,6 +14,7 @@ export default function Header(){
 
   const userInfo = localStorage.getUser();
   const userInfoSession = sessionStorage.getUserSession();
+  const userUid = userInfo.uid;
 
   const bookmark = (e) => {
     alert('Ctrl+D 키를 누르면 즐겨찾기에 추가하실 수 있습니다.');
@@ -53,6 +54,12 @@ export default function Header(){
     userInfo ? navigate(`/chat`) : handleLoginToggle();
     // userInfoSession ? navigate(`/chat`) : handleLoginToggle();
   }
+
+  /* Link to 함수넣기 동적링크 생성 */
+  // const naviMyProfileReturn = (e) => {
+  //   return `/profile/${e}`;
+  // }
+  // const naviMyProfile = naviMyProfileReturn(userUid);
 
   /* 로그인 후 가시화된 최상단 알림 hover */
   const alertPopup = useRef(null);
@@ -124,7 +131,7 @@ export default function Header(){
                     <div className="mystorelist" ref={mystorePopup}>
                       <ul>
                         <li onMouseEnter={handleStoreListEnter} onMouseLeave={handleStoreListLeave}>
-                          <Link to = '/profile'>내 상품</Link>
+                          <Link to = {`/profile/${userInfo.uid}`} >내 상품</Link>
                         </li>
                         <li onMouseEnter={handleStoreListEnter} onMouseLeave={handleStoreListLeave}>
                           <Link to = '/profile'>찜한상품</Link>
