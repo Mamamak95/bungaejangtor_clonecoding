@@ -179,17 +179,17 @@ export default function RegisterForm(props) {
       noticeTxt(true, 4)
       return inputImg.current.focus()
     }
-    if (form.productName === '') {
+    if (form.productName.length < 2 || form.productName === '') {
       noticeTxt(true, 0)
       onOutline('on', 0)
       return inputProductName.current.focus()
     }
-    if (form.price === '') {
+    if (parseInt(form.price) < 100 || form.price === '') {
       noticeTxt(true, 1)
       onOutline('on', 1)
       return inputPrice.current.focus()
     }
-    if (form.content === '') {
+    if (form.content.length < 10 || form.content === '') {
       noticeTxt(true, 3)
       onOutline('on', 3)
       return inputContent.current.focus()
