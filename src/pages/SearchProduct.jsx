@@ -20,7 +20,7 @@ export default function SearchProduct(prop){
     .then(data => {
       setSearchNameList(data.data)
       setSearchCount(data.data.length)
-      console.log(data.data);
+      // console.log(data.data);
     })
     .catch(error => {
       console.error("에러 발생:", error);

@@ -55,7 +55,7 @@
     
     .searchproductcontent {
       display:flex;
-      justify-content: space-between;
+      justify-content:first baseline;
       flex-wrap: wrap;
 
       li {
