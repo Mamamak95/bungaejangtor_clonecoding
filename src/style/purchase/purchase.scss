@@ -38,14 +38,24 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         * {
           font-size: 1.2em;
           margin: 5px 0;
           font-weight: 600;
         }
+       .pro_pr_da{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+       }
         .pro_name {
           width: 100%;
+          font-size: 1.4em;
+          text-align: left;
+        }
+        .pro_date{
+          font-size: 0.8em;
         }
       }
     }

@@ -190,6 +190,7 @@
   float: none;
 }
 .chatList .chatList_right .purchase .productlist .pro {
+  border-radius: none;
   display: flex;
   border: none;
   background-color: transparent;
