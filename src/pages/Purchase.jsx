@@ -6,26 +6,25 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { getUser } from "../util/localStorage";
 import { FaRegStar, FaStar } from "react-icons/fa";
 
+
 import "../style/purchase/purchase.css";
 
 export default function Purchase() {
   const user = getUser().uid;
   const [review, setReview] = useState("");
-  const [product, setProduct] = useState({});
-  const [star, setStar] = useState(1);
+  const [product, setProduct] = useState({image:'',name:'',price:0,date:'0'});
+  const [star, setStar] = useState(5);
   const navigate = useNavigate();
-
+  const { pid, uid, tid } = useParams();
   useEffect(() => {
     axios
       .get(`http://127.0.0.1:8000/review/${pid}/${uid}/${tid}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  const { pid, uid, tid } = useParams();
 
   const handleStars = (num) => {
     setStar((star) => 1 + num);
@@ -48,6 +47,17 @@ export default function Purchase() {
       });
   };
 
+  function dateFormat(date) {
+    const [datePart, timePart] = date.split(' ');
+    const [year, month, day] = datePart.split('-');
+    // 년월일을 '년 월 일' 형식으로 조합
+    const result = `${year}년 ${parseInt(month, 10)}월 ${parseInt(day, 10)}일`;
+    return result;
+  }
+
+
+
+
   return user == uid ? (
     <section className="purchaseMain inner">
       <FaRegCheckCircle className="purchase_icon" />
@@ -60,6 +70,7 @@ export default function Purchase() {
         image={product.img}
         name={product.pname}
         price={product.price}
+        date={dateFormat(product.date)}
       ></ProductList>
       <form onSubmit={handleSubmit}>
         <div className="stars">
