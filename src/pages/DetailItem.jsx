@@ -145,10 +145,29 @@ export default function DetailItem() {
           setDepth(!depth)
         })
         .catch((err) => { console.log(err) });
-    }else{
+    } else {
       alert('로그인후 진행해주세요!')
     }
+  }
 
+  const onClicetBuy = (e) => {
+
+    const result = window.confirm('바로 구매하시겠습니까?');
+    if (result) {
+      axios
+        .post(`http://127.0.0.1:8000/purchase`, {
+          pid: info.pid,
+          buyer: userInfo.uid,
+          seller: info.seller,
+        })
+        .then((res) =>
+          res.data > 0
+            ? navigate(`/purchase/${info.pid}/${userInfo.uid}/${res.data}`)
+            : res.data == -1
+              ? alert("이미 구매가 완료된 상품입니다.")
+              : alert("다시 시도해주세요")
+        );
+    }
   }
 
 
@@ -265,7 +284,7 @@ export default function DetailItem() {
                           <ChatBtn className="btnChat" color="white" size={18} chatClick={chatClick} />
                         </div>
                         <div>
-                          <button className="btnOrder btnStyle">
+                          <button className="btnOrder btnStyle" onClick={onClicetBuy}>
                             <span>바로구매</span>
                           </button>
                         </div>
@@ -412,14 +431,14 @@ export default function DetailItem() {
               <h3>상점정보</h3>
               <div>
 
-                <div className="userInfo" onClick={()=>navigate(`/profile/${info.seller}`)}>
+                <div className="userInfo" onClick={() => navigate(`/profile/${info.seller}`)}>
                   <Image className="profileImg" url={info.userImage} />
                   <div className="storeName">
-                      <p>{info.seller}</p>
-                      <ul>
-                        <li>상품{info.total_pid_count}</li>
-                        <li>팔로워20</li>
-                      </ul>
+                    <p>{info.seller}</p>
+                    <ul>
+                      <li>상품{info.total_pid_count}</li>
+                      <li>팔로워20</li>
+                    </ul>
 
                   </div>
                 </div>

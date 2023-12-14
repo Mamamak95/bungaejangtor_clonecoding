@@ -18,7 +18,7 @@ export default function WishList() {
   let [depth, setDepth] = useState(true);
   const userInfo = getUser() ? getUser() : '';
   let [sort, setSort] = useState('date');
-
+  
   const handleSort = (value) => {
     setSort(value);
   }
@@ -84,7 +84,7 @@ export default function WishList() {
 
   return (
     <div className="wishList">
-      <h2>찜<span>{list ? list[0]?.totalItemCount : ''}</span></h2>
+      <h2>찜<span>{list.length ? list[0]?.totalItemCount : 0}</span></h2>
       {
         list.length ?
           <>
@@ -95,9 +95,9 @@ export default function WishList() {
               </div>
               <h2>찜<span>{list ? list[0]?.totalItemCount : ''}</span></h2>
               <div className="sort">
-                <span  className={sort === 'date' && 'on'} onClick={()=>{handleSort('date')}}>최신순</span>
-                <span className={sort === 'lowPrice' && 'on'} onClick={()=>{handleSort('lowPrice')}}>저가순</span>
-                <span className={sort === 'highPrice' && 'on'} onClick={()=>{handleSort('highPrice')}}>고가순</span>
+                <span  className={sort === 'date' && 'on'} onClick={()=>{setCurrentPage(1); handleSort('date')}}>최신순</span>
+                <span className={sort === 'lowPrice' && 'on'} onClick={()=>{setCurrentPage(1); handleSort('lowPrice')}}>저가순</span>
+                <span className={sort === 'highPrice' && 'on'} onClick={()=>{setCurrentPage(1); handleSort('highPrice')}}>고가순</span>
               </div>
             </div>
 
@@ -106,7 +106,7 @@ export default function WishList() {
                 list.map(v =>
                   <li>
                     <Link to={`/productDetail/${v.pid}`}>
-                      <ProductList image={v.productImage} place={v.place} name={v.productName} price={v.price} date={formatRelativeDate(v.productRegDate)} />
+                      <ProductList image={v.productImage} place={v.place} name={v.productName} sellStatus={v.sellStatus} price={v.price} date={formatRelativeDate(v.productRegDate)} />
                     </Link>
                     <p className={`check ${v.check ? 'on' : ''}`} data-num={v.bid} onClick={clickCheck}></p>
 
