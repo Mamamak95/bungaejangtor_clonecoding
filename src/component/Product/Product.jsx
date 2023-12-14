@@ -10,7 +10,7 @@ export default function Product(){
   const [products, setProducts] = useState([]); 
   const [newLimit, setNewLimit] = useState(10);
   const [offset, setOffset] = useState(10);
-  console.log(products);
+  
   useEffect(()=>{
     axios
     .get(`http://127.0.0.1:8000/`)
@@ -27,7 +27,7 @@ export default function Product(){
       url:`http://127.0.0.1:8000/loadMore/${offset}/${newLimit}`,
     })
     .then((result) => {
-      console.log(JSON.stringify(result.data))
+      //console.log(JSON.stringify(result.data))
       setProducts((prevProducts) => [...prevProducts, ...result.data]);
       setNewLimit((prevLimit) => prevLimit )
       setOffset((prevOffset) => prevOffset + 10)
@@ -40,7 +40,7 @@ export default function Product(){
     <div className="product">
         {products.map((item)=>
             <div key={item.pid}>
-              <Link to={`/productDetail/${item.pid}`}>
+              <Link to={`/productDetail/${item.pid}`} >
                 <ProductList
                   image={item.img}
                   name={item.productName}

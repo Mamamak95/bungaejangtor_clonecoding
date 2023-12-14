@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import SubBar from './SubBar';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -8,7 +9,7 @@ const ScrollToTop = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return null;
+  return <SubBar pathname={pathname}/>;
 };
 
 export default ScrollToTop;

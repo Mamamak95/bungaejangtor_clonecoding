@@ -24,13 +24,13 @@
   box-sizing: border-box;
 }
 
-.stor{
+.store{
   font-weight: 700;
   font-size: 1.1rem;
   margin-right: 10px;
 }
 
-.stor_but{
+.store_but{
   border: 1px solid #eee;
   border-radius: 5px;
   width: 120px;
@@ -57,8 +57,12 @@
   border-radius: 3px;
   width: 80px;
   font-size: 0.8rem;
+  margin-top: 8px;
 }
 
+.savebut{
+  margin: 3px;
+}
 
 .float_right{
   float: right;
@@ -68,12 +72,19 @@
   height: 20%;
 }
 
+.name_textarea{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 25px;
+}
+
+
+
 .second{
-  height: 50%;
   display: flex;
+  height: 20%;
   justify-content: space-between;
   margin-top: 10px;
-  
 }
 
 .smallfont{
@@ -82,8 +93,8 @@
 }
 
 .third{
-  margin-top: 45px;
-  height: 20%;
+  height: 60%;
+  text-align: left;
 }
 
 .ok{
@@ -95,4 +106,23 @@
   background: orange;
   color: white;
   font-size: 0.8rem;
+}
+
+.commet{
+  width: 100%;
+  height: 60%;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  display: block;
+  font-size: 0.8rem;
+}
+
+.commet_textarea{
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
 }

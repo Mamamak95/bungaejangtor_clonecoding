@@ -45,3 +45,7 @@
 .topButton:hover {
   color: red; 
 }
+
+.subbar_img img{
+  width: 100%;
+}
