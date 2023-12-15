@@ -68,7 +68,7 @@
   position: relative;
   margin: 10px 0;
 }
-.loginpopup .loginwrap .loginContent .loginForm p i {
+.loginpopup .loginwrap .loginContent .loginForm p svg {
   position: absolute;
   top: 50%;
   left: 12px;
@@ -93,7 +93,7 @@
 .loginpopup .loginwrap .loginContent .loginForm .loginContent .loginstate {
   position: relative;
 }
-.loginpopup .loginwrap .loginContent .loginForm .loginContent .loginstate i {
+.loginpopup .loginwrap .loginContent .loginForm .loginContent .loginstate svg {
   position: absolute;
   top: 50%;
   left: 0;

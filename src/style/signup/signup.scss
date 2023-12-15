@@ -67,22 +67,24 @@
     .signpass{
       position: relative;
 
-      i {
+      svg {
         position: absolute;
         top:8px;
         right:10px;
         cursor: pointer;
+        font-size: 1.3rem;
       }
     }
 
     .signpasscheck {
       position: relative;
 
-      i {
+      svg {
         position: absolute;
         top:8px;
         right:10px;
         cursor: pointer;
+        font-size: 1.3rem;
       }
     }
 

@@ -92,7 +92,11 @@ header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .al
   cursor: default;
   display: none;
 }
-header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .alertnot i {
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .alertnot div {
+  display: flex;
+  justify-content: center;
+}
+header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .alertnot div svg {
   font-size: 1.5rem;
 }
 header .HeaderTop .headerTopWrap .HeaderTopMenuRight .HeaderLoginSign .alert .alertnot p {
@@ -249,7 +253,7 @@ header .HeaderMain .headerMainWrap .HeaderCategory {
   font-weight: 600;
 }
 header .HeaderMain .headerMainWrap .HeaderCategory .categoryMenu {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-right: 20px;
   position: relative;
   padding: 24px 10px 24px 0;
