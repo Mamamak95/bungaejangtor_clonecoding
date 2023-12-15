@@ -13,7 +13,6 @@ export default function Header(){
   const navigate = useNavigate();
 
   const userInfo = localStorage.getUser();
-  const userInfoSession = sessionStorage.getUserSession();
 
   const bookmark = (e) => {
     alert('Ctrl+D 키를 누르면 즐겨찾기에 추가하실 수 있습니다.');
@@ -46,7 +45,7 @@ export default function Header(){
     // navigate(`/products/new/${userInfoSession.uid}`)
   }
   const naviProduct = (e) => {
-    userInfo ? navigate(`/profile`) : handleLoginToggle();
+    userInfo ? navigate(`/profile/${userInfo.uid}`) : handleLoginToggle();
     // userInfoSession ? navigate(`/profile`) : handleLoginToggle();
   }
   const naviChat = (e) => {
@@ -109,11 +108,11 @@ export default function Header(){
             <div className="HeaderTopMenuRight">{/* 헤더탑의 오른쪽에 위치한 로그인/회원가입, 내상점을 감싸는 태그 */}
               <div className="HeaderLoginSign">{/* 헤더탑의 오른쪽 메뉴에 있는 로그인/회원가입을 다루는 컴포넌트 */}
               { 
-                userInfo || userInfoSession ?
+                userInfo ?
                 (
                 <>
                   <div className="loginuserid">
-                    <p>" { userInfo ? userInfo.uid : userInfoSession.uid }님 반갑습니다."</p>
+                    <p>" {userInfo.uid}님 반갑습니다."</p>
                   </div>
                   <button type="button" onClick={() => { setLogoutToggle(true) }}>로그아웃</button>
                   <div className="alert" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -133,7 +132,7 @@ export default function Header(){
                           <Link to = {`/profile/${userInfo.uid}`} >내 상품</Link>
                         </li>
                         <li onMouseEnter={handleStoreListEnter} onMouseLeave={handleStoreListLeave}>
-                          <Link to = '/profile'>찜한상품</Link>
+                          <Link to = {`/profile/${userInfo.uid}`}>찜한상품</Link>
                         </li>
                         <li onMouseEnter={handleStoreListEnter} onMouseLeave={handleStoreListLeave}>
                           <Link to = '/profile'>계정설정</Link>

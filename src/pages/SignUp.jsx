@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import '../style/signup/signup.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -26,7 +26,6 @@ export default function SignUp(){
 
   /* 폰번호 체크, 폰번호 중복 시 회원가입 막기 */
   const [phoneCheck, setPhoneCheck] = useState('');
-  const [phoneSame, setPhoneSame] = useState(false);
 
   /* 폼 체크박스 */
   const [isSnsChecked, setIsSnsChecked] = useState(false);
@@ -48,7 +47,6 @@ export default function SignUp(){
     setIsEmailChecked(!isEmailChecked);
   };
 
-
   /* 각 input 들 레퍼런스 값 설정 */
   const inputId = useRef(null)
   const inputPass = useRef(null)
@@ -58,7 +56,7 @@ export default function SignUp(){
   const inputPhone = useRef(null)
 
   /* 회원가입 확인 or 엔터 */
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if(signInfo.uid === ''){
@@ -104,35 +102,33 @@ export default function SignUp(){
 
     let signTel = signInfo.tel
 
-    axios
+    await axios
     .get(`http://127.0.0.1:8000/sign/user/${signTel}`)
     .then(data => {
       console.log(data.data);
       if(data.data.cnt === 1){
         alert('이미 등록된 폰번호 입니다.')
-        setPhoneSame(false)
         return inputPhone.current.focus();
       } else {
-        setPhoneSame(true);
+        if(idChecked){ 
+          axios
+          .post('http://localhost:8000/sign', signInfo)
+          .then(data => {
+            if(data.data === 'good'){
+              alert('회원가입 되셨습니다.')
+              navigate('/')
+            }
+          })
+          .catch(err => console.log(err))
+        } else if(!idChecked){
+          inputId.current.focus();
+        }
       }
     })
     .catch(err => console.log(err))
-
-
-    if(phoneSame && idChecked){ 
-      axios
-      .post('http://localhost:8000/sign', signInfo)
-      .then(data => {
-        if(data.data === 'good'){
-          alert('회원가입 되셨습니다.')
-          navigate('/')
-        }
-      })
-      .catch(err => console.log(err))
-    } else if(!idChecked){
-      inputId.current.focus();
-    }
+    
   }
+
 
   /* 취소 버튼 클릭 시 입력한 정보 초기화, 각 정보입력 input 들에게 value 값을 줘야함 */
   const handleReset = (e) => {
@@ -204,9 +200,9 @@ export default function SignUp(){
       setIdBlurCheck('4 ~ 16 자 까지 사용 가능합니다.')
     } else if(!/^[a-zA-Z0-9]*$/.test(e.target.value)){
       setIdBlurCheck('아이디는 한글 및 특수문자 사용이 불가능합니다.');
-    }/*  else if(idCheckBtn === 0){
+    } else if(idCheckBtn === 0){
       setIdBlurCheck('아이디 중복 확인을 해주세요.')
-    } */
+    }
   }
 
   /* 비밀번호 입력란 길이 및 영문,특수문자,숫자 사용 체크 */
@@ -241,10 +237,10 @@ export default function SignUp(){
       setPwSameCheck('비밀번호를 확인해 주세요.')
     } else if(inputPass.current.value === e.target.value){
       e.target.style.borderBottom = '1px solid #888';
-      setPwSameCheck('위 입력한 비밀번호를 올바르게 입력하셨습니다.')
+      setPwSameCheck('비밀번호가 일치합니다.')
     } else if(inputPass.current.value !== e.target.value){
       e.target.style.borderBottom = '1px solid red';
-      setPwSameCheck('위 입력하신 비밀번호와 일치하지 않습니다.')
+      setPwSameCheck('비밀번호가 일치하지 않습니다.')
     } 
   }
 

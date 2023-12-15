@@ -11,6 +11,7 @@ export default function HeaderSearch(){
   const [searchContentChange, setSearchContentChange] = useState(false);
   const [searchDelete, setSearchDelete] = useState(false);
   const [searchPopCenter, setSearchPopCenter] = useState(true)
+  const [searchPopCenter2, setSearchPopCenter2] = useState(false)
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,9 +20,11 @@ export default function HeaderSearch(){
   let searchInputRef = useRef(null);
 
   const [recentSearches, setRecentSearches] = useState([]);
-  const [searchPopChange, setSearchPopChange] = useState([]);
+  const [searchPopChange, setSearchPopChange] = useState(false);
   const [localLength, setLocalLength] = useState([]);
+  const [localTarget, setLocalTarget] = useState([]);
 
+  /* 로컬스토리지에 키값을 넣는걸 유즈이펙트로 저장 */
   useEffect(() => {
     const searchData = JSON.parse(localStorage.getItem('searchData')) || [];
     setRecentSearches(searchData);
@@ -36,7 +39,7 @@ export default function HeaderSearch(){
     });
   }, [searchPopChange]);
   
-
+  /* 최근검색어가 있으면 온체인지를 주어서 상태가 바뀜 */
   const handleSearchCenter = (e) => {
     if(recentSearches.length > 0){
       setSearchPopCenter(false)
@@ -50,6 +53,7 @@ export default function HeaderSearch(){
     
   }
 
+  /* 검색 서브밋 시 로컬스토리지로 키값을 넣고 검색한 페이지로 이동, 단 빈값이나 null 값일때는 리턴하여 실행하지 않음 */
   const handleSearchSubmit = (e) => {
     e.preventDefault()
 
@@ -58,29 +62,40 @@ export default function HeaderSearch(){
     const searchDataKey = 'searchData';
 
     const searchData = JSON.parse(localStorage.getItem(searchDataKey)) || [];
-    const newSearchData = [searchInput.value, ...searchData.slice(0, 9)];
-    localStorage.setItem(searchDataKey, JSON.stringify(newSearchData));
-    setSearchPopChange(newSearchData)
-    setLocalLength(newSearchData.length)
 
-    if(searchInput.value === ''){
+    // 검색어 값
+    const inputValue = searchInput.value;
+
+    // 검색어가 비어있거나 null이면 더 이상 진행하지 않음
+    if (!searchInput.value || searchInput.value === null) {
       return;
-    } else {
-      const newUrl = `/search?query=${searchInput.value}`;
-      navigate(newUrl);
+    }
+
+    // 중복된 키값이면 더 이상 진행하지 않음
+    if (searchData.includes(inputValue)) {
+      return;
+    }
+
+    const newSearchData = [inputValue, ...searchData.slice(0, 9)];
+    localStorage.setItem(searchDataKey, JSON.stringify(newSearchData));
+
+    setSearchPopChange(!searchPopChange)
+    setLocalLength(newSearchData.length)
+    setLocalTarget(searchData)
+
+    const newUrl = `/search?query=${inputValue}`;
+    navigate(newUrl);
 
       // 특정 경로로 이동한 후에 새로고침
       // window.location.href = newUrl;
-    }
-
   }
+
+  
 
   /* 검색창 온포커스때 나타나는 팝업창 안에서 온체인지가 실행되면 바뀌는 요소들 */
   const handleSearchContent = (e) => { // Change
     setSearchContent(false);
     setSearchContentChange(true);
-    
-    localLength === 0 ? setSearchContentChange(false) : setSearchContentChange(true)
   }
 
   /* 검색창 온포커스하여 나타난 팝업창과 검색창들 외 것들을 클릭해야 팝업창이 닫히게함 */
@@ -147,11 +162,15 @@ export default function HeaderSearch(){
       }
       
     }
+
+    // console.log(searchPopChange);
+    // console.log(searchInput.value);
     // console.log(searchPopChange.length);
     // console.log(location.pathname);
     // console.log(recentSearches.length);
   }
 
+  /* 최근검색어 리스트들 중 선택 클릭한 것의 검색페이지로 이동 */
   const handleNewSearchList = (e) => {
     // console.log(e.target.dataset.list);
 
@@ -159,11 +178,41 @@ export default function HeaderSearch(){
       navigate(newUrl);
   }
 
+  /* 최근검색어의 모든 검색어 삭제 */
   const handleSearchesDelete = (e) => {
     localStorage.removeItem('searchData'); // 'searchData' 키에 해당하는 데이터 삭제
     setSearchPopChange([]); // searchPopChange를 빈 배열로 설정하여 업데이트 강제
     setLocalLength(0); // 로컬 스토리지 데이터 길이 초기화
     setSearchPopCenter(true); // 검색어가 없으므로 검색 팝업을 중앙에 표시
+  }
+
+  /* 최근검색어에서 일정 검색어만을 삭제 */
+  const handleSearchDelete = (e) => {
+    const clickSearch = e.target.closest('.searchesnewlist').querySelector('.searchnewname').dataset.list;
+
+    // 기존 로컬 스토리지 데이터 가져오기
+    const searchData = JSON.parse(localStorage.getItem('searchData')) || [];
+
+    // 클릭된 검색어에 해당하는 키값을 찾아서 제거
+    const updatedSearchData = searchData.filter(search => search !== clickSearch);
+
+    // 업데이트된 데이터를 로컬 스토리지에 저장
+    localStorage.setItem('searchData', JSON.stringify(updatedSearchData));
+
+    // state 업데이트로 인한 리렌더링
+    setSearchPopChange(updatedSearchData);
+    setLocalLength(updatedSearchData.length);
+    setSearchPopCenter(updatedSearchData.length === 0);
+  }
+
+  const handlerecent = (e) => {
+    setSearchPopCenter(true)
+    setSearchPopCenter2(false)
+  }
+
+  const handlepopular = (e) => {
+    setSearchPopCenter(false)
+    setSearchPopCenter2(true)
   }
 
   return(
@@ -178,22 +227,34 @@ export default function HeaderSearch(){
               { !searchContent &&
                 <>
                   <div className="titlename">
-                    <div className="recently">최근 검색어</div>
-                    <div className="popular">인기 검색어</div>
+                    <div className="recently" onClick={handlerecent}>최근 검색어</div>
+                    <div className="popular" onClick={handlepopular}>인기 검색어</div>
                   </div>
                   <div className="searchcenter" onChange={handleSearchCenter}>
                     { searchPopCenter ?
                       <>
-                        <img src="https://m.bunjang.co.kr/pc-static/resource/fb38b8548f0c80b100ad.png" alt="searchcenterImg" />
+                        <img src="https://m.bunjang.co.kr/pc-static/resource/fb38b8548f0c80b100ad.png" alt="searchcenterImg" className="nonsearchlist"/>
                         <p>최근 검색어가 없습니다.</p>
                       </>
                       :
-                      <ul>
+                      <ul className="searchallnew">
                       { recentSearches.map((search) => 
-                          <li data-list={search} onClick={handleNewSearchList}>{search}</li>
+                          <li className="searchesnewlist">
+                            <div className="searchnewname" data-list={search} onClick={handleNewSearchList}>{search}</div>
+                            <button type="button" onClick={handleSearchDelete}>
+                              <img src="https://m.bunjang.co.kr/pc-static/resource/8221ab3198c73f8141a4.png" alt="searchCloseBtn" />
+                            </button>
+                          </li>
                         )
                       }
                       </ul>
+                    }
+
+                    {
+                      searchPopCenter2 &&
+                      <>
+                        <div>ddasdasdasd</div>
+                      </>
                     }
                   </div>
                 </>
@@ -213,9 +274,11 @@ export default function HeaderSearch(){
                 </>
               }
               </div>
+
               <div className="searchfooter">
-                { !searchDelete && !searchContent && 
-                  <div className="searchdelete" onClick={handleSearchesDelete}><i class="fa-solid fa-trash-can"></i> 검색어 전체삭제</div> }
+                { !searchContent && 
+                  <div className="searchdelete" onClick={handleSearchesDelete}><i class="fa-solid fa-trash-can"></i> 검색어 전체삭제</div> 
+                }
                 { !searchDelete && <div></div> }
                 <div className="searchclose" onClick={handleSearchClose}>닫기</div>
               </div>
