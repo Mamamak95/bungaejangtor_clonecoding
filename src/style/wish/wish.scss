@@ -241,13 +241,18 @@
 
     }
 
-    .productlist {}
+
 
 
     .productlist {
       .pro_comtent {
+
         position: relative;
         width: 100%;
+
+        @media #{m.$max-lg} {
+          width: 60%;
+        }
 
         .pro_pr_da {
           &>div:last-child {
@@ -272,16 +277,18 @@
               vertical-align: middle;
 
             }
+
             @media #{m.$max-lg} {
-            padding: 6px 0 6px 6px;
-            font-size: 11px;
+              padding: 6px 0 6px 6px;
+              font-size: 11px;
 
-            &::before {
-              width: 13px;
-              height: 10px;
+              &::before {
+                width: 13px;
+                height: 10px;
+              }
+
             }
 
-            }
             @media #{m.$max-sm} {
               position: static;
               padding: 5px 0;
@@ -292,9 +299,14 @@
         }
       }
 
+      .pro_status {
+        position: relative;
+      }
+
       .pro {
         display: flex;
         filter: none;
+
         @media #{m.$max-sm} {
           flex-wrap: wrap;
         }
@@ -302,9 +314,25 @@
         .pro_status {
           @media #{m.$max-lg} {
             width: 40%;
+            .sell{
+              width: 50px;
+              height: 50px;
+              font-size: 12px;
+              line-height: 50px;
+            }
           }
+
           @media #{m.$max-sm} {
             width: 100%;
+          }
+
+          @media #{m.$max-lg} {
+            .sell{
+              width: 70px;
+              height: 70px;
+              font-size: 15px;
+              line-height: 70px;
+            }
           }
 
 
@@ -319,6 +347,7 @@
             width: 100%;
             height: 115px;
           }
+
           @media #{m.$max-sm} {
             height: 40vw;
           }
@@ -342,6 +371,7 @@
               font-size: 12px;
               margin-bottom: 5px;
               padding: 10px 0 0 10px;
+              width: 70%;
             }
 
           }
@@ -351,6 +381,7 @@
             font-weight: 600;
             margin-right: 3px;
             line-height: 1;
+
             @media #{m.$max-lg} {
               font-size: 14px;
             }
@@ -361,6 +392,7 @@
             display: block;
             padding-left: 20px;
             box-sizing: border-box;
+
             @media #{m.$max-lg} {
               padding-left: 10px;
             }
@@ -368,11 +400,12 @@
 
             .pro_date {
               margin-top: 10px;
+
               @media #{m.$max-lg} {
                 margin-top: 6px;
                 font-size: 12px;
               }
-  
+
             }
 
 
@@ -441,6 +474,7 @@
     padding-top: 4%;
     display: flex;
     justify-content: center;
+
     @media #{m.$max-sm} {
       padding-top: 6%;
     }
