@@ -23,7 +23,9 @@
 }
 .Category .maincategoryname .categoryname .categoryarrow {
   position: absolute;
+  top: 50%;
   right: 30px;
+  transform: translateY(-50%);
   color: red;
 }
 .Category .maincategoryname .maincategorylist {
@@ -56,7 +58,9 @@
 }
 .Category .middlecategoryname .middlename .categoryarrow {
   position: absolute;
+  top: 50%;
   right: 30px;
+  transform: translateY(-50%);
   color: red;
 }
 .Category .middlecategoryname .middlecategorylist {

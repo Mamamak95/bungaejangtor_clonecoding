@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import '../style/signup/signup.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { FaRegEye, FaRegEyeSlash  } from "react-icons/fa6";
 
 export default function SignUp(){
   const navigate = useNavigate();
@@ -126,7 +127,7 @@ export default function SignUp(){
       }
     })
     .catch(err => console.log(err))
-    
+
   }
 
 
@@ -301,7 +302,7 @@ export default function SignUp(){
             onBlur={handleBlurPw}
             onChange={handleChange}
           />
-          { !pwLookToggle ? <i class="fa-regular fa-eye" onClick={handlePwLookToggle}></i> : <i class="fa-regular fa-eye-slash" onClick={handlePwLookToggle}></i> }
+          { !pwLookToggle ? <FaRegEye onClick={handlePwLookToggle} /> : <FaRegEyeSlash onClick={handlePwLookToggle} /> }
           { pwLengthCheck && <p style={{ color: 'red' }}>* {pwLengthCheck}</p> }
           { pwMixCheck && <p style={{ color: 'red' }}>* {pwMixCheck}</p> }
         </div>
@@ -315,8 +316,8 @@ export default function SignUp(){
             onChange={handleChange} 
             ref={inputPassCheck} 
           />
-          { !pwLookCheckToggle ? <i class="fa-regular fa-eye" onClick={handlePwLookCheckToggle}></i> : <i class="fa-regular fa-eye-slash" onClick={handlePwLookCheckToggle}></i> }
-          {/* <i class="fa-regular fa-eye-slash"></i> */}
+          <FaRegEye />
+          { !pwLookCheckToggle ? <FaRegEye onClick={handlePwLookCheckToggle}/> : <FaRegEyeSlash onClick={handlePwLookCheckToggle}/> }
           { pwSameCheck && <p style={{ color: 'red' }}>* {pwSameCheck}</p> }
         </div>
 

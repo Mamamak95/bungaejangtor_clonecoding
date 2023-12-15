@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../../style/header/Category.css';
+import { IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
 
 export default function Category(prop){
@@ -75,7 +76,7 @@ export default function Category(prop){
         <div className="maincategoryname">
           <div className="categoryname">전체 카테고리
             { arrow &&
-              <i class="fa-solid fa-angle-right categoryarrow"></i>
+              <IoIosArrowForward className="categoryarrow"/>
             }
           </div>
           <ul className="maincategorylist">
@@ -97,7 +98,7 @@ export default function Category(prop){
             <div className="middlecategoryname">
               <div className="middlename">{middleName}
               { middleArrow &&
-              <i class="fa-solid fa-angle-right categoryarrow"></i>
+                <IoIosArrowForward className="categoryarrow"/>
               }
               </div>
               <ul className="middlecategorylist">

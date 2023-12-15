@@ -4,15 +4,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import DownloadQR from '../popup/DownloadQR';
 import LoginPopUp from '../login/LoginPopUp';
 import LogoutPopUp from './../login/LogoutPopUp';
-import * as localStorage from '../../util/localStorage.js';
-import * as sessionStorage from '../../util/sessionStorage.js'; 
 import HeaderSearch from "./HeaderSearch.jsx";
 import Category from "./Category.jsx";
+import { TiArrowSortedDown } from "react-icons/ti";
+import { FaRegBell } from "react-icons/fa";
+import { HiMenu } from "react-icons/hi";
+import { getUser } from "../../util/localStorage.js";
+
 
 export default function Header(){
   const navigate = useNavigate();
 
-  const userInfo = localStorage.getUser();
+  const userInfo = getUser();
 
   const bookmark = (e) => {
     alert('Ctrl+D 키를 누르면 즐겨찾기에 추가하실 수 있습니다.');
@@ -41,7 +44,23 @@ export default function Header(){
   
   /* 각 주소로 이동 */
   const naviProductNew = (e) => {
-    userInfo ? navigate(`/products/new/${userInfo.uid}`) : handleLoginToggle();
+    if (userInfo) {
+      if (localStorage.getItem(`saveImg_${userInfo.uid}`) || localStorage.getItem(`saveData_${userInfo.uid}`)) {
+        const result = window.confirm('임시저장된 글이 있습니다 이어서 작성하시겠습니까?');
+        if (result) {
+          navigate(`/products/new/${userInfo.uid}`)
+        } else {
+          localStorage.removeItem(`saveImg_${userInfo.uid}`);
+          localStorage.removeItem(`saveData_${userInfo.uid}`);
+          navigate(`/products/new/${userInfo.uid}`)
+
+        }
+      } else {
+        navigate(`/products/new/${userInfo.uid}`)
+      }
+    } else {
+      handleLoginToggle()
+    }
     // navigate(`/products/new/${userInfoSession.uid}`)
   }
   const naviProduct = (e) => {
@@ -117,15 +136,15 @@ export default function Header(){
                   <button type="button" onClick={() => { setLogoutToggle(true) }}>로그아웃</button>
                   <div className="alert" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     <p>알림</p>
-                    <i class="fa-solid fa-caret-down"></i>
+                    <TiArrowSortedDown />
                     <div className="alertnot" ref={alertPopup}>
-                      <i class="fa-regular fa-bell"></i>
+                      <div><FaRegBell /></div>
                       <p>최근 알림이 없습니다.</p>
                     </div>
                   </div>
                   <div className="mystore" onMouseEnter={handleStoreMouseEnter} onMouseLeave={handleStoreMouseLeave}>
                     <p>내상점</p>
-                    <i class="fa-solid fa-caret-down"></i>
+                    <TiArrowSortedDown />
                     <div className="mystorelist" ref={mystorePopup}>
                       <ul>
                         <li onMouseEnter={handleStoreListEnter} onMouseLeave={handleStoreListLeave}>
@@ -177,12 +196,12 @@ export default function Header(){
             </div>
 
             <div className="HeaderCategory">{/* 헤더메인부분의 맨 아래쪽 카테고리를 감싸는 태그 */}
-              <i onMouseEnter={() => {handleCategoryMouseEnter(true)}} 
-                  onMouseLeave={() => {handleCategoryMouseEnter(false)}}
-                  class="fa-solid fa-bars categoryMenu">
-                  { CategoryToggle && <Category handleCategoryMouseEnter={handleCategoryMouseEnter}/> }
-                  {/* <Category /> */}
-              </i>
+              <div className="categoryMenu" onMouseEnter={() => {handleCategoryMouseEnter(true)}}
+                  onMouseLeave={() => {handleCategoryMouseEnter(false)}}>
+                <HiMenu />
+                { CategoryToggle && <Category handleCategoryMouseEnter={handleCategoryMouseEnter}/> }
+                {/* <Category /> */}
+              </div>
               <Link to = "https://seller.bunjang.co.kr/intro" target="_blank">번개장터 판매자센터</Link>
               <img src="https://m.bunjang.co.kr/pc-static/resource/34a01cb11e0b14957f81.png" className="categoryRight" alt="categoryRightImg" />
             </div>

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import * as Cookie from '../../util/cookie.js';
 import { jwtDecode } from "jwt-decode";
+import { HiLockClosed } from "react-icons/hi";
+import { FiUser } from "react-icons/fi";
 
 export default function LoginPopUp(prop){
   const navigate = useNavigate();
@@ -114,15 +116,15 @@ export default function LoginPopUp(prop){
             </div>
             <form className="loginForm" onSubmit={handleSubmit}>
               <p>
-                <i class="fa-regular fa-user"></i>
+                <FiUser />
                 <input type="text" placeholder="아이디" ref={inputUid} name="uid" value={loginForm.uid} onChange={handleChange}></input>
               </p>
               <p>
-                <i class="fa-solid fa-lock"></i>
+                <HiLockClosed />
                 <input type="password" placeholder="비밀번호" ref={inputPw} name="pw" value={loginForm.pw} onChange={handleChange}></input>
               </p>
   
-              <p className="loginContent">
+              <div className="loginContent">
                 <div></div>
                 <div className="ipsecurity">
                   <span className="ipsecu">PW보안</span>
@@ -130,7 +132,7 @@ export default function LoginPopUp(prop){
                     <div style = {styleIpBtnMove}>&nbsp;</div>
                   </span>
                 </div>
-              </p>
+              </div>
   
               <div className="loginSignBtns">
                 <button className="loginBtn">로그인</button>

@@ -101,9 +101,16 @@ header{
               cursor:default;
               display:none;
 
-              i {
-                font-size: 1.5rem;
+              div {
+                display: flex;
+                justify-content: center;
+
+                svg {
+                  font-size: 1.5rem;
+                }
               }
+
+              
 
               p {
                 padding-top: 10px;
@@ -294,7 +301,7 @@ header{
         font-weight: 600;
 
         .categoryMenu {
-          font-size: 1.5rem;
+          font-size: 2rem;
           margin-right: 20px;
           position: relative;
           padding: 24px 10px 24px 0;
