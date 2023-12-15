@@ -52,6 +52,8 @@
   cursor: pointer;
   position: relative;
   font-size: 1.3em;
+  align-items: center;
+  justify-content: flex-start;
 }
 .chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_img {
   position: relative;
@@ -80,30 +82,51 @@
   z-index: 1;
 }
 .chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents {
+  width: 200px;
   margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  overflow: hidden;
 }
-.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents div:first-child {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents span:first-child {
   font-weight: 600;
 }
-.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents div:last-child {
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_chatRoomLink_contents span:last-child {
   color: #aaa;
 }
 .chatList .chatList_left .chatList_inner .chatList_inner_roomList li:hover {
   background-color: #eee;
 }
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_pimg {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: 0;
+}
+.chatList .chatList_left .chatList_inner .chatList_inner_roomList li .chatList_inner_pimg img {
+  width: 100%;
+  height: 100%;
+}
 .chatList .chatList_left .chatList_inner .chatList_inner_roomList li .notReadCnt {
   position: absolute;
-  right: 20px;
+  right: 70px;
   width: 35px;
   height: 35px;
+  top: 50%;
   font-weight: 600;
   text-align: center;
   line-height: 35px;
-  transform: translate(10px, 15px);
+  transform: translate(0, -50%);
   background-color: #f70000;
   border-radius: 50%;
   color: white;
@@ -190,7 +213,7 @@
   float: none;
 }
 .chatList .chatList_right .purchase .productlist .pro {
-  border-radius: none;
+  border-radius: none !important;
   display: flex;
   border: none;
   background-color: transparent;
