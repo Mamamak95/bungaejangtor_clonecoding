@@ -2,6 +2,7 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import axios from "axios";
 import ChatRoom from "./ChatRoom";
 import * as localStorage from "../../util/localStorage.js";
+import * as sessionStorage from "../../util/sessionStorage.js"
 import Image from "../common/Image.jsx";
 import io from "socket.io-client";
 
@@ -9,7 +10,8 @@ import io from "socket.io-client";
 const socket = io("http://127.0.0.1:8000/");
 
 export default function Inner() {
-  const user = localStorage.getUser().uid;
+  const user = localStorage.getUser()?localStorage.getUser().uid:sessionStorage.getUserSession.uid;
+
   const [userChats, setUserChats] = useState([]);
   const [roomInfo, setRoomInfo] = useState({});
   const [chatLog, setChatLog] = useState([]);
@@ -167,9 +169,10 @@ export default function Inner() {
                   ></Image>
 
                   <div className="chatList_inner_chatRoomLink_contents">
-                    <div>{v.buyer === user ? v.sellerName : v.buyerName}</div>
-                    <div>{v.lastestMessage}</div>
+                    <span>{v.buyer === user ? v.sellerName : v.buyerName}</span>
+                    <span>{v.lastestMessage}</span>
                   </div>
+                  <Image url={v.productImg} className={'chatList_inner_pimg'}></Image>
                   {v.cnt ? (
                     <div
                       className={

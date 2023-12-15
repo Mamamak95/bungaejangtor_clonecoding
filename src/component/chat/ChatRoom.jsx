@@ -65,7 +65,7 @@ export default function ChatRoom({ user, roomInfo, chatLog, handleKey }) {
       </div>
       {roomInfo.crid ? (
         <div className="purchase">
-          <Link to={`/productDetail/2`}>
+          <Link to={`/productDetail/${roomInfo.pid}`}>
             <ProductList
               image={roomInfo.productImg}
               name={roomInfo.pname}
