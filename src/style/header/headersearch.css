@@ -48,12 +48,16 @@
   align-items: center;
   border-bottom: 2px solid rgb(217, 217, 217);
   position: relative;
+  width: 100%;
+  flex-wrap: nowrap;
 }
 .HeaderSearch .Searchpop .searchcontent .titlename2 div {
   padding: 6px;
 }
-.HeaderSearch .Searchpop .searchcontent .titlename2 .recently2 span {
+.HeaderSearch .Searchpop .searchcontent .titlename2 span {
   color: red;
+  overflow-wrap: break-word;
+  width: 50%;
 }
 .HeaderSearch .Searchpop .searchcontent .searchcenter2 {
   height: 360px;
@@ -72,6 +76,9 @@
   background-color: #efefef;
 }
 .HeaderSearch .Searchpop .searchfooter .searchclose {
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchfooter .searchdelete {
   cursor: pointer;
 }
 .HeaderSearch .searchCloseBtn {

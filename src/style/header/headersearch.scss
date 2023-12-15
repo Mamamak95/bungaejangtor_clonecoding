@@ -56,6 +56,8 @@
         align-items: center;
         border-bottom:2px solid rgb(217,217,217);
         position: relative;
+        width: 100%;
+        flex-wrap: nowrap;
 
         div {
           padding: 6px;
@@ -67,9 +69,12 @@
 
         .recently2 {
           
-          span {
-            color:red;
-          }
+        }
+
+        span {
+          color:red;
+          overflow-wrap: break-word;
+          width: 50%;
         }
 
         .popular2 {
@@ -97,6 +102,10 @@
       background-color: #efefef;
 
       .searchclose {
+        cursor: pointer;
+      }
+
+      .searchdelete {
         cursor: pointer;
       }
     }
