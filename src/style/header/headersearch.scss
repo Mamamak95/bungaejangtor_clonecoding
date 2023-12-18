@@ -99,17 +99,17 @@
         }
 
         .recently2 {
-          
+          width: 20%;
         }
 
         span {
           color:red;
           overflow-wrap: break-word;
-          width: 50%;
+          width: 54%;
         }
 
         .popular2 {
-          
+          width: 20%;
         }
       }
 
@@ -138,6 +138,12 @@
 
       .searchdelete {
         cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        svg {
+          padding-right: 6px;
+        }
       }
     }
   }
@@ -149,5 +155,9 @@
   
   .searchCloseBtn {
     visibility:visible;
+  }
+
+  .searchiconbtn {
+    height: 100%;
   }
 }

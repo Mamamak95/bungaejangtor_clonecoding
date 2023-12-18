@@ -107,11 +107,11 @@ export default function LoginPopUp(prop){
       <div className="loginpopup" style={prop.styleLoginBlock} >
         <div className="loginwrap">
           <div className="closeBtn">
-            <button type="button" onClick={prop.handleLoginToggle}><img src="source/closebtn.png" alt="closeBtnImg" /></button>
+            <button type="button" onClick={prop.handleLoginToggle}><img src="http://127.0.0.1:8000/webImg/closebtn.png" alt="closeBtnImg" /></button>
           </div>
           <div className="loginContent">
             <div className="logintitle">
-              <img src="source/loginicon.png"/>
+              <img src="http://127.0.0.1:8000/webImg/loginicon.png"/>
               <p>번개장터</p>
             </div>
             <form className="loginForm" onSubmit={handleSubmit}>

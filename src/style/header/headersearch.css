@@ -80,10 +80,16 @@
 .HeaderSearch .Searchpop .searchcontent .titlename2 div {
   padding: 6px;
 }
+.HeaderSearch .Searchpop .searchcontent .titlename2 .recently2 {
+  width: 20%;
+}
 .HeaderSearch .Searchpop .searchcontent .titlename2 span {
   color: red;
   overflow-wrap: break-word;
-  width: 50%;
+  width: 54%;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename2 .popular2 {
+  width: 20%;
 }
 .HeaderSearch .Searchpop .searchcontent .searchcenter2 {
   height: 360px;
@@ -106,7 +112,15 @@
 }
 .HeaderSearch .Searchpop .searchfooter .searchdelete {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.HeaderSearch .Searchpop .searchfooter .searchdelete svg {
+  padding-right: 6px;
 }
 .HeaderSearch .searchCloseBtn {
   visibility: visible;
+}
+.HeaderSearch .searchiconbtn {
+  height: 100%;
 }/*# sourceMappingURL=headersearch.css.map */
