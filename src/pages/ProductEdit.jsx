@@ -10,7 +10,6 @@ export default function ProductEdit() {
   const userInfo = getUser() ? getUser() : '';
   const [data,setData] = useState();
   const [images,setImages] = useState([]);
-  console.log(data?.seller);
 
   useEffect(() => {
     const fetchData = async () => {
