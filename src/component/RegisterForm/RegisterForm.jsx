@@ -47,6 +47,15 @@ export default function RegisterForm(props) {
 
       txtData.content ? setInfo(txtData.content.length) : setInfo(0)
 
+    } else if (location.pathname.includes(`/edit/${pid}`) && (localStorage.getItem(`editSaveImg_${userInfo.uid}`) || localStorage.getItem(`editSaveData_${userInfo.uid}`))) {
+
+      let txtData = JSON.parse(localStorage.getItem(`editSaveData_${userInfo.uid}`));
+      setForm(txtData);
+      setTempImg(JSON.parse(localStorage.getItem(`editSaveImg_${userInfo.uid}`)));
+      // setSaveImg(props.images)
+
+      txtData.content ? setInfo(txtData.content.length) : setInfo(0)
+
     } else {
       setForm(props.data ? props.data : form);
       props.data ? setInfo(props.data.content.length) : setInfo(0)
@@ -64,8 +73,7 @@ export default function RegisterForm(props) {
     for (let i = 0; i < formImg.length; i++) {
       formData.append('images', formImg[i]);
     }
-    // formData.append('form', JSON.stringify(form))
-    // formData.append('deleteImg', JSON.stringify(deleteImg))
+
     axios({
       method: 'post',
       url: `http://127.0.0.1:8000/save/${userInfo.uid}`,
@@ -75,10 +83,18 @@ export default function RegisterForm(props) {
       },
     })
       .then(result => {
+        if (location.pathname.includes(`/products/new/${userInfo.uid}`)) {
+          localStorage.setItem(`saveImg_${userInfo.uid}`, JSON.stringify([...result.data, ...tempImg]));
+          localStorage.setItem(`saveData_${userInfo.uid}`, JSON.stringify(form));
+          alert('임시저장 되었습니다.')
+        } else if (location.pathname.includes(`/edit/${pid}`)) {
+          saveImg = saveImg.map(v => v.img)
+          localStorage.setItem(`editSaveImg_${userInfo.uid}`, JSON.stringify([...saveImg, ...tempImg, ...result.data]));
+          localStorage.setItem(`editSaveData_${userInfo.uid}`, JSON.stringify(form));
+          alert('임시저장 되었습니다.')
+        }
 
-        localStorage.setItem(`saveImg_${userInfo.uid}`, JSON.stringify([...result.data,...tempImg]));
-        localStorage.setItem(`saveData_${userInfo.uid}`, JSON.stringify(form));
-        alert('임시저장 되었습니다.')
+
       })
       .catch(err => console.log('에러==>' + err))
   }
@@ -253,12 +269,21 @@ export default function RegisterForm(props) {
       formData.append('images', formImg[i]);
     }
     formData.append('form', JSON.stringify(form))
+
     if (location.pathname.includes(`/products/new/${userInfo.uid}`) && (localStorage.getItem(`saveImg_${userInfo.uid}`) || localStorage.getItem(`saveData_${userInfo.uid}`))) {
       formData.append('saveImg', JSON.stringify(tempImg))
 
+    } else if (location.pathname.includes(`/edit/${pid}`) ) {
+
+      if((localStorage.getItem(`editSaveImg_${userInfo.uid}`) || localStorage.getItem(`editSaveData_${userInfo.uid}`))){
+        formData.append('tempImg', JSON.stringify(tempImg))
+      }else{
+        formData.append('saveImg', JSON.stringify(saveImg))
+      }
+      
     }
 
-    formData.append('deleteImg', JSON.stringify(deleteImg))
+    // formData.append('deleteImg', JSON.stringify(deleteImg))
     axios({
       method: 'post',
       url: props.edit ? `http://127.0.0.1:8000/edit/${pid}` : `http://127.0.0.1:8000/product/new/${userInfo.uid}`,
@@ -269,8 +294,15 @@ export default function RegisterForm(props) {
     })
       .then(result => {
         props.edit ? alert('상품 수정이 완료되었습니다.') : alert('상품 등록이 완료되었습니다.')
-        localStorage.removeItem(`saveImg_${userInfo.uid}`);
-        localStorage.removeItem(`saveData_${userInfo.uid}`);
+
+        if (location.pathname.includes(`/products/new/${userInfo.uid}`)) {
+          localStorage.removeItem(`saveImg_${userInfo.uid}`);
+          localStorage.removeItem(`saveData_${userInfo.uid}`);
+        } else if (location.pathname.includes(`/edit/${pid}`)) {
+          localStorage.removeItem(`editSaveImg_${userInfo.uid}`);
+          localStorage.removeItem(`editSaveData_${userInfo.uid}`);
+        }
+
         navigate('/')
       })
       .catch(err => console.log('에러==>' + err))
@@ -385,23 +417,23 @@ export default function RegisterForm(props) {
           <div className="inputContainer">
             <p className="inputTitle">상품상태</p>
             <div>
-              <label for="newProduct" className="productRadio">
+              <label htmlFor="newProduct" className="productRadio">
                 <input id="newProduct" type="radio" name="use" />새 상품 (미사용)
                 <span >사용하지 않은 새 상품</span>
               </label>
-              <label for="newProduct2" className="productRadio">
+              <label htmlFor="newProduct2" className="productRadio">
                 <input id="newProduct2" type="radio" name="use" />사용감 없음
                 <span >사용은 했지만 눈에 띄는 흔적이나 얼룩이 없음</span>
               </label>
-              <label for="newProduct3" className="productRadio">
+              <label htmlFor="newProduct3" className="productRadio">
                 <input id="newProduct3" type="radio" name="use" />사용감 적음
                 <span >눈에 띄는 흔적이나 얼룩이 약간 있음</span>
               </label>
-              <label for="newProduct4" className="productRadio">
+              <label htmlFor="newProduct4" className="productRadio">
                 <input id="newProduct4" type="radio" name="use" />사용감 많음
                 <span >눈에 띄는 흔적이나 얼룩이 많이 있음</span>
               </label>
-              <label for="newProduct5" className="productRadio">
+              <label htmlFor="newProduct5" className="productRadio">
                 <input id="newProduct5" type="radio" name="use" /> 고장/파손 상품
                 <span >기능 이상이나 외관 손상 등으로 수리/수선 필요</span>
               </label>
@@ -411,10 +443,10 @@ export default function RegisterForm(props) {
           <div className="inputContainer">
             <p className="inputTitle">교환</p>
             <div className="formRadio">
-              <label for="disable" >
-                <input id="disable" type="radio" name="change" checked />불가
+              <label htmlFor="disable" >
+                <input id="disable" type="radio" name="change" defaultChecked />불가
               </label>
-              <label for="ablr" >
+              <label htmlFor="ablr" >
                 <input id="ablr" type="radio" name="change" />가능
               </label>
             </div>
@@ -432,10 +464,10 @@ export default function RegisterForm(props) {
                 </span>
               </p>
               <div className="formRadio ">
-                <label for="include" className="radioPrice">
+                <label htmlFor="include" className="radioPrice">
                   <input id="include" type="radio" name="deliver" checked={!deliverPrice} onChange={() => setDeliverPrice(false)} />배송비포함
                 </label>
-                <label for="notInclude" className="radioPrice">
+                <label htmlFor="notInclude" className="radioPrice">
                   <input id="notInclude" type="radio" name="deliver" onChange={() => setDeliverPrice(true)} />배송비별도
                 </label>
               </div>
