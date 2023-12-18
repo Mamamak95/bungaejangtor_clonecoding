@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../../style/header/headersearch.css';
 import { useLocation, useNavigate } from "react-router-dom";
+import { FaShop } from "react-icons/fa6";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import axios from "axios";
 
 export default function HeaderSearch(){
@@ -21,6 +23,7 @@ export default function HeaderSearch(){
 
   const [recentSearches, setRecentSearches] = useState([]);
   const [searchPopChange, setSearchPopChange] = useState(false);
+  const [searchPopular, setSearchPopular] = useState('');
   const [localLength, setLocalLength] = useState([]);
   const [localTarget, setLocalTarget] = useState([]);
 
@@ -86,8 +89,15 @@ export default function HeaderSearch(){
     const newUrl = `/search?query=${inputValue}`;
     navigate(newUrl);
 
-      // 특정 경로로 이동한 후에 새로고침
-      // window.location.href = newUrl;
+    // 특정 경로로 이동한 후에 새로고침
+    // window.location.href = newUrl;
+
+    axios
+    .post('http://127.0.0.1:8000/search',searchInput)
+    .then(data => 
+      data.data === 'good'
+    )
+    .catch(err => console.log(err))
   }
 
   
@@ -156,11 +166,10 @@ export default function HeaderSearch(){
       setSearchContent(true)
       setSearchContentChange(true)
 
-      if(e.target.value === ''){
+      if(value.length === 0){
         setSearchContent(false)
         setSearchContentChange(false)
       }
-      
     }
 
     // console.log(searchPopChange);
@@ -213,6 +222,8 @@ export default function HeaderSearch(){
   const handlepopular = (e) => {
     setSearchPopCenter(false)
     setSearchPopCenter2(true)
+
+    
   }
 
   return(
@@ -238,8 +249,8 @@ export default function HeaderSearch(){
                       </>
                       :
                       <ul className="searchallnew">
-                      { recentSearches.map((search) => 
-                          <li className="searchesnewlist">
+                      { recentSearches.map((search,i) => 
+                          <li className="searchesnewlist" key={i}>
                             <div className="searchnewname" data-list={search} onClick={handleNewSearchList}>{search}</div>
                             <button type="button" onClick={handleSearchDelete}>
                               <img src="https://m.bunjang.co.kr/pc-static/resource/8221ab3198c73f8141a4.png" alt="searchCloseBtn" />
@@ -263,7 +274,7 @@ export default function HeaderSearch(){
                 searchContentChange &&
                 <>
                   <div className="titlename2">
-                    <i class="fa-solid fa-shop searchproducticon"></i>
+                    <FaShop className="searchproducticon"/>
                     <div className="recently2">상품검색 &gt; </div>
                     <span>{searchInput.value}</span>
                     <div className="popular2"> 상품명으로 검색</div>
@@ -277,7 +288,7 @@ export default function HeaderSearch(){
 
               <div className="searchfooter">
                 { !searchContent && 
-                  <div className="searchdelete" onClick={handleSearchesDelete}><i class="fa-solid fa-trash-can"></i> 검색어 전체삭제</div> 
+                  <div className="searchdelete" onClick={handleSearchesDelete}><RiDeleteBin5Line /> 검색어 전체삭제</div> 
                 }
                 { !searchDelete && <div></div> }
                 <div className="searchclose" onClick={handleSearchClose}>닫기</div>
@@ -297,7 +308,7 @@ export default function HeaderSearch(){
             <img src="https://m.bunjang.co.kr/pc-static/resource/8221ab3198c73f8141a4.png" alt="searchCloseBtn" />
           </button>
         }
-        <button>
+        <button className="searchiconbtn">
           <img src="https://m.bunjang.co.kr/pc-static/resource/2be3c66fa47ccd5ece2a.png" alt="searchImg" />
         </button>
       </form>

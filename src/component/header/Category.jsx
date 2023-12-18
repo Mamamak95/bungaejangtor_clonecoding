@@ -81,13 +81,14 @@ export default function Category(prop){
           </div>
           <ul className="maincategorylist">
             { mainCategory &&
-              mainCategory.map((list) => 
+              mainCategory.map((list,i) => 
                 <li className="categorylist" 
                   onMouseEnter={handleEnterMainList} 
                   onMouseLeave={handleLeaveMainList}
                   data-value={list.value}
                   data-main={list.main}
-                  ref={listRef}>
+                  ref={listRef}
+                  key={i}>
                   <p ref={mainNameRef} >{list.main}</p>
                 </li>
               )
@@ -103,10 +104,11 @@ export default function Category(prop){
               </div>
               <ul className="middlecategorylist">
               { middle &&
-                middle.map((mlist) => 
+                middle.map((mlist,i) => 
                   <li className="middlelist" 
                     onMouseEnter={handleEnterMiddleList}
                     onMouseLeave={handleLeaveMiddleList}
+                    key={i}
                   >
                     <p>{mlist.middle}</p>
                   </li>
