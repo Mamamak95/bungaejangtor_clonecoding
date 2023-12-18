@@ -63,8 +63,8 @@ export default function SearchProduct(prop){
         <div className="searchproductmain">
           <ul className="searchproductcontent">
             {
-              searchNameList.map(list => 
-                <li>
+              searchNameList.map((list,i) => 
+                <li key={i}>
                   <Link to = {`/productDetail/${list.pid}`} className="searchlistlink">
                     <Image className="pro_img" url={list.img} />
                     <p>{list.productName}</p>
