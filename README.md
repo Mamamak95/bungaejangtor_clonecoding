@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# 번개장터 클론코딩
+### 클라이언트 https://github.com/Mamamak95/bungaejangtor_clonecoding
+### 서버 https://github.com/Mamamak95/bungaejangtor_clonecoding_server
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+![main](https://github.com/Mamamak95/bungaejangtor_clonecoding_server/assets/79183851/7c427adc-273d-4eed-bf80-26ebf54f5e44)
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 내용
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+중고거래를 위한 온라인 커뮤니티 사이트 '번개장터' 클론코딩
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+'번개장터'는 사용자가 자유롭게 중고물품을 사고팔 수 있는 사이트입니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+사용자는 자신이 팔 물품을 등록하고 구매자와의 협의를 거쳐 최종적으로 물건을 판매하기까지 한 곳에서 가능합니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+프로젝트에서는 '번개장터'의 메인 서비스인 중고 거래를 위한 기능들을 위주로 구현하였습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+주요 기능 :
 
-### `yarn eject`
+회원가입 및 로그인 : 각종 유효성 검사와 함께 bcript로 암호화 해서 DB에 저장합니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+판매등록 : multer 라이브러리를 이용해 서버에 이미지 파일과 함께 상품 정보를 등록할 수 있고, 로컬 스토리지를 통한 임시저장과 수정 기능이 있습니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+실시간 채팅 : socket.io 라이브러리를 이용해 양방향 통신으로 실시간 채팅을 구현하였습니다. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+상품 진열 : 상품 테이블에 저장된 상품의 목록들을 쿼리문을 통해 페이지별로 불러옵니다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+검색 : 검색어에 해당하는 품목을 쿼리문을 통해 상품 테이블에서 불러옵니다.
 
-## Learn More
+리뷰 : 구매한 제품에 대한 리뷰를 평점과 함께 작성합니다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+개인상점 프로필 : 사용자에 대한 정보를 표시합니다. 평점, 판매상품 내역등을 표시합니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+찜 : 사용자가 관심 있는 상품을 찜을 통해 북마크를 할 수 있고 찜 목록에서 확인할 수 있습니다.
 
-### Code Splitting
+상품 관리 : 등록한 상품을 삭제하거나 판매 완료로 상품 정보를 업데이트하거나 내용을 수정할 수 있습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-----
 
-### Analyzing the Bundle Size
+클라이언트는 리액트를 사용했고 react-router를 통해 SPA 방식으로 구성했습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+그리고 axios와 socket.io-client 라이브러리를 사용하여 서버와 통신합니다.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+서버는 Node.js와 Express.js를 메인으로 사용했고 채팅을 위한 실시간 통신은 socket.io를 사용했습니다. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+MVC 패턴으로 유지 보수가 용이하도록 구성했습니다.
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `yarn build` fails to minify
+## 참여자
+조장: 호준영 <https://github.com/Mamamak95>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+조원: 음정태 <https://github.com/Eumjeongtae>
+
+조원: 양근영 <https://github.com/ygy93>
+
+조원: 이세영 <https://github.com/2se0>
