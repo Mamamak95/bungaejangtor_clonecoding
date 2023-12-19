@@ -34,45 +34,58 @@ export default function Review() {
       .catch((err) => { console.log(err) });
   }, []);
 
+  const handleLinkClick = (link) => {
+    // Link 클릭 시 리로드
+    window.location.replace(link)
+  };
   return (
     <div className="wishList reviewList">
       <h2>상점후기<span>{reviewList.length ? reviewList.length : 0}</span></h2>
-      <div className="container1">
-        <div>
-          <div className="starBox">
-            <p className="starNum">{score}</p>
-            <Score score={score} />
-          </div>
-          <div className="middle"></div>
-          <div className="percentBox">
-            <p>{percent}%</p>
-            <span>만족후기</span>
-          </div>
-        </div>
-      </div>
-      <ul className="review">
-
-        {
-          reviewList.map(v =>
-            <li>
-              <Link to={`/profile/${v.uid}`}>
-                {<Image url={v.img} />}
-              </Link>
-              <div className="reviewContent">
-                <div className="buyerName">
-                  <Link to={`/profile/${v.uid}`} className="buyer">
-                    {v.uid}
-                  </Link>
-                  <p className="buyerDate">{v.date}</p>
+      {
+        reviewList.length ?
+          <>
+            <div className="container1">
+              <div>
+                <div className="starBox">
+                  <p className="starNum">{score}</p>
+                  <Score score={score} />
                 </div>
-                <Score score={v.score} />
-                <div className="reviewTxt">{v.content}</div>
-                <div className="report"><AiOutlineThunderbolt />신고하기</div>
+                <div className="middle"></div>
+                <div className="percentBox">
+                  <p>{percent}%</p>
+                  <span>만족후기</span>
+                </div>
               </div>
-            </li>
-          )
-        }
-      </ul>
+            </div>
+            <ul className="review">
+
+              {
+                reviewList.map(v =>
+                  <li>
+                    <div className="link" onClick={()=>handleLinkClick(`/profile/${v.uid}`)}>
+                      {<Image url={v.img} />}
+                    </div>
+                    <div className="reviewContent">
+                      <div className="buyerName">
+                        <div onClick={()=>handleLinkClick(`/profile/${v.uid}`)} className="buyer">
+                          {v.uid}
+                        </div>
+                        <p className="buyerDate">{v.date}</p>
+                      </div>
+                      <Score score={v.score} />
+                      <div className="reviewTxt">{v.content}</div>
+                      <div className="report"><AiOutlineThunderbolt />신고하기</div>
+                    </div>
+                  </li>
+                )
+              }
+            </ul>
+          </>
+          :
+          <p className="noList">찜한 상품이 없습니다.</p>
+      }
+
+
     </div>
 
   );
