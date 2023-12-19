@@ -117,7 +117,7 @@ export default function SignUp(){
     }
 
     if(capValue === null){
-      alert('reCaptcha 체크를 해주세요.')
+      alert("로봇이 아닌지 확인하는 동안 문제가 발생했습니다. 다시 시도해주세요.")
       reCap.current.style.border = "2px solid red";
       reCap.current.focus();
       return;
