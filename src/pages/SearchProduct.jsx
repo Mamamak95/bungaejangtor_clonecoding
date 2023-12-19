@@ -67,16 +67,28 @@ export default function SearchProduct(prop){
                 <li key={i}>
                   <Link to = {`/productDetail/${list.pid}`} className="searchlistlink">
                     <Image className="pro_img" url={list.img} />
-                    <p>{list.productName}</p>
-                    <div className="searchlistinfo">
-                      <div>{list.price} 원</div>
-                      <div>{formatRelativeDate(list.regdate)}</div>
+                    <div className="searchlistinfowrap">
+                      <p>{list.productName}</p>
+                      <div className="searchlistinfo">
+                        <div>{list.price} 원</div>
+                        <div className="searchlistregdate">{formatRelativeDate(list.regdate)}</div>
+                      </div>
                     </div>
                   </Link>
                 </li>
               )
             }
           </ul>
+          { searchCount === 0 ? 
+              <section className="searchproductnonewrap">
+                <div className="searchproductnone">
+                  <p className="searchproductnonename">{query}</p>
+                  <p className="searchproductnoneguide">에 대한 검색결과가 없습니다.</p>
+                </div>
+              </section>
+              :
+              ""
+            }
         </div>
 
         <div className="searchpage">

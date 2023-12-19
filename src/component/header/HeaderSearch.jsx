@@ -63,7 +63,6 @@ export default function HeaderSearch(){
       setSearchPopCenter(true)
     }
     
-
   }
 
   /* 검색 서브밋 시 로컬스토리지로 키값을 넣고 검색한 페이지로 이동, 단 빈값이나 null 값일때는 리턴하여 실행하지 않음 */
@@ -73,7 +72,6 @@ export default function HeaderSearch(){
     setInputFocus(false)
 
     const searchDataKey = 'searchData';
-
     const searchData = JSON.parse(localStorage.getItem(searchDataKey)) || [];
 
     // 검색어 값
@@ -190,6 +188,14 @@ export default function HeaderSearch(){
     // console.log(recentSearches.length);
   }
 
+  /* 인기검색어 리스트들 중 선택 클릭한 것의 검색페이지로 이동 */
+  const handlePopularSearchList = (e) => {
+    // console.log(e.target.dataset.list);
+
+    const newUrl = `/search?query=${e.target.dataset.list}`;
+      navigate(newUrl);
+  }
+
   /* 최근검색어 리스트들 중 선택 클릭한 것의 검색페이지로 이동 */
   const handleNewSearchList = (e) => {
     // console.log(e.target.dataset.list);
@@ -226,8 +232,11 @@ export default function HeaderSearch(){
     setSearchPopCenterList(updatedSearchData.length === 0);
   }
 
-  const handlerecent = (e) => {
 
+  const [searchColor, setSearchColor] = useState('active');
+  const [searchColor2, setSearchColor2] = useState('');
+  
+  const handlerecent = (e) => {
     if(recentSearches.length > 0){
       setSearchPopCenter(false)
       setSearchPopCenter2(false)
@@ -238,7 +247,10 @@ export default function HeaderSearch(){
       setSearchPopCenter2(false)
       setSearchPopCenterList(false)
       setSearchDelete2(true)
-    } 
+    }
+
+    setSearchColor('active')
+    setSearchColor2('')
   }
 
   const handlepopular = (e) => {
@@ -249,11 +261,15 @@ export default function HeaderSearch(){
     setSearchContent(false)
     setSearchDelete2(false)
 
+    setSearchColor2('active')
+    setSearchColor('')
+
     axios
     .get('http://127.0.0.1:8000/search/searchname/popular')
     .then(data => 
       setSearchPopular(data.data)
     )
+    .catch(err => console.log(err))
   }
 
   return(
@@ -268,8 +284,8 @@ export default function HeaderSearch(){
               { !searchContent &&
                 <>
                   <div className="titlename">
-                    <div className="recently" onClick={handlerecent}>최근 검색어</div>
-                    <div className="popular" onClick={handlepopular}>인기 검색어</div>
+                    <div className={`recently ${searchColor}`} onClick={handlerecent}>최근 검색어</div>
+                    <div className={`popular ${searchColor2}`} onClick={handlepopular}>인기 검색어</div>
                   </div>
                   <div className="searchcenter" onChange={handleSearchCenter}>
                     { searchPopCenter &&
@@ -299,7 +315,10 @@ export default function HeaderSearch(){
                       <>
                         <ul className="searchpopular">
                         { searchPopular.map((popular, i) => 
-                            <li key={i}><span>{popular.rno}</span>{popular.searchName}</li>
+                            <li key={i} className="searchpopularlist" onClick={handlePopularSearchList} data-list={popular.searchName}>
+                              <span>{popular.rno}</span>
+                              {popular.searchName}
+                            </li>
                           )
                         }
                         </ul>
@@ -329,6 +348,7 @@ export default function HeaderSearch(){
                   <div className="searchdelete" onClick={handleSearchesDelete}><RiDeleteBin5Line /> 검색어 전체삭제</div> 
                 }
                 { !searchDelete && !searchDelete2 && <div></div> }
+                <div></div>
                 <div className="searchclose" onClick={handleSearchClose}>닫기</div>
               </div>
             </div>

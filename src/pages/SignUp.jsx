@@ -3,10 +3,16 @@ import '../style/signup/signup.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { FaRegEye, FaRegEyeSlash  } from "react-icons/fa6";
+import ReCAPTCHA from "react-google-recaptcha";
+// 6Lf33DUpAAAAAD4JdT43w1ZxLAXtISy46IGqlsDc 리캡차 사이트 키
+// 6Lf33DUpAAAAALPYWDJLsdAUm3yrZYmJh_sxSRbg 리캡차 시크릿 키
 
 export default function SignUp(){
   const navigate = useNavigate();
   const [signInfo, setSignInfo] = useState({uid : "", pw : "", pwcheck : "", name : "", email : "", tel : ""})
+
+  /* 리캡차 */
+  const [capValue, setCapValue] = useState(null)
 
   /* 아이디 중복 확인 */
   const [idCheckBtn, setIdCheckBtn] = useState(0);
@@ -56,6 +62,16 @@ export default function SignUp(){
   const inputEmail = useRef(null)
   const inputPhone = useRef(null)
 
+  /* 리캡챠 */
+  const reCap = useRef(null)
+
+  /* 유효성검사 p 태그들 */
+  const inputIdCheck = useRef({color:"red"})
+  const inputPassChecked = useRef({color:"red"})
+  const inputPassChecked2 = useRef({color:"red"})
+  const inputNickCheck = useRef({color:"red"})
+  const inputPhoneCheck = useRef({color:"red"})
+
   /* 회원가입 확인 or 엔터 */
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -97,6 +113,13 @@ export default function SignUp(){
     if(!idChangeCheck){
       alert('아이디 중복 체크를 다시 해주세요')
       inputId.current.focus();
+      return;
+    }
+
+    if(capValue === null){
+      alert('reCaptcha 체크를 해주세요.')
+      reCap.current.style.border = "2px solid red";
+      reCap.current.focus();
       return;
     }
 
@@ -226,7 +249,9 @@ export default function SignUp(){
       setPwMixCheck('사용 가능한 비밀번호 입니다.')
       e.target.style.borderBottom = '1px solid #888';
     }
+
   }
+  
 
   /* 비밀번호 확인 체크 */
   const handleBlurPwSame = (e) => {
@@ -242,7 +267,7 @@ export default function SignUp(){
     } else if(inputPass.current.value !== e.target.value){
       e.target.style.borderBottom = '1px solid red';
       setPwSameCheck('비밀번호가 일치하지 않습니다.')
-    } 
+    }
   }
 
   /* 닉네임 체크 */
@@ -290,7 +315,7 @@ export default function SignUp(){
             onChange={handleChange}
           />
           <button type="button" className="idoverlapcheck" onClick={handleDuplication}>아이디 중복 확인</button>
-          { idBlurCheck && <p className="inputid">* {idBlurCheck}</p> }
+          { idBlurCheck && <p className="inputid" ref={inputIdCheck}>* {idBlurCheck}</p> }
         </div>
 
         <div className="signpass">
@@ -304,7 +329,7 @@ export default function SignUp(){
           />
           { !pwLookToggle ? <FaRegEye onClick={handlePwLookToggle} /> : <FaRegEyeSlash onClick={handlePwLookToggle} /> }
           { pwLengthCheck && <p style={{ color: 'red' }}>* {pwLengthCheck}</p> }
-          { pwMixCheck && <p style={{ color: 'red' }}>* {pwMixCheck}</p> }
+          { pwMixCheck && <p ref={inputPassChecked} style={{ color: 'red' }}>* {pwMixCheck}</p> }
         </div>
 
         <div className="signpasscheck">
@@ -318,7 +343,7 @@ export default function SignUp(){
           />
           <FaRegEye />
           { !pwLookCheckToggle ? <FaRegEye onClick={handlePwLookCheckToggle}/> : <FaRegEyeSlash onClick={handlePwLookCheckToggle}/> }
-          { pwSameCheck && <p style={{ color: 'red' }}>* {pwSameCheck}</p> }
+          { pwSameCheck && <p ref={inputPassChecked2} style={{ color: 'red' }}>* {pwSameCheck}</p> }
         </div>
 
         <div className="signnicname">
@@ -329,7 +354,7 @@ export default function SignUp(){
             onBlur={handleBlurName}
             onChange={handleChange} 
           />
-          { nameCheck && <p style={{ color: 'red' }}>* {nameCheck}</p> }
+          { nameCheck && <p ref={inputNickCheck} style={{ color: 'red' }}>* {nameCheck}</p> }
         </div>
 
         <div className="signemail">
@@ -354,8 +379,7 @@ export default function SignUp(){
             onBlur={handleBlurPhone}
             onChange={handleChange}
           /> 
-          {/* { !isPhoneVal ? <p style={{ color: 'red' }}>숫자만 입력해주세요.</p> : '' } */}
-          { phoneCheck && <p style={{ color: 'red' }}>* {phoneCheck}</p> }
+          { phoneCheck && <p ref={inputPhoneCheck} style={{ color: 'red' }}>* {phoneCheck}</p> }
           <div className="signphonecheckbox">
             <p>
               <input type="checkbox" name="snscheck" checked={isSnsChecked} onChange={handleSnsCheckChange}/><label>SNS 수신 허용</label>
@@ -364,6 +388,14 @@ export default function SignUp(){
               <input type="checkbox" name="emailcheck" checked={isEmailChecked} onChange={handleEmailCheckChange}/><label>E-mail 수신 허용</label>
             </p>
           </div>
+        </div>
+
+        <div className="recaptchawrap" ref={reCap}>
+          <ReCAPTCHA 
+            sitekey="6Lf33DUpAAAAAD4JdT43w1ZxLAXtISy46IGqlsDc"
+            onChange={(value) => setCapValue(value)}
+            className="recaptcha"
+          />
         </div>
 
         <div className="signcheckbar">

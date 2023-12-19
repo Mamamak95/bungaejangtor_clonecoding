@@ -23,12 +23,23 @@
   width: 50%;
 }
 .HeaderSearch .Searchpop .searchcontent .titlename .recently {
+  border-bottom: 2px solid lightgray;
+  color: black;
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename .recently.active {
   border-bottom: 2px solid red;
   color: red;
   cursor: pointer;
 }
 .HeaderSearch .Searchpop .searchcontent .titlename .popular {
-  border-bottom: 2px solid rgb(217, 217, 217);
+  border-bottom: 2px solid lightgray;
+  color: black;
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename .popular.active {
+  border-bottom: 2px solid red;
+  color: red;
   cursor: pointer;
 }
 .HeaderSearch .Searchpop .searchcontent .searchcenter {
@@ -68,6 +79,26 @@
 }
 .HeaderSearch .Searchpop .searchcontent .searchcenter .searchallnew .searchesnewlist button img {
   width: 14px;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchpopular {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchpopular .searchpopularlist {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 45px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchpopular .searchpopularlist span {
+  color: red;
+  width: 10%;
+  padding-right: 10px;
 }
 .HeaderSearch .Searchpop .searchcontent .titlename2 {
   display: flex;
