@@ -88,7 +88,7 @@ export default function LoginPopUp(prop){
     }
   }
   let styleIpBtnMove = {
-    left : ipToggle ? "0" : "calc(100% - 20px)"
+    left : ipToggle ? "0" : "calc(100% - 17px)"
   } // <div className={`downloadqr ${downloadqr && 'off'}`}>
   let styleIpBtnColor = {
     backgroundColor : ipToggle ? "red" : "orange"
@@ -111,8 +111,8 @@ export default function LoginPopUp(prop){
           </div>
           <div className="loginContent">
             <div className="logintitle">
-              <img src="http://127.0.0.1:8000/webImg/loginicon.png"/>
-              <p>번개장터</p>
+              <img src="http://127.0.0.1:8000/webImg/mainlogo.png"/>
+              {/* <p>번개장터</p> */}
             </div>
             <form className="loginForm" onSubmit={handleSubmit}>
               <p>
