@@ -54,7 +54,7 @@ export default function Product(){
         )}
       <div style={{clear:'both'}}></div>
       <button className="more_button" onClick={loadMore} >
-        더보기
+        more
       </button>
     </div>
   )

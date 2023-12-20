@@ -15,6 +15,7 @@ import NotFound from './pages/NotFound';
 import ProductEdit from './pages/ProductEdit';
 import SearchProduct from './pages/SearchProduct';
 import Purchase from './pages/Purchase';
+import ProductManage from './pages/ProductManage';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,8 @@ const router = createBrowserRouter([
       { path : '/sign', element : <SignUp /> },
       { path : '/search', element : <SearchProduct /> },
       { path : '/purchase/:pid/:uid/:tid', element : <Purchase/>},
-      { path : '/profile/:id', element : <Profile /> }
+      { path : '/profile/:uid', element : <Profile /> },
+      { path : '/productmanage/:uid', element : <ProductManage /> }
     ]
   }
 ])

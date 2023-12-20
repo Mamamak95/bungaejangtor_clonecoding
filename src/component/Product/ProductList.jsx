@@ -10,7 +10,7 @@ export default function ProductList({image, name, price, date, sellStatus, place
     <div className="productlist">
       <div className={`pro ${productClass}`}>      
       {sellStatus === "sell" ? (
-            <div className="pro_status">
+            <div className="pro_status sellClass">
               <div className="sell">판매완료</div>
               <Image
               className="pro_img"
@@ -18,7 +18,7 @@ export default function ProductList({image, name, price, date, sellStatus, place
             />
             </div>
           ) : (
-            <div className="pro_status sellClass">
+            <div className="pro_status">
               <Image
               className="pro_img"
               url={image} 

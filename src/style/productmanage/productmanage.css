@@ -1,0 +1,100 @@
+.managenav{
+  width: 100%;
+  height: 60px;
+  margin-top: 10px;
+}
+
+.managenav .divider {
+  border-left: 1px solid #ddd; 
+  height: 20px; 
+  margin-right: 30px; 
+}
+
+.managenav ul{
+  padding-left: 0;
+}
+
+.managenav li{
+  float: left;
+  margin-right: 30px
+}
+
+.managesecond{
+  height: 90px;
+  margin-top: 40px;
+}
+
+.mangethird{
+  text-align: center;
+}
+
+.managesearch{
+  width: 300px;
+  height: 50px;
+  margin-right: 20px;
+  border: 1px solid #ccc;
+}
+
+.manageop{
+  width: 100px;
+  height: 50px;
+  border: 1px solid #ccc;
+}
+
+.pmtable{
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.pmpage{
+  margin: 30px;
+  
+}
+
+.pmtrth{
+  background: #eee;
+  height: 50px;
+  font-weight: 600;
+  border-bottom: 1px dotted #ccc;
+}
+
+.pmimg img{
+  width: 100px;
+  height: 90px;
+  padding: 5px 70px 5px 70px ;
+  margin: auto;
+  object-fit: cover;
+}
+
+.pmtr{
+  border-bottom: 1px dotted #ccc;
+}
+
+.pmremove{
+  padding: 6px;
+  font-size: .85rem;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.pmcomplete{
+  padding: 6px;
+  font-size: .85rem;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+.pmbnt{
+  padding: 6px;
+  font-size: .85rem;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  margin: 10px 50px;
+}
+.pmbntnone{
+  padding: 6px;
+  font-size: .85rem;
+  margin-bottom: 10px;
+  margin: 10px 50px;
+}
