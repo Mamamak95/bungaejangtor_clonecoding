@@ -8,14 +8,14 @@ import formatRelativeDate from "../../util/date";
 import { AiOutlineThunderbolt } from "react-icons/ai";
 
 export default function Review() {
-  let { id } = useParams();
+  let { uid } = useParams();
   let [score, setScore] = useState(0);
   let [percent, setPercent] = useState(0);
   let [reviewList, setReviewList] = useState([]);
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:8000/reviewList/${id}`
+      url: `http://localhost:8000/reviewList/${uid}`
     })
       .then(res => {
         let data = res.data.map(item => {
@@ -29,10 +29,27 @@ export default function Review() {
         res.data.forEach(v => total += parseInt(v.score))
         let star = total / res.data.length;
         setScore(star)
-        setPercent(100 - (100 / star))
+        setPercent(calculatePercentage(star))
       })
       .catch((err) => { console.log(err) });
   }, []);
+
+  const calculatePercentage = (day) => {
+    switch (day) {
+      case 1:
+        return 20;
+      case 2:
+        return 40;
+      case 3:
+        return 60;
+      case 4:
+        return 80;
+      case 5:
+        return 100;
+      default:
+        return 0;
+    }
+  }
 
   const handleLinkClick = (link) => {
     // Link 클릭 시 리로드
@@ -82,7 +99,7 @@ export default function Review() {
             </ul>
           </>
           :
-          <p className="noList">찜한 상품이 없습니다.</p>
+          <p className="noList">상점후기가 없습니다.</p>
       }
 
 

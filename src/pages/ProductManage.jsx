@@ -8,11 +8,7 @@ import Pagination from "rc-pagination/lib/Pagination";
 
 export default function ProductManage(){
   let [list, setList] = useState([]);
-  // const { uid } = useParams();
-  // const { seller, buyer } = uid;
   let { uid } = useParams(); 
-  let [ seller, setSeller ] = useState(uid);
-  let [ buyer, setBuyer ] = useState(uid);
   const [selectedStatus, setSelectedStatus] = useState('전체');
   const [selectedProduct, setSelectedProduct] = useState([]);
 
@@ -23,7 +19,7 @@ export default function ProductManage(){
   useEffect(()=>{
     axios({
       method : "get",
-      url : `http://127.0.0.1:8000/productmanage/${userInfo.uid}/${seller}/${buyer}`
+      url : `http://127.0.0.1:8000/productmanage/${userInfo.uid}/${uid}/${uid}`
     })
     .then(res => setList(res.data))
     .catch(err=>console.log(err))
@@ -75,7 +71,7 @@ export default function ProductManage(){
         url: `http://127.0.0.1:8000/productmanage/${userInfo.uid}/${selectedProduct}`
     })
     .then((result) => {
-        alert(JSON.stringify(result.data));
+        alert("선택된 상품이 삭제 되었습니다.");
         window.location.reload();
     })
     .catch();
@@ -93,7 +89,7 @@ export default function ProductManage(){
         url: `http://127.0.0.1:8000/productmanage/${userInfo.uid}/${selectedProduct}`
     })
     .then((result) => {
-      alert(JSON.stringify(result.data));
+      // alert(JSON.stringify(result.data));
       window.location.reload();
 
       setList((prevList) =>

@@ -21,7 +21,7 @@ export default function SubBar({ pathname }) {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsWideScreen(window.innerWidth >= 1000);
+      setIsWideScreen(window.innerWidth >= 1400);
     };
 
     window.addEventListener("resize", handleResize);
