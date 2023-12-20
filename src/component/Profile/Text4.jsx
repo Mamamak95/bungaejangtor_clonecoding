@@ -3,7 +3,7 @@ import '../../style/wish/wish.css'
 
 export default function Text4(){
   return(
-    <div className="inner wishList">
+    <div className="wishList">
       <h2>팔로워</h2>
       <div className="sortBtn">
         <div className="checkControll">

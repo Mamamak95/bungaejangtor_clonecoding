@@ -9,7 +9,7 @@ const ScrollToTop = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return <SubBar pathname={pathname}/>;
+  return <SubBar pathname={pathname.includes('productDetail') ? pathname : false} />
 };
 
 export default ScrollToTop;
