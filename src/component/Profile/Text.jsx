@@ -16,7 +16,7 @@ export default function Text() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:8000/wishList/${userInfo.uid}`
+      url: `http://192.168.50.57:8000/wishList/${userInfo.uid}`
     })
       .then(res => {
         res.data = res.data.map(v => ({ ...v, 'check': false }))
@@ -52,7 +52,7 @@ export default function Text() {
     if (result) {
       axios({
         method: 'post',
-        url: `http://localhost:8000/wishList/${userInfo.uid}`,
+        url: `http://192.168.50.57:8000/wishList/${userInfo.uid}`,
         data: checkList
       })
         .then(res => {

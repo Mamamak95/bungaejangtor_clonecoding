@@ -13,7 +13,7 @@ export default function Profile(){
 
   useEffect(()=>{
     axios
-    .get(`http://127.0.0.1:8000/profile/${userInfo.uid}`)
+    .get(`http://192.168.50.57:8000/profile/${userInfo.uid}`)
     .then((result)=>
         SetProfile(result.data)
       )

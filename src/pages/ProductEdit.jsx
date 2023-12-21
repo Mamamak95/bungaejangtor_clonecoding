@@ -14,7 +14,7 @@ export default function ProductEdit() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/edit/${pid}`);
+        const response = await axios.get(`http://192.168.50.57:8000/edit/${pid}`);
         setData(response.data.data);
         setImages(response.data.image)
       } catch (error) {

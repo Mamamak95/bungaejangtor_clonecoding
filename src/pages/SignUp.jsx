@@ -127,7 +127,7 @@ export default function SignUp(){
     let signTel = signInfo.tel
 
     await axios
-    .get(`http://127.0.0.1:8000/sign/user/${signTel}`)
+    .get(`http://192.168.50.57:8000/sign/user/${signTel}`)
     .then(data => {
       console.log(data.data);
       if(data.data.cnt === 1){
@@ -136,7 +136,7 @@ export default function SignUp(){
       } else {
         if(idChecked){ 
           axios
-          .post('http://localhost:8000/sign', signInfo)
+          .post('http://192.168.50.57:8000/sign', signInfo)
           .then(data => {
             if(data.data === 'good'){
               alert('회원가입 되셨습니다.')
@@ -185,7 +185,7 @@ export default function SignUp(){
 
     // setIdCheckBtn 값이 2 이면 중복된아이디, 1 이면 사용가능아이디
     axios
-    .get(`http://127.0.0.1:8000/sign/${signUid}`)
+    .get(`http://192.168.50.57:8000/sign/${signUid}`)
     .then(data => {
       if(data.data.cnt === 1){
         alert('이미 존재하는 아이디 입니다.')

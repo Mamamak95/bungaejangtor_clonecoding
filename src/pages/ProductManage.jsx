@@ -19,7 +19,7 @@ export default function ProductManage(){
   useEffect(()=>{
     axios({
       method : "get",
-      url : `http://127.0.0.1:8000/productmanage/${userInfo.uid}/${uid}/${uid}`
+      url : `http://192.168.50.57:8000/productmanage/${userInfo.uid}/${uid}/${uid}`
     })
     .then(res => setList(res.data))
     .catch(err=>console.log(err))
@@ -68,7 +68,7 @@ export default function ProductManage(){
 
     axios({
         method: "get",
-        url: `http://127.0.0.1:8000/productmanage/${userInfo.uid}/${selectedProduct}`
+        url: `http://192.168.50.57:8000/productmanage/${userInfo.uid}/${selectedProduct}`
     })
     .then((result) => {
         alert("선택된 상품이 삭제 되었습니다.");
@@ -86,7 +86,7 @@ export default function ProductManage(){
 
     axios({
         method: "post",
-        url: `http://127.0.0.1:8000/productmanage/${userInfo.uid}/${selectedProduct}`
+        url: `http://192.168.50.57:8000/productmanage/${userInfo.uid}/${selectedProduct}`
     })
     .then((result) => {
       // alert(JSON.stringify(result.data));

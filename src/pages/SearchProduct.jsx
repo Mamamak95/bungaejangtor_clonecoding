@@ -16,7 +16,7 @@ export default function SearchProduct(prop){
 
   useEffect(() => {
     axios
-    .get(`http://127.0.0.1:8000/search?query=${query}`)
+    .get(`http://192.168.50.57:8000/search?query=${query}`)
     .then(data => {
       setSearchNameList(data.data)
       setSearchCount(data.data.length)

@@ -13,7 +13,7 @@ export default function Product(){
   
   useEffect(()=>{
     axios
-    .get(`http://127.0.0.1:8000/`)
+    .get(`http://192.168.50.57:8000/`)
     .then((result)=>
       setProducts(result.data)
       )
@@ -24,7 +24,7 @@ export default function Product(){
 
     axios({
       method:'post',
-      url:`http://127.0.0.1:8000/loadMore/${offset}/${newLimit}`,
+      url:`http://192.168.50.57:8000/loadMore/${offset}/${newLimit}`,
     })
     .then((result) => {
       //console.log(JSON.stringify(result.data))

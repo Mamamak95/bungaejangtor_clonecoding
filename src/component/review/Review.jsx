@@ -15,7 +15,7 @@ export default function Review() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:8000/reviewList/${uid}`
+      url: `http://192.168.50.57:8000/reviewList/${uid}`
     })
       .then(res => {
         let data = res.data.map(item => {

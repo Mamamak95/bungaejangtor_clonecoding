@@ -27,7 +27,7 @@ export default function UserItem(){
 
     axios({
       method: 'get',
-      url: `http://localhost:8000/profile/${uid}/${seller}/${buyer}/${sort}`
+      url: `http://192.168.50.57:8000/profile/${uid}/${seller}/${buyer}/${sort}`
     })
       .then((res)=>
         setList(res.data)

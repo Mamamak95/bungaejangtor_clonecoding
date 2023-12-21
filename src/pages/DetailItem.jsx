@@ -51,7 +51,7 @@ export default function DetailItem() {
   // useEffect(() => {
   //   axios({
   //     method: 'get',
-  //     url: `http://localhost:8000/product/${pid}`
+  //     url: `http://192.168.50.57:8000/product/${pid}`
   //   })
   //     .then(res => {
   //       res.data.product.regdate = formatRelativeDate(res.data.product.regdate)
@@ -66,7 +66,7 @@ export default function DetailItem() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `http://localhost:8000/product/${pid}/${userInfo.uid}`
+      url: `http://192.168.50.57:8000/product/${pid}/${userInfo.uid}`
     })
       .then(res => {
         let recent = { 'pid': res.data.product.pid, 'image': (res.data.product.images).split(',')[0] };
@@ -124,7 +124,7 @@ export default function DetailItem() {
     let chatData = { uid: userInfo.uid, pid: info.pid }
     axios({
       method: 'post',
-      url: `http://127.0.0.1:8000/chat/create`,
+      url: `http://192.168.50.57:8000/chat/create`,
       data: chatData
     })
       .then(res => {
@@ -138,7 +138,7 @@ export default function DetailItem() {
       let data = { pid: info.pid, uid: userInfo.uid, btnWish }
       axios({
         method: 'post',
-        url: `http://localhost:8000/product/wish`,
+        url: `http://192.168.50.57:8000/product/wish`,
         data: data
       })
         .then(res => {
@@ -155,7 +155,7 @@ export default function DetailItem() {
     const result = window.confirm('바로 구매하시겠습니까?');
     if (result) {
       axios
-        .post(`http://127.0.0.1:8000/purchase`, {
+        .post(`http://192.168.50.57:8000/purchase`, {
           pid: info.pid,
           buyer: userInfo.uid,
           seller: info.seller,
@@ -355,10 +355,10 @@ export default function DetailItem() {
         {/* 상품 정보(상품 설명/content) */}
         <div className="contentInfo">
           <div className="contentInfoHeader">
-            <div><img src="http://127.0.0.1:8000/webImg/blog.png" alt="네이버블로그공유" /></div>
+            <div><img src="http://192.168.50.57:8000/webImg/blog.png" alt="네이버블로그공유" /></div>
             <div><FaFacebookF /></div>
             <div><FaTwitter /></div>
-            <div><img src="http://127.0.0.1:8000/webImg/url.png" alt="URL공유" /></div>
+            <div><img src="http://192.168.50.57:8000/webImg/url.png" alt="URL공유" /></div>
           </div>
         </div>
       </section>

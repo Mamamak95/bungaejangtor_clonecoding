@@ -101,7 +101,7 @@ export default function HeaderSearch(){
     // window.location.href = newUrl;
 
     axios
-    .post('http://127.0.0.1:8000/search',searchInput)
+    .post('http://192.168.50.57:8000/search',searchInput)
     .then(data => 
       data.data === 'good'
     )
@@ -265,7 +265,7 @@ export default function HeaderSearch(){
     setSearchColor('')
 
     axios
-    .get('http://127.0.0.1:8000/search/searchname/popular')
+    .get('http://192.168.50.57:8000/search/searchname/popular')
     .then(data => 
       setSearchPopular(data.data)
     )
