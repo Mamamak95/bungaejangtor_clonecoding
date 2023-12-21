@@ -32,7 +32,7 @@ export default function ProfileNavbar() {
     
   useEffect(()=>{
     axios
-    .get(`http://192.168.50.57:8000/profile/${uid}`)
+    .get(`http://192.168.50.57/profile/${uid}`)
     .then((result)=>
         SetInfo(result.data)
       )

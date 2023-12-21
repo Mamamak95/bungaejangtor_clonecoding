@@ -75,7 +75,7 @@ fieldset{
 :root {
   --red: rgb(247, 47, 51); 
 }
-.scoreBox{display: flex;}
+.scoreBox{display: flex; }
 .star{
   display: block;
   width: 15px;

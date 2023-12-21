@@ -73,21 +73,25 @@ export default function Purchase() {
         date={dateFormat(product.date)}
       ></ProductList>
       <form onSubmit={handleSubmit}>
-        <div className="stars">
+        <div className="stars  yStar">
           {Array.from({ length: star }).map((v, i) => (
-            <FaStar
+            <FaRegStar
+            key={i}
               className="star"
               onClick={() => {
                 handleStars(i);
               }}
-            ></FaStar>
+              
+            ></FaRegStar>
           ))}
           {Array.from({ length: 5 - star }).map((v, i) => (
-            <FaRegStar
+            <FaStar
               className="star"
               onClick={() => {
                 handleStars(star + i);
               }}
+              
+
             />
           ))}
         </div>

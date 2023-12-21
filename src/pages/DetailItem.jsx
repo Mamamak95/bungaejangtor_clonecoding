@@ -271,7 +271,7 @@ export default function DetailItem() {
                   {
                     userInfo.uid === info.seller ?
                       <div className="myPageBtn">
-                        <Link to="/profile">
+                        <Link to={`/profile/${userInfo.uid}`}>
                           내 상점 관리
                         </Link>
                       </div>
