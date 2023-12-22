@@ -25,7 +25,7 @@ export default function HeaderSearch(){
   let searchInputRef = useRef(null);
 
   const [recentSearches, setRecentSearches] = useState([]);
-  const [searchPopChange, setSearchPopChange] = useState(false);
+  const [searchPopChange, setSearchPopChange] = useState([]);
   const [searchPopular, setSearchPopular] = useState([]);
   const [localLength, setLocalLength] = useState([]);
   const [localTarget, setLocalTarget] = useState([]);
@@ -62,6 +62,8 @@ export default function HeaderSearch(){
       setSearchPopCenterList(false)
       setSearchPopCenter(true)
     }
+
+    
     
   }
 
@@ -83,16 +85,39 @@ export default function HeaderSearch(){
     }
 
     // 중복된 키값이면 더 이상 진행하지 않음
-    if (searchData.includes(inputValue)) {
-      return;
+    // if (searchData.includes(inputValue)) { 
+    //   // const updatedSearchData = [inputValue, ...searchData.filter(item => item !== inputValue)];
+    //   // localStorage.setItem(searchDataKey, JSON.stringify(updatedSearchData));
+    //   return;
+    // }
+
+    // 중복된 키값이면 입력한 값이 로컬스토리지에서 0 번째로 오도록 수정하기
+    const existingIndex = searchData.indexOf(inputValue);
+    if (existingIndex !== -1) {
+      // Remove the existing search term from its position
+      searchData.splice(existingIndex, 1);
     }
 
     const newSearchData = [inputValue, ...searchData.slice(0, 9)];
     localStorage.setItem(searchDataKey, JSON.stringify(newSearchData));
 
-    setSearchPopChange(!searchPopChange)
+    setSearchPopChange([])
     setLocalLength(newSearchData.length)
     setLocalTarget(searchData)
+
+
+    // 인기검색어 누른상태에서 검색어 입력 후 서브밋하고 온포커스하면 최근검색어가 인기검색어 안에 들어가있음
+    // 다시 검색팝업창을 켰을때 최근검색어를 트루상태여서 그런것 같음
+    if(searchPopCenter2 === true){ 
+      setSearchPopCenter2(!searchPopCenter2)
+      setSearchContent(!searchContent)
+      setSearchDelete2(true)
+      setSearchColor('active')
+      setSearchColor2('')
+
+      // setSearchPopCenter(false)
+      // setSearchPopCenterList(false)
+    }
 
     const newUrl = `/search?query=${inputValue}`;
     navigate(newUrl);
@@ -192,8 +217,8 @@ export default function HeaderSearch(){
   const handlePopularSearchList = (e) => {
     // console.log(e.target.dataset.list);
 
-    const newUrl = `/search?query=${e.target.dataset.list}`;
-      navigate(newUrl);
+    const hotUrl = `/search?query=${e.target.dataset.listed}`;
+      navigate(hotUrl);
   }
 
   /* 최근검색어 리스트들 중 선택 클릭한 것의 검색페이지로 이동 */
@@ -272,6 +297,16 @@ export default function HeaderSearch(){
     .catch(err => console.log(err))
   }
 
+  // useEffect(() => {
+  //   if (recentSearches.length > 0) {
+  //     setSearchPopCenterList(true);
+  //     setSearchPopCenter(false);
+  //   } else if (recentSearches.length === 0) {
+  //     setSearchPopCenterList(false);
+  //     setSearchPopCenter(true);
+  //   }
+  // }, [recentSearches, searchPopCenterList]);
+
   return(
     <>
       <form className="HeaderSearch" 
@@ -315,7 +350,7 @@ export default function HeaderSearch(){
                       <>
                         <ul className="searchpopular">
                         { searchPopular.map((popular, i) => 
-                            <li key={i} className="searchpopularlist" onClick={handlePopularSearchList} data-list={popular.searchName}>
+                            <li key={i} className="searchpopularlist" onClick={handlePopularSearchList} data-listed={popular.searchName}>
                               <span>{popular.rno}</span>
                               {popular.searchName}
                             </li>

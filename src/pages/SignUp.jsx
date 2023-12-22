@@ -6,6 +6,8 @@ import { FaRegEye, FaRegEyeSlash  } from "react-icons/fa6";
 import ReCAPTCHA from "react-google-recaptcha";
 // 6Lf33DUpAAAAAD4JdT43w1ZxLAXtISy46IGqlsDc 리캡차 사이트 키
 // 6Lf33DUpAAAAALPYWDJLsdAUm3yrZYmJh_sxSRbg 리캡차 시크릿 키
+// 6LdjGDgpAAAAAAYD0SNMsXfGLpMZu_hYGYV9f5yv 리캡차 발표용 사이트 키
+// 6LdjGDgpAAAAAI52Krojtc30WcQVGhzgZFp7_gko 리캡차 발표용 시크릿 키
 
 export default function SignUp(){
   const navigate = useNavigate();
@@ -382,10 +384,12 @@ export default function SignUp(){
           { phoneCheck && <p ref={inputPhoneCheck} style={{ color: 'red' }}>* {phoneCheck}</p> }
           <div className="signphonecheckbox">
             <p>
-              <input type="checkbox" name="snscheck" checked={isSnsChecked} onChange={handleSnsCheckChange}/><label>SNS 수신 허용</label>
+              <input type="checkbox" id="snscheck" name="snscheck" checked={isSnsChecked} onChange={handleSnsCheckChange}/>
+              <label htmlFor="snscheck">SNS 수신 허용</label>
             </p>
             <p>
-              <input type="checkbox" name="emailcheck" checked={isEmailChecked} onChange={handleEmailCheckChange}/><label>E-mail 수신 허용</label>
+              <input type="checkbox" id="emailcheck" name="emailcheck" checked={isEmailChecked} onChange={handleEmailCheckChange}/>
+              <label htmlFor="emailcheck">E-mail 수신 허용</label>
             </p>
           </div>
         </div>
