@@ -13,7 +13,7 @@ export default function Category(prop){
   const [mainCategory, setMainCategory] = useState([])
   useEffect(() => {
     axios
-    .get('http://127.0.0.1:3000/data/mainCategory.json')
+    .get('http://192.168.50.57:3000/data/mainCategory.json')
     .then(data => {
       setMainCategory(data.data)
     })
@@ -41,7 +41,7 @@ export default function Category(prop){
     setMiddleName(mainNameKor)
 
     await axios
-    .get(`http://127.0.0.1:3000/data/middle/${mainName}.json`)
+    .get(`http://192.168.50.57:3000/data/middle/${mainName}.json`)
     .then(data => 
       setMiddle(data.data)
     )

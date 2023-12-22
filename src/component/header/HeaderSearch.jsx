@@ -83,9 +83,31 @@ export default function HeaderSearch(){
     }
 
     // 중복된 키값이면 더 이상 진행하지 않음
-    if (searchData.includes(inputValue)) {
-      return;
+    // if (searchData.includes(inputValue)) {
+    //   return;
+    // }
+
+    // 중복된 키값이면 입력한 값이 로컬스토리지에서 0 번째로 오도록 수정하기
+    const existingIndex = searchData.indexOf(inputValue);
+    if (existingIndex !== -1) {
+      // Remove the existing search term from its position
+      searchData.splice(existingIndex, 1);
     }
+
+    // 인기검색어 누른상태에서 검색어 입력 후 서브밋하고 온포커스하면 최근검색어가 인기검색어 안에 들어가있음
+    // 다시 검색팝업창을 켰을때 최근검색어를 트루상태여서 그런것 같음
+    if(searchPopCenter2 === true){ 
+      setSearchPopCenter2(!searchPopCenter2)
+      setSearchContent(!searchContent)
+      setSearchDelete2(true)
+      setSearchColor('active')
+      setSearchColor2('')
+
+      // setSearchPopCenter(false)
+      // setSearchPopCenterList(false)
+    }
+
+    
 
     const newSearchData = [inputValue, ...searchData.slice(0, 9)];
     localStorage.setItem(searchDataKey, JSON.stringify(newSearchData));

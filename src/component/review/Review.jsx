@@ -38,12 +38,20 @@ export default function Review() {
     switch (day) {
       case 1:
         return 20;
+      case 1.5:
+        return 30;
       case 2:
         return 40;
+      case 2.5:
+        return 50;
       case 3:
         return 60;
+      case 3.5:
+        return 70;
       case 4:
         return 80;
+      case 4.5:
+        return 90;
       case 5:
         return 100;
       default:
@@ -79,12 +87,12 @@ export default function Review() {
               {
                 reviewList.map(v =>
                   <li>
-                    <div className="link" onClick={()=>handleLinkClick(`/profile/${v.uid}`)}>
+                    <div className="link" onClick={() => handleLinkClick(`/profile/${v.uid}`)}>
                       {<Image url={v.img} />}
                     </div>
                     <div className="reviewContent">
                       <div className="buyerName">
-                        <div onClick={()=>handleLinkClick(`/profile/${v.uid}`)} className="buyer">
+                        <div onClick={() => handleLinkClick(`/profile/${v.uid}`)} className="buyer">
                           {v.uid}
                         </div>
                         <p className="buyerDate">{v.date}</p>
