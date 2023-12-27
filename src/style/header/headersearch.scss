@@ -1,0 +1,197 @@
+.HeaderSearch {
+
+  .Searchpop {
+    position: absolute;
+    top:46px;
+    left:0;
+    width: 100%;
+    border:1px solid #ddd;
+    box-sizing: border-box;
+
+    .searchcontent {
+      padding: 20px;
+      background-color: #fff;
+
+      .titlename {
+        display:flex;
+        justify-content: space-between;
+        text-align: center;
+        font-weight: bold;
+
+        div {
+          padding: 6px;
+          width: 50%;
+        }
+
+        .recently {
+          border-bottom:2px solid lightgray;
+          color:black;
+          cursor: pointer;
+        }
+        .recently.active {
+          border-bottom:2px solid red;
+          color:red;
+          cursor: pointer;
+        }
+
+        .popular {
+          border-bottom:2px solid lightgray;
+          color:black;
+          cursor: pointer;
+        }
+        .popular.active {
+          border-bottom:2px solid red;
+          color:red;
+          cursor: pointer;
+        }
+      }
+
+      .searchcenter {
+        height: 360px;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+
+        .nonsearchlist {
+          width: 52px !important;
+          height: 46px !important;
+        }
+
+        p {
+          margin-top: 20px;
+        }
+
+        .searchallnew {
+          width: 100%;
+          height: 100%;
+          display:flex;
+          justify-content: flex-start;
+          flex-direction: column;
+
+          .searchesnewlist {
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 45px;
+            padding: 0 10px;
+
+            .searchnewname {
+              cursor: pointer;
+            }
+
+            button {
+              width: 14px;
+
+              img {
+                width: 14px;
+              }
+            }
+          }
+        }
+
+        .searchpopular {
+          width: 100%;
+          height: 100%;
+          display:flex;
+          justify-content: flex-start;
+          flex-direction: column;
+
+          .searchpopularlist {
+            display:flex;
+            justify-content:flex-start;
+            align-items: center;
+            height: 45px;
+            padding: 0 10px;
+            cursor: pointer;
+
+            span {
+              color:red;
+              width: 10%;
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+
+      /* 검색어를 입력하는 중인 onChange 상태의 css */
+      .titlename2 {
+        display:flex;
+        align-items: center;
+        border-bottom:2px solid rgb(217,217,217);
+        position: relative;
+        width: 100%;
+        flex-wrap: nowrap;
+
+        div {
+          padding: 6px;
+        }
+
+        .searchproducticon {
+          
+        }
+
+        .recently2 {
+          width: 20%;
+        }
+
+        span {
+          color:red;
+          overflow-wrap: break-word;
+          width: 54%;
+        }
+
+        .popular2 {
+          width: 20%;
+        }
+      }
+
+      .searchcenter2 {
+        height: 360px;
+        display:flex;
+        flex-direction: column;
+        justify-content:flex-start;
+        align-items:left;
+
+        p {
+          margin-top: 20px;
+        }
+      }
+    }
+
+    .searchfooter {
+      display:flex;
+      justify-content: space-between;
+      padding: 8px 30px;
+      background-color: #efefef;
+
+      .searchclose {
+        cursor: pointer;
+      }
+
+      .searchdelete {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        svg {
+          padding-right: 6px;
+        }
+      }
+    }
+  }
+
+
+  .search {
+
+  }
+  
+  .searchCloseBtn {
+    visibility:visible;
+  }
+
+  .searchiconbtn {
+    height: 100%;
+  }
+}

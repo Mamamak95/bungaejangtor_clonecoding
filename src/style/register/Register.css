@@ -1,11 +1,53 @@
 @charset "UTF-8";
-.inner {
-  width: 60%;
-  margin: 0 auto;
+.photoPreview {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .submit {
   color: #000;
+}
+
+.imageInputBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+.imageInputBox .previewContainer {
+  position: relative;
+  width: 202px;
+  height: 202px;
+  margin: 5px;
+}
+@media screen and (max-width:1000px) {
+  .imageInputBox .previewContainer {
+    width: 160px;
+    height: 160px;
+  }
+}
+.imageInputBox .previewContainer img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.imageInputBox .previewContainer .imgClose {
+  position: absolute;
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: rgba(25, 25, 25, 0.3);
+  padding: 0;
+  top: 15px;
+  right: 5px;
+}
+.imageInputBox .previewContainer .imgClose svg {
+  color: #fff;
+  margin: 0 auto;
+  pointer-events: none;
+}
+.imageInputBox .imgExplain {
+  width: 100%;
 }
 
 .ProductRegisterTitle {
@@ -22,18 +64,37 @@
   font-size: 1rem;
   margin-left: 2rem;
 }
+@media screen and (max-width:1000px) {
+  .ProductRegisterTitle {
+    height: 80px;
+    font-size: 20px;
+  }
+  .ProductRegisterTitle span {
+    font-size: 0.8rem;
+    margin-left: 1rem;
+  }
+}
 
 fieldset .inputContainer:nth-child(2) label::after {
   content: "";
 }
 
+fieldset {
+  width: 100%;
+}
 fieldset .inputContainer {
   display: flex;
+  width: 100%;
   padding: 2rem 0;
   border-bottom: 1px solid rgb(218, 218, 218);
 }
 fieldset .inputContainer:last-child {
   margin-bottom: 50px;
+}
+@media screen and (max-width:500px) {
+  fieldset .inputContainer:last-child {
+    margin-bottom: 15px;
+  }
 }
 fieldset .inputContainer .formRadio {
   display: flex;
@@ -85,6 +146,13 @@ fieldset .inputContainer div:nth-child(2) {
   position: relative;
   width: calc(100% - 200px);
 }
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer div:nth-child(2) {
+    width: 82%;
+    padding-left: 8px;
+    box-sizing: border-box;
+  }
+}
 fieldset .inputContainer div:nth-child(2) .notice {
   display: block;
   width: 100%;
@@ -114,6 +182,12 @@ fieldset .inputContainer div:nth-child(2) .choiceCategory {
   font-weight: 400;
   color: rgb(216, 12, 24);
 }
+@media screen and (max-width:500px) {
+  fieldset .inputContainer div:nth-child(2) .choiceCategory {
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+}
 fieldset .inputContainer div:nth-child(2) .choiceCategory span {
   font-weight: 600;
 }
@@ -123,6 +197,23 @@ fieldset .inputContainer div:nth-child(2) label {
   color: rgb(25, 25, 25);
   align-items: center;
   cursor: pointer;
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer div:nth-child(2) label {
+    font-size: 12px;
+    flex-wrap: wrap;
+    margin-right: 10px;
+  }
+  fieldset .inputContainer div:nth-child(2) label.radioPrice {
+    flex-wrap: nowrap;
+  }
+  fieldset .inputContainer div:nth-child(2) label.productRadio {
+    font-size: 14px;
+  }
+  fieldset .inputContainer div:nth-child(2) label span {
+    width: 100%;
+    font-size: 12px;
+  }
 }
 fieldset .inputContainer div:nth-child(2) label.productRadio {
   -webkit-box-align: center;
@@ -138,6 +229,11 @@ fieldset .inputContainer div:nth-child(2) label.productRadio span {
   font-size: 14px;
   margin-top: 3px;
   color: rgb(102, 102, 102);
+}
+@media screen and (max-width:500px) {
+  fieldset .inputContainer div:nth-child(2) label.productRadio span {
+    font-size: 12px;
+  }
 }
 fieldset .inputContainer div:nth-child(2) b {
   display: block;
@@ -165,6 +261,15 @@ fieldset .inputContainer div:nth-child(2) .infoNoticeTxt span {
   margin-top: 8px;
   font-size: 12px;
 }
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer div:nth-child(2) .infoNoticeTxt {
+    font-size: 12px;
+  }
+  fieldset .inputContainer div:nth-child(2) .infoNoticeTxt span {
+    margin-top: 6px;
+    font-size: 10px;
+  }
+}
 fieldset .inputContainer textarea {
   width: 100%;
   resize: none;
@@ -184,6 +289,11 @@ fieldset .inputContainer .priceInput {
   width: 400px;
   margin-bottom: 10px;
 }
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer .priceInput {
+    width: 100%;
+  }
+}
 fieldset .inputContainer .priceInput::after {
   content: "원";
   position: absolute;
@@ -192,6 +302,11 @@ fieldset .inputContainer .priceInput::after {
   font-size: 16px;
   font-weight: 400;
   color: rgb(153, 153, 153);
+}
+@media screen and (max-width:500px) {
+  fieldset .inputContainer .priceInput::after {
+    font-size: 12px;
+  }
 }
 fieldset .inputContainer .priceInput.quantity::after {
   content: "개";
@@ -203,10 +318,22 @@ fieldset .inputContainer div.nameInput {
 fieldset .inputContainer div.nameInput #productName {
   width: 90%;
 }
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer div.nameInput #productName {
+    width: 87%;
+    font-size: 12px;
+  }
+}
 fieldset .inputContainer div.nameInput span {
   width: 10%;
   line-height: 45px;
   text-align: right;
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer div.nameInput span {
+    width: 13%;
+    font-size: 12px;
+  }
 }
 fieldset .inputContainer div .register {
   display: flex;
@@ -215,6 +342,11 @@ fieldset .inputContainer div .register {
   border-radius: 2px;
   border: 1px solid rgb(204, 204, 204);
   background: rgb(255, 255, 255);
+}
+@media screen and (max-width:500px) {
+  fieldset .inputContainer div .register {
+    height: 55vw;
+  }
 }
 fieldset .inputContainer div .register.active {
   border: 1px solid rgb(245, 126, 0) !important;
@@ -229,6 +361,11 @@ fieldset .inputContainer div .register > div {
   color: rgb(99, 99, 99);
   padding: 0.5rem 0;
 }
+@media screen and (max-width:500px) {
+  fieldset .inputContainer div .register > div {
+    font-size: 12px;
+  }
+}
 fieldset .inputContainer div .register > div .categoryNon {
   position: absolute;
   left: 50%;
@@ -237,6 +374,12 @@ fieldset .inputContainer div .register > div .categoryNon {
   font-size: 16px;
   font-weight: 400;
   color: rgb(153, 153, 153);
+  text-align: center;
+}
+@media screen and (max-width:500px) {
+  fieldset .inputContainer div .register > div .categoryNon {
+    font-size: 14px;
+  }
 }
 fieldset .inputContainer div .register > div:nth-child(2) {
   border: 1px solid rgb(204, 204, 204);
@@ -246,11 +389,14 @@ fieldset .inputContainer div .register > div:nth-child(2) {
 fieldset .inputContainer div .register > div button {
   width: 100%;
   height: 40px;
-  text-align: left;
-  line-height: 40px;
   padding-left: 15px;
   cursor: pointer;
   font-weight: 500;
+}
+@media screen and (max-width:500px) {
+  fieldset .inputContainer div .register > div button {
+    padding-left: 0px;
+  }
 }
 fieldset .inputContainer div .register > div button:hover {
   background-color: #cfcfcf;
@@ -261,6 +407,16 @@ fieldset .inputContainer div .register > div button.on {
 fieldset .inputContainer div.sellerLocation ul {
   display: flex;
   margin-bottom: 15px;
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer div.sellerLocation ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  fieldset .inputContainer div.sellerLocation ul li {
+    margin: 8px 0;
+    width: 49%;
+  }
 }
 fieldset .inputContainer div.sellerLocation ul li {
   width: 100px;
@@ -298,6 +454,35 @@ fieldset .inputContainer .inputTitle {
   color: rgb(25, 25, 25);
   line-height: 45px;
 }
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer .inputTitle {
+    display: flex;
+  }
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer .inputTitle.imgTitle {
+    display: block;
+    margin-top: 10px;
+    line-height: 20px;
+  }
+  fieldset .inputContainer .inputTitle.imgTitle .red {
+    display: none;
+  }
+  fieldset .inputContainer .inputTitle.imgTitle small {
+    line-height: 20px;
+  }
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer .inputTitle {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer .inputTitle {
+    font-size: 14px;
+    width: 18%;
+  }
+}
 fieldset .inputContainer .inputTitle small {
   color: rgb(178, 178, 178);
   font-size: 16px;
@@ -305,6 +490,16 @@ fieldset .inputContainer .inputTitle small {
   line-height: 42px;
   margin-left: 0.25rem;
   vertical-align: top;
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer .inputTitle small {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width:500px) {
+  fieldset .inputContainer .inputTitle small {
+    font-size: 12px;
+  }
 }
 fieldset .inputContainer .inputTitle span {
   color: red;
@@ -321,6 +516,16 @@ fieldset .inputContainer #imageInput {
   border-radius: 2px;
   border: 1px solid rgb(204, 204, 204);
   background: rgb(250, 250, 250);
+  margin: 5px;
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer #imageInput {
+    width: 160px;
+    height: 160px;
+  }
+}
+fieldset .inputContainer #imageInput.on {
+  outline: 1px solid rgb(245, 126, 0) !important;
 }
 fieldset .inputContainer #imageInput input[type=file] {
   width: 100%;
@@ -348,6 +553,11 @@ fieldset .inputContainer #imageInput i span {
   font-size: 16px;
   margin-top: 13px;
 }
+@media screen and (max-width:500px) {
+  fieldset .inputContainer #imageInput i span {
+    font-size: 14px;
+  }
+}
 fieldset .inputContainer .imgExplain {
   display: block;
   margin-top: 20px;
@@ -355,6 +565,12 @@ fieldset .inputContainer .imgExplain {
   line-height: 180%;
   font-size: 14px;
   font-weight: 400;
+}
+@media screen and (max-width:1000px) {
+  fieldset .inputContainer .imgExplain {
+    font-size: 12px;
+    line-height: 150%;
+  }
 }
 fieldset .inputContainer.borderNone {
   border: none;
@@ -372,6 +588,11 @@ form .submitBar {
   background: rgb(246, 246, 246);
   box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px;
   z-index: 10;
+}
+@media screen and (max-width:1000px) {
+  form .submitBar {
+    width: 100%;
+  }
 }
 form .submitBar ul {
   display: flex;
@@ -403,4 +624,17 @@ form .submitBar ul button.submit {
 }
 form .submitBar ul button.submit:hover {
   background: rgb(190, 14, 26);
+}
+@media screen and (max-width:1000px) {
+  form .submitBar ul {
+    gap: 0;
+    justify-content: center;
+  }
+  form .submitBar ul li {
+    margin: 0 5%;
+  }
+  form .submitBar ul button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }/*# sourceMappingURL=Register.css.map */

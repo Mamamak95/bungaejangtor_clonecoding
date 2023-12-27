@@ -1,7 +1,18 @@
 import React from "react";
-import '../logoutpopup.css';
+import '../../style/popup/logoutpopup.css';
+import * as localStorage from '../../util/localStorage.js';
+import { useNavigate } from "react-router-dom";
 
-export default function LogoutPopUp(){
+export default function LogoutPopUp(prop){
+  const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    alert('로그아웃 되었습니다.');
+    localStorage.removeUser();
+    prop.handleLogoutToggle();
+    navigate('/');
+  }
+
   return(
     <div className="logoutpopup">
       <div className="logoutwrap">
@@ -13,8 +24,8 @@ export default function LogoutPopUp(){
             로그아웃 하시겠습니까?
           </div>
           <div className="logoutBtn">
-            <button className="logoutno">취소</button>
-            <button className="logoutyes">확인</button>
+            <button className="logoutno" onClick={()=> prop.handleLogoutToggle(false)}>취소</button>
+            <button className="logoutyes" onClick={handleLogout}>확인</button>
           </div>
         </div>
       </div>

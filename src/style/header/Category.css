@@ -1,0 +1,76 @@
+.Category {
+  position: absolute;
+  top: 71px;
+  left: 0;
+  border: 1px solid #ddd;
+  color: #000;
+  font-size: 0.9rem;
+  font-weight: 400;
+  background-color: #fff;
+  cursor: auto;
+}
+.Category .maincategoryname {
+  font-weight: bold;
+  position: relative;
+  height: 600px;
+}
+.Category .maincategoryname .categoryname {
+  border-bottom: 1px solid #ddd;
+  padding: 14px 26px;
+  position: relative;
+  width: 250px;
+  box-sizing: border-box;
+}
+.Category .maincategoryname .categoryname .categoryarrow {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  color: red;
+}
+.Category .maincategoryname .maincategorylist {
+  padding: 10px 0;
+  font-weight: 500;
+  width: 250px;
+}
+.Category .maincategoryname .maincategorylist .categorylist {
+  padding: 16px 0;
+  cursor: pointer;
+}
+.Category .maincategoryname .maincategorylist .categorylist p {
+  padding-left: 26px;
+}
+.Category .middlecategoryname {
+  font-weight: bold;
+  width: 250px;
+  height: 600px;
+  position: absolute;
+  top: 0;
+  left: 251px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.Category .middlecategoryname .middlename {
+  border-bottom: 1px solid #ddd;
+  padding: 14px 26px;
+  position: relative;
+}
+.Category .middlecategoryname .middlename .categoryarrow {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  color: red;
+}
+.Category .middlecategoryname .middlecategorylist {
+  padding: 10px 0;
+  font-weight: 500;
+}
+.Category .middlecategoryname .middlecategorylist .middlelist {
+  padding: 16px 0;
+  cursor: pointer;
+}
+.Category .middlecategoryname .middlecategorylist .middlelist p {
+  padding-left: 26px;
+}/*# sourceMappingURL=category.css.map */

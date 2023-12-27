@@ -1,0 +1,106 @@
+.purchaseMain {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin: 10px auto 100px;
+  .purchase_icon {
+    margin: 50px auto 20px;
+    font-size: 5em;
+    color: #f70000;
+  }
+  & > .productlist {
+    float: none;
+    margin: 0 auto;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    .pro {
+      filter: none;
+      display: flex;
+      box-shadow: none;
+      border: none;
+      margin: 10px auto 10px;
+      text-align: center;
+      justify-content: center;
+
+      .pro_img {
+        display: block;
+        width: 200px;
+        height: 200px;
+        img {
+          height: 100%;
+        }
+      }
+      .pro_comtent {
+        max-width: 300px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        * {
+          font-size: 1.2em;
+          margin: 5px 0;
+          font-weight: 600;
+        }
+       .pro_pr_da{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+       }
+        .pro_name {
+          width: 100%;
+          font-size: 1.4em;
+          text-align: left;
+        }
+        .pro_date{
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+  .purchaseMain_message {
+    font-size: 1.5em;
+    font-weight: 700;
+    line-height: 40px;
+    font-family: "Black Han Sans", sans-serif;
+  }
+
+  & > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .stars {
+      display: flex;
+      justify-content: center;
+      width: 500px;
+      margin-bottom: 30px;
+      font-size: 3em;
+      color: #FEC323;
+      .star{
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      
+    }
+    textarea {
+      width: 500px;
+      height: 100px;
+      font-size: 1.1em;
+      resize: none;
+      padding: 5px;
+    }
+    button {
+      width: 500px;
+      border: 1px solid #eee;
+      margin: 10px auto;
+      padding: 10px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      background-color: red;
+    }
+  }
+}

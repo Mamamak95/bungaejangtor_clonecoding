@@ -1,0 +1,99 @@
+.selected {
+  color: red;
+}
+
+.searchProduct {
+  padding: 80px 0;
+}
+.searchProduct .searchproductnav {
+  display: flex;
+  justify-content: space-between;
+}
+.searchProduct .searchproductnav .searchproducttitle {
+  display: flex;
+}
+.searchProduct .searchproductnav .searchproducttitle .searchproductname {
+  color: red;
+}
+.searchProduct .searchproductnav .searchproducttitle .searchproductcount {
+  padding-left: 10px;
+}
+.searchProduct .searchproductnav .searchsequence {
+  display: flex;
+  font-size: 0.9rem;
+}
+.searchProduct .searchproductnav .searchsequence li:not(:last-of-type) {
+  margin-right: 20px;
+  padding-right: 20px;
+  position: relative;
+}
+.searchProduct .searchproductnav .searchsequence li:not(:last-of-type)::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: #ccc;
+}
+.searchProduct .searchproductnav .searchsequence li {
+  cursor: pointer;
+}
+.searchProduct .searchproductmain {
+  margin: 40px 0;
+}
+.searchProduct .searchproductmain .searchproductcontent {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+}
+.searchProduct .searchproductmain .searchproductcontent li {
+  margin: 0 1%;
+  margin-bottom: 14px;
+  width: 18%;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.searchProduct .searchproductmain .searchproductcontent li .searchlistlink .searchlistinfowrap {
+  padding: 6px;
+}
+.searchProduct .searchproductmain .searchproductcontent li .searchlistlink .searchlistinfowrap .searchlistinfo {
+  padding-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.searchProduct .searchproductmain .searchproductcontent li .searchlistlink .searchlistinfowrap .searchlistinfo .searchlistregdate {
+  color: #888;
+  font-size: 0.9rem;
+}
+.searchProduct .searchproductmain .searchproductnonewrap {
+  text-align: center;
+  padding: 40px 0;
+}
+.searchProduct .searchproductmain .searchproductnonewrap .searchproductnone .searchproductnonename {
+  color: red;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.searchProduct .searchproductmain .searchproductnonewrap .searchproductnone .searchproductnoneguide {
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 30px 0;
+  border-bottom: 1px solid #ddd;
+}
+.searchProduct .searchpage .searchpagenation {
+  display: flex;
+  justify-content: center;
+}
+.searchProduct .searchpage .searchpagenation li {
+  padding: 6px 12px;
+  margin: 0 10px;
+  border: 1px solid #000;
+  cursor: pointer;
+}/*# sourceMappingURL=searchproduct.css.map */

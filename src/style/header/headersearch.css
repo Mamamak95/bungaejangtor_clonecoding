@@ -1,0 +1,157 @@
+@charset "UTF-8";
+.HeaderSearch .Searchpop {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.HeaderSearch .Searchpop .searchcontent {
+  padding: 20px;
+  background-color: #fff;
+  /* 검색어를 입력하는 중인 onChange 상태의 css */
+}
+.HeaderSearch .Searchpop .searchcontent .titlename {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  font-weight: bold;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename div {
+  padding: 6px;
+  width: 50%;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename .recently {
+  border-bottom: 2px solid lightgray;
+  color: black;
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename .recently.active {
+  border-bottom: 2px solid red;
+  color: red;
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename .popular {
+  border-bottom: 2px solid lightgray;
+  color: black;
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename .popular.active {
+  border-bottom: 2px solid red;
+  color: red;
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter {
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .nonsearchlist {
+  width: 52px !important;
+  height: 46px !important;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter p {
+  margin-top: 20px;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchallnew {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchallnew .searchesnewlist {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  padding: 0 10px;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchallnew .searchesnewlist .searchnewname {
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchallnew .searchesnewlist button {
+  width: 14px;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchallnew .searchesnewlist button img {
+  width: 14px;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchpopular {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchpopular .searchpopularlist {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 45px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter .searchpopular .searchpopularlist span {
+  color: red;
+  width: 10%;
+  padding-right: 10px;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename2 {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid rgb(217, 217, 217);
+  position: relative;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename2 div {
+  padding: 6px;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename2 .recently2 {
+  width: 20%;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename2 span {
+  color: red;
+  overflow-wrap: break-word;
+  width: 54%;
+}
+.HeaderSearch .Searchpop .searchcontent .titlename2 .popular2 {
+  width: 20%;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter2 {
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+}
+.HeaderSearch .Searchpop .searchcontent .searchcenter2 p {
+  margin-top: 20px;
+}
+.HeaderSearch .Searchpop .searchfooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 30px;
+  background-color: #efefef;
+}
+.HeaderSearch .Searchpop .searchfooter .searchclose {
+  cursor: pointer;
+}
+.HeaderSearch .Searchpop .searchfooter .searchdelete {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.HeaderSearch .Searchpop .searchfooter .searchdelete svg {
+  padding-right: 6px;
+}
+.HeaderSearch .searchCloseBtn {
+  visibility: visible;
+}
+.HeaderSearch .searchiconbtn {
+  height: 100%;
+}/*# sourceMappingURL=headersearch.css.map */
