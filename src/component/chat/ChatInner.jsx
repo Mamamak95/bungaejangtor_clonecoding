@@ -7,7 +7,7 @@ import Image from "../common/Image.jsx";
 import io from "socket.io-client";
 
 //소켓 서버연결 주소
-const socket = io("http://127.0.0.1:8000/");
+const socket = io("http://192.168.50.57:8000/");
 
 export default function Inner() {
   const user = localStorage.getUser()?localStorage.getUser().uid:sessionStorage.getUserSession.uid;
@@ -25,7 +25,7 @@ export default function Inner() {
   //채팅방목록 불러오기
   const getUserChats = () => {
     return axios
-      .post("http://127.0.0.1:8000/chat/list", { id: user })
+      .post("http://192.168.50.57:8000/chat/list", { id: user })
       .then((res) => {
         return res.data;
       })
@@ -34,7 +34,7 @@ export default function Inner() {
   //채팅로그 불러오기
   const getLog = (crid) => {
     return axios
-      .post("http://127.0.0.1:8000/chat/refresh", { crid: crid })
+      .post("http://192.168.50.57:8000/chat/refresh", { crid: crid })
       .then((res) => res.data);
   };
 

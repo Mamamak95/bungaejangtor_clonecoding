@@ -23,7 +23,7 @@ export default function ChatRoom({ user, roomInfo, chatLog, handleKey }) {
 
   const confirmPurchase = () => {
     axios
-      .post(`http://127.0.0.1:8000/purchase`, {
+      .post(`http://192.168.50.57:8000/purchase`, {
         pid: roomInfo.pid,
         buyer: user,
         seller: roomInfo.seller,
@@ -113,7 +113,7 @@ export default function ChatRoom({ user, roomInfo, chatLog, handleKey }) {
           <>
             <li>
               <div className="empty-chat">
-                <img src="http://127.0.0.1:8000/webImg/empty_chat.svg" alt="" />
+                <img src="http://192.168.50.57:8000/webImg/empty_chat.svg" alt="" />
                 <span>대화방을 선택해주세요.</span>
               </div>
             </li>

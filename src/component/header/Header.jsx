@@ -120,8 +120,8 @@ export default function Header(){
           <div className="headerTopWrap inner">
             <div className="HeaderTopMenuLeft">{/* 헤더탑의 왼쪽에 있는 앱다운로드, 즐겨찾기를 감싸는 태그 */}
               <button type="button" onClick={()=> { setQr(true) }}>
-                                                <img src="http://127.0.0.1:8000/webImg/download.png" alt="downloadImg" />앱다운로드</button>
-              <button type="button" onClick={bookmark}><img src="http://127.0.0.1:8000/webImg/bookmark.svg" alt="bookMarkImg" />즐겨찾기</button>
+                                                <img src="http://192.168.50.57:8000/webImg/download.png" alt="downloadImg" />앱다운로드</button>
+              <button type="button" onClick={bookmark}><img src="http://192.168.50.57:8000/webImg/bookmark.svg" alt="bookMarkImg" />즐겨찾기</button>
             </div>
 
             <div className="HeaderTopMenuRight">{/* 헤더탑의 오른쪽에 위치한 로그인/회원가입, 내상점을 감싸는 태그 */}
@@ -178,7 +178,7 @@ export default function Header(){
         <div className="HeaderMain">
           <div className="headerMainWrap inner">
             <div className="HeaderContents">{/* 헤더메인부분의 모든 콘텐츠를 감싸는 태그 */}
-              <Link to = "/"><img src="http://127.0.0.1:8000/webImg/mainlogo.png" alt="mainLogoImg" /></Link>
+              <Link to = "/"><img src="http://192.168.50.57:8000/webImg/mainlogo.png" alt="mainLogoImg" /></Link>
               
               <HeaderSearch />
 

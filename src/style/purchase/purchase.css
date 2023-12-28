@@ -77,12 +77,14 @@
   justify-content: center;
   width: 500px;
   margin-bottom: 30px;
-  font-size: 3em;
-  color: #FEC323;
 }
 .purchaseMain > form .stars .star {
-  margin: 0 10px;
+  margin: 0 20px;
   cursor: pointer;
+  transform: scale(2);
+}
+.purchaseMain > form .stars .yStar {
+  color: #FEC323;
 }
 .purchaseMain > form textarea {
   width: 500px;

@@ -16,7 +16,7 @@ export default function SearchProduct(prop){
 
   useEffect(() => {
     axios
-    .get(`http://127.0.0.1:8000/search?query=${query}`)
+    .get(`http://192.168.50.57:8000/search?query=${query}`)
     .then(data => {
       setSearchNameList(data.data)
       setSearchCount(data.data.length)
@@ -94,10 +94,10 @@ export default function SearchProduct(prop){
         <div className="searchpage">
           <ul className="searchpagenation">
             <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
+            {/* <li>2</li> */}
+            {/* <li>3</li> */}
+            {/* <li>4</li> */}
+            {/* <li>5</li> */}
           </ul>
         </div>
       </div>

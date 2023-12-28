@@ -76,12 +76,18 @@
       display: flex;
       justify-content: center;
       width: 500px;
+      
       margin-bottom: 30px;
-      font-size: 3em;
-      color: #FEC323;
+      
+      
       .star{
-        margin: 0 10px;
+        margin: 0 20px;
         cursor: pointer;
+        transform: scale(2);
+      }
+
+      .yStar{
+        color: #FEC323;
       }
       
     }

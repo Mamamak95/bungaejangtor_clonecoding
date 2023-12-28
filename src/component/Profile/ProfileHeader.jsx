@@ -39,7 +39,7 @@ export default function ProfileHeader({name,regDate,comment}){
     }
 
       axios
-      .get(`http://127.0.0.1:8000/profile/${userInfo.uid}/updatedName/${updatedName}`)
+      .get(`http://192.168.50.57:8000/profile/${userInfo.uid}/updatedName/${updatedName}`)
       .then((result)=>
         window.location.reload()
       )
@@ -65,7 +65,7 @@ export default function ProfileHeader({name,regDate,comment}){
       updatedComment = '';
     }
     axios
-    .get(`http://127.0.0.1:8000/profile/${userInfo.uid}/updatedComment/${updatedComment}`)
+    .get(`http://192.168.50.57:8000/profile/${userInfo.uid}/updatedComment/${updatedComment}`)
     .then((result) => {
       // Reset the comment to an empty string after saving
         window.location.reload();
@@ -84,7 +84,7 @@ export default function ProfileHeader({name,regDate,comment}){
 
   useEffect(()=>{
     axios
-    .get(`http://127.0.0.1:8000/profile/${uid}`)
+    .get(`http://192.168.50.57:8000/profile/${uid}`)
     .then((result)=>
         SetInfo(result.data)
       )

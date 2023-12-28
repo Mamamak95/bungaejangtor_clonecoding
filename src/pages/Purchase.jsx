@@ -18,7 +18,7 @@ export default function Purchase() {
   const { pid, uid, tid } = useParams();
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/review/${pid}/${uid}/${tid}`)
+      .get(`http://192.168.50.57:8000/review/${pid}/${uid}/${tid}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -31,7 +31,7 @@ export default function Purchase() {
   };
   const handleReview = () => {
     axios
-      .post(`http://127.0.0.1:8000/review`, {
+      .post(`http://192.168.50.57:8000/review`, {
         pid,
         uid,
         tid,
@@ -73,21 +73,25 @@ export default function Purchase() {
         date={dateFormat(product.date)}
       ></ProductList>
       <form onSubmit={handleSubmit}>
-        <div className="stars">
+        <div className="stars  yStar">
           {Array.from({ length: star }).map((v, i) => (
-            <FaStar
+            <FaRegStar
+            key={i}
               className="star"
               onClick={() => {
                 handleStars(i);
               }}
-            ></FaStar>
+              
+            ></FaRegStar>
           ))}
           {Array.from({ length: 5 - star }).map((v, i) => (
-            <FaRegStar
+            <FaStar
               className="star"
               onClick={() => {
                 handleStars(star + i);
               }}
+              
+
             />
           ))}
         </div>

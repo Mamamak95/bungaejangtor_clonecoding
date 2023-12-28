@@ -38,7 +38,7 @@ export default function LoginPopUp(prop){
 
     // 서버 연동
     axios
-    .post('http://localhost:8000/login', loginForm)
+    .post('http://192.168.50.57:8000/login', loginForm)
     .then(data => {
       if(data.data.login){
         alert('로그인 성공')
@@ -107,11 +107,11 @@ export default function LoginPopUp(prop){
       <div className="loginpopup" style={prop.styleLoginBlock} >
         <div className="loginwrap">
           <div className="closeBtn">
-            <button type="button" onClick={prop.handleLoginToggle}><img src="http://127.0.0.1:8000/webImg/closebtn.png" alt="closeBtnImg" /></button>
+            <button type="button" onClick={prop.handleLoginToggle}><img src="http://192.168.50.57:8000/webImg/closebtn.png" alt="closeBtnImg" /></button>
           </div>
           <div className="loginContent">
             <div className="logintitle">
-              <img src="http://127.0.0.1:8000/webImg/mainlogo.png"/>
+              <img src="http://192.168.50.57:8000/webImg/mainlogo.png"/>
               {/* <p>번개장터</p> */}
             </div>
             <form className="loginForm" onSubmit={handleSubmit}>

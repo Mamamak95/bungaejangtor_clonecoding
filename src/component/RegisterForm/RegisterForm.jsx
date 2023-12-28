@@ -76,7 +76,7 @@ export default function RegisterForm(props) {
 
     axios({
       method: 'post',
-      url: `http://127.0.0.1:8000/save/${userInfo.uid}`,
+      url: `http://192.168.50.57:8000/save/${userInfo.uid}`,
       data: formData,
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -286,7 +286,7 @@ export default function RegisterForm(props) {
     // formData.append('deleteImg', JSON.stringify(deleteImg))
     axios({
       method: 'post',
-      url: props.edit ? `http://127.0.0.1:8000/edit/${pid}` : `http://127.0.0.1:8000/product/new/${userInfo.uid}`,
+      url: props.edit ? `http://192.168.50.57:8000/edit/${pid}` : `http://192.168.50.57:8000/product/new/${userInfo.uid}`,
       data: formData,
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -316,7 +316,7 @@ export default function RegisterForm(props) {
       return saveImg.length ? (
         saveImg.map((photo, i) => (
           <span className="previewContainer" key={i}>
-            <img src={`http://127.0.0.1:8000/${photo.img}`} className='photoPreview' />
+            <img src={`http://192.168.50.57:8000/${photo.img}`} className='photoPreview' />
             <button className="imgClose" type="button" data-imagenum={photo.imageid} onClick={(e) => closeImg(e, 'saveImg')}>
               <CgClose />
             </button>
@@ -336,7 +336,7 @@ export default function RegisterForm(props) {
       return tempImg.length ? (
         tempImg.map((photo, i) => (
           <span className="previewContainer" key={i}>
-            <img src={`http://127.0.0.1:8000/${photo}`} className='photoPreview' />
+            <img src={`http://192.168.50.57:8000/${photo}`} className='photoPreview' />
             <button className="imgClose" type="button" value={i} onClick={(e) => closeImg(e, 'tempImg')}>
               <CgClose />
             </button>

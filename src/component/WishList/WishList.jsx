@@ -32,7 +32,7 @@ export default function WishList() {
     endIndex = currentPage * pageSize; // endIndex 공삭
     axios({
       method: 'get',
-      url: `http://localhost:8000/wishList/${userInfo.uid}/${startIndex}/${endIndex}/${sort}`
+      url: `http://192.168.50.57:8000/wishList/${userInfo.uid}/${startIndex}/${endIndex}/${sort}`
     })
       .then(res => {
         setTotalCount(res.data[0].totalItemCount)
@@ -69,7 +69,7 @@ export default function WishList() {
     if (result) {
       axios({
         method: 'post',
-        url: `http://localhost:8000/wishList/${userInfo.uid}`,
+        url: `http://192.168.50.57:8000/wishList/${userInfo.uid}`,
         data: checkList
       })
         .then(res => {
